@@ -2002,10 +2002,10 @@
 	(let* ((constList (buildConstList ast '()))
 		  (ciscConstTable 
 		  			(begin 
-		  				(set! SCHEMEconstTable (taggingConsts constList (initConstTable))) 
+		  				(set! SCHEMEconstTable (taggingConsts constList (initConstTable)))
 		  				(buildCiscConstTable SCHEMEconstTable))))
 		  				 ;;ciscConstTable is a STRING!
-		(resetAddress) ;;;;not belong here
+		;(resetAddress) ;;;;not belong here
 		ciscConstTable
 	)))
 
@@ -2213,7 +2213,7 @@
 			"MOV (R1 , INDD (R0,1));" n
 			"PUSH (R1);" n
 			"MOV (R1 , INDD (R0,2));" n
-			;"CALL (R1);" n
+			"CALLA (R1);" n
 			"DROP(1);" n "POP(R1);" n "DROP(R1);" n
 			errorLabel":" n
 		))))
@@ -2350,7 +2350,7 @@
 			exitLabel":" n
 			"MOV (R3 , FPARG(1));" n
 			"PUSH(R3);" n "CALL(MALLOC);" n "DROP(1);" n
-			"MOV (INDD(R2,0) , R0);"n
+			"MOV (INDD(INDD(R2,0),0) , R0);"n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(2));" n
 			extendEnvLoopLabel":" n
