@@ -2183,11 +2183,6 @@
 			(string-append (code_gen (car exprs) major) (code_gen_seq (cdr exprs) code_gen major)))))
 
 
-(define applic_label 
-	(lambda ()
-		(string-append "L_Error_cannot_apply_non_closure" (number->string (updateCounter)))
-	))
-
 (define code_gen_applic_push_args 
 	(lambda (argsLst major)
 		(if (null? argsLst) 
@@ -2206,15 +2201,22 @@
 
 (define code_gen_applic 
 	(lambda (op exprs code_gen major)
+		(let ((errorLabel (string-append "L_Error_cannot_apply_non_closure_" (number->string (updateCounter)))))
 		(string-append
 			(push_args_if_needed exprs major)
 			(code_gen op major) n
+			"SHOW (\"T_clos:\",INDD(R0,0));" n
+			"SHOW (\"Env:\",INDD(R0,1));" n
+			"SHOW (\"code:\",INDD(R0,2));" n
 			"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
-			"JUMP_NE (" (applic_label) ");" n
-			"PUSH (INDD (R0,1));" n
-			"CALL (INDD (R0,2));" n
+			"JUMP_NE("errorLabel");" n
+			"MOV (R1 , INDD (R0,1));" n
+			"PUSH (R1);" n
+			"MOV (R1 , INDD (R0,2));" n
+			;"CALL (R1);" n
 			"DROP(1);" n "POP(R1);" n "DROP(R1);" n
-		)))
+			errorLabel":" n
+		))))
 
 
 ;(define code_gen_tc_applic 
@@ -2262,59 +2264,67 @@
 (define createLambdaBodyInCISC
 		(lambda (args body code_gen major) 
 			(let* ((counter (number->string (updateCounter)))
-				   (bodyLabel (string-append "L_CLOSURE_BODY_"  counter ":"))
-				   (closExitLabel (string-append "L_CLOSURE_EXIT_" counter ":")))
+				   (bodyLabel (string-append "L_CLOSURE_BODY_" counter))
+				   (closExitLabel (string-append "L_CLOSURE_EXIT_" counter))
+				   (errorLabel (string-append "L_ERROR_LAMBDA_ARGS_COUNT_" counter)))
 				(string-append 
-					"MOV (INDD(R0 ,2) ," bodyLabel ");" n
+					"MOV (INDD(R0 ,2) ,LABEL(" bodyLabel "));" n
 					"JUMP(" closExitLabel ");" n
-					bodyLabel n
-					"PUSH(fp);" n
-					"MOV (fp , sp);" n
+					bodyLabel":" n
+					"PUSH(FP);" n
+					"MOV (FP , SP);" n
 					"CMP(FPARG(1) , IMM(" (number->string (length args)) "));" n
-					"JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT);" n
+					"JUMP_NE("errorLabel");" n
 					(code_gen body major)
-					"POP(fp);"
-					"RETURN;"
-					closExitLabel
+					"POP(FP);" n
+					"RETURN;"  n
+					errorLabel":" n
+					"OUT(IMM(2) , 'c' );" n
+					"SHOW(\"Wrong number of args!!!\" , R0);" n
+					"HALT;"n
+					closExitLabel ":" n
 					))
 			))
 
 (define code_gen_lambda_simple
 	(lambda (newMajor args body code_gen)
+		(let* ((counter (number->string (updateCounter)))
+			  (exitLabel (string-append "EXIT_LOOP_COPY_" counter))
+			  (copyLoopLabel (string-append "LOOP_COPY_ENV_" counter))
+			  (exitExtendLabel (string-append "EXIT_LOOP_EXTEND_ENV_" counter))
+			  (extendEnvLoopLabel (string-append "LOOP_EXTEND_ENV_" counter)))
 		(string-append
 			"MOV (R1,FPARG(0));" n
 			"PUSH(" (number->string newMajor) ");" n "CALL(MALLOC);" n "DROP(1);" n
+			"SHOW(\"this is  RO : \" , R0);" n
 			"MOV (R2,R0);" n
-			"MOV (INDD(R3,0),R2);" n
-			(CISC_comment "R2 holds major+1 !!! ") n
-			"PUSH (R2);" n "CALL (MALLOC);" n "DROP(1);" n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(1));" n
-			"LOOP_COPY_ENV:" n
+			copyLoopLabel":" n
 			"CMP(R4," (number->string (- newMajor 1)) ");" n
-			"JUMP_EQ(EXIT_LOOP_COPY);" n
+			"JUMP_EQ("exitLabel");" n
 			"MOV (INDD(R2,R5) , INDD(R1,R4) );" n
 			"ADD(R4 , IMM(1));" n "ADD(R5 , IMM(1));" n
-			"JUMP(LOOP_COPY_ENV);" n
-			"EXIT_LOOP_COPY:" n
+			"JUMP("copyLoopLabel");" n
+			exitLabel":" n
 			"MOV (R3 , FPARG(1));" n
 			"PUSH(R3);" n "CALL(MALLOC);" n "DROP(1);" n
 			"MOV (INDD(R2,0) , R0);"n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(2));" n
-			"LOOP_EXTEND_ENV:" n
+			extendEnvLoopLabel":" n
 			"CMP(R4 , R3);" n
-			"JUMP_EQ(EXIT_LOOP_EXTEND_ENV);" n
+			"JUMP_EQ("exitExtendLabel");" n
 			"MOV (INDD(INDD(R2,0), R4) , FPARG(R5));" n
 			"ADD(R4 , IMM(1));" n "ADD(R5 , IMM(1));" n
-			"JUMP(LOOP_EXTEND_ENV);" n
-			"EXIT_LOOP_EXTEND_ENV:" n
+			"JUMP("extendEnvLoopLabel");" n
+			exitExtendLabel":" n
 			"PUSH (IMM(3));" n "CALL(MALLOC);" n "DROP(1);" n
 			"MOV (INDD(R0 ,0) , T_CLOSURE);" n
 			"MOV (INDD(R0 ,1) , R2);" n
 			(createLambdaBodyInCISC  args body code_gen newMajor)
 			)
-		))
+		)))
 
 
 (define  code_gen  
