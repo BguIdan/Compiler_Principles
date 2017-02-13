@@ -2219,18 +2219,59 @@
 		))))
 
 
-;(define code_gen_tc_applic 
-;	(lambda (op exprs code_gen)
-;		(string-append
-;			(push_args_if_needed exprs)
-;			(code_gen op) n
-;			"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
-;			"JUMP_NE (" (applic_label) ");" n
-;			"PUSH INDD (R0,1);" n
-;			"CALL INDD (R0,2);" n
-;			"DROP(1);" n "POP(R1);" n "DROP(R1);" n
-;		)))
 
+(define run_over_frame (lambda ()
+	(let ((endParamsLabel (string-append "tc_applic_end_param_ranover" (number->string (updateCounter))))
+		   (forLabel (string-append "tc_applic_for_label" (number->string (updateCounter)))))
+	(string-append 
+			"PUSH (R7);" n ;;push old 'ret address'
+			"PUSH (IMM(1));" n
+			;;init 'for'-loop: (R9 = n+1 , n is the num of params of old applic)
+			"MOV(R10 , STARG(IMM(1));" n ;;after that line R10 = m
+			"CMP(R10 , IMM(0));" n ;;if there is no params, jump to the end of that func.
+			"JUMP_E (" noParamLabel ");" n 
+			"ADD (R10 , IMM(1));" n ;;after that line R10 = m+1 , m is the num of params of new applic
+
+			;;for-loop:
+			forLabel ":" n
+			"CMP (R10 , 1);" n ;;;loop condtion
+			"JUMP_LE (" endParamsLabel ");" n
+			"MOV (R11,STARG(R10));" n
+			"MOV (FPARG(R9),R11);" n 
+			"SUB (R9 , 1);" n "SUB (R10 , 1);" n  ;;; n-- , m--
+			"JUMP (" forLabel ");" n
+			;;for loop ends
+			endParamsLabel ":" n
+			"MOV (R11, STARG(R10);" n  ;;;copy the new number of params
+			"MOV (FPARG(R9) , R11);" n 
+			"SUB (R9 , 1);" n  ;;; n-- 
+			"MOV (R11, STARG(0);" n  ;;;copy the new env pointer
+			"MOV (FPARG(R9) , R11);" n 
+			"SUB (R9 , 1);" n  ;;; n-- 
+			"MOV (FPARG(R9) , R7);" n  ;;;assign the old 'ret' address
+			"SUB (R9 , 1);" n  ;;; n-- 
+			"MOV (FPARG(R9) , R8);" n ;;;assign the old 'fp'
+			"SUB (R9 , 1);" n  ;;; n-- 
+			"MOV(SP , FPARG(R9);" n
+	))))
+
+(define code_gen_tc_applic 
+	(lambda (op exprs code_gen)
+		(string-append
+			(CISC_comment "tc-applic code starts here")
+			"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
+			"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
+			(push_args_if_needed exprs)
+			(code_gen op) n
+			"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
+			"JUMP_NE (" (applic_label) ");" n
+			"PUSH INDD (R0,1);" n  ;;push env
+			"MOV (R9 , FPARG(IMM(1)));" n ;;get the previous applic param number
+			"ADD (R9 , IMM(1));" n  ;;add one for the last cell of the previous applic
+			(run_over_frame) ;;;;R0 holds pointer to the closure 
+			"JUMP (INDD(RO,2)); " n
+			(CISC_comment "tc-applic code ends here")
+		)))
 
 
 
@@ -2411,13 +2452,10 @@
 							(code_gen_applic op exprs code_gen major)
 							(CISC_comment "applic code ends here"))))
 					
-			;(pattern-rule
-			;	`(tc-applic ,(? 'op )  ,(? 'exprs))
-			;		(lambda (op exprs)
-			;			(string-append (CISC_comment "tc-applic code starts here")
-			;			(code_gen_tc_applic op exprs code_gen))
-			;			(CISC_comment "tc-applic code ends here")))
-			;		))
+			(pattern-rule
+				`(tc-applic ,(? 'op )  ,(? 'exprs))
+					(lambda (op exprs)
+						(code_gen_tc_applic op exprs code_gen)))
 
 			(pattern-rule
 				`(seq ,(? 'exps))
