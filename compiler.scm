@@ -2225,14 +2225,14 @@
 		    (endParamsLabel (string-append "tc_applic_end_param_ranover" counter)) 
 		   (forLabel (string-append "tc_applic_for_label" counter)))
 	(string-append 
+			(CISC_comment "run run_over_frame starts")
 			"PUSH (R7);" n ;;push old 'ret address'
-			"PUSH (IMM(1));" n
+			;"PUSH (IMM(1));" n
 			;;init 'for'-loop: (R9 = n+1 , n is the num of params of old applic)
-			"MOV(R10 , STARG(IMM(1));" n ;;after that line R10 = m
+			"MOV(R10 , STARG(IMM(1)));" n ;;after that line R10 = m
 			"CMP(R10 , IMM(0));" n ;;if there is no params, jump to the end of that func.
-			"JUMP_E (" endParamsLabel ");" n 
+			"JUMP_EQ (" endParamsLabel ");" n 
 			"ADD (R10 , IMM(1));" n ;;after that line R10 = m+1 , m is the num of params of new applic
-
 			;;for-loop:
 			forLabel ":" n
 			"CMP (R10 , 1);" n ;;;loop condtion
@@ -2243,38 +2243,45 @@
 			"JUMP (" forLabel ");" n
 			;;for loop ends
 			endParamsLabel ":" n
-			"MOV (R11, STARG(R10);" n  ;;;copy the new number of params
+			"MOV (R11, STARG(R10));" n  ;;;copy the new number of params
 			"MOV (FPARG(R9) , R11);" n 
 			"SUB (R9 , 1);" n  ;;; n-- 
-			"MOV (R11, STARG(0);" n  ;;;copy the new env pointer
+			"MOV (R11, STARG(0));" n  ;;;copy the new env pointer
 			"MOV (FPARG(R9) , R11);" n 
 			"SUB (R9 , 1);" n  ;;; n-- 
 			"MOV (FPARG(R9) , R7);" n  ;;;assign the old 'ret' address
 			"SUB (R9 , 1);" n  ;;; n-- 
-			"MOV (FPARG(R9) , R8);" n ;;;assign the old 'fp'
-			"SUB (R9 , 1);" n  ;;; n-- 
-			"MOV(SP , FPARG(R9);" n
+			"MOV (SP ,FP);" n ;;repair SP
+			"SUB (SP , R9);" n ;;repair SP
+			"SUB (SP , 3);" n ;;repair SP
+			"MOV (FP , R8);" n ;;that because the next line would be "PUSH FP" , and F8 holds the old fp(the one we need )
+			(CISC_comment "run run_over_frame starts")
 	))))
 
 (define code_gen_tc_applic 
 	(lambda (op exprs code_gen major)
-		(string-append
-			(CISC_comment "tc-applic code starts here")
-			"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
-			"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
-			(push_args_if_needed (reverse exprs) major)
-			(code_gen op major) n
-			"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
-			"JUMP_NE (" (applic_label) ");" n
-			"PUSH INDD (R0,1);" n  ;;push env
-			"MOV (R9 , FPARG(IMM(1)));" n ;;get the previous applic param number
-			"ADD (R9 , IMM(1));" n  ;;add one for the last cell of the previous applic
-			(run_over_frame) ;;;;R0 holds pointer to the closure 
-			"JUMP (INDD(RO,2)); " n
-			(CISC_comment "tc-applic code ends here")
-		)))
-
-
+		(let* 
+			((counter (number->string (updateCounter)))
+			(errorLabel (string-append "L_Error_cannot_tc_apply_non_closure_" counter)))
+				(string-append
+					(CISC_comment "tc-applic code starts here")
+					"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
+					;"SHOW (\"R7 is the old ret add:\" , R7);" n 
+					"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
+					;"SHOW (\"R8 is the old ret add:\" , R8);" n 
+					(push_args_if_needed (reverse exprs) major)
+					(code_gen op major) n
+					"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
+					"JUMP_NE (" errorLabel ");" n
+					"PUSH (INDD (R0,1));" n  ;;push env
+					"MOV (R9 , FPARG(IMM(1)));" n ;;get the previous applic param number
+					"ADD (R9 , IMM(1));" n  ;;add one for the last cell of the previous applic
+					(run_over_frame) ;;;;R0 holds pointer to the closure 
+					(CISC_comment "tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body")
+					"JUMPA (INDD(R0,2)); " n
+					errorLabel ":" n
+					"SHOW (\"NOT A CLOSURE:\" , INDD(R0,0));" n 	
+				))))
 
 
 (define box_get_code_gen (lambda (var)
@@ -2321,8 +2328,10 @@
 					"POP(FP);" n
 					"RETURN;"  n
 					errorLabel":" n
-					"OUT(IMM(2) , 'c' );" n
-					"SHOW(\"Wrong number of args!!!\" , R0);" n
+					;"OUT(IMM(2) , 'c' );" n
+					"SHOW(\"counter = " counter " in closure-address :\" , R0);" n
+					"SHOW(\"Wrong number of args!!! should be- " (number->string (length args)) " actual : \" , FPARG(1));" n
+					"INFO" n
 					"HALT;"n
 					closExitLabel ":" n
 					))
