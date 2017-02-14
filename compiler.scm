@@ -2021,7 +2021,7 @@
 ;***********************************************************************************
 
 
-;;;;scheme part start;;;
+;;;;scheme part start;;; ((add1 var1) (add2 var2)...)
 (define SCHEMEFvarsTable '())
 
 (define fvar_address -1)
@@ -2164,7 +2164,7 @@
 				(searchConstInSCHEMEconstTable const (cdr constTable)))))
 
 (define code_gen_constant (lambda (const)
-	(string-append "MOV (R0 ,INDD(CONSTARRAY," (number->string (searchConstInSCHEMEconstTable const SCHEMEconstTable)) "));")))
+	(string-append "MOV (R0 ,INDD(CONSTARRAY," (number->string (searchConstInSCHEMEconstTable const SCHEMEconstTable)) "));" n)))
 
 
 (define code_gen_or 
@@ -2383,11 +2383,29 @@
 		)))
 
 
+
+
+(define SCHVarTableLookUp (lambda (var_name fvarTable)   ;; var-name = ('fvar name) , SCHEMEFvarsTable = ((add1 var1) (add2 var2)...)
+	(if (equal? (cadr var_name) (cadar fvarTable))
+		(caar fvarTable)
+		(SCHVarTableLookUp var_name (cdr fvarTable))
+	)))
+
+(define define_cod_gen 
+	(lambda (var exp code_gen major)
+		(let ((var_address (SCHVarTableLookUp var SCHEMEFvarsTable)))
+			(string-append
+				(CISC_comment "'def' code starts here")
+				(code_gen exp major) ;;after that, r0 holds the result of 'exp'
+				"MOV(INDD(FVARARRAY," (number->string var_address) "),R0);" n  ;;afther that, R7 holds the pointer to the var's value.  
+				"MOV (R0 , SOB_VOID);" n
+				(CISC_comment "'def' code ends here")
+	))))
+
 (define  code_gen  
 	(lambda (exp major)
 		(let ((run 
 		(compose-patterns
-
 			(pattern-rule 
 				`(box-get ,(? 'var)) 
 					(lambda (var) (box_get_code_gen var)))
@@ -2453,10 +2471,11 @@
 			;					))
 
 
-		;	(pattern-rule
-			;	`(def ,(? 'var) ,(? 'exps))
-			;		(lambda (var exps) 
-			;		))
+			(pattern-rule
+				`(def ,(? 'var) ,(? 'exps))
+					(lambda (var exps)
+					(define_cod_gen var exps code_gen major) 
+					))
 
 
 			(pattern-rule
@@ -2559,6 +2578,7 @@ CISC-fvar-table
 	)))
 
 
-
+(define test (lambda () 
+	(a '(begin (define x 7) (define x 8) (define y 9) ((lambda (y) x) 2)))))
 
 ;;;; fail to work if we dont run "compiler.scm" before evrey test
