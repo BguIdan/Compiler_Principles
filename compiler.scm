@@ -2277,20 +2277,21 @@
 
 
 
-(define box_get_code_gen (lambda (var)
-						(string-append
-							(CISC_comment "box-get code starts here") 
-							"MOV (R0,FPARG(2 + " (number->string (caddr var)) "));" n
-							"MOV (R0, IND(R0));" n
-							(CISC_comment "box-get code ends here"))))
+(define box_get_code_gen 
+	(lambda (var)
+		(string-append
+			(CISC_comment "box-get code starts here") 
+			"MOV (R0,FPARG(2 + " (number->string (caddr var)) "));" n
+			"MOV (R0, IND(R0));" n
+			(CISC_comment "box-get code ends here"))))
 
 
 (define pvar_code_gen 		
 	(lambda (var-name minor)
-			(string-append
-				(CISC_comment "pvar code starts here") 
-				"MOV (R0,FPARG(2 + " (number->string minor) "));" n	
-				(CISC_comment "pvar code ends here"))))
+		(string-append
+			(CISC_comment "pvar code starts here") 
+			"MOV (R0,FPARG(2 + " (number->string minor) "));" n	
+			(CISC_comment "pvar code ends here"))))
 
 
 (define bvar_code_gen 
@@ -2303,20 +2304,67 @@
 			(CISC_comment "bvar code ends here"))))
 
 
+(define repairStack
+	(lambda (args optionalArgs)
+		(let* ((lengthOfList (length args))
+			   (counter (number->string (updateCounter)))
+			   (initR1Label (string-append "INIT_Label_" counter))
+			   (loopLabel (string-append "LOOP_ARGS_" counter))
+			   (exitLoopLabel (string-append "EXIT_LOOP_ARGS_" counter))
+			   (iterateListLoopLabel (string-append "ITER_LOOP_ARGS_" counter))
+			   (exitIterateListLoopLabel (string-append "EXIT_ITER_LOOP_ARGS_" counter))
+			   (nilFixStackLabel (string-append "FIX_STACK_WITH_NIL_" counter))
+			   (doAfterFixignStackLabel (string-append "AFTER_FIXING_STACK_" counter)))
+			(string-append 
+				"MOV (R6 ,SOB_NIL);" n 						;create linked list for optional args
+				"MOV (R5 , R6);" n 							;R5 = iterator, R6 = pointer to head
+				"MOV (R4 , FPARG(1));" n
+				"DECR(R4);" n 								;R4 = num of args - 1
+				loopLabel ":" n
+				"CMP (R4 ," (number->string (- lengthOfList 1)) ");" n 	;add values to list not include the non optional args
+				"JUMP_EQ(" exitLoopLabel ");" n
+				"PUSH(2);" n
+				"CALL(MALLOC);" n
+				"DROP(1);" n
+				"MOV (INDD(R0,1) , R5);" n 					;new block will point to the old block 
+				"MOV (R5 , R0);" n 							;R5 = pointer to the new block
+				"MOV (INDD(R5,0) , FPARG(2 + R4));" n 		;update value in new block
+				"MOV (R6, R5);" n 							; R1 will point to the linked list head
+				"DECR(R4);" n
+				"JUMP(" loopLabel ");"n
+				exitLoopLabel ":" n
+				"CMP(FPARG(1) , 0);" n
+				"JUMP_NE(" nilFixStackLabel ");" n
+				; TODO: After asking about the linked list repair the stack to include only the list and
+				;		the "must" arguments
+				"JUMP(" doAfterFixignStackLabel ");" n
+				nilFixStackLabel ":" n
+				
+				doAfterFixignStackLabel ":" n
+				"MOV (FPARG(2 + " (number->string lengthOfList) "), R6);" n 		; move R1 to proper place on stack, hence after list of "must" args
+			)
+		)))
+
+
 (define createLambdaBodyInCISC
-		(lambda (args body code_gen major) 
+		(lambda (args optionalArgs body code_gen major variadic optional) 
 			(let* ((counter (number->string (updateCounter)))
 				   (bodyLabel (string-append "L_CLOSURE_BODY_" counter))
 				   (closExitLabel (string-append "L_CLOSURE_EXIT_" counter))
 				   (errorLabel (string-append "L_ERROR_LAMBDA_ARGS_COUNT_" counter)))
 				(string-append 
 					"MOV (INDD(R0 ,2) ,LABEL(" bodyLabel "));" n
-					"JUMP(" closExitLabel ");" n
+					"JUMP(" closExitLabel ");" n 
 					bodyLabel":" n
 					"PUSH(FP);" n
 					"MOV (FP , SP);" n
-					"CMP(FPARG(1) , IMM(" (number->string (length args)) "));" n
-					"JUMP_NE("errorLabel");" n
+					(if (and (equal? variadic 0) (equal? optional 0))
+						(string-append "CMP(FPARG(1) , IMM(" (number->string (length args)) "));" n
+										"JUMP_NE("errorLabel");" n )
+						"")
+					(if (or (equal? variadic 1) (equal? optional 1))
+						(repairStack args optionalArgs)
+						"")
 					(code_gen body major)
 					"POP(FP);" n
 					"RETURN;"  n
@@ -2328,8 +2376,8 @@
 					))
 			))
 
-(define code_gen_lambda_simple
-	(lambda (newMajor args body code_gen)
+(define code_gen_lambda
+	(lambda (newMajor code_gen)
 		(let* ((counter (number->string (updateCounter)))
 			  (exitLabel (string-append "EXIT_LOOP_COPY_" counter))
 			  (copyLoopLabel (string-append "LOOP_COPY_ENV_" counter))
@@ -2340,9 +2388,7 @@
 			"MOV(R2 ,SOB_NIL);" n  ;;;init R2(env)
 			"CMP (" (number->string newMajor) ",IMM(1));" n ;;check if we should enlarge the env
 			"JUMP_EQ (" exitExtendLabel ");" n 
-
 			"PUSH(" (number->string newMajor) ");" n "CALL(MALLOC);" n "DROP(1);" n
-			;"SHOW(\"this is  RO : \" , R0);" n
 			"MOV (R2,R0);" n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(1));" n
@@ -2369,7 +2415,6 @@
 			"PUSH (IMM(3));" n "CALL(MALLOC);" n "DROP(1);" n
 			"MOV (INDD(R0 ,0) , T_CLOSURE);" n
 			"MOV (INDD(R0 ,1) , R2);" n
-			(createLambdaBodyInCISC  args body code_gen newMajor)
 			)
 		)))
 
@@ -2428,20 +2473,29 @@
 			(pattern-rule 
 					`(lambda-simple ,(? 'params) ,(? 'body)) 
 						(lambda (params body)
-								(string-append 
-									(CISC_comment "lambda-simple code starts here") 
-									(code_gen_lambda_simple (+ 1 major) params body code_gen)
-									(CISC_comment "lambda-simple code ends here"))))			
+							(string-append 
+								(CISC_comment "lambda-simple code starts here") 
+								(code_gen_lambda (+ 1 major) code_gen)
+								(createLambdaBodyInCISC  params '() body code_gen major 0 0)
+								(CISC_comment "lambda-simple code ends here"))))			
 		
-			;(pattern-rule 
-			;	`(lambda-opt ,(? 'args) ,(? 'rest) ,(? 'body)) 
-			;		(lambda (args rest body) 
-			;				))
-			;
-			;(pattern-rule 
-			;	`(lambda-var ,(? 'args ) ,(? 'body)) 
-			;		(lambda (args body) 
-			;					))
+			(pattern-rule 
+				`(lambda-opt ,(? 'args) ,(? 'rest) ,(? 'body)) 
+					(lambda (args rest body) 
+							(string-append 
+								(CISC_comment "lambda-opt code starts here") 
+								(code_gen_lambda (+ 1 major) code_gen)
+								(createLambdaBodyInCISC  args rest body code_gen major 0 1)
+								(CISC_comment "lambda-opt code ends here"))))
+			
+			(pattern-rule 
+				`(lambda-var ,(? 'args ) ,(? 'body)) 
+					(lambda (args body) 
+							(string-append 
+								(CISC_comment "lambda-var code starts here") 
+								(code_gen_lambda (+ 1 major) code_gen)
+								(createLambdaBodyInCISC  '() args body code_gen major 1 0)
+								(CISC_comment "lambda-var code ends here"))))
 
 
 		;	(pattern-rule
