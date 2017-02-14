@@ -2203,7 +2203,7 @@
 	(lambda (op exprs code_gen major)
 		(let ((errorLabel (string-append "L_Error_cannot_apply_non_closure_" (number->string (updateCounter)))))
 		(string-append
-			(push_args_if_needed exprs major)
+			(push_args_if_needed (reverse exprs) major)
 			(code_gen op major) n
 			"SHOW (\"T_clos:\",INDD(R0,0));" n
 			"SHOW (\"Env:\",INDD(R0,1));" n
@@ -2229,7 +2229,7 @@
 			;;init 'for'-loop: (R9 = n+1 , n is the num of params of old applic)
 			"MOV(R10 , STARG(IMM(1));" n ;;after that line R10 = m
 			"CMP(R10 , IMM(0));" n ;;if there is no params, jump to the end of that func.
-			"JUMP_E (" noParamLabel ");" n 
+			"JUMP_E (" endParamsLabel ");" n 
 			"ADD (R10 , IMM(1));" n ;;after that line R10 = m+1 , m is the num of params of new applic
 
 			;;for-loop:
@@ -2256,13 +2256,13 @@
 	))))
 
 (define code_gen_tc_applic 
-	(lambda (op exprs code_gen)
+	(lambda (op exprs code_gen major)
 		(string-append
 			(CISC_comment "tc-applic code starts here")
 			"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
 			"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
-			(push_args_if_needed exprs)
-			(code_gen op) n
+			(push_args_if_needed (reverse exprs) major)
+			(code_gen op major) n
 			"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
 			"JUMP_NE (" (applic_label) ");" n
 			"PUSH INDD (R0,1);" n  ;;push env
@@ -2336,8 +2336,12 @@
 			  (extendEnvLoopLabel (string-append "LOOP_EXTEND_ENV_" counter)))
 		(string-append
 			"MOV (R1,FPARG(0));" n
+			"MOV(R2 ,SOB_NIL);" n  ;;;init R2(env)
+			"CMP (" (number->string newMajor) ",IMM(1));" n ;;check if we should enlarge the env
+			"JUMP_EQ (" exitExtendLabel ");" n 
+
 			"PUSH(" (number->string newMajor) ");" n "CALL(MALLOC);" n "DROP(1);" n
-			"SHOW(\"this is  RO : \" , R0);" n
+			;"SHOW(\"this is  RO : \" , R0);" n
 			"MOV (R2,R0);" n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(1));" n
@@ -2350,13 +2354,14 @@
 			exitLabel":" n
 			"MOV (R3 , FPARG(1));" n
 			"PUSH(R3);" n "CALL(MALLOC);" n "DROP(1);" n
-			"MOV (INDD(INDD(R2,0),0) , R0);"n
+			"MOV (INDD(R2,0) , R0);"n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(2));" n
-			extendEnvLoopLabel":" n
+			extendEnvLoopLabel":" n`
 			"CMP(R4 , R3);" n
 			"JUMP_EQ("exitExtendLabel");" n
 			"MOV (INDD(INDD(R2,0), R4) , FPARG(R5));" n
+
 			"ADD(R4 , IMM(1));" n "ADD(R5 , IMM(1));" n
 			"JUMP("extendEnvLoopLabel");" n
 			exitExtendLabel":" n
@@ -2455,7 +2460,7 @@
 			(pattern-rule
 				`(tc-applic ,(? 'op )  ,(? 'exprs))
 					(lambda (op exprs)
-						(code_gen_tc_applic op exprs code_gen)))
+						(code_gen_tc_applic op exprs code_gen major)))
 
 			(pattern-rule
 				`(seq ,(? 'exps))
