@@ -2221,8 +2221,9 @@
 
 
 (define run_over_frame (lambda ()
-	(let ((endParamsLabel (string-append "tc_applic_end_param_ranover" (number->string (updateCounter))))
-		   (forLabel (string-append "tc_applic_for_label" (number->string (updateCounter)))))
+	(let* ((counter (number->string (updateCounter)))
+		    (endParamsLabel (string-append "tc_applic_end_param_ranover" counter)) 
+		   (forLabel (string-append "tc_applic_for_label" counter)))
 	(string-append 
 			"PUSH (R7);" n ;;push old 'ret address'
 			"PUSH (IMM(1));" n
