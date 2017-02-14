@@ -2221,15 +2221,16 @@
 
 
 (define run_over_frame (lambda ()
-	(let ((endParamsLabel (string-append "tc_applic_end_param_ranover" (number->string (updateCounter))))
-		   (forLabel (string-append "tc_applic_for_label" (number->string (updateCounter)))))
+	(let* ((counter (number->string (updateCounter)))
+		    (endParamsLabel (string-append "tc_applic_end_param_ranover" counter)) 
+		   (forLabel (string-append "tc_applic_for_label" counter)))
 	(string-append 
 			"PUSH (R7);" n ;;push old 'ret address'
 			"PUSH (IMM(1));" n
 			;;init 'for'-loop: (R9 = n+1 , n is the num of params of old applic)
 			"MOV(R10 , STARG(IMM(1));" n ;;after that line R10 = m
 			"CMP(R10 , IMM(0));" n ;;if there is no params, jump to the end of that func.
-			"JUMP_E (" noParamLabel ");" n 
+			"JUMP_E (" endParamsLabel ");" n 
 			"ADD (R10 , IMM(1));" n ;;after that line R10 = m+1 , m is the num of params of new applic
 
 			;;for-loop:
