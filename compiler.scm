@@ -1809,6 +1809,11 @@
 		(caddr tagged)
 	))
 
+(define get_string_address_from_tagged_symbol (lambda (tagged)  
+	(caddr tagged)
+	))
+
+
 
 (define updateAddress (lambda ()
 	(set! const-address (+ 1 const-address)) const-address))
@@ -1838,7 +1843,7 @@
 
 	))
 
-(define make-number&symbol-tag (lambda (costa ans)
+(define make-number-tag (lambda (costa ans)
 			(if (dup? costa ans)
 				ans
 				`(,@ans ,(list (updateAddress) costa  costa)))))
@@ -1865,6 +1870,8 @@
 (define vector&string-tag (lambda (costa lst ans) 
 		`(,@ans  ,(list (updateAddress) costa  `(,(length lst) ,@(buildAddressList-Vector&String lst ans))))))
 
+(define symbol_tag (lambda (costa ans) 
+	`(,@ans ,(list (updateAddress) costa (searchAdd (symbol->string costa) ans)))))
 
 (define removeLast (lambda (lst)
 	(reverse (cdr (reverse lst)))))
@@ -1886,9 +1893,9 @@
 	(cond 
 		((null? costa) ans)
 		((boolean? costa) ans)
-		((number? costa) (make-number&symbol-tag costa ans))
-		((symbol? costa) (make-number&symbol-tag costa ans))
+		((number? costa) (make-number-tag costa ans))
 		((char? costa)  (make-char-tag costa ans))
+		((symbol? costa) (if (dup? costa ans) ans (symbol_tag costa (taggingConstsHelper (symbol->string costa) ans))))
 		((string? costa) (if (dup? costa ans) ans (vector&string-tag costa (string->list costa) 
 						(letrec ((loop-lst (lambda (lst ans) 
 							(if (null? lst) ans 
@@ -1907,26 +1914,21 @@
 
 		(else costa))))
 
-
-
-
 (define taggingConsts (lambda (constList ans)
 	(if (null? constList) 
 			ans
 			(taggingConsts (cdr constList) (taggingConstsHelper (car constList) ans)))))
-
-
 
 (define initConstTable (lambda ()
 		(list 
 			(list (updateAddress) '() T_NIL)
 			(list (updateAddress) (if #f 'cr7) T_VOID)
 			(list (updateAddress)  #t T_BOOL1)
-			(list (updateAddress) #f T_BOOL0)
-			
+			(list (updateAddress) #f T_BOOL0)		
 	)))
 
 
+;;code-gen-of-const_table part:
 (define code_gen_constNil (lambda ()
 	(string-append "CALL (MAKE_SOB_NIL);"  n "MOV (INDD(CONSTARRAY,0),R0);"
 )))
@@ -1969,13 +1971,28 @@
 				   "CALL (MAKE_SOB_PAIR);" n "DROP (2);"  n
 				   "MOV(INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);")))
 
+
+(define make_sob_symbol (lambda (str_add)
+	(string-append 
+		"PUSH (IMM(2));" n
+		(call-malloc)
+		"MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ," (number->string str_add) ");" n )))
+
+
+
+(define code_gen_constSymbol (lambda (tagged_exp) 
+	(string-append 
+		(make_sob_symbol (get_string_address_from_tagged_symbol tagged_exp))
+		"MOV (INDD (CONSTARRAY ," (number->string (get-address-from-tagged tagged_exp)) ") , R0);" n)))
+
 (define code_gen_consts (lambda (tagged-exp) 
 	(cond 
 		((null? (get-costa-from-tagged tagged-exp)) (code_gen_constNil))
 		((void? (get-costa-from-tagged tagged-exp)) (code_gen_constVoid))
 		((boolean? (get-costa-from-tagged tagged-exp)) (code_gen_constBool tagged-exp))
 		((char? (get-costa-from-tagged tagged-exp)) (code_gen_constChar tagged-exp))
-		;((symbol? (get-costa-from-tagged tagged-exp)) (code_gen_constSymbol tagged-exp))
+		((symbol? (get-costa-from-tagged tagged-exp)) (code_gen_constSymbol tagged-exp))
 		((string? (get-costa-from-tagged tagged-exp)) (code_gen_constStringOrVector tagged-exp "MAKE_SOB_STRING"))
 		((number? (get-costa-from-tagged tagged-exp)) (code_gen_constNumber tagged-exp))
 		((vector? (get-costa-from-tagged tagged-exp)) (code_gen_constStringOrVector tagged-exp "MAKE_SOB_VECTOR"))
@@ -2000,10 +2017,11 @@
 
 (define buildConstantTable (lambda (ast) 
 	(let* ((constList (buildConstList ast '()))
-		  (ciscConstTable 
+		(ciscConstTable 
 		  			(begin 
 		  				(set! SCHEMEconstTable (taggingConsts constList (initConstTable)))
-		  				(buildCiscConstTable SCHEMEconstTable))))
+		  		(buildCiscConstTable SCHEMEconstTable))))
+	
 		  				 ;;ciscConstTable is a STRING!
 		;(resetAddress) ;;;;not belong here
 		ciscConstTable
@@ -2013,6 +2031,54 @@
 ;***********************************************************************************
 ;;;;;;;;;;;;;;;;;;;;;;;; "Constants Table ends here ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;***********************************************************************************
+
+
+
+;*****************************************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;; "Symbol Table(represntitive String-linked-list) starts here" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*****************************************************************************************************************
+
+
+
+(define SCHEMESymbolTable '())
+
+
+(define SymbolsLookUp (lambda (tagged_const_lst ans)
+	(if (null? tagged_const_lst) ans
+		(if (symbol? (get-costa-from-tagged (car tagged_const_lst)))
+				(SymbolsLookUp (cdr tagged_const_lst) (append ans (list (car tagged_const_lst))))
+				(SymbolsLookUp (cdr tagged_const_lst) ans)
+			))))
+
+(define buildCISCSymbolTable (lambda (address_list)
+		(if (null? address_list) 
+
+				(string-append 
+					"PUSH (IMM(1));" n (call-malloc)
+					"MOV (SYMBOLTABLE,R0);" n 
+					"MOV (IND(SYMBOLTABLE) ,R7);" n)
+
+				(string-append
+					"PUSH(IMM(2));" n (call-malloc)
+					"MOV (INDD(R0 ,0) ,"  (number->string (car address_list))  ");" n
+					"MOV (INDD (R0,1) , R7);" n
+					"MOV (R7, R0);" n
+					(buildCISCSymbolTable (cdr address_list))))))
+
+
+(define buildSymbolTable (lambda () 
+	(let* ((symbol_lst  (SymbolsLookUp SCHEMEconstTable '()))
+		 (CISC_symbol_table 
+		 	(begin 
+			 	(set! SCHEMESymbolTable symbol_lst)
+			 	(buildCISCSymbolTable (reverse (map get_string_address_from_tagged_symbol SCHEMESymbolTable))))))
+	(string-append 
+		"MOV (R7,SOB_NIL);" n 
+		CISC_symbol_table))))
+
+;*****************************************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;; "Symbol Table(represntitive String-linked-list) ends here" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*****************************************************************************************************************
 
 
 
@@ -2105,11 +2171,6 @@
 ;***********************************************************************************
 
 
-;TO DO
- 
-;if3 or lambda-simple lambda-opt lambda-var def tc-applic applic seq set
-;;maybe : box-get box-set  var pvar bvar fvar const
-
 (define counter_label -1)
 
 (define updateCounter (lambda ()
@@ -2129,10 +2190,20 @@
 
 (define fvar_code_gen 
 	(lambda  (var_name) 
-		(string-append 
-			;(CISC_comment "fvar code starts here") 
-			"MOV (R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n)))
-			;(CISC_comment "fvar code ends here"))))
+			(let* ((counter (number->string (updateCounter)))
+					(errorlabel (string-append "UNDEF_LABEL" counter))
+					(finishlabel (string-append "FINISH_FVAR_LABEL" counter)))
+				(string-append 
+					(CISC_comment "fvar code:")
+					"MOV ( R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n 
+					"CMP (R0 , 0XDEF);" n 
+					"JUMP_EQ (" errorlabel ");" n
+					"JUMP (" finishlabel ");"  n 
+					errorlabel ":" n 
+					"SHOW(\"THE VAR YOU ARE LOOKING FOR IS UNDEFINE\",R0);" n 
+					"HALT;" n 
+					finishlabel ":" n))))
+
 
 
 (define if_label (lambda (flag)
@@ -2205,9 +2276,6 @@
 		(string-append
 			(push_args_if_needed (reverse exprs) major)
 			(code_gen op major) n
-			"SHOW (\"T_clos:\",INDD(R0,0));" n
-			"SHOW (\"Env:\",INDD(R0,1));" n
-			"SHOW (\"code:\",INDD(R0,2));" n
 			"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
 			"JUMP_NE("errorLabel");" n
 			"MOV (R1 , INDD (R0,1));" n
@@ -2266,9 +2334,7 @@
 				(string-append
 					(CISC_comment "tc-applic code starts here")
 					"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
-					;"SHOW (\"R7 is the old ret add:\" , R7);" n 
 					"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
-					;"SHOW (\"R8 is the old ret add:\" , R8);" n 
 					(push_args_if_needed (reverse exprs) major)
 					(code_gen op major) n
 					"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
@@ -2284,19 +2350,12 @@
 				))))
 
 
-(define box_get_code_gen (lambda (var)
-						(string-append
-							(CISC_comment "box-get code starts here") 
-							"MOV (R0,FPARG(2 + " (number->string (caddr var)) "));" n
-							"MOV (R0, IND(R0));" n
-							(CISC_comment "box-get code ends here"))))
-
 
 (define pvar_code_gen 		
 	(lambda (var-name minor)
 			(string-append
 				(CISC_comment "pvar code starts here") 
-				"MOV (R0,FPARG(2 + " (number->string minor) "));" n	
+				"MOV (R0,FPARG(" (number->string (+  2 minor)) "));" n	;;(+2 num) is for the offset from 'env'
 				(CISC_comment "pvar code ends here"))))
 
 
@@ -2345,13 +2404,13 @@
 			  (exitExtendLabel (string-append "EXIT_LOOP_EXTEND_ENV_" counter))
 			  (extendEnvLoopLabel (string-append "LOOP_EXTEND_ENV_" counter)))
 		(string-append
+			(CISC_comment "lambda-simple code starts here") 
 			"MOV (R1,FPARG(0));" n
 			"MOV(R2 ,SOB_NIL);" n  ;;;init R2(env)
 			"CMP (" (number->string newMajor) ",IMM(1));" n ;;check if we should enlarge the env
 			"JUMP_EQ (" exitExtendLabel ");" n 
 
 			"PUSH(" (number->string newMajor) ");" n "CALL(MALLOC);" n "DROP(1);" n
-			;"SHOW(\"this is  RO : \" , R0);" n
 			"MOV (R2,R0);" n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(1));" n
@@ -2379,8 +2438,8 @@
 			"MOV (INDD(R0 ,0) , T_CLOSURE);" n
 			"MOV (INDD(R0 ,1) , R2);" n
 			(createLambdaBodyInCISC  args body code_gen newMajor)
-			)
-		)))
+			(CISC_comment "lambda-simple code ends here") 
+			))))
 
 
 
@@ -2402,21 +2461,87 @@
 				(CISC_comment "'def' code ends here")
 	))))
 
+
+;;;box code gen start
+(define box_code_gen (lambda (var code_gen major)  
+		"PUSH (IMM(1));" n call-malloc
+		"MOV (R7,R0);" n 
+		(code_gen var major) ;;;now the CISC-value of 'var' is in R0
+		"MOV (IND(R7),R0);" n
+		"MOV(R0,R7);" n ;;the result should be in R0
+	))
+
+
+(define box_set_code_gen 
+	(lambda (var1 var2 code_gen major) 
+	 	(string-append 
+			(code_gen var1 major)
+			"MOV (R7, R0)" n ;now R7 holds the pointer of var1-box
+			(code_gen var2 major) ; now R0 holds the value of var2
+			"MOV(IND(R7),R0);" n 
+			"MOV (R0 , SOB_VOID);" n )))
+
+
+
+(define box_get_code_gen (lambda (var code_gen major)
+	(string-append
+		(code_gen var major) ;now R0 holds the value of var
+		"MOV(R0, (IND R0));" 
+	)))
+;;box code gen ends
+;;;code-gen of SET
+
+(define code_gen_setFvar (lambda (fvar value code_gen major) 
+	;;;;maybe i should check if the Fvar is defined before.
+	(let ((fvar_offset (SCHVarTableLookUp fvar SCHEMEFvarsTable)))
+		(string-append 
+			(code_gen value major)
+			"MOV(INDD(FVARARRAY," (number->string fvar_offset) "),R0);" n))))
+
+(define code_gen_setBvar (lambda (bvar value code_gen major_of_code_gen) 
+	(let ((major (caddr bvar))
+		  (minor (cadddr bvar)))
+			(string-append
+					(code_gen value major_of_code_gen) ;;r0 = value
+					"MOV (R7,FPARG(0));" n ;; now R7 hold the env 
+					"MOV (R7,INDD(R7," (number->string major) "));" n
+					"MOV (INDD(R7," (number->string minor) "),R0);" n))))
+
+(define code_gen_setPvar (lambda (pvar value code_gen major) 
+	(let ((minor (+ 2 (caddr pvar)))) ;;(+2 pvar) is for the offset from 'env'
+					(string-append
+						(code_gen value major) ;;r0 = value
+						"MOV(FPARG(" (number->string minor) "),R0);" n))))
+(define set_code_gen 
+	(lambda (varible value code_gen major)
+		(let ((var_kind (car varible)))
+			(string-append 
+				(cond
+					((equal? var_kind 'fvar) (code_gen_setFvar varible value code_gen major))
+					((equal? var_kind 'bvar) (code_gen_setBvar varible value code_gen major))
+					((equal? var_kind 'pvar) (code_gen_setPvar varible value code_gen major)))
+				"MOV (R0,SOB_VOID);" n 
+				))))
+
+;;;end (code-gen of SET)
+
+
 (define  code_gen  
 	(lambda (exp major)
 		(let ((run 
 		(compose-patterns
+
+			(pattern-rule 
+					`(box ,(? 'var)) 
+						(lambda (var) (box_code_gen var code_gen major)))
+
 			(pattern-rule 
 				`(box-get ,(? 'var)) 
-					(lambda (var) (box_get_code_gen var)))
+					(lambda (var) (box_get_code_gen var code_gen major)))
 				
-			;(pattern-rule 
-				;	`(box-set ,(? 'var1) ,(? 'var2)) 
-				;		(lambda (var1 var2) ))
-
-			;(pattern-rule 
-			;		`(box ,(? 'var)) 
-			;			(lambda (var) ))
+			(pattern-rule 
+					`(box-set ,(? 'var1) ,(? 'var2)) 
+						(lambda (var1 var2) (box_set_code_gen var1 var2 code_gen major)))
 
 			(pattern-rule 
 				`(pvar ,(? 'var-name) ,(? 'minor)) 
@@ -2454,11 +2579,8 @@
 
 			(pattern-rule 
 					`(lambda-simple ,(? 'params) ,(? 'body)) 
-						(lambda (params body)
-								(string-append 
-									(CISC_comment "lambda-simple code starts here") 
-									(code_gen_lambda_simple (+ 1 major) params body code_gen)
-									(CISC_comment "lambda-simple code ends here"))))			
+						(lambda (params body)	
+									(code_gen_lambda_simple (+ 1 major) params body code_gen)))	
 		
 			;(pattern-rule 
 			;	`(lambda-opt ,(? 'args) ,(? 'rest) ,(? 'body)) 
@@ -2499,12 +2621,7 @@
 			(pattern-rule
 				`(set  ,(? 'var ) ,(? 'val)) 
 					(lambda (var val)
-					 (string-append 
-							(CISC_comment "set code starts here")
-							(code_gen val major)
-							"MOV (FPARG(2 + " (number->string (caddr var)) "),R0);" n
-							"MOV (R0,IMM(SOB_VOID));" n
-							(CISC_comment "set code ends here"))))
+							(set_code_gen var val code_gen major)))
 
 			)))
 
@@ -2537,10 +2654,6 @@ CONTINUE:
 (define epilogue 
 "
 INFO
-SHOW (\"null\",IND (IND (CONSTARRAY)));
-SHOW (\"void\",IND (INDD (CONSTARRAY,1)));
-SHOW (\"true\",INDD ((INDD (CONSTARRAY,2)),1));
-SHOW (\"false\",INDD ((INDD (CONSTARRAY,3)),1));
 STOP_MACHINE;
 return 0;
 }")
@@ -2561,6 +2674,7 @@ return 0;
 (define a (lambda (src)
 	(let* ((after_ass3 (runAss3 src))
 			(CISC-const-table (buildConstantTable after_ass3))
+			(CISC_symbol_table (buildSymbolTable))
 			(CISC-fvar-table (buildFvarTable after_ass3))	
 			(codeGen (code_gen after_ass3 0))
 		   )
@@ -2569,7 +2683,8 @@ CISC-fvar-table
 		(string-append 
 				prolouge
 				MACROS 
-				CISC-const-table	
+				CISC-const-table
+				CISC_symbol_table	
 				CISC-fvar-table		
 				codeGen
 				epilogue
@@ -2578,7 +2693,26 @@ CISC-fvar-table
 	)))
 
 
-(define test (lambda () 
-	(a '(begin (define x 7) (define x 8) (define y 9) ((lambda (y) x) 2)))))
+;(define test (lambda ()
+;	(a  '(let ((a 0)) (list
+ ;                          (lambda () a)
+  ;                         (lambda () (set! a (+ a 1)))
+   ;                        (lambda (b) (set! a b)))))))
+
+(define test (lambda ()
+(a '((lambda (x) ((lambda (a b) (or #f #f (begin (define u 9) (set! u 777) (if #f a u)) )) 7 8)) 2))))
+;;Halili Level:
+;(define test (lambda ()
+;	(a '((lambda (a b c) 
+;		((lambda (x y z) 
+;
+;		(  (lambda (u) (set! c 9) (set! u c) 
+;
+;			((lambda (t) (set! a u) a)   0)
+;			) 777)
+;
+;		) 4 5 6)) 1 2 3))))
+
+
 
 ;;;; fail to work if we dont run "compiler.scm" before evrey test
