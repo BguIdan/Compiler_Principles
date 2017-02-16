@@ -1964,9 +1964,9 @@
 	 			   "MOV(INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);")))
 
 
-(define code_gen_constPair (lambda (exp)  
-	(string-append "PUSH (" (number->string (cadr (get-repr-from-tagged exp))) ");" n
-				   "PUSH (" (number->string (car (get-repr-from-tagged exp))) ");" n
+(define code_gen_constPair (lambda (exp) 
+	(string-append "PUSH (INDD(CONSTARRAY," (number->string (cadr (get-repr-from-tagged exp))) "));" n
+				   "PUSH (INDD(CONSTARRAY," (number->string (car (get-repr-from-tagged exp))) "));" n
 				   "CALL (MAKE_SOB_PAIR);" n "DROP (2);"  n
 				   "MOV(INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);")))
 
@@ -2082,6 +2082,190 @@
 
 
 ;***********************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;; "RUNTIME SUPPORT Starts here ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;***********************************************************************************
+
+
+
+(define empty_env "0x1A85")
+
+(define lookupFvar (lambda (var_name fvar_table) 
+	(if (equal? var_name (cadr (car fvar_table)))
+		(get-address-from-tagged (car fvar_table))
+		(lookupFvar var_name (cdr fvar_table))
+	)))
+
+
+
+(define RS_makeClosure (lambda (body_label finishlabel fvar_address) 
+	(string-append 
+		"PUSH (IMM(3));" n (call-malloc)
+		"MOV(INDD(R0,0),T_CLOSURE);" n 
+		"MOV (INDD(R0,1)," empty_env ");" n 
+		"MOV(INDD(R0,2),LABEL(" body_label "));" n 
+		"MOV(INDD(FVARARRAY," (number->string fvar_address) "),R0);" n
+		"JUMP (" finishlabel ");" n 
+	)))
+
+(define RS_Closure_Code (lambda (body_label code)
+	(string-append 
+		body_label ":" n 
+		"PUSH(FP);" n "MOV(FP,SP);" n 
+		code
+		"POP(FP);" n "RETURN;"  n 
+	)))
+
+(define RS_car
+	(lambda ()
+		(let
+			((finishlabel  "RS_make_car_closure_ends")
+			(body_label  "RS_LABEL_car_body") 
+			(error_label"RS_ERORR_CAR"))
+				(string-append 
+					(CISC_comment "RS_car starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'car SCHEMEFvarsTable))
+					(RS_Closure_Code body_label  
+
+						(string-append
+							"CMP (FPARG(1),IMM(1));" n
+							"JUMP_NE (" error_label ");" n
+							"MOV(R7,FPARG(2)); " n 
+							"CMP (INDD (R7,0),IMM(T_PAIR));" n
+							"JUMP_NE(" error_label ");" n 
+							"MOV(R0,INDD(R7,1));" n )
+					)
+					error_label ":"
+					"SHOW(\"error in procedure 'car\",R7);" n 
+					"HALT;" n
+					finishlabel ":" n
+					(CISC_comment "RS_car ends")
+))))
+
+(define RS_cdr
+	(lambda ()
+		(let (
+			(finishlabel "RS_make_cdr_closure_ends")
+			(body_label  "RS_LABEL_cdr_body")
+			(error_label  "RS_ERORR_CDR"))
+				(string-append 
+					(CISC_comment "RS_cdr starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'cdr SCHEMEFvarsTable))
+					(RS_Closure_Code body_label  
+
+						(string-append
+							"CMP (FPARG(1),IMM(1));" n
+							"JUMP_NE (" error_label ");" n
+							"MOV(R7,FPARG(2)); " n 
+							"CMP (INDD (R7,0),IMM(T_PAIR));" n
+							"JUMP_NE(" error_label ");" n 
+							"MOV(R0,INDD(R7,2));" n )
+					)
+					error_label ":"
+					"SHOW(\"error in procedure 'cdr\",R0);" n 
+					"HALT;" n 
+					finishlabel ":" n
+					(CISC_comment "RS_cdr ends")
+))))
+
+
+(define RS_cons
+	(lambda ()
+		(let(
+			(finishlabel "RS_make_cons_closure_ends")
+			(body_label "RS_LABEL_cons_body" )
+			(error_label "RS_ERORR_CONS"))
+				(string-append
+				(CISC_comment "RS_cons starts") 
+					(RS_makeClosure body_label finishlabel (lookupFvar 'cons SCHEMEFvarsTable))
+					(RS_Closure_Code body_label  
+						(string-append
+							"CMP (FPARG(1),IMM(2));" n
+							"JUMP_NE (" error_label ");" n	
+							"PUSH (IMM(3));" n (call-malloc)
+							"MOV(INDD(R0,0),T_PAIR);" n
+							"MOV(INDD(R0,1),FPARG(2));" n 
+							"MOV(INDD(R0,2),FPARG(3));" n ))
+					error_label ":"
+					"SHOW(\"error in procedure 'cons. needed 2 arguments\",R0);" n 
+					"HALT;" n 
+					finishlabel ":" n
+					(CISC_comment "RS_cons ends")
+					))))
+
+(define RS_set_car
+	(lambda ()
+		(let
+			((finishlabel  "RS_make_SETCAR_closure_ends")
+			(body_label  "RS_LABEL_SETCAR_body")
+			(error_label "RS_ERORR_SETCAR"))
+				(string-append 
+					(CISC_comment "RS_set_car starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'set-car! SCHEMEFvarsTable))
+					(RS_Closure_Code body_label  
+						(string-append
+							"CMP (IND(FPARG(2)),T_PAIR);" n
+							"JUMP_NE (" error_label ");" n	
+							"MOV (INDD(FPARG(2),1),FPARG(3));" n
+							"MOV(R0,SOB_VOID);" n))
+					error_label ":"
+					"SHOW(\"error in procedure 'SET_CAR!\",FPARG(2));" n 
+					"HALT;" n 
+					finishlabel ":" n
+					(CISC_comment "RS_set_car ends")
+					))))
+
+(define RS_set_cdr
+	(lambda ()
+		(let (
+			(finishlabel "RS_make_SETCDR_closure_ends")
+			(body_label "RS_LABEL_SETCDR_body")
+			(error_label  "RS_ERORR_SETCDR"))
+				(string-append 
+					(CISC_comment "RS_set_cdr starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'set-cdr! SCHEMEFvarsTable))
+					(RS_Closure_Code body_label  
+						(string-append
+							"CMP (IND(FPARG(2)),T_PAIR);" n
+							"JUMP_NE (" error_label ");" n	
+							"MOV (INDD(FPARG(2),2),FPARG(3));" n
+							"MOV(R0,SOB_VOID);" n))
+					error_label ":"
+					"SHOW(\"error in procedure 'SET_CDR!\",R0);" n 
+					"HALT;" n 
+					finishlabel ":" n
+					(CISC_comment "RS_set_cdr ends")
+					))))
+
+
+
+
+
+(define add_RS_to_FvarTable 
+	(lambda ()
+		(string-append 
+		(RS_car) (RS_cdr) (RS_cons) (RS_set_car) (RS_set_cdr)
+		)))
+
+(define RS_LIST 
+	(list 'car 'cdr 'cons 'set-car! 'set-cdr!))
+
+;;RUNTIME SUPPORT TODO:
+
+
+;; append,apply , 
+;; < , = , > , +, / , * , - 
+;; string-length, string-ref,string-set! string->symbol ,symbol->string , char->integer  
+;; boolean? ,  char? ,eq? ,integer? ,pair? , procedure? , string? , symbol? ,vector? , zero? ; rational? 
+;, remainder  , denonimator , numertor  (what is all of these??)
+;; vector , vector-length,vector-ref , vector-set! 
+
+
+;***********************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;; "RUNTIME SUPPORT ends here ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;***********************************************************************************
+
+
+;***********************************************************************************
 ;;;;;;;;;;;;;;;;;;;;;;;; "Fvar Table Starts here ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;***********************************************************************************
 
@@ -2119,14 +2303,14 @@
 ;;;;scheme part ends;;;
 ;;;;CISC part start;;;
 
-(define code_gen_fvar (lambda (exp)
+(define code_gen_init_fvar (lambda (exp)
 	(string-append 
 	 			   "MOV(INDD(FVARARRAY," (number->string (get-address-from-tagged exp)) ") , 0XDEF);")))
 
 (define code_gen_fvar_helper (lambda (SchemeTaggedFvarTable)
 	(if (null? SchemeTaggedFvarTable) ""
 		(string-append 
-			(code_gen_fvar (car SchemeTaggedFvarTable)) n 
+			(code_gen_init_fvar (car SchemeTaggedFvarTable)) n 
 			(code_gen_fvar_helper (cdr SchemeTaggedFvarTable))))))
 
 (define buildCiscFvarsTable (lambda (SchemeTaggedFvarTable)
@@ -2141,17 +2325,30 @@
 
 ;;;;CISC part ends;;;
 
+
+;;RS-procedure : 
+(define enlargeFvars (lambda (oldFvarTable rs_list ans)
+	(if (null? rs_list) 
+		(append oldFvarTable ans) 
+		(if (member (car rs_list) oldFvarTable)
+			(enlargeFvars oldFvarTable (cdr rs_list) ans)
+			(enlargeFvars oldFvarTable (cdr rs_list) (append ans `(,(car rs_list)))))
+	)))
+
+
 ;;fvarTable's main : ;;;;
 (define buildFvarTable (lambda (ast) 
 	(let* ((SchemeFvarTable (buildSchemeFvarList ast '()))
 		  (CISCFvarTable 
-		  		 (begin
-		  				(set! SCHEMEFvarsTable (taggingFvars SchemeFvarTable '()))
+		  		 (begin 
+		  				(set! SCHEMEFvarsTable (taggingFvars (enlargeFvars SchemeFvarTable RS_LIST '()) '()))
 		  				(buildCiscFvarsTable SCHEMEFvarsTable) ;;;this is STRING
 		  				)))
 		(reset_fvar_Address)
+	(string-append
 		CISCFvarTable
-	)))
+		(add_RS_to_FvarTable)
+	))))
 
 
 
@@ -2179,13 +2376,6 @@
 	(set! counter_label -1)
 	))
 
-
-
-(define lookupFvar (lambda (var_name fvar_table) 
-	(if (equal? var_name (cadr (car fvar_table)))
-		(get-address-from-tagged (car fvar_table))
-		(lookupFvar var_name (cdr fvar_table))
-	)))
 
 (define fvar_code_gen 
 	(lambda  (var_name) 
@@ -2570,7 +2760,7 @@
 
 ;;;box code gen start
 (define box_code_gen (lambda (var code_gen major)  
-		"PUSH (IMM(1));" n call-malloc
+		"PUSH (IMM(1));" n (call-malloc)
 		"MOV (R7,R0);" n 
 		(code_gen var major) ;;;now the CISC-value of 'var' is in R0
 		"MOV (IND(R7),R0);" n
@@ -2630,9 +2820,6 @@
 				))))
 
 ;;;end (code-gen of SET)
-
-			)
-		)))
 
 
 (define  code_gen  
@@ -2813,10 +3000,43 @@ CISC-fvar-table
 
 	)))
 
+
 (define test
 	(lambda ()
 		(a '((lambda x ((lambda (a b . y) 999) 12 13)) 2))
 	))
 
 
+
+;;;;;;;;;;;TESTS: 
+
+;(define test (lambda ()
+;	(a  '(let ((a 0)) (list
+ ;                          (lambda () a)
+  ;                         (lambda () (set! a (+ a 1)))
+   ;                        (lambda (b) (set! a b)))))))
+
+
+;(define test (lambda ()
+;		(a `()
+;	))
+
+;(define test (lambda ()
+;(a '((lambda (x) ((lambda (a b) (or #f #f (begin (define u 9) (set! u 777) (if #f a u)) )) 7 8)) 2))))
+;;Halili Level:
+;(define test (lambda ()
+;	(runAss3 '((lambda (a b c) 
+;		((lambda (x y z) 
+;
+;		(  (lambda (u) (set! c 9) (set! u c) 
+;
+;			((lambda (t) (set! a u) a)   0)
+;			) 777)
+;
+;		) 4 5 6)) 1 2 3))))
+
+
+
+
 ;;;; fail to work if we dont run "compiler.scm" before evrey test
+
