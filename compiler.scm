@@ -2304,50 +2304,99 @@
 			(CISC_comment "bvar code ends here"))))
 
 
-(define repairStack
-	(lambda (args optionalArgs)
-		(let* ((lengthOfList (length args))
+(define repairStackEmptyVar
+	(lambda (args)
+		(let* ((lengthOfArgs (length args))
 			   (counter (number->string (updateCounter)))
-			   (initR1Label (string-append "INIT_Label_" counter))
 			   (loopLabel (string-append "LOOP_ARGS_" counter))
 			   (exitLoopLabel (string-append "EXIT_LOOP_ARGS_" counter))
-			   (iterateListLoopLabel (string-append "ITER_LOOP_ARGS_" counter))
-			   (exitIterateListLoopLabel (string-append "EXIT_ITER_LOOP_ARGS_" counter))
-			   (nilFixStackLabel (string-append "FIX_STACK_WITH_NIL_" counter))
-			   (doAfterFixignStackLabel (string-append "AFTER_FIXING_STACK_" counter)))
-			(string-append 
-				"MOV (R6 ,SOB_NIL);" n 						;create linked list for optional args
-				"MOV (R5 , R6);" n 							;R5 = iterator, R6 = pointer to head
-				"MOV (R4 , FPARG(1));" n
-				"DECR(R4);" n 								;R4 = num of args - 1
-				loopLabel ":" n
-				"CMP (R4 ," (number->string (- lengthOfList 1)) ");" n 	;add values to list not include the non optional args
-				"JUMP_EQ(" exitLoopLabel ");" n
-				"PUSH(2);" n
-				"CALL(MALLOC);" n
-				"DROP(1);" n
-				"MOV (INDD(R0,1) , R5);" n 					;new block will point to the old block 
-				"MOV (R5 , R0);" n 							;R5 = pointer to the new block
-				"MOV (INDD(R5,0) , FPARG(2 + R4));" n 		;update value in new block
-				"MOV (R6, R5);" n 							; R1 will point to the linked list head
-				"DECR(R4);" n
-				"JUMP(" loopLabel ");"n
-				exitLoopLabel ":" n
-				"CMP(FPARG(1) , 0);" n
-				"JUMP_NE(" nilFixStackLabel ");" n
-				; TODO: After asking about the linked list repair the stack to include only the list and
-				;		the "must" arguments
-				"JUMP(" doAfterFixignStackLabel ");" n
-				nilFixStackLabel ":" n
-				
-				doAfterFixignStackLabel ":" n
-				"MOV (FPARG(2 + " (number->string lengthOfList) "), R6);" n 		; move R1 to proper place on stack, hence after list of "must" args
+			   (loopOverStackLabel (string-append "FIXING_STACK_" counter))
+			   (exitLoopOverStackLabel (string-append "EXIT_FIXING_STACK_" counter))
+			   (ifNoOptionalArgs (string-append "NO_OPTIONAL_ARGS_" counter))
+			   (loopNilCaseLabel (string-append "NIL_CASE_LOOP_" counter))
+			   (exitLoopNilCaseLabel (string-append "EXIT_NIL_CASE_LOOP_" counter))
+			   (finalLabel (string-append "FINAL_" counter)))
+			(string-append
+				"CMP (FPARG(1) ,0);" n  						;If we should create a liked list from optional args
+				"JUMP_EQ(" ifNoOptionalArgs ");" n
+
+			))
+	)) 
+
+(define repairStackForVarOpt
+	(lambda (args)
+		(let* ((lengthOfArgs (length args))
+			   (counter (number->string (updateCounter)))
+			   (loopLabel (string-append "LOOP_ARGS_" counter))
+			   (exitLoopLabel (string-append "EXIT_LOOP_ARGS_" counter))
+			   (loopOverStackLabel (string-append "FIXING_STACK_" counter))
+			   (exitLoopOverStackLabel (string-append "EXIT_FIXING_STACK_" counter))
+			   (ifNoOptionalArgs (string-append "NO_OPTIONAL_ARGS_" counter))
+			   (loopNilCaseLabel (string-append "NIL_CASE_LOOP_" counter))
+			   (exitLoopNilCaseLabel (string-append "EXIT_NIL_CASE_LOOP_" counter))
+			   (finalLabel (string-append "FINAL_" counter)))
+			(string-append
+				    "CMP (FPARG(1) , " (number->string lengthOfArgs) ");" n  	;If we should create a liked list from optional args
+				    "JUMP_EQ(" ifNoOptionalArgs ");" n
+					"MOV (R6 ,SOB_NIL);" n 						;create linked list for optional args
+					"MOV (R5 , R6);" n 							;R5 = iterator, R6 = pointer to head
+					"MOV (R4 , FPARG(1));" n
+					"DECR(R4);" n 								;R4 = num of args - 1
+					loopLabel ":" n
+					"CMP (R4 ," (number->string (- lengthOfArgs 1)) ");" n 	;add values to list not include the non optional args
+					"JUMP_EQ(" exitLoopLabel ");" n
+					"PUSH(2);" n
+					"CALL(MALLOC);" n
+					"DROP(1);" n
+					"MOV (INDD(R0,1) , R5);" n 					;R0 holds the new block that will now point to the old block 
+					"MOV (R5 , R0);" n 							;R5 = pointer to the new block
+					"MOV (INDD(R5,0) , FPARG(2 + R4));" n 		;update value in new block
+					"MOV (R6, R5);" n 							;R6 will point to the linked list head
+					"DECR(R4);" n
+					"JUMP(" loopLabel ");"n
+					exitLoopLabel ":" n
+					"MOV (FPARG(2 + " (number->string lengthOfArgs) "), R6);" n 		;move R6 to proper place on stack, hence after "must" args
+					"MOV (R4, FPARG(1));" n 											;the old num of total args is on R4 in order to repair the stack
+					"MOV (FPARG(1), " (number->string (+ 1 lengthOfArgs)) ");" n 		;the new num of args is the num of "must" args + 1 for the list
+					"MOV (R3 , FPARG(1));" n 											;R3 = number of loops  = num of args (= "must" + 1) + 3 (= fp, ret, env ,num)
+					"ADD (R3 , IMM(3));" n
+					loopOverStackLabel ":" n
+					"CMP (R3,IMM(0));"n
+					"JUMP_EQ(" exitLoopOverStackLabel ");" n
+					"MOV (FPARG(1 + R4), FPARG(-2 + R3));" n
+					"DECR(R3);" n  "DECR(R4);" n
+					"JUMP(" loopOverStackLabel ");"n
+					exitLoopOverStackLabel ":" n
+					"MOV (FPARG(1 + R4), FPARG(-2 + R3));" n
+					"MOV (SP , FP);" n 												;repair stack pointer according to Nadav "The Tool" Zilberstein formula
+					"SUB (SP , R4);" n
+					"SUB (SP , IMM(3));" n
+					"JUMP(" finalLabel ");" n
+					ifNoOptionalArgs ":" n
+					"MOV (R5 , SOB_NIL);" n 										;R5 = holds the data we want to add to the stack
+					"MOV (R4 , FPARG(1));" n "ADD(R4 , IMM(4));" n 					;R4 = num of loops
+					"ADD (FPARG(1) , IMM(1));" n 									;add nil to args so num of args is FPARG(1) + 1
+					loopNilCaseLabel ":" n
+					"CMP (R4 , IMM(0));" n
+					"JUMP_EQ(" exitLoopNilCaseLabel ");" n
+					"MOV (R3 , FPARG(-2 + R4 - 1));" n 								;R3 = holds the data from the stack that we will override
+					"MOV (FPARG(-2 + R4 - 1) , R5);" n
+					"MOV (R5 , R3);" n
+					"DECR(R4);" n
+					"JUMP(" loopNilCaseLabel");" n
+					exitLoopNilCaseLabel ":" n
+					"MOV (FPARG(-2 + R4 - 1) , R5);" n
+					"DECR(R4);" n
+					"MOV (SP , FP);" n
+					"SUB (SP , R4);" n
+					finalLabel ":" n
+				)				
 			)
-		)))
+		))
 
 
 (define createLambdaBodyInCISC
-		(lambda (args optionalArgs body code_gen major variadic optional) 
+		(lambda (args body code_gen major variadic optional) 
 			(let* ((counter (number->string (updateCounter)))
 				   (bodyLabel (string-append "L_CLOSURE_BODY_" counter))
 				   (closExitLabel (string-append "L_CLOSURE_EXIT_" counter))
@@ -2363,7 +2412,7 @@
 										"JUMP_NE("errorLabel");" n )
 						"")
 					(if (or (equal? variadic 1) (equal? optional 1))
-						(repairStack args optionalArgs)
+						(repairStackForVarOpt args)
 						"")
 					(code_gen body major)
 					"POP(FP);" n
@@ -2373,8 +2422,8 @@
 					"SHOW(\"Wrong number of args!!!\" , R0);" n
 					"HALT;"n
 					closExitLabel ":" n
-					))
-			))
+				))
+		))
 
 (define code_gen_lambda
 	(lambda (newMajor code_gen)
@@ -2408,7 +2457,6 @@
 			"CMP(R4 , R3);" n
 			"JUMP_EQ("exitExtendLabel");" n
 			"MOV (INDD(INDD(R2,0), R4) , FPARG(R5));" n
-
 			"ADD(R4 , IMM(1));" n "ADD(R5 , IMM(1));" n
 			"JUMP("extendEnvLoopLabel");" n
 			exitExtendLabel":" n
@@ -2476,7 +2524,7 @@
 							(string-append 
 								(CISC_comment "lambda-simple code starts here") 
 								(code_gen_lambda (+ 1 major) code_gen)
-								(createLambdaBodyInCISC  params '() body code_gen major 0 0)
+								(createLambdaBodyInCISC  params body code_gen major 0 0)
 								(CISC_comment "lambda-simple code ends here"))))			
 		
 			(pattern-rule 
@@ -2485,7 +2533,7 @@
 							(string-append 
 								(CISC_comment "lambda-opt code starts here") 
 								(code_gen_lambda (+ 1 major) code_gen)
-								(createLambdaBodyInCISC  args rest body code_gen major 0 1)
+								(createLambdaBodyInCISC  args body code_gen major 0 1)
 								(CISC_comment "lambda-opt code ends here"))))
 			
 			(pattern-rule 
@@ -2494,7 +2542,7 @@
 							(string-append 
 								(CISC_comment "lambda-var code starts here") 
 								(code_gen_lambda (+ 1 major) code_gen)
-								(createLambdaBodyInCISC  '() args body code_gen major 1 0)
+								(createLambdaBodyInCISC  '() body code_gen major 1 0)
 								(CISC_comment "lambda-var code ends here"))))
 
 
@@ -2603,7 +2651,10 @@ CISC-fvar-table
 
 	)))
 
-
+(define test
+	(lambda ()
+		(a '((lambda x ((lambda (a b . y) 999) 12 13)) 2))
+	))
 
 
 ;;;; fail to work if we dont run "compiler.scm" before evrey test
