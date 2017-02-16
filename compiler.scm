@@ -2190,18 +2190,19 @@
 
 (define fvar_code_gen 
 	(lambda  (var_name) 
-		(string-append 
 			(let* ((counter (number->string (updateCounter)))
 					(errorlabel (string-append "UNDEF_LABEL" counter))
-					(finishlabel (string-append "FINISH-FVAR_LABEL" counter)))
-			"MOV ( R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n 
-			"CMP (R0 , 0XDEF);" n 
-			"JUMP_E (" errorlabel ");" n
-			"JUMP (" finishlabel ");"  n 
-			errorlabel ":" n 
-			SHOW("THE VAR YOU ARE LOOKING FOR IS \"UNDEFINE\")"
-			"HALT;" n 
-			finishlabel ":" n)))))
+					(finishlabel (string-append "FINISH_FVAR_LABEL" counter)))
+				(string-append 
+					(CISC_comment "fvar code:")
+					"MOV ( R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n 
+					"CMP (R0 , 0XDEF);" n 
+					"JUMP_EQ (" errorlabel ");" n
+					"JUMP (" finishlabel ");"  n 
+					errorlabel ":" n 
+					"SHOW(\"THE VAR YOU ARE LOOKING FOR IS UNDEFINE\",R0);" n 
+					"HALT;" n 
+					finishlabel ":" n))))
 
 
 
@@ -2275,9 +2276,6 @@
 		(string-append
 			(push_args_if_needed (reverse exprs) major)
 			(code_gen op major) n
-			"SHOW (\"T_clos:\",INDD(R0,0));" n
-			"SHOW (\"Env:\",INDD(R0,1));" n
-			"SHOW (\"code:\",INDD(R0,2));" n
 			"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
 			"JUMP_NE("errorLabel");" n
 			"MOV (R1 , INDD (R0,1));" n
@@ -2336,9 +2334,7 @@
 				(string-append
 					(CISC_comment "tc-applic code starts here")
 					"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
-					;"SHOW (\"R7 is the old ret add:\" , R7);" n 
 					"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
-					;"SHOW (\"R8 is the old ret add:\" , R8);" n 
 					(push_args_if_needed (reverse exprs) major)
 					(code_gen op major) n
 					"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
@@ -2415,7 +2411,6 @@
 			"JUMP_EQ (" exitExtendLabel ");" n 
 
 			"PUSH(" (number->string newMajor) ");" n "CALL(MALLOC);" n "DROP(1);" n
-			;"SHOW(\"this is  RO : \" , R0);" n
 			"MOV (R2,R0);" n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(1));" n
@@ -2501,7 +2496,7 @@
 	(let ((fvar_offset (SCHVarTableLookUp fvar SCHEMEFvarsTable)))
 		(string-append 
 			(code_gen value major)
-			"MOV(INDD(FVARARRAY," fvar_offset "),R0);" n))))
+			"MOV(INDD(FVARARRAY," (number->string fvar_offset) "),R0);" n))))
 
 (define code_gen_setBvar (lambda (bvar value code_gen major_of_code_gen) 
 	(let ((major (caddr bvar))
@@ -2626,15 +2621,7 @@
 			(pattern-rule
 				`(set  ,(? 'var ) ,(? 'val)) 
 					(lambda (var val)
-							(set_code_gen var val code_gen major)
-
-
-					 (string-append 
-							(CISC_comment "set code starts here")
-							(code_gen val major)
-							"MOV (FPARG(2 + " (number->string (caddr var)) "),R0);" n
-							"MOV (R0,IMM(SOB_VOID));" n
-							(CISC_comment "set code ends here"))))
+							(set_code_gen var val code_gen major)))
 
 			)))
 
@@ -2667,10 +2654,6 @@ CONTINUE:
 (define epilogue 
 "
 INFO
-SHOW (\"null\",IND (IND (CONSTARRAY)));
-SHOW (\"void\",IND (INDD (CONSTARRAY,1)));
-SHOW (\"true\",INDD ((INDD (CONSTARRAY,2)),1));
-SHOW (\"false\",INDD ((INDD (CONSTARRAY,3)),1));
 STOP_MACHINE;
 return 0;
 }")
@@ -2716,7 +2699,8 @@ CISC-fvar-table
   ;                         (lambda () (set! a (+ a 1)))
    ;                        (lambda (b) (set! a b)))))))
 
-
+(define test (lambda ()
+(a '((lambda (x) ((lambda (a b) (or #f #f (begin (define u 9) (set! u 777) (if #f a u)) )) 7 8)) 2))))
 ;;Halili Level:
 ;(define test (lambda ()
 ;	(a '((lambda (a b c) 
