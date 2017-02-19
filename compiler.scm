@@ -2107,12 +2107,22 @@
 		"JUMP (" finishlabel ");" n 
 	)))
 
-(define RS_Closure_Code (lambda (body_label code)
+(define RS_Closure_Code (lambda (body_label finish_label error_label error_show code)
 	(string-append 
 		body_label ":" n 
 		"PUSH(FP);" n "MOV(FP,SP);" n 
 		code
 		"POP(FP);" n "RETURN;"  n 
+		error_label ":"
+		error_show n 
+		"HALT;" n
+		finish_label ":" n
+	)))
+
+(define args_check_macro (lambda (num_args_str error_label)
+	(string-append
+			"CMP (FPARG(1),IMM(" num_args_str "));" n ;;check number of args == 1
+			"JUMP_NE (" error_label ");" n	
 	)))
 
 (define RS_car
@@ -2124,22 +2134,14 @@
 				(string-append 
 					(CISC_comment "RS_car starts")
 					(RS_makeClosure body_label finishlabel (lookupFvar 'car SCHEMEFvarsTable))
-					(RS_Closure_Code body_label  
-
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure 'car\",R7);"
 						(string-append
-							"CMP (FPARG(1),IMM(1));" n
-							"JUMP_NE (" error_label ");" n
+							(args_check_macro "1" error_label)
 							"MOV(R7,FPARG(2)); " n 
 							"CMP (INDD (R7,0),IMM(T_PAIR));" n
 							"JUMP_NE(" error_label ");" n 
-							"MOV(R0,INDD(R7,1));" n )
-					)
-					error_label ":"
-					"SHOW(\"error in procedure 'car\",R7);" n 
-					"HALT;" n
-					finishlabel ":" n
-					(CISC_comment "RS_car ends")
-))))
+							"MOV(R0,INDD(R7,1));" n ))
+					(CISC_comment "RS_car ends")))))
 
 (define RS_cdr
 	(lambda ()
@@ -2150,49 +2152,36 @@
 				(string-append 
 					(CISC_comment "RS_cdr starts")
 					(RS_makeClosure body_label finishlabel (lookupFvar 'cdr SCHEMEFvarsTable))
-					(RS_Closure_Code body_label  
-
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure 'cdr\",R0);"
 						(string-append
-							"CMP (FPARG(1),IMM(1));" n
-							"JUMP_NE (" error_label ");" n
+							(args_check_macro "1" error_label)
 							"MOV(R7,FPARG(2)); " n 
 							"CMP (INDD (R7,0),IMM(T_PAIR));" n
 							"JUMP_NE(" error_label ");" n 
-							"MOV(R0,INDD(R7,2));" n )
-					)
-					error_label ":"
-					"SHOW(\"error in procedure 'cdr\",R0);" n 
-					"HALT;" n 
-					finishlabel ":" n
-					(CISC_comment "RS_cdr ends")
-))))
+							"MOV(R0,INDD(R7,2));" n ))
+					(CISC_comment "RS_cdr ends")))))
 
 
 (define RS_cons
 	(lambda ()
 		(let(
 			(finishlabel "RS_make_cons_closure_ends")
-			(body_label "RS_LABEL_cons_body" )
+			(body_label "RS_LABEL_cons_body")
 			(error_label "RS_ERORR_CONS"))
 				(string-append
 				(CISC_comment "RS_cons starts") 
 					(RS_makeClosure body_label finishlabel (lookupFvar 'cons SCHEMEFvarsTable))
-					(RS_Closure_Code body_label  
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure cons\",R0);"
 						(string-append
-							"CMP (FPARG(1),IMM(2));" n
+							(args_check_macro "2" error_label)
 							"JUMP_NE (" error_label ");" n	
 							"PUSH (IMM(3));" n (call-malloc)
 							"MOV(INDD(R0,0),T_PAIR);" n
 							"MOV(INDD(R0,1),FPARG(2));" n 
 							"MOV(INDD(R0,2),FPARG(3));" n ))
-					error_label ":"
-					"SHOW(\"error in procedure 'cons. needed 2 arguments\",R0);" n 
-					"HALT;" n 
-					finishlabel ":" n
-					(CISC_comment "RS_cons ends")
-					))))
+					(CISC_comment "RS_cons ends")))))
 
-(define RS_set_car
+(define RS_set_car 
 	(lambda ()
 		(let
 			((finishlabel  "RS_make_SETCAR_closure_ends")
@@ -2201,20 +2190,16 @@
 				(string-append 
 					(CISC_comment "RS_set_car starts")
 					(RS_makeClosure body_label finishlabel (lookupFvar 'set-car! SCHEMEFvarsTable))
-					(RS_Closure_Code body_label  
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure 'SET_CAR!\",FPARG(2));"
 						(string-append
+							(args_check_macro "2" error_label)
 							"CMP (IND(FPARG(2)),T_PAIR);" n
 							"JUMP_NE (" error_label ");" n	
 							"MOV (INDD(FPARG(2),1),FPARG(3));" n
 							"MOV(R0,SOB_VOID);" n))
-					error_label ":"
-					"SHOW(\"error in procedure 'SET_CAR!\",FPARG(2));" n 
-					"HALT;" n 
-					finishlabel ":" n
-					(CISC_comment "RS_set_car ends")
-					))))
+					(CISC_comment "RS_set_car ends")))))
 
-(define RS_set_cdr
+(define RS_set_cdr 
 	(lambda ()
 		(let (
 			(finishlabel "RS_make_SETCDR_closure_ends")
@@ -2223,41 +2208,202 @@
 				(string-append 
 					(CISC_comment "RS_set_cdr starts")
 					(RS_makeClosure body_label finishlabel (lookupFvar 'set-cdr! SCHEMEFvarsTable))
-					(RS_Closure_Code body_label  
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure 'SET_CDR!\",R0);"
 						(string-append
+							(args_check_macro "2" error_label)
 							"CMP (IND(FPARG(2)),T_PAIR);" n
 							"JUMP_NE (" error_label ");" n	
 							"MOV (INDD(FPARG(2),2),FPARG(3));" n
 							"MOV(R0,SOB_VOID);" n))
-					error_label ":"
-					"SHOW(\"error in procedure 'SET_CDR!\",R0);" n 
-					"HALT;" n 
-					finishlabel ":" n
-					(CISC_comment "RS_set_cdr ends")
-					))))
+					(CISC_comment "RS_set_cdr ends")))))
 
 
+(define RS_predicate
+	(lambda (body_label finishlabel error_label true_cond pred_symobl type)
+				(string-append 
+					(CISC_comment (string-append "RS_" (symbol->string pred_symobl) "starts"))
+					(RS_makeClosure body_label finishlabel (lookupFvar pred_symobl SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure " (symbol->string pred_symobl) "\",FPARG(2));"
+						(string-append
+							"MOV(R0,SOB_TRUE);" n ;;init R0 to be true
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2))," type ");" n ;;the pridacte ;;maybe without IND
+							"JUMP_EQ (" true_cond ");" n
+							"MOV(R0,SOB_FALSE);" n ))
+					true_cond ":"
+					"POP(FP);" n "RETURN;"  n 
+					(CISC_comment (string-append "RS_" (symbol->string pred_symobl) "ends"))
+					)))
 
+(define RS_boolean (lambda () (RS_predicate "RS_LABEL_boolean?_body" "RS_LABEL_boolean?_finish" 
+	"RS_ERORR_BOOLEAN?" "RS_BOOLEAN_TRUE_COND" 'boolean? "T_BOOL")))
+
+(define RS_char (lambda () (RS_predicate "RS_LABEL_char?_body" "RS_LABEL_char?_finish" 
+	"RS_ERORR_char?" "RS_char_TRUE_COND" 'char? "T_CHAR")))
+
+(define RS_integer (lambda () (RS_predicate "RS_LABEL_integer?_body" "RS_LABEL_integer?_finish" 
+	"RS_ERORR_integer?" "RS_integer_TRUE_COND" 'integer? "T_INTEGER")))
+
+(define RS_pair (lambda () (RS_predicate "RS_LABEL_pair?_body" "RS_LABEL_pair?_finish" 
+	"RS_ERORR_pair?" "RS_pair_TRUE_COND" 'pair? "T_PAIR")))
+
+(define RS_procedure (lambda () (RS_predicate "RS_LABEL_procedure?_body" "RS_LABEL_procedure?_finish" 
+	"RS_ERORR_procedure?" "RS_procedure_TRUE_COND" 'procedure? "T_CLOSURE")))
+
+(define RS_string (lambda () (RS_predicate "RS_LABEL_string?_body" "RS_LABEL_string?_finish" 
+	"RS_ERORR_string?" "RS_string_TRUE_COND" 'string? "T_STRING")))
+
+(define RS_symbol (lambda () (RS_predicate "RS_LABEL_symbol?_body" "RS_LABEL_symbol?_finish" 
+	"RS_ERORR_symbol?" "RS_symbol_TRUE_COND" 'symbol? "T_SYMBOL")))
+
+(define RS_vector (lambda () (RS_predicate "RS_LABEL_vector?_body" "RS_LABEL_vector?_finish" 
+	"RS_ERORR_vector?" "RS_vector_TRUE_COND" 'vector? "T_VECTOR")))
+
+(define RS_null (lambda () (RS_predicate "RS_LABEL_null?_body" "RS_LABEL_null?_finish" 
+	"RS_ERORR_null?" "RS_null_TRUE_COND" 'null? "T_NIL")))
+
+
+(define RS_symbolToString 
+	(lambda () 
+		(let ((finishlabel "RS_make_symbolToString_closure_ends")
+			(body_label "RS_LABEL_symbolToString_body")
+			(error_label  "RS_ERORR_symbolToString"))
+				(string-append 
+					(CISC_comment "RS_symbolToString  starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'symbol->string SCHEMEFvarsTable))
+					(RS_Closure_Code body_label  finishlabel error_label "SHOW(\"error in procedure symbolToString!\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_SYMBOL);" n
+							"JUMP_NE (" error_label ");" n	
+							"MOV(R0,IND(INDD(FPARG(2),1)));" n)) ;;maybe without the additional "ind"
+					(CISC_comment "RS_symbolToString  ends")))))
+
+
+(define RS_zero? 
+	(lambda () 
+		(let ((finishlabel "RS_make_zero?_closure_ends")
+			(body_label "RS_LABEL_zero?_body")
+			(error_label  "RS_ERORR_zero?")
+			(true_cond "RS_zero?_true_cond"))
+				(string-append 
+					(CISC_comment "RS_zero? starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'zero? SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure zero?\",R0);"
+						(string-append
+							"MOV(R0,SOB_TRUE);" n
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_INTEGER);" n
+							"JUMP_NE (" error_label ");" n
+							"MOV(R7,INDD(FPARG(2),1));" n
+							"CMP(R7,0);" n
+							"JUMP_EQ(true_cond); " n
+							"MOV(R0,SOB_FALSE);" n)) 
+					true_cond ":"
+					"POP(FP);" n "RETURN;"  n 
+					(CISC_comment "RS_zero? ends")))))
+
+(define RS_not 
+	(lambda () 
+		(let ((finishlabel "RS_make_not_closure_ends")
+			(body_label "RS_LABEL_not_body")
+			(error_label  "RS_ERORR_not")
+			(true_cond "RS_'not'_true_cond"))
+				(string-append 
+					(CISC_comment "RS_not starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'not SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure not\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"MOV(R0,SOB_TRUE);" n
+							"MOV(R7,INDD(FPARG(2),1));" n
+							"CMP (R7,T_BOOL);" n
+							"JUMP_NE (" true_cond ");" n
+							"CMP (INDD(R7,1) , 1);" n  ;;1 is true?
+							"JUMP_EQ (" true_cond ");" n
+							"MOV(R0,SOB_FALSE);" n)) 
+					true_cond ":"
+					"POP(FP);" n "RETURN;"  n 
+					(CISC_comment "RS_not ends")))))
+
+
+(define RS_vector_length 
+	(lambda () 
+		(let ((finishlabel "RS_make_vector_length_closure_ends")
+			(body_label "RS_LABEL_vector_length_body")
+			(error_label  "RS_ERORR_vector_length"))
+				(string-append 
+					(CISC_comment "RS_vector_length starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'vector-length SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure vector_length\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_VECTOR);" n
+							"JUMP_NE (" error_label ");" n	
+							"MOV(R7,INDD(FPARG(2),1));" n ;;now r7 holds the length-number
+							"PUSH(2);" n call-malloc
+							"MOV(IND(R0),T_INTEGER);" n
+							"MOV(INDD(R0,1),R7);" n 
+							)) 
+					(CISC_comment "RS_vector_length  ends")))))
+
+
+(define RS_vector_ref 
+	(lambda () 
+		(let ((finishlabel "RS_vector_ref_closure_ends")
+			(body_label "RS_vector_ref_ref_body")
+			(error_label  "RS_ERORR_RS_vector_ref"))
+				(string-append 
+					(CISC_comment "RS_vector_ref starts")
+					(RS_makeClosure body_label finishlabel (lookupFvar 'vector-ref SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finishlabel error_label "SHOW(\"error in procedure RS_vector_ref\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"MOV(R10,FPARG(2);" n
+							"CMP (IND(R10),T_VECTOR);" n  ;;;r10 HOLDS THE VECTOR
+							"JUMP_NE (" error_label ");" n
+							"CMP (IND(FPARG(3),T_INTEGER);" n
+							"JUMP_NE (" error_label ");" n		
+							"MOV(R7,INDD(FPARG(2),1));" n ;;now r7 holds the vector' length(actual number,not sob)
+							"MOV(R8,INDD(FPARG(3),1));" n ;;R8 holds the argument number(actual number,not sob)
+							"CMP(R7,R8);" n
+							"JUMP_GE(" error_label ");" n
+							"ADD(R8,2);" n ;;repair index
+							"MOV(R0,INDD(R10,R8));" n
+							)) 
+					(CISC_comment "RS_vector_ref ends")))))
 
 
 (define add_RS_to_FvarTable 
 	(lambda ()
 		(string-append 
-		(RS_car) (RS_cdr) (RS_cons) (RS_set_car) (RS_set_cdr)
+		(RS_car) (RS_cdr) (RS_cons) (RS_set_car) (RS_set_cdr) 
+		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?)
+		(RS_symbolToString) (RS_zero?) (RS_not) 
+		(RS_vector_length) (RS_vector_ref)
 		)))
 
 (define RS_LIST 
-	(list 'car 'cdr 'cons 'set-car! 'set-cdr!))
+	(list 
+		'car 'cdr 'cons 'set-car! 'set-cdr! 
+		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? zero?
+		'symbol->string
+		'not
+		'vector-length 'vector-ref
+	 ))
+
+
+
 
 ;;RUNTIME SUPPORT TODO:
-
-
 ;; append,apply , 
 ;; < , = , > , +, / , * , - 
-;; string-length, string-ref,string-set! string->symbol ,symbol->string , char->integer  
-;; boolean? ,  char? ,eq? ,integer? ,pair? , procedure? , string? , symbol? ,vector? , zero? ; rational? 
+;; list , map 
+;; make-string  , string-length, string-ref,string-set! string->symbol , char->integer,integer->char 
+;; rational? ,eq? ,  number?
 ;, remainder  , denonimator , numertor  (what is all of these??)
-;; vector , vector-length,vector-ref , vector-set! 
+;; vector , vector-set! 
+
 
 
 ;***********************************************************************************
