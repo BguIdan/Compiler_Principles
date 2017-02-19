@@ -2382,6 +2382,69 @@
 					finish_label ":" n
 					(CISC_comment "RS_vector_ref ends")))))
 
+(define RS_vector_set! 
+	(lambda () 
+		(let ((finish_label "RS_vector_set_closure_ends")
+			(body_label "RS_vector_set_body")
+			(error_label  "RS_ERORR_RS_vector_set"))
+				(string-append 
+					(CISC_comment "RS_vector_set starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'vector-set! SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_vector_set\",R0);"
+						(string-append
+							(args_check_macro "3" error_label)
+							"MOV (R2 , FPARG(2));" n 				;R2 = holds vector
+							"MOV (R3 , INDD(FPARG(3),1));" n 		;R3 = holds index
+							"CMP (R3 , INDD(R2,1));" n  			;check that index is smaller than the length of the vector
+							"JUMP_GE(" error_label ");" n
+							"CMP (INDD(R2 ,0) ,T_VECTOR);" n
+							"JUMP_NE(" error_label ");" n
+							"ADD (R3 , IMM(2));" n 					;fix index
+							"MOV (R4 , FPARG(4));" n 				;R4 = holds pointer to obj
+							"MOV (INDD(R2,R3) , R4);" n 			;change the vector
+							))
+					finish_label ":" n
+					(CISC_comment "RS_vector_set ends")))))
+
+
+(define RS_vector 
+	(lambda () 
+		(let ((finish_label "RS_vector_closure_ends")
+			(body_label "RS_vector_body")
+			(error_label  "RS_ERORR_RS_vector")
+			(empty_vector_label  "RS_Empty_vector")
+			(loop_vector_label  "RS_Loop_vector")
+			(continue_vector_label  "RS_continue_vector"))
+				(string-append 
+					(CISC_comment "RS_vector starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'vector SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_vector\",R0);"
+						(string-append
+							"MOV (R3 , FPARG(1));" n 							;R3 = num of args (also num of loops)
+							"CMP (R3 , IMM(0));" n 								;if num of args eq 0 build empty vector
+							"JUMP_EQ(" empty_vector_label ");" n
+							"MOV (R4 , FPARG(1));" n 									
+							"ADD (R4 , IMM(2));" n 								;R4 = num of args + 2 = size of malloc
+							"PUSH(R4)" n "CALL(MALLOC);" n "DROP(1)" n
+							"MOV (INDD(R0,0) , T_VECTOR);" n
+							"MOV (INDD(R0,1) , R3);" n
+							"MOV (R5 , IMM(2));" n 								;R5 =  index
+							loop_vector_label ":" n
+							"CMP (R3 ,IMM(0));" n
+							"JUMP_EQ(" continue_vector_label ");" n
+							"MOV (INDD(R0,R5) , FPARG(R5));" n
+							"DECR(R3);" n "INCR(R5);" n
+							"JUMP(" loop_vector_label ");" n
+							empty_vector_label ":" n
+							(call_malloc 3)
+							"MOV (INDD(R0,0) , T_VECTOR);" n
+							"MOV (INDD(R0,1) , R3);" n
+							"MOV (INDD(R0,2) , SOB_NIL);" n
+							continue_vector_label ":" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_vector ends")))))
+
 
 (define RS_string_length
 	(lambda () 
@@ -2486,6 +2549,8 @@
 							"MOV (R3 , INDD(FPARG(3),1));" n 		;R3 = holds index
 							"CMP (R3 , INDD(R2,1));" n  			;check that index is smaller than the length of the string
 							"JUMP_GE(" error_label ");" n
+							"CMP (INDD(R2 ,0) ,T_STRING);" n
+							"JUMP_NE(" error_label ");" n
 							"ADD (R3 , IMM(2));" n 					;fix index
 							"MOV (R4 , FPARG(4));" n 				;R4 = holds pointer to char
 							"MOV (INDD(R2,R3) , R4);" n 			;change the string
@@ -2500,7 +2565,7 @@
 		(RS_car) (RS_cdr) (RS_cons) (RS_set_car) (RS_set_cdr) 
 		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?)
 		(RS_symbolToString) (RS_zero?) (RS_not) 
-		(RS_vector_length) (RS_vector_ref)
+		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
 		)))
 
@@ -2509,7 +2574,7 @@
 		'car 'cdr 'cons 'set-car! 'set-cdr! 
 		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 
 		'symbol->string 'zero? 'not
-		'vector-length 'vector-ref
+		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
 	 ))
 
@@ -2522,8 +2587,7 @@
 ;; list , map 
 ;; string->symbol , char->integer,integer->char 
 ;; rational? ,eq? ,  number?
-;, remainder  , denonimator , numertor  (what is all of these??)
-;; vector , vector-set! 
+;, remainder  , denonimator , numertor  (what is all of these??) 
 
 
 
@@ -3251,28 +3315,27 @@ CISC-fvar-table
 	)))
 
 
-(define test
-	(lambda ()
-		(a '((lambda x 
-				((lambda (a b . y) 
-					((lambda k 999))) 12 13 14)) 7)
-	)))
-					((lambda k 
-
-						((lambda x  
-
-
-							((lambda (x) (cons 88 99)) 1000)
-
-							) )
-
-						))) 12 13 14)) 7)
-	)))
-
-(define test2
-	(lambda ()
-		(a '((lambda (x) (cons 2 3)) 5)
-	)))
+;(define test
+;	(lambda ()
+;		(a '((lambda x 
+;				((lambda (a b . y) 
+;					((lambda k 999))) 12 13 14)) 7)
+;					((lambda k 
+;
+;						((lambda x  
+;
+;
+;							((lambda (x) (cons 88 99)) 1000)
+;
+;							) )
+;
+;						))) 12 13 14)) 7)
+;	)))
+;
+;(define test2
+;	(lambda ()
+;;		(a '((lambda (x) (cons 2 3)) 5)
+;	)))
 ;;;;;;;;;;;TESTS: 
 
 ;(define test (lambda ()
