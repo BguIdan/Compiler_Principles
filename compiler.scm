@@ -2640,6 +2640,7 @@
 			;"PUSH (IMM(1));" n
 			;;init 'for'-loop: (R9 = n+1 , n is the num of params of old applic)
 			"MOV(R10 , STARG(IMM(1)));" n ;;after that line R10 = m
+			"MOV(R12,R10);" n
 			"CMP(R10 , IMM(0));" n ;;if there is no params, jump to the end of that func.
 			"JUMP_EQ (" endParamsLabel ");" n 
 			"ADD (R10 , IMM(1));" n ;;after that line R10 = m+1 , m is the num of params of new applic
@@ -2653,7 +2654,8 @@
 			"JUMP (" forLabel ");" n
 			;;for loop ends
 			endParamsLabel ":" n
-			"MOV (R11, STARG(R10));" n  ;;;copy the new number of params
+			;"MOV (R11, STARG(R10));" n  ;;;copy the new number of params
+			"MOV (R11, R12);" n  ;;;copy the new number of params
 			"MOV (FPARG(R9) , R11);" n 
 			"SUB (R9 , 1);" n  ;;; n-- 
 			"MOV (R11, STARG(0));" n  ;;;copy the new env pointer
@@ -2674,11 +2676,12 @@
 			((counter (number->string (updateCounter)))
 			(errorLabel (string-append "L_Error_cannot_tc_apply_non_closure_" counter)))
 				(string-append
-					(CISC_comment "tc-applic code starts here")
-					"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
-					"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
+					(CISC_comment (string-append "tc-applic code starts here" counter))
 					(push_args_if_needed (reverse exprs) major)
 					(code_gen op major) n
+					(CISC_comment (string-append "tc-applic cont" counter))
+					"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
+					"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
 					"CMP (INDD (R0,0) ,IMM(T_CLOSURE));" n
 					"JUMP_NE (" errorLabel ");" n
 					"PUSH (INDD (R0,1));" n  ;;push env
@@ -2728,25 +2731,7 @@
 			"MOV (R0,INDD(R0," (number->string minor) "));" n
 			(CISC_comment "bvar code ends here"))))
 
-
-(define repairStackEmptyVar
-	(lambda (args)
-		(let* ((lengthOfArgs (length args))
-			   (counter (number->string (updateCounter)))
-			   (loopLabel (string-append "LOOP_ARGS_" counter))
-			   (exitLoopLabel (string-append "EXIT_LOOP_ARGS_" counter))
-			   (loopOverStackLabel (string-append "FIXING_STACK_" counter))
-			   (exitLoopOverStackLabel (string-append "EXIT_FIXING_STACK_" counter))
-			   (ifNoOptionalArgs (string-append "NO_OPTIONAL_ARGS_" counter))
-			   (loopNilCaseLabel (string-append "NIL_CASE_LOOP_" counter))
-			   (exitLoopNilCaseLabel (string-append "EXIT_NIL_CASE_LOOP_" counter))
-			   (finalLabel (string-append "FINAL_" counter)))
-			(string-append
-				"CMP (FPARG(1) ,0);" n  						;If we should create a liked list from optional args
-				"JUMP_EQ(" ifNoOptionalArgs ");" n
-
-			))
-	)) 
+ 
 
 (define repairStackForVarOpt
 	(lambda (args)
@@ -2810,10 +2795,10 @@
 					"DECR(R4);" n
 					"JUMP(" loopNilCaseLabel");" n
 					exitLoopNilCaseLabel ":" n
-					"MOV (FPARG(-2 + R4 - 1) , R5);" n
+					"MOV (FPARG(-2 + R4 - 1) , R5);" n	
 					"DECR(R4);" n
+					"SUB(FP,R4);" n
 					"MOV (SP , FP);" n
-					"SUB (SP , R4);" n
 					finalLabel ":" n
 				)				
 			)
@@ -3158,8 +3143,18 @@ CISC-fvar-table
 	(lambda ()
 		(a '((lambda x 
 				((lambda (a b . y) 
-					((lambda k 999))) 12 13 14)) 7)
+					((lambda k 
+
+						((lambda x  
+
+
+							((lambda (x) (cons 88 99)) 1000)
+
+							) )
+
+						))) 12 13 14)) 7)
 	)))
+
 
 
 ;;;;;;;;;;;TESTS: 
