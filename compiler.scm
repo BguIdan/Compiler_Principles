@@ -1766,10 +1766,9 @@
 
 
 ;;;;;CISC MACROS
-(define call-malloc (lambda ()
-	(string-append "CALL (MALLOC);" n "DROP(1);" n 
+(define call_malloc (lambda (num)
+	(string-append "PUSH(IMM(" (number->string num) "));" n  "CALL (MALLOC);" n "DROP(1);" n 
 	)))
-
 
 (define n "\n")
 
@@ -1948,7 +1947,7 @@
 (define code_gen_constStringOrVector_Helper (lambda (chars_lst)
 	(if (null? chars_lst) ""
 		(string-append
-			"PUSH (" (number->string (car chars_lst)) ");" n
+			"PUSH (INDD(CONSTARRAY," (number->string (car chars_lst)) "));" n
 			(code_gen_constStringOrVector_Helper (cdr chars_lst))))))
 
 (define code_gen_constStringOrVector (lambda (exp type)
@@ -1973,10 +1972,9 @@
 
 (define make_sob_symbol (lambda (str_add)
 	(string-append 
-		"PUSH (IMM(2));" n
-		(call-malloc)
+		(call_malloc 2)
 		"MOV(IND(R0) , T_SYMBOL);
-		MOV(INDD(R0,1) ," (number->string str_add) ");" n )))
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY," (number->string str_add) "));" n )))
 
 
 
@@ -2008,7 +2006,7 @@
 		;;allocate memory for const table
 		(string-append 
 			(CISC_comment "init Const-Table starts here")
-			"PUSH (" (number->string (length constTable)) ");" n (call-malloc)
+			(call_malloc (length constTable))
 			"MOV (CONSTARRAY,R0);" n (code_gen_consts_helper constTable)
 			(CISC_comment "init Const-Table ends here"))))
 
@@ -2053,12 +2051,12 @@
 		(if (null? address_list) 
 
 				(string-append 
-					"PUSH (IMM(1));" n (call-malloc)
+					(call_malloc 1)
 					"MOV (SYMBOLTABLE,R0);" n 
 					"MOV (IND(SYMBOLTABLE) ,R7);" n)
 
 				(string-append
-					"PUSH(IMM(2));" n (call-malloc)
+					(call_malloc 2)
 					"MOV (INDD(R0 ,0) ,"  (number->string (car address_list))  ");" n
 					"MOV (INDD (R0,1) , R7);" n
 					"MOV (R7, R0);" n
@@ -2099,7 +2097,7 @@
 
 (define RS_makeClosure (lambda (body_label finish_label fvar_address) 
 	(string-append 
-		"PUSH (IMM(3));" n (call-malloc)
+		(call_malloc 3)
 		"MOV(INDD(R0,0),T_CLOSURE);" n 
 		"MOV (INDD(R0,1)," empty_env ");" n 
 		"MOV(INDD(R0,2),LABEL(" body_label "));" n 
@@ -2176,7 +2174,7 @@
 						(string-append
 							(args_check_macro "2" error_label)
 							"JUMP_NE (" error_label ");" n	
-							"PUSH (IMM(3));" n (call-malloc)
+							(call_malloc 3)
 							"MOV(INDD(R0,0),T_PAIR);" n
 							"MOV(INDD(R0,1),FPARG(2));" n 
 							"MOV(INDD(R0,2),FPARG(3));" n ))
@@ -2322,13 +2320,15 @@
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure not\",R0);"
 						(string-append
 							(args_check_macro "1" error_label)
-							"MOV(R0,SOB_TRUE);" n
-							"MOV(R7,INDD(FPARG(2),1));" n
-							"CMP (R7,T_BOOL);" n
+
+							"MOV(R0,SOB_FALSE);" n
+							"MOV(R7,FPARG(2));" n
+							"CMP (IND(R7),T_BOOL);" n
 							"JUMP_NE (" true_cond ");" n
-							"CMP (INDD(R7,1) , 1);" n  ;;1 is true?
+
+							"CMP (INDD(R7,1) , 1);" n 
 							"JUMP_EQ (" true_cond ");" n
-							"MOV(R0,SOB_FALSE);" n)) 
+							"MOV(R0,SOB_TRUE);" n)) 
 					true_cond ":" n 
 					"POP(FP);" n "RETURN;"  n
 					finish_label ":" n 
@@ -2349,7 +2349,7 @@
 							"CMP (IND(FPARG(2)),T_VECTOR);" n
 							"JUMP_NE (" error_label ");" n	
 							"MOV(R7,INDD(FPARG(2),1));" n ;;now r7 holds the length-number
-							"PUSH(2);" n (call-malloc)
+							(call_malloc 2)
 							"MOV(IND(R0),T_INTEGER);" n
 							"MOV(INDD(R0,1),R7);" n 
 							))
@@ -2375,7 +2375,7 @@
 							"JUMP_NE (" error_label ");" n		
 							"MOV(R7,INDD(FPARG(2),1));" n ;;now r7 holds the vector' length(actual number,not sob)
 							"MOV(R8,INDD(FPARG(3),1));" n ;;R8 holds the argument number(actual number,not sob)
-							"CMP(R7,R8);" n
+							"CMP(R8,R7);" n
 							"JUMP_GE(" error_label ");" n
 							"ADD(R8,2);" n ;;repair index
 							"MOV(R0,INDD(R10,R8));" n)) 
@@ -2470,8 +2470,7 @@
 (define buildCiscFvarsTable (lambda (SchemeTaggedFvarTable)
 		(string-append 
 			(CISC_comment "init Fvar-Table start here")
-			"PUSH (" (number->string (length SchemeTaggedFvarTable)) ");" n 
-			(call-malloc)
+			(call_malloc (length SchemeTaggedFvarTable))
 			"MOV (FVARARRAY,R0);" n 
 			(code_gen_fvar_helper SchemeTaggedFvarTable)
 			(CISC_comment "init Fvar-Table ends here")
@@ -2608,7 +2607,7 @@
 (define push_args_if_needed
 	(lambda (argsLst major)
 		(if (null? argsLst)
-			""
+			(string-append "PUSH (IMM(0));" n)
 			(string-append (code_gen_applic_push_args argsLst major)
 						    "PUSH(" (number->string (length argsLst)) ");" n) 
 		)))
@@ -2914,7 +2913,7 @@
 
 ;;;box code gen start
 (define box_code_gen (lambda (var code_gen major)  
-		"PUSH (IMM(1));" n (call-malloc)
+		(call_malloc 1)
 		"MOV (R7,R0);" n 
 		(code_gen var major) ;;;now the CISC-value of 'var' is in R0
 		"MOV (IND(R7),R0);" n
@@ -3157,9 +3156,10 @@ CISC-fvar-table
 
 (define test
 	(lambda ()
-		(a '((lambda x ((lambda (a b . y) 999) 12 13)) 2))
-	))
-
+		(a '((lambda x 
+				((lambda (a b . y) 
+					((lambda k 999))) 12 13 14)) 7)
+	)))
 
 
 ;;;;;;;;;;;TESTS: 
