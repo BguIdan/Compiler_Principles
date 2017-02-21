@@ -1755,14 +1755,15 @@
       output)))
 
 
-(define file->string (lambda (in-file)
-	(let ((in-port (open-input-file in-file)))
-		(letrec ((run (lambda ()
-			(let ((ch (read-char in-port)))
-				(if (eof-object? ch)
-					(begin (close-input-port in-port) '())
-					(cons ch (run)))))))
-			(list->string (run))))))
+(define file->string 
+	(lambda (in-file)
+		(let ((in-port (open-input-file in-file)))
+			(letrec ((run (lambda ()
+				(let ((ch (read-char in-port)))
+					(if (eof-object? ch)
+						(begin (close-input-port in-port) '())
+						(cons ch (run)))))))
+				(list->string (run))))))
 
 
 ;;;;;CISC MACROS
@@ -2655,6 +2656,77 @@
 					(CISC_comment "RS_GCD ends")))))
 
 
+(define RS_cahrToInteger 
+	(lambda () 
+		(let ((finish_label "RS_cahrToInteger_closure_ends")
+			(body_label "RS_cahrToInteger_body")
+			(error_label  "RS_ERORR_RS_cahrToInteger"))
+				(string-append 
+					(CISC_comment "RS_cahrToInteger starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'char->integer SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_cahrToInteger\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the char 
+							"CMP (INDD(R2,0) , T_CHAR);" n
+							"JUMP_NE(" error_label ");" n
+							"MOV (INDD(R2,0) , T_INTEGER);" n
+							"MOV (R0 , R2);" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_cahrToInteger ends")))))
+
+
+(define RS_integerToChar
+	(lambda () 
+		(let ((finish_label "RS_integerToChar_closure_ends")
+			(body_label "RS_integerToChar_body")
+			(error_label  "RS_ERORR_RS_integerToChar"))
+				(string-append 
+					(CISC_comment "RS_integerToChar starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'integer->char SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_integerToChar\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							
+							))
+					finish_label ":" n
+					(CISC_comment "RS_integerToChar ends")))))
+
+
+(define RS_list
+	(lambda () 
+		(let ((finish_label "RS_list_closure_ends")
+			(body_label "RS_list_body")
+			(error_label  "RS_ERORR_RS_list")
+			(emptyListLabel  "Gen_Empty_List")
+			(loopLabel  "Gen_List_Loop_Label")
+			(endLoopLabel  "Gen_List_End_Loop_Label"))
+				(string-append 
+					(CISC_comment "RS_list starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'list SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_list\",R0);"
+						(string-append
+							"MOV (R6 ,SOB_NIL);" n 						;R6 initialize to empty list
+							"MOV (R5 , R6);" n 							;R5 = iterator, R6 = pointer to head
+							"MOV (R4 , FPARG(1));" n 					;R4 = holds the list length (num of args)
+							loopLabel ":" n
+							"CMP (R4 ,IMM(0));" n 						;If R4 will be 0 at first gen empty list
+							"JUMP_EQ(" endLoopLabel ");" n
+							(call_malloc 3)
+							"MOV (INDD(R0,2) , R5);" n 					;R0 holds the new block that will now point to the old block 
+							"MOV (R5 , R0);" n 							;R5 = pointer to the new block
+							"MOV (INDD(R5,1) , FPARG(1 + R4));" n 		;update value in new block
+							"MOV (INDD(R5,0) , T_PAIR);" n
+							"MOV (R6, R5);" n 							;R6 will point to the linked list head
+							"DECR(R4);" n
+							"JUMP(" loopLabel ");"n
+							endLoopLabel ":" n
+							"MOV (R0 , R6);" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_list ends")))))
+
 
 (define add_RS_to_FvarTable 
 	(lambda () 
@@ -2666,27 +2738,30 @@
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
 		(RS_GCD)
+		(RS_cahrToInteger) (RS_integerToChar) 
+		(RS_list)
 		)))
 
 (define RS_LIST 
 	(list 
 		'car 'cdr 'cons 'set-car! 'set-cdr! 
 		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 
-		 'zero? 'not 
-		 'string->symbol 'symbol->string
+		'zero? 'not 
+		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
 		'gcd
+		'char->integer 'integer->char
+		'list
 	 ))
 
 
 
 
 ;;RUNTIME SUPPORT TODO:
-;; append,apply , 
+;; apply , 
 ;; < , = , > , +, / , * , - 
-;; list , map 
-;;  char->integer,integer->char 
+;; integer->char 
 ;; rational? ,eq? ,  number?
 ;, remainder  , denonimator , numertor  (what is all of these??)
 
@@ -3387,6 +3462,87 @@ return 0;
 ;	(lambda (str)
 ;		(cadar (test-string <Sexpr> str))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;(define gen_map 										;according to MR. T need to concatenate this code after output of ass1 as input to ass2 
+;	(lambda ()
+;		'(define map
+;			(lambda (proc items)
+;				(if (null? items)
+;					(list)
+;					(cons (proc (car items))
+;				  	  	  (map proc (cdr items))))))))
+
+;(define gen_binaryAppend
+;	(lambda ()
+;		'(define binaryAppend
+;			(lambda (list1 list2)
+;				(if (null? list1)
+;					list2
+;					(cons (car list1)
+;				  		  (append (cdr list1) list2)))))))
+
+;(define gen_append
+;	(lambda ()
+;		'(define append 
+;			(lambda args
+;				(cond ((null? args) '()) 																						;if (append) = '()
+;					  ((and (list? args) (null? (cdr args))) args) 																;if (append '(1)) = '(1)
+;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (caar args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
+;					  (else (append (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))))								;if (append '(1) '(2)) = '(1 2)
+					  
+
+				
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; (define cadr
+; 	(lambda (exp)
+; 		(car (cdr exp))))
+
+; (define cdar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define caar
+; 	(lambda (exp)
+; 		(car (car exp))))
+
+; (define cddr
+; 	(lambda (exp)
+; 		(cdr (cdr exp))))
+
+; (define caaar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define caadr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cadar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdaar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdadr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cddar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdddr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
 
 (define runAss3 (lambda (exp) 
 	(annotate-tc (pe->lex-pe (box-set (remove-applic-lambda-nil (eliminate-nested-defines (parse  exp))))))))
@@ -3401,7 +3557,8 @@ return 0;
 			(CISC-fvar-table (buildFvarTable after_ass3))	
 			(codeGen (code_gen after_ass3 0))
 		   )
-CISC-fvar-table
+
+	CISC-fvar-table
 	(writeToFile "arch/out.c"
 		(string-append 
 				prolouge
