@@ -1959,7 +1959,7 @@
 	(string-append 	
 				(code_gen_constStringOrVector_Helper (cdr (get-repr-from-tagged exp)))
 				   "PUSH (" (number->string (car (get-repr-from-tagged exp))) ");" n
-	 			  	"CALL (" type ")"   n "DROP (" (number->string (car (get-repr-from-tagged exp))) ");"  n 
+	 			   "CALL (" type ")"   n "DROP (" (number->string (car (get-repr-from-tagged exp))) ");"  n 
 	 			   "MOV(INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);")))
 
 (define code_gen_constNumber (lambda (exp)
@@ -1988,12 +1988,12 @@
 		(make_sob_symbol (get_string_address_from_tagged_symbol tagged_exp))
 		"MOV (INDD (CONSTARRAY ," (number->string (get-address-from-tagged tagged_exp)) ") , R0);" n)))
 
-(define make_sob_fraction 
-	(lambda (str_add)
-		(string-append 
-			(call_malloc 2)
-			"MOV(IND(R0) , T_SYMBOL);
-			MOV(INDD(R0,1) ,INDD(CONSTARRAY," (number->string str_add) "));" n )))
+
+(define code_gen_constFraction (lambda (exp)
+	(string-append "PUSH (" (number->string (numerator (get-repr-from-tagged exp))) ");" n
+				   "PUSH (" (number->string (denominator (get-repr-from-tagged exp))) ");" n
+	 			   "CALL (MAKE_SOB_FRACTION);" n "DROP (2);"  n 
+	 			   "MOV (INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);" n)))
 
 (define code_gen_consts (lambda (tagged-exp) 
 	(cond 
@@ -2003,7 +2003,8 @@
 		((char? (get-costa-from-tagged tagged-exp)) (code_gen_constChar tagged-exp))
 		((symbol? (get-costa-from-tagged tagged-exp)) (code_gen_constSymbol tagged-exp))
 		((string? (get-costa-from-tagged tagged-exp)) (code_gen_constStringOrVector tagged-exp "MAKE_SOB_STRING"))
-		((number? (get-costa-from-tagged tagged-exp)) (code_gen_constNumber tagged-exp))
+		((integer? (get-costa-from-tagged tagged-exp)) (code_gen_constNumber tagged-exp))
+		((number? (get-costa-from-tagged tagged-exp)) (code_gen_constFraction tagged-exp))
 		((vector? (get-costa-from-tagged tagged-exp)) (code_gen_constStringOrVector tagged-exp "MAKE_SOB_VECTOR"))
 		((pair? (get-costa-from-tagged tagged-exp)) (code_gen_constPair tagged-exp))
 )))
@@ -2261,6 +2262,9 @@
 (define RS_integer? (lambda () (RS_predicate "RS_LABEL_integer_body" "RS_LABEL_integer_finish" 
 	"RS_ERORR_integer" "RS_integer_TRUE_COND" 'integer? "T_INTEGER")))
 
+(define RS_fraction? (lambda () (RS_predicate "RS_LABEL_fraction_body" "RS_LABEL_fraction_finish" 
+	"RS_ERORR_fraction" "RS_fraction_TRUE_COND" 'fraction? "T_FRACTION")))
+
 (define RS_pair? (lambda () (RS_predicate "RS_LABEL_pair_body" "RS_LABEL_pair_finish" 
 	"RS_ERORR_pair" "RS_pair_TRUE_COND" 'pair? "T_PAIR")))
 
@@ -2278,6 +2282,18 @@
 
 (define RS_null? (lambda () (RS_predicate "RS_LABEL_null_body" "RS_LABEL_null_finish" 
 	"RS_ERORR_null" "RS_null_TRUE_COND" 'null? "T_NIL")))
+
+(define gen_rational
+	(lambda ()
+		`(define rational? 
+			(lambda (num)
+				(or (integer? num) (fraction? num))))))
+
+(define gen_number 
+	(lambda()
+		`(define number? 
+			(lambda (num)
+				(rational? num)))))
 
 
 (define RS_symbolToString 
@@ -2759,46 +2775,171 @@
 					(CISC_comment "RS_remainder ends")))))
 
 
+(define RS_numerator
+	(lambda ()
+		(let
+			((finish_label  "RS_numerator_closure_ends")
+			(body_label  "RS_numerator_body")
+			(error_label "RS_ERORR_RS_numerator")
+			(fractionLabel "RS_numerator_Fraction_Label")
+			(exit_label "RS_numerator_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_numerator starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'numerator SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_numerator\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_INTEGER);" n
+							"JUMP_NE(" fractionLabel ");" n
+							"MOV (R0 , FPARG(2));" n
+							"JUMP(" exit_label ");" n
+							fractionLabel ":" n
+							"CMP (IND(FPARG(2)),T_FRACTION);" n
+							"JUMP_NE (" error_label ");" n
+							"PUSH(INDD(FPARG(2),1));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n	
+							;"MOV (R0 , INDD(FPARG(2),1));" n 
+							exit_label ":" n))
+					finish_label ":" n
+					(CISC_comment "RS_numerator ends")))))
+
+
+(define RS_denominator
+	(lambda ()
+		(let
+			((finish_label  "RS_denominator_closure_ends")
+			(body_label  "RS_denominator_body")
+			(error_label "RS_ERORR_RS_denominator")
+			(fractionLabel "RS_denominator_Fraction_Label")
+			(exit_label "RS_denominator_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_denominator starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'denominator SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_denominator\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_INTEGER);" n
+							"JUMP_NE(" fractionLabel ");" n
+							"PUSH(IMM(1));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n
+							"JUMP(" exit_label ");" n
+							fractionLabel ":" n
+							"CMP (IND(FPARG(2)),T_FRACTION);" n
+							"JUMP_NE (" error_label ");" n
+							"PUSH(INDD(FPARG(2),2));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n		
+							;"MOV (R0 , INDD(FPARG(2),2));" n 
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_denominator ends")))))
+
+
+(define RS_compare_vals
+	(lambda ()
+		(let
+			((finish_label  "RS_compare_vals_closure_ends")
+			(body_label  "RS_compare_vals_body")
+			(error_label "RS_ERORR_RS_compare_vals")
+			(false_label "RS_compare_vals_False_Label")
+			(exit_label "RS_compare_vals_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_compare_vals starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'compare_vals SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_compare_vals\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"CMP (INDD(FPARG(2),1) , INDD(FPARG(3),1));" n
+							"JUMP_NE(" false_label ");" n
+							"MOV (R0 , SOB_TRUE);" n
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_compare_vals ends")))))
+
+(define RS_compare_address
+	(lambda ()
+		(let
+			((finish_label  "RS_compare_address_closure_ends")
+			(body_label  "RS_compare_address_body")
+			(error_label "RS_ERORR_RS_compare_address")
+			(false_label "RS_compare_address_False_Label")
+			(exit_label "RS_compare_address_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_compare_address starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'compare_address SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_compare_address\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"CMP (FPARG(2) , FPARG(3));" n
+							"JUMP_NE(" false_label ");" n
+							"MOV (R0 , SOB_TRUE);" n
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_compare_address ends")))))
+
+(define gen_eq
+	(lambda()
+		'(define eq? 
+			(lambda (exp1 exp2)
+				(if (or (and (integer? exp1) (integer? exp2)) 
+						(and (fraction? exp1) (fraction? exp2))
+						(and (char? exp1) (char? exp2))
+						(and (symbol? exp1) (symbol? exp2)))
+					(compare_vals exp1 exp2)
+					(if (or (and (null? exp1) (null? exp2))
+							(and (boolean? exp1) (boolean? exp2))
+							(and (string? exp1) (string? exp2))
+							(and (vector? exp1) (vector? exp2))
+							(and (pair? exp1) (pair? exp2)))
+						(compare_address exp1 exp2)
+						#f )
+				)))))
+					
 
 
 (define add_RS_to_FvarTable 
 	(lambda () 
 		(string-append 
 		(RS_car) (RS_cdr) (RS_cons) (RS_set_car) (RS_set_cdr) 
-		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?)
-		(RS_zero?) (RS_not) 
+		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?) (RS_fraction?)
+		(RS_zero?) (RS_not) (RS_compare_address) (RS_compare_vals)
 		(RS_symbolToString) (RS_stringToSymbol)
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
 		(RS_GCD)
 		(RS_cahrToInteger) ;(RS_integerToChar) 
 		(RS_list)
-		(RS_remainder)
+		(RS_remainder) (RS_denominator) (RS_numerator)
 		)))
 
 (define RS_LIST 
 	(list 
 		'car 'cdr 'cons 'set-car! 'set-cdr! 
-		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 
-		'zero? 'not 
+		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 'fraction?
+		'zero? 'not 'compare_address 'compare_vals
 		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
 		'gcd
 		'char->integer ;'integer->char
 		'list
-		'remainder
+		'remainder 'denominator 'numerator
 	 ))
 
 
 
 
 ;;RUNTIME SUPPORT TODO:
-;; apply , 
 ;; < , = , > , +, / , * , - 
 ;; integer->char 
-;; rational? ,eq? ,  number?
-;, denonimator , numertor  (what is all of these??)
 
 
 
@@ -3548,6 +3689,12 @@ return 0;
        		(lambda args
          		(foldl_2 binaryAppend '() (reverseList args '())))) ))
 
+(define gen_apply
+	(lambda ()
+		`(define apply
+			(lambda (func arg . args)
+				(func (cons arg args))))))
+
 ;(define gen_append
 ;	(lambda ()
 ;		(define append_2 
@@ -3609,7 +3756,7 @@ return 0;
 
 (define addRSINScheme
 	(lambda (src)
-		`(begin  ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend) ,(gen_append) ,src) ))
+		`(begin  ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend) ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,src) ))
 
 
 
@@ -3631,7 +3778,7 @@ return 0;
 	(writeToFile "arch/out.c"
 		(string-append 
 				prolouge
-				MACROS 
+				MACROS
 				CISC-const-table
 				CISC_symbol_table	
 				CISC-fvar-table		
