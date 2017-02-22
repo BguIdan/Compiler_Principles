@@ -1988,6 +1988,13 @@
 		(make_sob_symbol (get_string_address_from_tagged_symbol tagged_exp))
 		"MOV (INDD (CONSTARRAY ," (number->string (get-address-from-tagged tagged_exp)) ") , R0);" n)))
 
+(define make_sob_fraction 
+	(lambda (str_add)
+		(string-append 
+			(call_malloc 2)
+			"MOV(IND(R0) , T_SYMBOL);
+			MOV(INDD(R0,1) ,INDD(CONSTARRAY," (number->string str_add) "));" n )))
+
 (define code_gen_consts (lambda (tagged-exp) 
 	(cond 
 		((null? (get-costa-from-tagged tagged-exp)) (code_gen_constNil))
@@ -2677,21 +2684,21 @@
 					(CISC_comment "RS_cahrToInteger ends")))))
 
 
-(define RS_integerToChar
-	(lambda () 
-		(let ((finish_label "RS_integerToChar_closure_ends")
-			(body_label "RS_integerToChar_body")
-			(error_label  "RS_ERORR_RS_integerToChar"))
-				(string-append 
-					(CISC_comment "RS_integerToChar starts")
-					(RS_makeClosure body_label finish_label (lookupFvar 'integer->char SCHEMEFvarsTable))
-					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_integerToChar\",R0);"
-						(string-append
-							(args_check_macro "1" error_label)
-							
-							))
-					finish_label ":" n
-					(CISC_comment "RS_integerToChar ends")))))
+;(define RS_integerToChar
+;	(lambda () 
+;		(let ((finish_label "RS_integerToChar_closure_ends")
+;			(body_label "RS_integerToChar_body")
+;			(error_label  "RS_ERORR_RS_integerToChar"))
+;				(string-append 
+;					(CISC_comment "RS_integerToChar starts")
+;;					(RS_makeClosure body_label finish_label (lookupFvar 'integer->char SCHEMEFvarsTable))
+;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_integerToChar\",R0);"
+;						(string-append
+;							(args_check_macro "1" error_label)
+;							
+;;							))
+;					finish_label ":" n
+;					(CISC_comment "RS_integerToChar ends")))))
 
 
 (define RS_list
@@ -2728,6 +2735,32 @@
 					(CISC_comment "RS_list ends")))))
 
 
+(define RS_remainder
+	(lambda () 
+		(let ((finish_label "RS_remainder_closure_ends")
+			(body_label "RS_remainder_body")
+			(error_label  "RS_ERORR_RS_remainder"))
+				(string-append 
+					(CISC_comment "RS_remainder starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'remainder SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_remainder\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"MOV (R1 ,FPARG(2));" n
+							"MOV (R2 ,FPARG(3));" n
+							"CMP (INDD(R1 , 0) , T_INTEGER);" n
+							"JUMP_NE(" error_label ");" n
+							"CMP (INDD(R2 , 0) , T_INTEGER);" n
+							"JUMP_NE(" error_label ");" n
+							"REM (INDD(R1,1) ,INDD(R2,1));" n
+							"MOV (R0 , R1);" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_remainder ends")))))
+
+
+
+
 (define add_RS_to_FvarTable 
 	(lambda () 
 		(string-append 
@@ -2738,8 +2771,9 @@
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
 		(RS_GCD)
-		(RS_cahrToInteger) (RS_integerToChar) 
+		(RS_cahrToInteger) ;(RS_integerToChar) 
 		(RS_list)
+		(RS_remainder)
 		)))
 
 (define RS_LIST 
@@ -2751,8 +2785,9 @@
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
 		'gcd
-		'char->integer 'integer->char
+		'char->integer ;'integer->char
 		'list
+		'remainder
 	 ))
 
 
@@ -2763,7 +2798,7 @@
 ;; < , = , > , +, / , * , - 
 ;; integer->char 
 ;; rational? ,eq? ,  number?
-;, remainder  , denonimator , numertor  (what is all of these??)
+;, denonimator , numertor  (what is all of these??)
 
 
 
@@ -2847,7 +2882,7 @@
 	(let* ((SchemeFvarTable (buildSchemeFvarList ast '()))
 		  (CISCFvarTable 
 		  		 (begin 
-		  				(set! SCHEMEFvarsTable (taggingFvars (enlargeFvars SchemeFvarTable RS_LIST '()) '()))
+		  				(set! SCHEMEFvarsTable (taggingFvars (enlargeFvars RS_LIST SchemeFvarTable '()) '()))
 		  				(buildCiscFvarsTable SCHEMEFvarsTable) ;;;this is STRING
 		  				)))
 		(reset_fvar_Address)
@@ -2884,13 +2919,13 @@
 
 
 (define fvar_code_gen 
-	(lambda  (var_name) 
+	(lambda  (var_name)
 			(let* ((counter (number->string (updateCounter)))
 					(errorlabel (string-append "UNDEF_LABEL" counter))
 					(finish_label (string-append "FINISH_FVAR_LABEL" counter)))
 				(string-append 
 					(CISC_comment "fvar code:")
-					"MOV ( R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n 
+					"MOV (R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n 
 					"CMP (R0 , 0XDEF);" n 
 					"JUMP_EQ (" errorlabel ");" n
 					"JUMP (" finish_label ");"  n 
@@ -3394,7 +3429,7 @@
 			(pattern-rule
 				`(def ,(? 'var) ,(? 'exps))
 					(lambda (var exps)
-					(define_cod_gen var exps code_gen major) 
+						(define_cod_gen var exps code_gen major)
 					))
 
 
@@ -3466,32 +3501,61 @@ return 0;
 ;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;(define gen_map 										;according to MR. T need to concatenate this code after output of ass1 as input to ass2 
-;	(lambda ()
-;		'(define map
-;			(lambda (proc items)
-;				(if (null? items)
-;					(list)
-;					(cons (proc (car items))
-;				  	  	  (map proc (cdr items))))))))
+										;according to MR. T need to concatenate this code after output of ass1 as input to ass2
 
-;(define gen_binaryAppend
-;	(lambda ()
-;		'(define binaryAppend
-;			(lambda (list1 list2)
-;				(if (null? list1)
-;					list2
-;					(cons (car list1)
-;				  		  (append (cdr list1) list2)))))))
+(define gen_foldl_2
+	(lambda ()
+		`(define foldl_2 
+			(lambda (func accum lst)
+  				(if (null? lst)
+      				accum
+      				(foldl_2 func (func (car lst) accum) (cdr lst))))) ))
+
+
+(define gen_map 										 
+	(lambda ()
+		`(define map
+			(lambda (proc items)
+				(if (null? items)
+					(list)
+					(cons (proc (car items))
+				  	  	  (map proc (cdr items)))))) ))
+
+(define gen_binaryAppend
+	(lambda ()
+		`(define binaryAppend
+			(lambda (list1 list2)
+				(if (null? list1)
+					list2
+					(cons (car list1)
+				  		(binaryAppend (cdr list1) list2))))) ))
+
+
+
+
+(define gen_reverseList
+	(lambda ()
+		`(define reverseList
+      		(lambda (lst revList)
+        		(if (null? lst)
+            		revList
+		            (reverseList (cdr lst) (cons (car lst) revList))))) ))
+
+
+(define gen_append
+	(lambda ()
+		`(define append
+       		(lambda args
+         		(foldl_2 binaryAppend '() (reverseList args '())))) ))
 
 ;(define gen_append
 ;	(lambda ()
-;		'(define append 
+;		(define append_2 
 ;			(lambda args
-;				(cond ((null? args) '()) 																						;if (append) = '()
-;					  ((and (list? args) (null? (cdr args))) args) 																;if (append '(1)) = '(1)
-;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (caar args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
-;					  (else (append (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))))								;if (append '(1) '(2)) = '(1 2)
+;				(cond ((null? args) args) 																						;if (append) = '()
+;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
+;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
+;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
 					  
 
 				
@@ -3543,6 +3607,11 @@ return 0;
 ; 	(lambda (exp)
 ; 		(cdr (car exp))))
 
+(define addRSINScheme
+	(lambda (src)
+		`(begin  ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend) ,(gen_append) ,src) ))
+
+
 
 (define runAss3 (lambda (exp) 
 	(annotate-tc (pe->lex-pe (box-set (remove-applic-lambda-nil (eliminate-nested-defines (parse  exp))))))))
@@ -3551,13 +3620,13 @@ return 0;
 ;	(lambda (src CISC)
 ;		(apply_sxpr_str (file->string src))    ;; this expression need to sent to parse function
 (define a (lambda (src)
-	(let* ((after_ass3 (runAss3 src))
+	(let* ( (addShitToSaveTime (addRSINScheme src))
+			(after_ass3 (runAss3 addShitToSaveTime))
 			(CISC-const-table (buildConstantTable after_ass3))
 			(CISC_symbol_table (buildSymbolTable))
 			(CISC-fvar-table (buildFvarTable after_ass3))	
 			(codeGen (code_gen after_ass3 0))
 		   )
-
 	CISC-fvar-table
 	(writeToFile "arch/out.c"
 		(string-append 
