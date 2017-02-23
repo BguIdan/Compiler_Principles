@@ -1755,14 +1755,15 @@
       output)))
 
 
-(define file->string (lambda (in-file)
-	(let ((in-port (open-input-file in-file)))
-		(letrec ((run (lambda ()
-			(let ((ch (read-char in-port)))
-				(if (eof-object? ch)
-					(begin (close-input-port in-port) '())
-					(cons ch (run)))))))
-			(list->string (run))))))
+(define file->string 
+	(lambda (in-file)
+		(let ((in-port (open-input-file in-file)))
+			(letrec ((run (lambda ()
+				(let ((ch (read-char in-port)))
+					(if (eof-object? ch)
+						(begin (close-input-port in-port) '())
+						(cons ch (run)))))))
+				(list->string (run))))))
 
 
 ;;;;;CISC MACROS
@@ -1781,6 +1782,10 @@
 	 "#define SOB_VOID INDD (CONSTARRAY,1)" n
 	 "#define SOB_TRUE INDD (CONSTARRAY,2)" n
 	 "#define SOB_FALSE INDD (CONSTARRAY,3)" n
+	))
+
+(define printC (lambda (label reg)
+	(string-append n "SHOW(\"" label "\"," reg ");" n)
 	))
 ;***********************************************************************************
 ;;;;;;;;;;;;;;;;;;;;;;;; "Constants Table starts here ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1954,7 +1959,7 @@
 	(string-append 	
 				(code_gen_constStringOrVector_Helper (cdr (get-repr-from-tagged exp)))
 				   "PUSH (" (number->string (car (get-repr-from-tagged exp))) ");" n
-	 			  	"CALL (" type ")"   n "DROP (" (number->string (car (get-repr-from-tagged exp))) ");"  n 
+	 			   "CALL (" type ")"   n "DROP (" (number->string (car (get-repr-from-tagged exp))) ");"  n 
 	 			   "MOV(INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);")))
 
 (define code_gen_constNumber (lambda (exp)
@@ -1983,6 +1988,13 @@
 		(make_sob_symbol (get_string_address_from_tagged_symbol tagged_exp))
 		"MOV (INDD (CONSTARRAY ," (number->string (get-address-from-tagged tagged_exp)) ") , R0);" n)))
 
+
+(define code_gen_constFraction (lambda (exp)
+	(string-append "PUSH (" (number->string (numerator (get-repr-from-tagged exp))) ");" n
+				   "PUSH (" (number->string (denominator (get-repr-from-tagged exp))) ");" n
+	 			   "CALL (MAKE_SOB_FRACTION);" n "DROP (2);"  n 
+	 			   "MOV (INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);" n)))
+
 (define code_gen_consts (lambda (tagged-exp) 
 	(cond 
 		((null? (get-costa-from-tagged tagged-exp)) (code_gen_constNil))
@@ -1991,7 +2003,8 @@
 		((char? (get-costa-from-tagged tagged-exp)) (code_gen_constChar tagged-exp))
 		((symbol? (get-costa-from-tagged tagged-exp)) (code_gen_constSymbol tagged-exp))
 		((string? (get-costa-from-tagged tagged-exp)) (code_gen_constStringOrVector tagged-exp "MAKE_SOB_STRING"))
-		((number? (get-costa-from-tagged tagged-exp)) (code_gen_constNumber tagged-exp))
+		((integer? (get-costa-from-tagged tagged-exp)) (code_gen_constNumber tagged-exp))
+		((number? (get-costa-from-tagged tagged-exp)) (code_gen_constFraction tagged-exp))
 		((vector? (get-costa-from-tagged tagged-exp)) (code_gen_constStringOrVector tagged-exp "MAKE_SOB_VECTOR"))
 		((pair? (get-costa-from-tagged tagged-exp)) (code_gen_constPair tagged-exp))
 )))
@@ -2039,29 +2052,29 @@
 
 (define SCHEMESymbolTable '())
 
-
 (define SymbolsLookUp (lambda (tagged_const_lst ans)
 	(if (null? tagged_const_lst) ans
 		(if (symbol? (get-costa-from-tagged (car tagged_const_lst)))
 				(SymbolsLookUp (cdr tagged_const_lst) (append ans (list (car tagged_const_lst))))
-				(SymbolsLookUp (cdr tagged_const_lst) ans)
-			))))
+				(SymbolsLookUp (cdr tagged_const_lst) ans)))))
 
-(define buildCISCSymbolTable (lambda (address_list)
+(define buildCISCSymbolTableHelper (lambda (address_list)
 		(if (null? address_list) 
 
 				(string-append 
 					(call_malloc 1)
-					"MOV (SYMBOLTABLE,R0);" n 
-					"MOV (IND(SYMBOLTABLE) ,R7);" n)
-
+					"MOV (SYMBOLTABLE,R7);" n )
 				(string-append
 					(call_malloc 2)
-					"MOV (INDD(R0 ,0) ,"  (number->string (car address_list))  ");" n
+					"MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,"  (number->string (car address_list))  "));" n
 					"MOV (INDD (R0,1) , R7);" n
 					"MOV (R7, R0);" n
-					(buildCISCSymbolTable (cdr address_list))))))
+					(buildCISCSymbolTableHelper (cdr address_list))))))
 
+(define buildCISCSymbolTable (lambda (lst) 
+	(if (null? lst)
+		(string-append "MOV (SYMBOLTABLE,R7);" n )
+		(buildCISCSymbolTableHelper lst))))
 
 (define buildSymbolTable (lambda () 
 	(let* ((symbol_lst  (SymbolsLookUp SCHEMEconstTable '()))
@@ -2070,8 +2083,10 @@
 			 	(set! SCHEMESymbolTable symbol_lst)
 			 	(buildCISCSymbolTable (reverse (map get_string_address_from_tagged_symbol SCHEMESymbolTable))))))
 	(string-append 
+		(CISC_comment "symbol table starts: ")
 		"MOV (R7,SOB_NIL);" n 
-		CISC_symbol_table))))
+		CISC_symbol_table
+		(CISC_comment "symbol table ends: ")))))
 
 ;*****************************************************************************************************************
 ;;;;;;;;;;;;;;;;;;;;;;;; "Symbol Table(represntitive String-linked-list) ends here" ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2247,6 +2262,9 @@
 (define RS_integer? (lambda () (RS_predicate "RS_LABEL_integer_body" "RS_LABEL_integer_finish" 
 	"RS_ERORR_integer" "RS_integer_TRUE_COND" 'integer? "T_INTEGER")))
 
+(define RS_fraction? (lambda () (RS_predicate "RS_LABEL_fraction_body" "RS_LABEL_fraction_finish" 
+	"RS_ERORR_fraction" "RS_fraction_TRUE_COND" 'fraction? "T_FRACTION")))
+
 (define RS_pair? (lambda () (RS_predicate "RS_LABEL_pair_body" "RS_LABEL_pair_finish" 
 	"RS_ERORR_pair" "RS_pair_TRUE_COND" 'pair? "T_PAIR")))
 
@@ -2264,6 +2282,18 @@
 
 (define RS_null? (lambda () (RS_predicate "RS_LABEL_null_body" "RS_LABEL_null_finish" 
 	"RS_ERORR_null" "RS_null_TRUE_COND" 'null? "T_NIL")))
+
+(define gen_rational
+	(lambda ()
+		`(define rational? 
+			(lambda (num)
+				(or (integer? num) (fraction? num))))))
+
+(define gen_number 
+	(lambda()
+		`(define number? 
+			(lambda (num)
+				(rational? num)))))
 
 
 (define RS_symbolToString 
@@ -2382,6 +2412,7 @@
 					finish_label ":" n
 					(CISC_comment "RS_vector_ref ends")))))
 
+
 (define RS_vector_set! 
 	(lambda () 
 		(let ((finish_label "RS_vector_set_closure_ends")
@@ -2460,7 +2491,7 @@
 							"CMP (IND(FPARG(2)),T_STRING);" n
 							"JUMP_NE (" error_label ");" n	
 							"MOV(R7,INDD(FPARG(2),1));" n 		;;now R7 holds the length-number
-							"PUSH(2);" n (call-malloc)
+							(call_malloc 2)
 							"MOV(IND(R0),T_INTEGER);" n
 							"MOV(INDD(R0,1),R7);" n )) 
 					finish_label ":" n
@@ -2549,8 +2580,6 @@
 							"MOV (R3 , INDD(FPARG(3),1));" n 		;R3 = holds index
 							"CMP (R3 , INDD(R2,1));" n  			;check that index is smaller than the length of the string
 							"JUMP_GE(" error_label ");" n
-							"CMP (INDD(R2 ,0) ,T_STRING);" n
-							"JUMP_NE(" error_label ");" n
 							"ADD (R3 , IMM(2));" n 					;fix index
 							"MOV (R4 , FPARG(4));" n 				;R4 = holds pointer to char
 							"MOV (INDD(R2,R3) , R4);" n 			;change the string
@@ -2559,35 +2588,475 @@
 					(CISC_comment "RS_string_set ends")))))
 
 
+(define RS_stringToSymbol 
+	(lambda () 
+		(let ((finish_label "RS_stringToSymbol_closure_ends")
+			(body_label "RS_LABEL_stringToSymbol_body")
+			(error_label  "RS_ERORR_stringToSymbol")
+			(end_calc  "RS_stringToSymbol_end_calc"))
+				(string-append 
+					(CISC_comment "RS_stringToSymbol starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'string->symbol SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label (string-append "SHOW(\"error in procedure stringToSymbol\",R0);" n "INFO" n)
+						(string-append
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_STRING);" n
+							"JUMP_NE (" error_label ");" n	
+							;;INIT:
+							"MOV (R7,FPARG(2));" n ;;R7 HOLDS a pointer to the argument-string
+							"MOV (R10,SYMBOLTABLE);" ;;R10 holdS the first node of the symbol linked list
+							"MOV (R12,R10);" n ;;R12 IS TEMP, FOR KNOWING WHERE IS THE LAST NODE
+							;;LOOP:
+							"STRING_TO_SYMBOL_LOOP:"
+							"CMP(R10,SOB_NIL);" n  ;;;??
+							"JUMP_EQ (STR_TO_SYM_ADD_HERE);"
+							;;;ELSE = FIRST LINK IS NOT NULL:
+							"CMP (R7 , INDD(R10,0));" n 
+							"JUMP_EQ(STRTOSYM_RETURN_TO_USER);" n 
+							;;IF ITS NOT EQUAL:
+							"MOV(R12,R10);"  
+							"MOV(R10,INDD(R10,1));" n		
+							"JUMP(STRING_TO_SYMBOL_LOOP);" n 
+							"STR_TO_SYM_ADD_HERE:" n  
+							;;;UPDATE THE LINKEDLIST
+							(call_malloc 2)
+							"MOV(INDD(R0,0),R7);" n 
+							"MOV(INDD(R0,1),SOB_NIL);" n 
+							;;CHECK WHO WAS THE LAST NODE,and update it
+							"CMP(R12,SOB_NIL);" n 
+							"JUMP_EQ(R12_ISNULL);" n 
+							"MOV (INDD(R12,1),R0);" n
+							"JUMP(STRTOSYM_RETURN_TO_USER);"
+							"R12_ISNULL:" n 
+							"MOV(SYMBOLTABLE,R0);" n
+							;;;;build a symobl for the user:
+							"STRTOSYM_RETURN_TO_USER:" n 
+							(call_malloc 2)
+							"MOV(IND(R0), T_SYMBOL);" n 
+							"MOV(INDD(R0,1),R7);" n 	
+							end_calc ":"))
+					finish_label ":" n 
+					(CISC_comment "RS_stringToSymbol ends")))))
+
+
+;(define RS_GCD 
+;	(lambda () 
+;		(let ((finish_label "RS_GCD_ends")
+;			(body_label "RS_GCD_body")
+;			(error_label  "RS_ERORR_RS_GCD_set"))
+;				(string-append 
+;					(CISC_comment "RS_GCD starts")
+;;					(RS_makeClosure body_label finish_label (lookupFvar 'gcd SCHEMEFvarsTable))
+;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_GCD\",R0);"
+;						(string-append
+;							"CMP (FPARG(1) , IMM(2));" n
+;							"JUMP_NE(" error_label ");" n
+;							"MOV (R1 , FPARG(2));" n
+;							"CMP (INDD(R1 ,0) , IMM(T_INTEGER));" n
+;							"JUMP_NE(" error_label ");" n
+;							"MOV (R2 , FPARG(3));" n
+;							"CMP (INDD(R2 ,0) , IMM(T_INTEGER));" n
+;							"JUMP_NE(" error_label ");" n
+;							"CMP (INDD(R2 ,1) , IMM(0));" n
+;							"JUMP_EQ(" error_label ");" n
+;							"MOV (R1 , INDD(R1 ,1));" n
+;							"MOV (R2 , INDD(R2 ,1));" n
+;							"GCD_LOOP:" n
+;							"MOV (R3 , R1);" n
+;							"REM (R3 , R2);" n
+;							"CMP (R3 , IMM(0));" n
+;							"JUMP_EQ(GCD_EXIT);" n
+;							"MOV (R1 , R2);" n
+;							"MOV (R2, R3);" n
+;							"JUMP(GCD_LOOP);" n
+;							"GCD_EXIT:" n
+;							"PUSH(R2);" n
+;							"CALL(MAKE_SOB_INTEGER);" n
+;							"DROP(1);" n
+;							))
+;					finish_label ":" n
+;					(CISC_comment "RS_GCD ends")))))
+
+(define gen_gcd
+  (lambda ()
+    `(define gcd
+       (lambda (a b)
+         (cond [(eq? b 0) a]
+               [else (gcd b (remainder a b))])
+         ))
+    ))
+
+
+(define RS_cahrToInteger 
+	(lambda () 
+		(let ((finish_label "RS_cahrToInteger_closure_ends")
+			(body_label "RS_cahrToInteger_body")
+			(error_label  "RS_ERORR_RS_cahrToInteger"))
+				(string-append 
+					(CISC_comment "RS_cahrToInteger starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'char->integer SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_cahrToInteger\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the char 
+							"CMP (INDD(R2,0) , T_CHAR);" n
+							"JUMP_NE(" error_label ");" n
+							"MOV (INDD(R2,0) , T_INTEGER);" n
+							"MOV (R0 , R2);" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_cahrToInteger ends")))))
+
+
+(define RS_list
+	(lambda () 
+		(let ((finish_label "RS_list_closure_ends")
+			(body_label "RS_list_body")
+			(error_label  "RS_ERORR_RS_list")
+			(emptyListLabel  "Gen_Empty_List")
+			(loopLabel  "Gen_List_Loop_Label")
+			(endLoopLabel  "Gen_List_End_Loop_Label"))
+				(string-append 
+					(CISC_comment "RS_list starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'list SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_list\",R0);"
+						(string-append
+							"MOV (R6 ,SOB_NIL);" n 						;R6 initialize to empty list
+							"MOV (R5 , R6);" n 							;R5 = iterator, R6 = pointer to head
+							"MOV (R4 , FPARG(1));" n 					;R4 = holds the list length (num of args)
+							loopLabel ":" n
+							"CMP (R4 ,IMM(0));" n 						;If R4 will be 0 at first gen empty list
+							"JUMP_EQ(" endLoopLabel ");" n
+							(call_malloc 3)
+							"MOV (INDD(R0,2) , R5);" n 					;R0 holds the new block that will now point to the old block 
+							"MOV (R5 , R0);" n 							;R5 = pointer to the new block
+							"MOV (INDD(R5,1) , FPARG(1 + R4));" n 		;update value in new block
+							"MOV (INDD(R5,0) , T_PAIR);" n
+							"MOV (R6, R5);" n 							;R6 will point to the linked list head
+							"DECR(R4);" n
+							"JUMP(" loopLabel ");"n
+							endLoopLabel ":" n
+							"MOV (R0 , R6);" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_list ends")))))
+
+
+(define RS_remainder
+	(lambda () 
+		(let ((finish_label "RS_remainder_closure_ends")
+			(body_label "RS_remainder_body")
+			(error_label  "RS_ERORR_RS_remainder"))
+				(string-append 
+					(CISC_comment "RS_remainder starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'remainder SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_remainder\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"MOV (R1 ,FPARG(2));" n
+							"MOV (R2 ,FPARG(3));" n
+							"CMP (INDD(R1 , 0) , T_INTEGER);" n
+							"JUMP_NE(" error_label ");" n
+							"CMP (INDD(R2 , 0) , T_INTEGER);" n
+							"JUMP_NE(" error_label ");" n
+							"PUSH(INDD(R1,1));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n
+							"MOV(R3 , R0);" n
+							"REM (INDD(R3,1) ,INDD(R2,1));" n
+							"MOV (R0 , R3);" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_remainder ends")))))
+
+
+(define RS_numerator
+	(lambda ()
+		(let
+			((finish_label  "RS_numerator_closure_ends")
+			(body_label  "RS_numerator_body")
+			(error_label "RS_ERORR_RS_numerator")
+			(fractionLabel "RS_numerator_Fraction_Label")
+			(exit_label "RS_numerator_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_numerator starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'numerator SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_numerator\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_INTEGER);" n
+							"JUMP_NE(" fractionLabel ");" n
+							"MOV (R0 , FPARG(2));" n
+							"JUMP(" exit_label ");" n
+							fractionLabel ":" n
+							"CMP (IND(FPARG(2)),T_FRACTION);" n
+							"JUMP_NE (" error_label ");" n
+							"PUSH(INDD(FPARG(2),1));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n	
+							;"MOV (R0 , INDD(FPARG(2),1));" n 
+							exit_label ":" n))
+					finish_label ":" n
+					(CISC_comment "RS_numerator ends")))))
+
+
+(define RS_denominator
+	(lambda ()
+		(let
+			((finish_label  "RS_denominator_closure_ends")
+			(body_label  "RS_denominator_body")
+			(error_label "RS_ERORR_RS_denominator")
+			(fractionLabel "RS_denominator_Fraction_Label")
+			(exit_label "RS_denominator_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_denominator starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'denominator SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_denominator\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"CMP (IND(FPARG(2)),T_INTEGER);" n
+							"JUMP_NE(" fractionLabel ");" n
+							"PUSH(IMM(1));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n
+							"JUMP(" exit_label ");" n
+							fractionLabel ":" n
+							"CMP (IND(FPARG(2)),T_FRACTION);" n
+							"JUMP_NE (" error_label ");" n
+							"PUSH(INDD(FPARG(2),2));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n		
+							;"MOV (R0 , INDD(FPARG(2),2));" n 
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_denominator ends")))))
+
+
+(define RS_compare_vals
+	(lambda ()
+		(let
+			((finish_label  "RS_compare_vals_closure_ends")
+			(body_label  "RS_compare_vals_body")
+			(error_label "RS_ERORR_RS_compare_vals")
+			(false_label "RS_compare_vals_False_Label")
+			(exit_label "RS_compare_vals_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_compare_vals starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'compare_vals SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_compare_vals\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"CMP (INDD(FPARG(2),1) , INDD(FPARG(3),1));" n
+							"JUMP_NE(" false_label ");" n
+							"MOV (R0 , SOB_TRUE);" n
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_compare_vals ends")))))
+
+(define RS_compare_address
+	(lambda ()
+		(let
+			((finish_label  "RS_compare_address_closure_ends")
+			(body_label  "RS_compare_address_body")
+			(error_label "RS_ERORR_RS_compare_address")
+			(false_label "RS_compare_address_False_Label")
+			(exit_label "RS_compare_address_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_compare_address starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'compare_address SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_compare_address\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"CMP (FPARG(2) , FPARG(3));" n
+							"JUMP_NE(" false_label ");" n
+							"MOV (R0 , SOB_TRUE);" n
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_compare_address ends")))))
+
+(define gen_eq
+	(lambda()
+		'(define eq? 
+			(lambda (exp1 exp2)
+				(if (or (and (integer? exp1) (integer? exp2)) 
+						(and (fraction? exp1) (fraction? exp2))
+						(and (char? exp1) (char? exp2))
+						(and (symbol? exp1) (symbol? exp2)))
+					(compare_vals exp1 exp2)
+					(if (or (and (null? exp1) (null? exp2))
+							(and (boolean? exp1) (boolean? exp2))
+							(and (string? exp1) (string? exp2))
+							(and (vector? exp1) (vector? exp2))
+							(and (pair? exp1) (pair? exp2)))
+						(compare_address exp1 exp2)
+						#f )
+				)))))
+					
+
+(define RS_plus       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only integers !!!!!!!!! ;;;;;;;;;;;;;;;;;;;;
+	(lambda ()
+		(let
+			((finish_label  "RS_plus_closure_ends")
+			(body_label  "RS_plus_body")
+			(error_label "RS_ERORR_RS_plus")
+			(baseCaseLabel "RS_plus_Base_Case_Label")
+			(loopLabel "RS_plus_Loop_Label")
+			(otherCaseLabel "RS_plus_Other_Case_Label")
+			(exit_label "RS_plus_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_plus starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '+ SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
+						(string-append
+							"CMP (FPARG(1) , IMM(0));" n
+							"JUMP_EQ(" baseCaseLabel ");" n
+							"MOV (R2 , FPARG(1));" n 					;R2 = number of args
+							"MOV (R3 , INDD(FPARG(2),1));" n 			;F3 = value of first arg and in the end the answer
+							loopLabel ":" n
+							"CMP (R2 , IMM(1));" n
+							"JUMP_EQ(" otherCaseLabel ");" n
+							"ADD (R3 , INDD(FPARG(1 + R2),1));" n 		;Add vals from the end of args list
+							"DECR (R2);" n
+							"JUMP(" loopLabel ");" n
+							baseCaseLabel ":" n
+							"PUSH(IMM(0));" n
+							"CALL(MAKE_SOB_INTEGER);" n
+							"DROP(1);" n
+							"JUMP(" exit_label ");" n
+							otherCaseLabel ":" n
+							"PUSH(R3);" n
+							"CALL(MAKE_SOB_INTEGER);" n
+							"DROP(1);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_plus ends")))))
+
+
+(define RS_smaller    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only fractions !!!!!!! ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	(lambda ()
+		(let
+			((finish_label  "RS_smaller_closure_ends")
+			(body_label  "RS_smaller_body")
+			(error_label "RS_ERORR_RS_smaller")
+			(decide_by_numerator_label "RS_smaller_decide_by_numerator_Label")
+			(false_label "RS_smaller_false_Label")
+			(exit_label "RS_smaller_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_plus starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '< SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"MOV (R1 , FPARG(2));" n 							;R1 = is the first number
+							"MOV (R2 , FPARG(3));" n 							;R2 = is the second number
+							"MOV (R3 , INDD(R1,2));" n 							;R3 = first number denominator
+							"MOV (R4 , INDD(R2,2));" n 							;R4 = second number denominator
+							"MOV (R5 , INDD(R1,1));" n 							;R5 = first number numerator
+							"MOV (R6 , INDD(R2,1));" n 							;R6 = second number numerator
+							"CMP (R3 , R4);" n									;compare denominators 
+							"JUMP_EQ(" decide_by_numerator_label ");" n
+							"MUL (R5 , R4);" n 									;make common denomirators - that also affect numerators
+							"MUL (R6 , R3);" n 									;know we can decide by numerators								
+							decide_by_numerator_label ":" n
+							"CMP (R5 , R6);" n 									;compare numerators
+							"JUMP_GE(" false_label ");" n 						;if first number ge than the second number jump & return false
+							"MOV (R0 , SOB_TRUE);" n 							;else return true
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_plus ends")))))
+
+
+(define RS_numberTofraction
+	(lambda ()
+		(let
+			((finish_label  "RS_numberTofraction_closure_ends")
+			(body_label  "RS_numberTofraction_body")
+			(error_label "RS_ERORR_RS_numberTofraction")
+			(changeIntTofrac_Label "RS_numberTofraction_changeIntTofrac_Label")
+			(exit_label "RS_numberTofraction_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_numberTofraction starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'number->fraction SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_numberTofraction\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the integer 
+							"CMP (INDD(R2,0) , T_INTEGER);" n
+							"JUMP_EQ(" changeIntTofrac_Label ");" n 
+							"CMP (INDD(R2,0) , T_FRACTION);" n
+							"JUMP_NE(" error_label ");" n
+							"MOV (R0 , R2);" 
+							"JUMP(" exit_label ");" n 
+							changeIntTofrac_Label ":" n
+							(call_malloc 3)
+							"MOV (R3 , R0);" n
+							"MOV (INDD(R3,0) , T_FRACTION);" n
+							"MOV (INDD(R3,1) , INDD(R2,1));" n
+							"MOV (INDD(R3,2) , IMM(1));" n
+							"MOV (R0 , R3);" n
+							exit_label ":" n 
+							))
+					finish_label ":" n
+					(CISC_comment "RS_numberTofraction ends")))))
+
+
+;(define gen_checkNumbers
+;  (lambda ()
+;    `(define checkNumbers
+;       (lambda (a b)
+;         (cond [(and (integer? a) (fraction? b)) (op (number->fraction a) b)]
+;         	   [(and (fraction? a) (integer? b)) (op  a (number->fraction b))]
+;         	   [(and (fraction? a) (fraction? b)) (op a b)]
+;               [else (op  (number->fraction a) (number->fraction b))])
+;         ))
+;    ))
+
 (define add_RS_to_FvarTable 
 	(lambda () 
 		(string-append 
 		(RS_car) (RS_cdr) (RS_cons) (RS_set_car) (RS_set_cdr) 
-		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?)
-		(RS_symbolToString) (RS_zero?) (RS_not) 
+		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?) (RS_fraction?)
+		(RS_zero?) (RS_not) (RS_compare_address) (RS_compare_vals)
+		(RS_symbolToString) (RS_stringToSymbol)
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
+		;(RS_GCD)
+		(RS_cahrToInteger) (RS_numberTofraction) ;(RS_integerToChar) 
+		(RS_list)
+		(RS_remainder) (RS_denominator) (RS_numerator)
+		(RS_plus) (RS_smaller)
 		)))
 
 (define RS_LIST 
 	(list 
 		'car 'cdr 'cons 'set-car! 'set-cdr! 
-		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 
-		'symbol->string 'zero? 'not
+		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 'fraction?
+		'zero? 'not 'compare_address 'compare_vals
+		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
+		;'gcd
+		'char->integer 'number->fraction ;'integer->char
+		'list
+		'remainder 'denominator 'numerator
+		'+ '<
 	 ))
 
 
 
 
 ;;RUNTIME SUPPORT TODO:
-;; append,apply , 
 ;; < , = , > , +, / , * , - 
-;; list , map 
-;; string->symbol , char->integer,integer->char 
-;; rational? ,eq? ,  number?
-;, remainder  , denonimator , numertor  (what is all of these??) 
+;; integer->char 
 
 
 
@@ -2671,7 +3140,7 @@
 	(let* ((SchemeFvarTable (buildSchemeFvarList ast '()))
 		  (CISCFvarTable 
 		  		 (begin 
-		  				(set! SCHEMEFvarsTable (taggingFvars (enlargeFvars SchemeFvarTable RS_LIST '()) '()))
+		  				(set! SCHEMEFvarsTable (taggingFvars (enlargeFvars RS_LIST SchemeFvarTable '()) '()))
 		  				(buildCiscFvarsTable SCHEMEFvarsTable) ;;;this is STRING
 		  				)))
 		(reset_fvar_Address)
@@ -2708,13 +3177,13 @@
 
 
 (define fvar_code_gen 
-	(lambda  (var_name) 
+	(lambda  (var_name)
 			(let* ((counter (number->string (updateCounter)))
 					(errorlabel (string-append "UNDEF_LABEL" counter))
 					(finish_label (string-append "FINISH_FVAR_LABEL" counter)))
 				(string-append 
 					(CISC_comment "fvar code:")
-					"MOV ( R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n 
+					"MOV (R0 ,INDD(FVARARRAY," (number->string (lookupFvar var_name SCHEMEFvarsTable)) "));" n 
 					"CMP (R0 , 0XDEF);" n 
 					"JUMP_EQ (" errorlabel ");" n
 					"JUMP (" finish_label ");"  n 
@@ -3218,7 +3687,7 @@
 			(pattern-rule
 				`(def ,(? 'var) ,(? 'exps))
 					(lambda (var exps)
-					(define_cod_gen var exps code_gen major) 
+						(define_cod_gen var exps code_gen major)
 					))
 
 
@@ -3286,6 +3755,127 @@ return 0;
 ;	(lambda (str)
 ;		(cadar (test-string <Sexpr> str))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+										;according to MR. T need to concatenate this code after output of ass1 as input to ass2
+
+(define gen_foldl_2
+	(lambda ()
+		`(define foldl_2 
+			(lambda (func accum lst)
+  				(if (null? lst)
+      				accum
+      				(foldl_2 func (func (car lst) accum) (cdr lst))))) ))
+
+
+(define gen_map 										 
+	(lambda ()
+		`(define map
+			(lambda (proc items)
+				(if (null? items)
+					(list)
+					(cons (proc (car items))
+				  	  	  (map proc (cdr items)))))) ))
+
+(define gen_binaryAppend
+	(lambda ()
+		`(define binaryAppend
+			(lambda (list1 list2)
+				(if (null? list1)
+					list2
+					(cons (car list1)
+				  		(binaryAppend (cdr list1) list2))))) ))
+
+
+
+
+(define gen_reverseList
+	(lambda ()
+		`(define reverseList
+      		(lambda (lst revList)
+        		(if (null? lst)
+            		revList
+		            (reverseList (cdr lst) (cons (car lst) revList))))) ))
+
+
+(define gen_append
+	(lambda ()
+		`(define append
+       		(lambda args
+         		(foldl_2 binaryAppend '() (reverseList args '())))) ))
+
+(define gen_apply
+	(lambda ()
+		`(define apply
+			(lambda (func arg . args)
+				(func (cons arg args))))))
+
+;(define gen_append
+;	(lambda ()
+;		(define append_2 
+;			(lambda args
+;				(cond ((null? args) args) 																						;if (append) = '()
+;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
+;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
+;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
+					  
+
+				
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; (define cadr
+; 	(lambda (exp)
+; 		(car (cdr exp))))
+
+; (define cdar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define caar
+; 	(lambda (exp)
+; 		(car (car exp))))
+
+; (define cddr
+; 	(lambda (exp)
+; 		(cdr (cdr exp))))
+
+; (define caaar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define caadr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cadar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdaar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdadr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cddar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdddr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+(define addRSINScheme
+	(lambda (src)
+		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend) ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd) ,src) ))
+
+
 
 (define runAss3 (lambda (exp) 
 	(annotate-tc (pe->lex-pe (box-set (remove-applic-lambda-nil (eliminate-nested-defines (parse  exp))))))))
@@ -3294,17 +3884,18 @@ return 0;
 ;	(lambda (src CISC)
 ;		(apply_sxpr_str (file->string src))    ;; this expression need to sent to parse function
 (define a (lambda (src)
-	(let* ((after_ass3 (runAss3 src))
+	(let* ( (addShitToSaveTime (addRSINScheme src))
+			(after_ass3 (runAss3 addShitToSaveTime))
 			(CISC-const-table (buildConstantTable after_ass3))
 			(CISC_symbol_table (buildSymbolTable))
 			(CISC-fvar-table (buildFvarTable after_ass3))	
 			(codeGen (code_gen after_ass3 0))
 		   )
-CISC-fvar-table
+	CISC-fvar-table
 	(writeToFile "arch/out.c"
 		(string-append 
 				prolouge
-				MACROS 
+				MACROS
 				CISC-const-table
 				CISC_symbol_table	
 				CISC-fvar-table		
@@ -3314,12 +3905,13 @@ CISC-fvar-table
 
 	)))
 
-
+;;;;;;;;;;;TESTS: 
 ;(define test
 ;	(lambda ()
 ;		(a '((lambda x 
 ;				((lambda (a b . y) 
 ;					((lambda k 999))) 12 13 14)) 7)
+;	)))
 ;					((lambda k 
 ;
 ;						((lambda x  
@@ -3334,37 +3926,5 @@ CISC-fvar-table
 ;
 ;(define test2
 ;	(lambda ()
-;;		(a '((lambda (x) (cons 2 3)) 5)
+;		(a '((lambda (x) (cons 2 3)) 5)
 ;	)))
-;;;;;;;;;;;TESTS: 
-
-;(define test (lambda ()
-;	(a  '(let ((a 0)) (list
- ;                          (lambda () a)
-  ;                         (lambda () (set! a (+ a 1)))
-   ;                        (lambda (b) (set! a b)))))))
-
-
-;(define test (lambda ()
-;		(a `()
-;	))
-
-;(define test (lambda ()
-;(a '((lambda (x) ((lambda (a b) (or #f #f (begin (define u 9) (set! u 777) (if #f a u)) )) 7 8)) 2))))
-;;Halili Level:
-;(define test (lambda ()
-;	(runAss3 '((lambda (a b c) 
-;		((lambda (x y z) 
-;
-;		(  (lambda (u) (set! c 9) (set! u c) 
-;
-;			((lambda (t) (set! a u) a)   0)
-;			) 777)
-;
-;		) 4 5 6)) 1 2 3))))
-
-
-
-
-;;;; fail to work if we dont run "compiler.scm" before evrey test
-

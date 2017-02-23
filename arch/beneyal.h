@@ -14,6 +14,7 @@
   : ((x) == T_PAIR)    ? snprintf(res, 16, "%s", "T_PAIR")                     \
   : ((x) == T_VECTOR)  ? snprintf(res, 16, "%s", "T_VECTOR")                   \
   : ((x) == T_CLOSURE) ? snprintf(res, 16, "%s", "T_CLOSURE")                  \
+  : ((x) == T_FRACTION) ? snprintf(res, 16, "%s", "T_FRACTION")                \
   : snprintf(res, 16, "%ld", (x)))
  
 #if DO_SHOW == 0
@@ -53,7 +54,7 @@
   printf("----------------------------\n");                                         \
   printf("Memory Info:\n");                                                         \
   printf("----------------------------\n");                                         \
-  for (i = 0; i <= 101; i += 4) {                                               \
+  for (i = 0; i <= 301; i += 4) {                                               \
     TRANS(IND(i), type1); TRANS(IND(i + 1), type2);                                 \
     TRANS(IND(i + 2) ,type3); TRANS(IND(i + 3), type4);                             \
     printf("MEM[%4d] = %-10s MEM[%d] = %-10s MEM[%4d] = %-10s MEM[%d] = %-10s\n",   \
