@@ -2639,44 +2639,52 @@
 					(CISC_comment "RS_stringToSymbol ends")))))
 
 
-(define RS_GCD 
-	(lambda () 
-		(let ((finish_label "RS_GCD_ends")
-			(body_label "RS_GCD_body")
-			(error_label  "RS_ERORR_RS_GCD_set"))
-				(string-append 
-					(CISC_comment "RS_GCD starts")
-					(RS_makeClosure body_label finish_label (lookupFvar 'gcd SCHEMEFvarsTable))
-					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_GCD\",R0);"
-						(string-append
-							"CMP (FPARG(1) , IMM(2));" n
-							"INFO" n
-							"JUMP_NE(" error_label ");" n
-							"MOV (R1 , FPARG(2));" n
-							"CMP (INDD(R1 ,0) , IMM(T_INTEGER));" n
-							"JUMP_NE(" error_label ");" n
-							"MOV (R2 , FPARG(3));" n
-							"CMP (INDD(R2 ,0) , IMM(T_INTEGER));" n
-							"JUMP_NE(" error_label ");" n
-							"CMP (INDD(R2 ,1) , IMM(0));" n
-							"JUMP_NE(" error_label ");" n
-							"MOV (R4 , INDD(R1 ,1));" n
-							"MOV (R5 , INDD(R2 ,1));" n
-							"GCD_LOOP:" n
-							"MOV (R3 , R4);" n
-							"REM (R3 , R5);" n
-							"CMP (R3 , IMM(0));" n
-							"JUMP_EQ(GCD_EXIT);" n
-							"MOV (R1 , R3);" n
-							"DIV (R4, R1);" n
-							"JUMP(GCD_LOOP);" n
-							"GCD_EXIT:" n
-							"PUSH(R1);" n
-							"CALL(MAKE_SOB_INTEGER);" n
-							"DROP(1);" n
-							))
-					finish_label ":" n
-					(CISC_comment "RS_GCD ends")))))
+;(define RS_GCD 
+;	(lambda () 
+;		(let ((finish_label "RS_GCD_ends")
+;			(body_label "RS_GCD_body")
+;			(error_label  "RS_ERORR_RS_GCD_set"))
+;				(string-append 
+;					(CISC_comment "RS_GCD starts")
+;;					(RS_makeClosure body_label finish_label (lookupFvar 'gcd SCHEMEFvarsTable))
+;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_GCD\",R0);"
+;						(string-append
+;							"CMP (FPARG(1) , IMM(2));" n
+;							"JUMP_NE(" error_label ");" n
+;							"MOV (R1 , FPARG(2));" n
+;							"CMP (INDD(R1 ,0) , IMM(T_INTEGER));" n
+;							"JUMP_NE(" error_label ");" n
+;							"MOV (R2 , FPARG(3));" n
+;							"CMP (INDD(R2 ,0) , IMM(T_INTEGER));" n
+;							"JUMP_NE(" error_label ");" n
+;							"CMP (INDD(R2 ,1) , IMM(0));" n
+;							"JUMP_EQ(" error_label ");" n
+;							"MOV (R1 , INDD(R1 ,1));" n
+;							"MOV (R2 , INDD(R2 ,1));" n
+;							"GCD_LOOP:" n
+;							"MOV (R3 , R1);" n
+;							"REM (R3 , R2);" n
+;							"CMP (R3 , IMM(0));" n
+;							"JUMP_EQ(GCD_EXIT);" n
+;							"MOV (R1 , R2);" n
+;							"MOV (R2, R3);" n
+;							"JUMP(GCD_LOOP);" n
+;							"GCD_EXIT:" n
+;							"PUSH(R2);" n
+;							"CALL(MAKE_SOB_INTEGER);" n
+;							"DROP(1);" n
+;							))
+;					finish_label ":" n
+;					(CISC_comment "RS_GCD ends")))))
+
+(define gen_gcd
+  (lambda ()
+    `(define gcd
+       (lambda (a b)
+         (cond [(eq? b 0) a]
+               [else (gcd b (remainder a b))])
+         ))
+    ))
 
 
 (define RS_cahrToInteger 
@@ -2698,23 +2706,6 @@
 							))
 					finish_label ":" n
 					(CISC_comment "RS_cahrToInteger ends")))))
-
-
-;(define RS_integerToChar
-;	(lambda () 
-;		(let ((finish_label "RS_integerToChar_closure_ends")
-;			(body_label "RS_integerToChar_body")
-;			(error_label  "RS_ERORR_RS_integerToChar"))
-;				(string-append 
-;					(CISC_comment "RS_integerToChar starts")
-;;					(RS_makeClosure body_label finish_label (lookupFvar 'integer->char SCHEMEFvarsTable))
-;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_integerToChar\",R0);"
-;						(string-append
-;							(args_check_macro "1" error_label)
-;							
-;;							))
-;					finish_label ":" n
-;					(CISC_comment "RS_integerToChar ends")))))
 
 
 (define RS_list
@@ -2768,8 +2759,12 @@
 							"JUMP_NE(" error_label ");" n
 							"CMP (INDD(R2 , 0) , T_INTEGER);" n
 							"JUMP_NE(" error_label ");" n
-							"REM (INDD(R1,1) ,INDD(R2,1));" n
-							"MOV (R0 , R1);" n
+							"PUSH(INDD(R1,1));" n
+							"CALL (MAKE_SOB_INTEGER);" n 
+							"DROP(1);" n
+							"MOV(R3 , R0);" n
+							"REM (INDD(R3,1) ,INDD(R2,1));" n
+							"MOV (R0 , R3);" n
 							))
 					finish_label ":" n
 					(CISC_comment "RS_remainder ends")))))
@@ -2904,6 +2899,126 @@
 				)))))
 					
 
+(define RS_plus       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only integers !!!!!!!!! ;;;;;;;;;;;;;;;;;;;;
+	(lambda ()
+		(let
+			((finish_label  "RS_plus_closure_ends")
+			(body_label  "RS_plus_body")
+			(error_label "RS_ERORR_RS_plus")
+			(baseCaseLabel "RS_plus_Base_Case_Label")
+			(loopLabel "RS_plus_Loop_Label")
+			(otherCaseLabel "RS_plus_Other_Case_Label")
+			(exit_label "RS_plus_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_plus starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '+ SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
+						(string-append
+							"CMP (FPARG(1) , IMM(0));" n
+							"JUMP_EQ(" baseCaseLabel ");" n
+							"MOV (R2 , FPARG(1));" n 					;R2 = number of args
+							"MOV (R3 , INDD(FPARG(2),1));" n 			;F3 = value of first arg and in the end the answer
+							loopLabel ":" n
+							"CMP (R2 , IMM(1));" n
+							"JUMP_EQ(" otherCaseLabel ");" n
+							"ADD (R3 , INDD(FPARG(1 + R2),1));" n 		;Add vals from the end of args list
+							"DECR (R2);" n
+							"JUMP(" loopLabel ");" n
+							baseCaseLabel ":" n
+							"PUSH(IMM(0));" n
+							"CALL(MAKE_SOB_INTEGER);" n
+							"DROP(1);" n
+							"JUMP(" exit_label ");" n
+							otherCaseLabel ":" n
+							"PUSH(R3);" n
+							"CALL(MAKE_SOB_INTEGER);" n
+							"DROP(1);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_plus ends")))))
+
+
+(define RS_smaller    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only fractions !!!!!!! ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	(lambda ()
+		(let
+			((finish_label  "RS_smaller_closure_ends")
+			(body_label  "RS_smaller_body")
+			(error_label "RS_ERORR_RS_smaller")
+			(decide_by_numerator_label "RS_smaller_decide_by_numerator_Label")
+			(false_label "RS_smaller_false_Label")
+			(exit_label "RS_smaller_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_plus starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '< SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"MOV (R1 , FPARG(2));" n 							;R1 = is the first number
+							"MOV (R2 , FPARG(3));" n 							;R2 = is the second number
+							"MOV (R3 , INDD(R1,2));" n 							;R3 = first number denominator
+							"MOV (R4 , INDD(R2,2));" n 							;R4 = second number denominator
+							"MOV (R5 , INDD(R1,1));" n 							;R5 = first number numerator
+							"MOV (R6 , INDD(R2,1));" n 							;R6 = second number numerator
+							"CMP (R3 , R4);" n									;compare denominators 
+							"JUMP_EQ(" decide_by_numerator_label ");" n
+							"MUL (R5 , R4);" n 									;make common denomirators - that also affect numerators
+							"MUL (R6 , R3);" n 									;know we can decide by numerators								
+							decide_by_numerator_label ":" n
+							"CMP (R5 , R6);" n 									;compare numerators
+							"JUMP_GE(" false_label ");" n 						;if first number ge than the second number jump & return false
+							"MOV (R0 , SOB_TRUE);" n 							;else return true
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_plus ends")))))
+
+
+(define RS_numberTofraction
+	(lambda ()
+		(let
+			((finish_label  "RS_numberTofraction_closure_ends")
+			(body_label  "RS_numberTofraction_body")
+			(error_label "RS_ERORR_RS_numberTofraction")
+			(changeIntTofrac_Label "RS_numberTofraction_changeIntTofrac_Label")
+			(exit_label "RS_numberTofraction_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_numberTofraction starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'number->fraction SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_numberTofraction\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the integer 
+							"CMP (INDD(R2,0) , T_INTEGER);" n
+							"JUMP_EQ(" changeIntTofrac_Label ");" n 
+							"CMP (INDD(R2,0) , T_FRACTION);" n
+							"JUMP_NE(" error_label ");" n
+							"MOV (R0 , R2);" 
+							"JUMP(" exit_label ");" n 
+							changeIntTofrac_Label ":" n
+							(call_malloc 3)
+							"MOV (R3 , R0);" n
+							"MOV (INDD(R3,0) , T_FRACTION);" n
+							"MOV (INDD(R3,1) , INDD(R2,1));" n
+							"MOV (INDD(R3,2) , IMM(1));" n
+							"MOV (R0 , R3);" n
+							exit_label ":" n 
+							))
+					finish_label ":" n
+					(CISC_comment "RS_numberTofraction ends")))))
+
+
+;(define gen_checkNumbers
+;  (lambda ()
+;    `(define checkNumbers
+;       (lambda (a b)
+;         (cond [(and (integer? a) (fraction? b)) (op (number->fraction a) b)]
+;         	   [(and (fraction? a) (integer? b)) (op  a (number->fraction b))]
+;         	   [(and (fraction? a) (fraction? b)) (op a b)]
+;               [else (op  (number->fraction a) (number->fraction b))])
+;         ))
+;    ))
 
 (define add_RS_to_FvarTable 
 	(lambda () 
@@ -2914,10 +3029,11 @@
 		(RS_symbolToString) (RS_stringToSymbol)
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
-		(RS_GCD)
-		(RS_cahrToInteger) ;(RS_integerToChar) 
+		;(RS_GCD)
+		(RS_cahrToInteger) (RS_numberTofraction) ;(RS_integerToChar) 
 		(RS_list)
 		(RS_remainder) (RS_denominator) (RS_numerator)
+		(RS_plus) (RS_smaller)
 		)))
 
 (define RS_LIST 
@@ -2928,10 +3044,11 @@
 		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
-		'gcd
-		'char->integer ;'integer->char
+		;'gcd
+		'char->integer 'number->fraction ;'integer->char
 		'list
 		'remainder 'denominator 'numerator
+		'+ '<
 	 ))
 
 
@@ -3756,7 +3873,7 @@ return 0;
 
 (define addRSINScheme
 	(lambda (src)
-		`(begin  ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend) ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,src) ))
+		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend) ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd) ,src) ))
 
 
 
