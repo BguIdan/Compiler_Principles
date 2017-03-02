@@ -2597,7 +2597,7 @@
 				(string-append 
 					(CISC_comment "RS_stringToSymbol starts")
 					(RS_makeClosure body_label finish_label (lookupFvar 'string->symbol SCHEMEFvarsTable))
-					(RS_Closure_Code body_label finish_label error_label (string-append "SHOW(\"error in procedure stringToSymbol\",R0);" n "INFO" n)
+					(RS_Closure_Code body_label finish_label error_label (string-append "SHOW(\"error in procedure stringToSymbol\",R0);" n)
 						(string-append
 							(args_check_macro "1" error_label)
 							"CMP (IND(FPARG(2)),T_STRING);" n
@@ -2706,6 +2706,26 @@
 							))
 					finish_label ":" n
 					(CISC_comment "RS_cahrToInteger ends")))))
+
+(define RS_integerToChar
+	(lambda () 
+		(let ((finish_label "RS_integerToChar_closure_ends")
+			(body_label "RS_integerToChar_body")
+			(error_label  "RS_ERORR_RS_integerToChar"))
+				(string-append 
+					(CISC_comment "RS_integerToChar starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'integer->char SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_integerToChar\",R0);"
+						(string-append
+							(args_check_macro "1" error_label)
+							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the integer 
+							"CMP (INDD(R2,0) , T_INTEGER);" n
+							"JUMP_NE(" error_label ");" n
+							"MOV (INDD(R2,0) , T_CHAR);" n
+							"MOV (R0 , R2);" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_integerToChar ends")))))
 
 
 (define RS_list
@@ -2898,47 +2918,207 @@
 						#f )
 				)))))
 					
+;;;;;;;;;;;;;;;;;;;;;;;;;;arithmetic procedures;;;;;;;;;;;;;;;;
 
-(define RS_plus       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only integers !!!!!!!!! ;;;;;;;;;;;;;;;;;;;;
+;(define RS_plus      
+;	(lambda ()
+;		(let
+;			((finish_label  "RS_plus_closure_ends")
+;			(body_label  "RS_plus_body")
+;			(error_label "RS_ERORR_RS_plus")
+;			(baseCaseLabel "RS_plus_Base_Case_Label")
+;			(loopLabel "RS_plus_Loop_Label")
+;			(otherCaseLabel "RS_plus_Other_Case_Label")
+;			(exit_label "RS_plus_Exit_Label"))
+;				(string-append 
+;					(CISC_comment "RS_plus starts")
+;					(RS_makeClosure body_label finish_label (lookupFvar '+ SCHEMEFvarsTable))
+;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
+;						(string-append
+;							"CMP (FPARG(1) , IMM(0));" n
+;							"JUMP_EQ(" baseCaseLabel ");" n
+;							"MOV (R2 , FPARG(1));" n 					;R2 = number of args
+;							"MOV (R3 , INDD(FPARG(2),1));" n 			;F3 = value of first arg and in the end the answer
+;							loopLabel ":" n
+;							"CMP (R2 , IMM(1));" n
+;							"JUMP_EQ(" otherCaseLabel ");" n
+;							"ADD (R3 , INDD(FPARG(1 + R2),1));" n 		;Add vals from the end of args list
+;							"DECR (R2);" n
+;							"JUMP(" loopLabel ");" n
+;							baseCaseLabel ":" n
+;							"PUSH(IMM(0));" n
+;							"CALL(MAKE_SOB_INTEGER);" n
+;							"DROP(1);" n
+;							"JUMP(" exit_label ");" n
+;							otherCaseLabel ":" n
+;							"PUSH(R3);" n
+;							"CALL(MAKE_SOB_INTEGER);" n
+;							"DROP(1);" n
+;							exit_label ":" n ))
+;					finish_label ":" n
+;					(CISC_comment "RS_plus ends")))))
+
+
+(define check_if_2_args_are_fracs 
+	(lambda (error_label) 
+		(string-append
+		"MOV (R1 , FPARG(2));" n 							;R1 = is the first number
+		"MOV (R2 , FPARG(3));" n 							;R2 = is the second number
+		"CMP (IND(R1),T_FRACTION);" n  					;check if R1 is a fraction
+		"JUMP_NE( " error_label ");" n 
+		"CMP (IND(R2),T_FRACTION);" n  					;check if R2 is a fraction
+		"JUMP_NE( " error_label ");" n 
+	)))
+
+(define get_denom_and_numer_from_fracs
+ (lambda ()
+		(string-append
+			"MOV (R3 , INDD(R1,2));" n 							;R3 = first number denominator
+			"MOV (R4 , INDD(R2,2));" n 							;R4 = second number denominator
+			"MOV (R5 , INDD(R1,1));" n 							;R5 = first number numerator
+			"MOV (R6 , INDD(R2,1));" n 							;R6 = second number numerator
+			)))
+
+
+(define RS_plus       ;;binary plus for fractions
 	(lambda ()
 		(let
 			((finish_label  "RS_plus_closure_ends")
 			(body_label  "RS_plus_body")
-			(error_label "RS_ERORR_RS_plus")
-			(baseCaseLabel "RS_plus_Base_Case_Label")
-			(loopLabel "RS_plus_Loop_Label")
-			(otherCaseLabel "RS_plus_Other_Case_Label")
-			(exit_label "RS_plus_Exit_Label"))
+			(error_label "RS_ERORR_RS_plus"))
 				(string-append 
 					(CISC_comment "RS_plus starts")
 					(RS_makeClosure body_label finish_label (lookupFvar '+ SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
 						(string-append
-							"CMP (FPARG(1) , IMM(0));" n
-							"JUMP_EQ(" baseCaseLabel ");" n
-							"MOV (R2 , FPARG(1));" n 					;R2 = number of args
-							"MOV (R3 , INDD(FPARG(2),1));" n 			;F3 = value of first arg and in the end the answer
-							loopLabel ":" n
-							"CMP (R2 , IMM(1));" n
-							"JUMP_EQ(" otherCaseLabel ");" n
-							"ADD (R3 , INDD(FPARG(1 + R2),1));" n 		;Add vals from the end of args list
-							"DECR (R2);" n
-							"JUMP(" loopLabel ");" n
-							baseCaseLabel ":" n
-							"PUSH(IMM(0));" n
-							"CALL(MAKE_SOB_INTEGER);" n
-							"DROP(1);" n
-							"JUMP(" exit_label ");" n
-							otherCaseLabel ":" n
-							"PUSH(R3);" n
-							"CALL(MAKE_SOB_INTEGER);" n
-							"DROP(1);" n
-							exit_label ":" n ))
+							(args_check_macro "2" error_label)
+							(check_if_2_args_are_fracs error_label)  
+							;; now R1 = arg1 , R2 = arg2
+							(get_denom_and_numer_from_fracs)
+							;;now R3 = denom1 , R4 = denom2 , R5 =  numer1 , R6  = numer2
+							"MUL(R5,R4);" n ;;common base calc
+							"MUL(R6,R3);" n ;;common base calc
+							"ADD(R5,R6)"    ;; now R5 is the new numerator
+							"MUL(R3,R4);" n ;; now R3 is the new denom
+							(call_malloc 3)
+							"MOV (INDD(R0,0) , T_FRACTION);" n
+							"MOV (INDD(R0,1) , R5);" n
+							"MOV (INDD(R0,2) , R3);" n))
 					finish_label ":" n
 					(CISC_comment "RS_plus ends")))))
 
+(define RS_minus    
+	(lambda ()
+		(let
+			((finish_label  "RS_minus_closure_ends")
+			(body_label  "RS_minus_body")
+			(error_label "RS_ERORR_RS_minus"))
+				(string-append 
+					(CISC_comment "RS_minus starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '- SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_minus\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							(check_if_2_args_are_fracs error_label)  
+							;; now R1 = arg1 , R2 = arg2
+							(get_denom_and_numer_from_fracs)
+							;;now R3 = denom1 , R4 = denom2 , R5 =  numer1 , R6  = numer2
+							"MUL(R5,R4);" n ;;common base calc
+							"MUL(R6,R3);" n ;;common base calc
+							"SUB(R5,R6)"    ;; now R5 is the new numerator
+							"MUL(R3,R4);" n ;; now R3 is the new denom
+							(call_malloc 3)
+							"MOV (INDD(R0,0) , T_FRACTION);" n
+							"MOV (INDD(R0,1) , R5);" n
+							"MOV (INDD(R0,2) , R3);" n))
+					finish_label ":" n
+					(CISC_comment "RS_minus ends")))))
 
-(define RS_smaller    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only fractions !!!!!!! ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define RS_mul   
+	(lambda ()
+		(let
+			((finish_label  "RS_mul_closure_ends")
+			(body_label  "RS_mul_body")
+			(error_label "RS_ERORR_RS_mul"))
+				(string-append 
+					(CISC_comment "RS_mul starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '* SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_mul\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							(check_if_2_args_are_fracs error_label)  
+							;; now R1 = arg1 , R2 = arg2
+							(get_denom_and_numer_from_fracs)
+							;;now R3 = denom1 , R4 = denom2 , R5 =  numer1 , R6  = numer2
+							"MUL(R5,R6);" n  ;; now R5 is the new numerator
+							"MUL(R3,R4);" n  ;; now R3 is the new denom 	
+							(call_malloc 3)
+							"MOV (INDD(R0,0) , T_FRACTION);" n
+							"MOV (INDD(R0,1) , R5);" n
+							"MOV (INDD(R0,2) , R3);" n))
+					finish_label ":" n
+					(CISC_comment "RS_mul ends")))))
+
+(define RS_div   
+	(lambda ()
+		(let
+			((finish_label  "RS_div_closure_ends")
+			(body_label  "RS_div_body")
+			(error_label "RS_ERORR_RS_div"))
+				(string-append 
+					(CISC_comment "RS_div starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '/ SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_div\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							(check_if_2_args_are_fracs error_label)  
+							;; now R1 = arg1 , R2 = arg2
+							(get_denom_and_numer_from_fracs)
+							;;now R3 = denom1 , R4 = denom2 , R5 =  numer1 , R6  = numer2
+							"MUL(R5,R4);" n  ;; now R5 is the new numerator
+							"MUL(R3,R6);" n  ;; now R3 is the new denom 	
+							(call_malloc 3)
+							"MOV (INDD(R0,0) , T_FRACTION);" n
+							"MOV (INDD(R0,1) , R5);" n
+							"MOV (INDD(R0,2) , R3);" n))
+					finish_label ":" n
+					(CISC_comment "RS_div ends")))))
+
+
+
+(define RS_equality_op    
+	(lambda ()
+		(let
+			((finish_label  "RS_equality_op_closure_ends")
+			(body_label  "RS_equality_op_body")
+			(error_label "RS_ERORR_RS_RS_equality_op")
+			(false_label "RS_equality_op_false_Label")
+			(exit_label "RS_equality_op_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_equality_op starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '= SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_equality_op\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							(check_if_2_args_are_fracs error_label)  
+							;; now R1 = arg1 , R2 = arg2
+							(get_denom_and_numer_from_fracs)
+							;;now R3 = denom1 , R4 = denom2 , R5 =  numer1 , R6  = numer2
+							"CMP (R3 , R4);" n				;compare denominators 					
+							"JUMP_NE(" false_label ");" n
+							"CMP (R5 , R6);" n 				;compare numerators
+							"JUMP_NE(" false_label ");" n
+							"MOV (R0 , SOB_TRUE);" n 				
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_equality_op ends")))))
+
+
+(define RS_smaller    
 	(lambda ()
 		(let
 			((finish_label  "RS_smaller_closure_ends")
@@ -2948,17 +3128,15 @@
 			(false_label "RS_smaller_false_Label")
 			(exit_label "RS_smaller_Exit_Label"))
 				(string-append 
-					(CISC_comment "RS_plus starts")
+					(CISC_comment "RS_smaller starts")
 					(RS_makeClosure body_label finish_label (lookupFvar '< SCHEMEFvarsTable))
-					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_smaller\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
-							"MOV (R1 , FPARG(2));" n 							;R1 = is the first number
-							"MOV (R2 , FPARG(3));" n 							;R2 = is the second number
-							"MOV (R3 , INDD(R1,2));" n 							;R3 = first number denominator
-							"MOV (R4 , INDD(R2,2));" n 							;R4 = second number denominator
-							"MOV (R5 , INDD(R1,1));" n 							;R5 = first number numerator
-							"MOV (R6 , INDD(R2,1));" n 							;R6 = second number numerator
+							(check_if_2_args_are_fracs error_label)  
+							;; now R1 = arg1 , R2 = arg2
+							(get_denom_and_numer_from_fracs)
+							;;now R3 = denom1 , R4 = denom2 , R5 =  numer1 , R6  = numer2
 							"CMP (R3 , R4);" n									;compare denominators 
 							"JUMP_EQ(" decide_by_numerator_label ");" n
 							"MUL (R5 , R4);" n 									;make common denomirators - that also affect numerators
@@ -2972,8 +3150,42 @@
 							"MOV (R0 , SOB_FALSE);" n
 							exit_label ":" n ))
 					finish_label ":" n
-					(CISC_comment "RS_plus ends")))))
+					(CISC_comment "RS_smaller ends")))))
 
+
+(define RS_greater    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only fractions !!!!!!! ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	(lambda ()
+		(let
+			((finish_label  "RS_greater_closure_ends")
+			(body_label  "RS_greater_body")
+			(error_label "RS_ERORR_RS_greater")
+			(decide_by_numerator_label "RS_greater_decide_by_numerator_Label")
+			(false_label "RS_greater_false_Label")
+			(exit_label "RS_greater_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_greater starts")
+					(RS_makeClosure body_label finish_label (lookupFvar '> SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_greater\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							(check_if_2_args_are_fracs error_label)  
+							;; now R1 = arg1 , R2 = arg2
+							(get_denom_and_numer_from_fracs)
+							;;now R3 = denom1 , R4 = denom2 , R5 =  numer1 , R6  = numer2
+							"CMP (R3 , R4);" n									;compare denominators 
+							"JUMP_EQ(" decide_by_numerator_label ");" n
+							"MUL (R5 , R4);" n 									;make common denomirators - that also affect numerators
+							"MUL (R6 , R3);" n 									;know we can decide by numerators								
+							decide_by_numerator_label ":" n
+							"CMP (R5 , R6);" n 									;compare numerators
+							"JUMP_LE(" false_label ");" n 						
+							"MOV (R0 , SOB_TRUE);" n 							;else return true
+							"JUMP(" exit_label ");" n
+							false_label ":" n
+							"MOV (R0 , SOB_FALSE);" n
+							exit_label ":" n ))
+					finish_label ":" n
+					(CISC_comment "RS_greater ends")))))
 
 (define RS_numberTofraction
 	(lambda ()
@@ -3030,10 +3242,10 @@
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
 		;(RS_GCD)
-		(RS_cahrToInteger) (RS_numberTofraction) ;(RS_integerToChar) 
+		(RS_cahrToInteger) (RS_numberTofraction) (RS_integerToChar) 
 		(RS_list)
 		(RS_remainder) (RS_denominator) (RS_numerator)
-		(RS_plus) (RS_smaller)
+		(RS_plus) (RS_minus) (RS_smaller) (RS_greater) (RS_mul) (RS_div) (RS_equality_op)
 		)))
 
 (define RS_LIST 
@@ -3045,10 +3257,10 @@
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
 		;'gcd
-		'char->integer 'number->fraction ;'integer->char
+		'char->integer 'number->fraction 'integer->char
 		'list
 		'remainder 'denominator 'numerator
-		'+ '<
+		'+ '- '< '> '/ '* '=
 	 ))
 
 
@@ -3056,7 +3268,6 @@
 
 ;;RUNTIME SUPPORT TODO:
 ;; < , = , > , +, / , * , - 
-;; integer->char 
 
 
 
@@ -3156,7 +3367,126 @@
 ;***********************************************************************************
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*************************************** SCHEME RUN TIME FUNCTIONS !!!!!!!!!!!!!!! ************************************** ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+										;according to MR. T need to concatenate this code after output of ass1 as input to ass2
+
+(define gen_foldl_2
+	(lambda ()
+		`(define foldl_2 
+			(lambda (func accum lst)
+  				(if (null? lst)
+      				accum
+      				(foldl_2 func (func (car lst) accum) (cdr lst))))) ))
+
+
+(define gen_map 										 
+	(lambda ()
+		`(define map
+			(lambda (proc items)
+				(if (null? items)
+					(list)
+					(cons (proc (car items))
+				  	  	  (map proc (cdr items)))))) ))
+
+(define gen_binaryAppend
+	(lambda ()
+		`(define binaryAppend
+			(lambda (list1 list2)
+				(if (null? list1)
+					list2
+					(cons (car list1)
+				  		(binaryAppend (cdr list1) list2))))) ))
+
+
+
+
+(define gen_reverseList
+	(lambda ()
+		`(define reverseList
+      		(lambda (lst revList)
+        		(if (null? lst)
+            		revList
+		            (reverseList (cdr lst) (cons (car lst) revList))))) ))
+
+
+(define gen_append
+	(lambda ()
+		`(define append
+       		(lambda args
+         		(foldl_2 binaryAppend '() (reverseList args '())))) ))
+
+(define gen_apply
+	(lambda ()
+		`(define apply
+			(lambda (func arg . args)
+				(func (cons arg args))))))
+
+;(define gen_append
+;	(lambda ()
+;		(define append_2 
+;			(lambda args
+;				(cond ((null? args) args) 																						;if (append) = '()
+;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
+;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
+;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
+					  
+
+				
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; (define cadr
+; 	(lambda (exp)
+; 		(car (cdr exp))))
+
+; (define cdar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define caar
+; 	(lambda (exp)
+; 		(car (car exp))))
+
+; (define cddr
+; 	(lambda (exp)
+; 		(cdr (cdr exp))))
+
+; (define caaar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define caadr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cadar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdaar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdadr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cddar
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+; (define cdddr
+; 	(lambda (exp)
+; 		(cdr (car exp))))
+
+(define addRSINScheme
+	(lambda (src)
+		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend)
+		 ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd) ,src)))
 
 
 
@@ -3391,8 +3721,10 @@
 			   (exitLoopNilCaseLabel (string-append "EXIT_NIL_CASE_LOOP_" counter))
 			   (finalLabel (string-append "FINAL_" counter)))
 			(string-append
+					(CISC_comment "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 				    "CMP (FPARG(1) , " (number->string lengthOfArgs) ");" n  	;If we should create a liked list from optional args
 				    "JUMP_EQ(" ifNoOptionalArgs ");" n
+				    "MOV (R8,FPARG(1)-"  (number->string lengthOfArgs) "- 1);" n  ;;ADDED BY NADAV
 					"MOV (R6 ,SOB_NIL);" n 						;create linked list for optional args
 					"MOV (R5 , R6);" n 							;R5 = iterator, R6 = pointer to head
 					"MOV (R4 , FPARG(1));" n
@@ -3400,12 +3732,15 @@
 					loopLabel ":" n
 					"CMP (R4 ," (number->string (- lengthOfArgs 1)) ");" n 	;add values to list not include the non optional args
 					"JUMP_EQ(" exitLoopLabel ");" n
-					"PUSH(2);" n
-					"CALL(MALLOC);" n
-					"DROP(1);" n
-					"MOV (INDD(R0,1) , R5);" n 					;R0 holds the new block that will now point to the old block 
+					;;nadav's changes: 2.3.2017 18:05 
+					(call_malloc 3)
+					;(call_malloc 2)
+					"MOV (INDD(R0,0) , T_PAIR);" n 
+					"MOV (INDD(R0,2) , R5);" n
+					;"MOV (INDD(R0,1) , R5);" n 					;R0 holds the new block that will now point to the old block 
 					"MOV (R5 , R0);" n 							;R5 = pointer to the new block
-					"MOV (INDD(R5,0) , FPARG(2 + R4));" n 		;update value in new block
+					"MOV (INDD(R5,1) , FPARG(2 + R4));" n 
+					;"MOV (INDD(R5,0) , FPARG(2 + R4));" n 		;update value in new block
 					"MOV (R6, R5);" n 							;R6 will point to the linked list head
 					"DECR(R4);" n
 					"JUMP(" loopLabel ");"n
@@ -3423,9 +3758,11 @@
 					"JUMP(" loopOverStackLabel ");"n
 					exitLoopOverStackLabel ":" n
 					"MOV (FPARG(1 + R4), FPARG(-2 + R3));" n
+					;"INFO" n 
 					"MOV (SP , FP);" n 												;repair stack pointer according to Nadav "The Tool" Zilberstein formula
 					"SUB (SP , R4);" n
 					"SUB (SP , IMM(3));" n
+					"SUB (FP,R8);" n  ;;ADDED BY NADAV , MR.T's suggestion
 					"JUMP(" finalLabel ");" n
 					ifNoOptionalArgs ":" n
 					"MOV (R5 , SOB_NIL);" n 										;R5 = holds the data we want to add to the stack
@@ -3445,6 +3782,7 @@
 					"SUB(FP,R4);" n
 					"MOV (SP , FP);" n
 					finalLabel ":" n
+					(CISC_comment "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 				)				
 			)
 		))
@@ -3508,7 +3846,7 @@
 			"MOV (INDD(R2,0) , R0);"n
 			"MOV (R4 , IMM(0));" n
 			"MOV (R5 , IMM(2));" n
-			extendEnvLoopLabel":" n`
+			extendEnvLoopLabel":" n
 			"CMP(R4 , R3);" n
 			"JUMP_EQ("exitExtendLabel");" n
 			"MOV (INDD(INDD(R2,0), R4) , FPARG(R5));" n
@@ -3662,7 +4000,7 @@
 							(string-append 
 								(CISC_comment "lambda-simple code starts here") 
 								(code_gen_lambda (+ 1 major) code_gen)
-								(createLambdaBodyInCISC  params body code_gen major 0 0)
+								(createLambdaBodyInCISC  params body code_gen (+ 1 major) 0 0)
 								(CISC_comment "lambda-simple code ends here"))))			
 		
 			(pattern-rule 
@@ -3671,7 +4009,7 @@
 							(string-append 
 								(CISC_comment "lambda-opt code starts here") 
 								(code_gen_lambda (+ 1 major) code_gen)
-								(createLambdaBodyInCISC  args body code_gen major 0 1)
+								(createLambdaBodyInCISC  args body code_gen (+ 1 major) 0 1)
 								(CISC_comment "lambda-opt code ends here"))))
 			
 			(pattern-rule 
@@ -3680,7 +4018,7 @@
 							(string-append 
 								(CISC_comment "lambda-var code starts here") 
 								(code_gen_lambda (+ 1 major) code_gen)
-								(createLambdaBodyInCISC  '() body code_gen major 1 0)
+								(createLambdaBodyInCISC  '() body code_gen (+ 1 major) 1 0)
 								(CISC_comment "lambda-var code ends here"))))
 
 
@@ -3755,125 +4093,7 @@ return 0;
 ;	(lambda (str)
 ;		(cadar (test-string <Sexpr> str))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-										;according to MR. T need to concatenate this code after output of ass1 as input to ass2
-
-(define gen_foldl_2
-	(lambda ()
-		`(define foldl_2 
-			(lambda (func accum lst)
-  				(if (null? lst)
-      				accum
-      				(foldl_2 func (func (car lst) accum) (cdr lst))))) ))
-
-
-(define gen_map 										 
-	(lambda ()
-		`(define map
-			(lambda (proc items)
-				(if (null? items)
-					(list)
-					(cons (proc (car items))
-				  	  	  (map proc (cdr items)))))) ))
-
-(define gen_binaryAppend
-	(lambda ()
-		`(define binaryAppend
-			(lambda (list1 list2)
-				(if (null? list1)
-					list2
-					(cons (car list1)
-				  		(binaryAppend (cdr list1) list2))))) ))
-
-
-
-
-(define gen_reverseList
-	(lambda ()
-		`(define reverseList
-      		(lambda (lst revList)
-        		(if (null? lst)
-            		revList
-		            (reverseList (cdr lst) (cons (car lst) revList))))) ))
-
-
-(define gen_append
-	(lambda ()
-		`(define append
-       		(lambda args
-         		(foldl_2 binaryAppend '() (reverseList args '())))) ))
-
-(define gen_apply
-	(lambda ()
-		`(define apply
-			(lambda (func arg . args)
-				(func (cons arg args))))))
-
-;(define gen_append
-;	(lambda ()
-;		(define append_2 
-;			(lambda args
-;				(cond ((null? args) args) 																						;if (append) = '()
-;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
-;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
-;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
-					  
-
-				
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; (define cadr
-; 	(lambda (exp)
-; 		(car (cdr exp))))
-
-; (define cdar
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-; (define caar
-; 	(lambda (exp)
-; 		(car (car exp))))
-
-; (define cddr
-; 	(lambda (exp)
-; 		(cdr (cdr exp))))
-
-; (define caaar
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-; (define caadr
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-; (define cadar
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-; (define cdaar
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-; (define cdadr
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-; (define cddar
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-; (define cdddr
-; 	(lambda (exp)
-; 		(cdr (car exp))))
-
-(define addRSINScheme
-	(lambda (src)
-		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend) ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd) ,src) ))
 
 
 
@@ -3908,10 +4128,27 @@ return 0;
 ;;;;;;;;;;;TESTS: 
 ;(define test
 ;	(lambda ()
-;		(a '((lambda x 
-;				((lambda (a b . y) 
-;					((lambda k 999))) 12 13 14)) 7)
-;	)))
+;		(a '((lambda (a . x) (car (cdr (cdr x)))) 1 2 3 4 5 6 7))))
+(define test
+	(lambda ()
+		(a '((lambda x 
+				((lambda (a b . y) 
+					((lambda k 
+						((lambda (g . h) 
+
+							((lambda (u) 
+
+								((lambda (n . m) y) 200 300 500 600 700 800 900)
+
+								) 100)
+
+							) 80)
+
+						))) 12 13 14 15)) 7 8 9))))
+
+
+
+
 ;					((lambda k 
 ;
 ;						((lambda x  
