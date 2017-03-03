@@ -3155,6 +3155,10 @@
 					finish_label ":" n
 					(CISC_comment "RS_numberTofraction ends")))))
 
+;;;arithmetics end here
+
+
+
 (define RS_apply
 	(lambda ()
 		(let
@@ -3174,7 +3178,6 @@
 							"MOV(R9,0);" n ;; INIT COUNTER OF LIST-LENGTH
 							"MOV(R7,FPARG(3)); " n ;; R7  = list of args
 							"CMP(R7, SOB_NIL);" n ;;check if we are talking about 'empty list'
-							
 							"JUMP_EQ (RS_APPLY_EMPTY_LST);" n 
 							"CMP (IND(R7),T_PAIR);"  n ;;check if arg1 = proc 
 							"JUMP_NE(" error_label ");" n 	
@@ -3187,9 +3190,7 @@
 							;;FINISH INIT,START THE LOOP. 
 							;;R8 = previous pointer. R7 = current pointer to original list. R6 = proc
 							"RS_APPLY_REVERSE_LOOP:" n
-	
 							"MOV(R8,R0);" n ;;MOVING POINTERS
-
 							"CMP(INDD(R7,2),SOB_NIL);"  n  ;;MOVING POINTERS
 							"JUMP_EQ(RS_APPLY_FINISH_REVERSE);" n 
 							"MOV(R7,INDD(R7,2));" n ;;MOVING POINTERS
@@ -3198,20 +3199,16 @@
 							"MOV(INDD(R0,1),R8);" n
 							"ADD(R9,1);" n ;;ADD 1 TO LENGTH COUNTER
 							"JUMP(RS_APPLY_REVERSE_LOOP);" n 
-
 							"RS_APPLY_EMPTY_LST:" n 
 							"MOV(R0,R7);" n 	
 							"RS_APPLY_FINISH_REVERSE:"	n 
-							
 							;;;;;;;;;;; REVERSE LIST ENDS ;;;;;;;;;;;;;; 
 							;;;NOW R0 = THE REVERSE LIST. R9 = LENGTH OF LIST R6 = PROC 
 							;;;PUSHING ARGS:
 							"MOV(R10,R9);" n ;;;R10 IS A TEMP REG THAT HOLDS THE LENGTH. I DONT WANT TO 'RUN-OVER' R9
 							"CMP(R10,0);" n 
 							"JUMP_EQ(RS_APPLY_FINISH_PUSHING_ARGS);" n 
-
 							"RS_APPLY_PUSH_ARGS_LOOP:" n 
-
 							"CMP(R10,0);" n 
 							"JUMP_EQ(RS_APPLY_FINISH_PUSHING_ARGS);" n 
 							"PUSH(INDD(R0,0));" n 
@@ -3220,7 +3217,6 @@
 							"JUMP(RS_APPLY_PUSH_ARGS_LOOP);" n 
 							"RS_APPLY_FINISH_PUSHING_ARGS:" n 
 							"PUSH(R9);" n ;;;PUSH THE NUMBER OF ARGUMENTS THAT HAVE BEEN PUSHED
-
 							"MOV(R0,R6);" n 
 							;;;FINISH PUSH ARGS . NOW R9 = LENGTH. R0 = PROC 
 							"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
@@ -3234,7 +3230,41 @@
 					finish_label ":" n
 					(CISC_comment "RS_apply ends")))))
 
-					
+(define RS_append_bin   
+	(lambda ()
+		(let
+			((finish_label  "RS_append_bin_closure_ends")
+			(body_label  "RS_append_bin_body")
+			(error_label "RS_ERORR_RS_append_bin "))
+				(string-append 
+					(CISC_comment "RS_append_bin  starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'append_bin SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_append_bin \",R0); \n INFO \n"
+						(string-append
+							(args_check_macro "2" error_label)
+							"MOV(R6,FPARG(2));"  n  ;;R6 = FIRST LIST (THE ONE THAT GOT REVERESED)
+							"MOV(R7,FPARG(3));"  n  ;;R7 = SECOND LIST
+							"CMP (IND(R7) , T_PAIR);" n
+							"JUMP_NE(" error_label ");" n
+							"CMP(R6,SOB_NIL);" n 
+							"JUMP_EQ(RS_APPEND_FINISH_ADDING);" n 
+							"CMP (IND(R6) , T_PAIR);" n
+							"JUMP_NE(" error_label ");" n	
+							"RS_APPEND_ADDING_LOOP:" n 	
+							(call_malloc 3)
+							"MOV(INDD(R0,0) , T_PAIR);" n 
+							"MOV(INDD(R0,1) , (INDD(R6 ,1)));" n 
+							"MOV(INDD(R0,2) , R7);" n 
+							"MOV(R7,R0);" n 
+							"CMP(INDD(R6,2),SOB_NIL);" n 
+							"JUMP_EQ(RS_APPEND_FINISH_ADDING);" n
+							"MOV(R6, INDD(R6,2));" n 
+							"JUMP(RS_APPEND_ADDING_LOOP);" n 
+							"RS_APPEND_FINISH_ADDING:" n 
+							"MOV(R0,R7);" n 
+							))
+					finish_label ":" n
+					(CISC_comment "RS_append_bin  ends")))))					
 
 (define add_RS_to_FvarTable 
 	(lambda () 
@@ -3245,7 +3275,7 @@
 		(RS_symbolToString) (RS_stringToSymbol)
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
-		(RS_apply)
+		(RS_apply) (RS_append_bin)
 		(RS_cahrToInteger) (RS_numberTofraction) (RS_integerToChar) 
 		(RS_list)
 		(RS_remainder) (RS_denominator) (RS_numerator)
@@ -3260,7 +3290,7 @@
 		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
-		'apply
+		'apply 'append_bin
 		'char->integer 'number->fraction 'integer->char
 		'list
 		'remainder 'denominator 'numerator
@@ -3378,7 +3408,7 @@
 			(lambda (func accum lst)
   				(if (null? lst)
       				accum
-      				(foldl_2 func (func (car lst) accum) (cdr lst))))) ))
+      				(foldl_2 func (func accum (car lst)) (cdr lst))))) ))
 
 
 (define gen_map 										 
@@ -3388,18 +3418,7 @@
 				(if (null? items)
 					(list)
 					(cons (proc (car items))
-				  	  	  (map proc (cdr items)))))) ))
-
-(define gen_binaryAppend
-	(lambda ()
-		`(define binaryAppend
-			(lambda (list1 list2)
-				(if (null? list1)
-					list2
-					(cons (car list1)
-				  		(binaryAppend (cdr list1) list2))))) ))
-
-
+				  	  	  (map proc (cdr items))))))))
 
 
 (define gen_reverseList
@@ -3411,12 +3430,34 @@
 		            (reverseList (cdr lst) (cons (car lst) revList))))) ))
 
 
+;(define gen_append
+	;(lambda ()
+		;`(define append
+       ;		(lambda args
+      ;   		(foldl_2 append_bin '() ))) ))
+
+
+
 (define gen_append
 	(lambda ()
 		`(define append
-       		(lambda args
-         		(foldl_2 binaryAppend '() (reverseList args '())))) ))
+			(lambda args
+					(cond ((null? args) (list))
+						  ((null? (cdr args)) (car args))
+						  (bin_append (reverseList (car args)) (append (cdr args))))))))
 
+
+
+
+;(define gen_append
+;	(lambda ()
+;		(define append_2 
+;			(lambda args
+;				(cond ((null? args) args) 																						;if (append) = '()
+;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
+;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
+;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
+	
 
 
 (define gen_eq
@@ -3448,15 +3489,6 @@
     )))
 
 
-;(define gen_append
-;	(lambda ()
-;		(define append_2 
-;			(lambda args
-;				(cond ((null? args) args) 																						;if (append) = '()
-;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
-;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
-;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
-	
 
 	;;;;arithmetics:
 
