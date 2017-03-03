@@ -2479,7 +2479,6 @@
 					finish_label ":" n
 					(CISC_comment "RS_vector ends")))))
 
-
 (define RS_string_length
 	(lambda () 
 		(let ((finish_label "RS_string_length_closure_ends")
@@ -2640,45 +2639,6 @@
 							end_calc ":"))
 					finish_label ":" n 
 					(CISC_comment "RS_stringToSymbol ends")))))
-
-
-;(define RS_GCD 
-;	(lambda () 
-;		(let ((finish_label "RS_GCD_ends")
-;			(body_label "RS_GCD_body")
-;			(error_label  "RS_ERORR_RS_GCD_set"))
-;				(string-append 
-;					(CISC_comment "RS_GCD starts")
-;;					(RS_makeClosure body_label finish_label (lookupFvar 'gcd SCHEMEFvarsTable))
-;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_GCD\",R0);"
-;						(string-append
-;							"CMP (FPARG(1) , IMM(2));" n
-;							"JUMP_NE(" error_label ");" n
-;							"MOV (R1 , FPARG(2));" n
-;							"CMP (INDD(R1 ,0) , IMM(T_INTEGER));" n
-;							"JUMP_NE(" error_label ");" n
-;							"MOV (R2 , FPARG(3));" n
-;							"CMP (INDD(R2 ,0) , IMM(T_INTEGER));" n
-;							"JUMP_NE(" error_label ");" n
-;							"CMP (INDD(R2 ,1) , IMM(0));" n
-;							"JUMP_EQ(" error_label ");" n
-;							"MOV (R1 , INDD(R1 ,1));" n
-;							"MOV (R2 , INDD(R2 ,1));" n
-;							"GCD_LOOP:" n
-;							"MOV (R3 , R1);" n
-;							"REM (R3 , R2);" n
-;							"CMP (R3 , IMM(0));" n
-;							"JUMP_EQ(GCD_EXIT);" n
-;							"MOV (R1 , R2);" n
-;							"MOV (R2, R3);" n
-;							"JUMP(GCD_LOOP);" n
-;							"GCD_EXIT:" n
-;							"PUSH(R2);" n
-;							"CALL(MAKE_SOB_INTEGER);" n
-;							"DROP(1);" n
-;							))
-;					finish_label ":" n
-;					(CISC_comment "RS_GCD ends")))))
 
 
 
@@ -3195,7 +3155,86 @@
 					finish_label ":" n
 					(CISC_comment "RS_numberTofraction ends")))))
 
+(define RS_apply
+	(lambda ()
+		(let
+			((finish_label  "RS_apply_closure_ends")
+			(body_label  "RS_apply_body")
+			(error_label "RS_ERORR_RS_apply")
+			(exit_label "RS_apply_Exit_Label"))
+				(string-append 
+					(CISC_comment "RS_apply starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'apply SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_apply\",R0);"
+						(string-append
+							(args_check_macro "2" error_label)
+							"MOV(R6,FPARG(2)); " n  ;;;R6 = the proc 
+							"CMP (IND(R6),T_CLOSURE);"  n ;;check if arg1 = proc 
+							"JUMP_NE(" error_label ");" n 
+							"MOV(R9,0);" n ;; INIT COUNTER OF LIST-LENGTH
+							"MOV(R7,FPARG(3)); " n ;; R7  = list of args
+							"CMP(R7, SOB_NIL);" n ;;check if we are talking about 'empty list'
+							
+							"JUMP_EQ (RS_APPLY_EMPTY_LST);" n 
+							"CMP (IND(R7),T_PAIR);"  n ;;check if arg1 = proc 
+							"JUMP_NE(" error_label ");" n 	
+							;;;;;;;;;;;REVERSE LIST: ;;;;;;;;;;;;;;
+							;;init_reverse_looP:
+							(call_malloc 2)
+							"MOV(INDD(R0,0),INDD(R7,1));" n 
+							"MOV(INDD(R0,1),SOB_NIL);" n
+							"ADD(R9,1);" n ;;ADD 1 TO LENGTH COUNTER
+							;;FINISH INIT,START THE LOOP. 
+							;;R8 = previous pointer. R7 = current pointer to original list. R6 = proc
+							"RS_APPLY_REVERSE_LOOP:" n
+	
+							"MOV(R8,R0);" n ;;MOVING POINTERS
 
+							"CMP(INDD(R7,2),SOB_NIL);"  n  ;;MOVING POINTERS
+							"JUMP_EQ(RS_APPLY_FINISH_REVERSE);" n 
+							"MOV(R7,INDD(R7,2));" n ;;MOVING POINTERS
+							(call_malloc 2) ;;;CREATING NEW NODE
+							"MOV(INDD(R0,0),INDD(R7,1));" n 
+							"MOV(INDD(R0,1),R8);" n
+							"ADD(R9,1);" n ;;ADD 1 TO LENGTH COUNTER
+							"JUMP(RS_APPLY_REVERSE_LOOP);" n 
+
+							"RS_APPLY_EMPTY_LST:" n 
+							"MOV(R0,R7);" n 	
+							"RS_APPLY_FINISH_REVERSE:"	n 
+							
+							;;;;;;;;;;; REVERSE LIST ENDS ;;;;;;;;;;;;;; 
+							;;;NOW R0 = THE REVERSE LIST. R9 = LENGTH OF LIST R6 = PROC 
+							;;;PUSHING ARGS:
+							"MOV(R10,R9);" n ;;;R10 IS A TEMP REG THAT HOLDS THE LENGTH. I DONT WANT TO 'RUN-OVER' R9
+							"CMP(R10,0);" n 
+							"JUMP_EQ(RS_APPLY_FINISH_PUSHING_ARGS);" n 
+
+							"RS_APPLY_PUSH_ARGS_LOOP:" n 
+
+							"CMP(R10,0);" n 
+							"JUMP_EQ(RS_APPLY_FINISH_PUSHING_ARGS);" n 
+							"PUSH(INDD(R0,0));" n 
+							"MOV(R0,INDD(R0,1));" n
+							"SUB(R10,1);" n  
+							"JUMP(RS_APPLY_PUSH_ARGS_LOOP);" n 
+							"RS_APPLY_FINISH_PUSHING_ARGS:" n 
+							"PUSH(R9);" n ;;;PUSH THE NUMBER OF ARGUMENTS THAT HAVE BEEN PUSHED
+
+							"MOV(R0,R6);" n 
+							;;;FINISH PUSH ARGS . NOW R9 = LENGTH. R0 = PROC 
+							"MOV (R7,FPARG(IMM(-1)));" n ;;;save 'ret-address' of old applic
+							"MOV (R8, FPARG(IMM(-2)));" n ;;;save old fp
+							"PUSH (INDD (R0,1));" n  ;;push env
+							"MOV (R9 , FPARG(IMM(1)));" n ;;get the previous applic param number
+							"ADD (R9 , IMM(1));" n  ;;add one for the last cell of the previous applic
+							(run_over_frame) ;;;;R0 holds pointer to the closure 
+							"JUMPA (INDD(R0,2)); " n
+				))
+					finish_label ":" n
+					(CISC_comment "RS_apply ends")))))
+
+					
 
 (define add_RS_to_FvarTable 
 	(lambda () 
@@ -3206,7 +3245,7 @@
 		(RS_symbolToString) (RS_stringToSymbol)
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
-		;(RS_GCD)
+		(RS_apply)
 		(RS_cahrToInteger) (RS_numberTofraction) (RS_integerToChar) 
 		(RS_list)
 		(RS_remainder) (RS_denominator) (RS_numerator)
@@ -3221,7 +3260,7 @@
 		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 
 		'string-length 'string-ref 'make-string 'string-set!
-		;'gcd
+		'apply
 		'char->integer 'number->fraction 'integer->char
 		'list
 		'remainder 'denominator 'numerator
@@ -3378,11 +3417,7 @@
        		(lambda args
          		(foldl_2 binaryAppend '() (reverseList args '())))) ))
 
-(define gen_apply
-	(lambda ()
-		`(define apply
-			(lambda (func arg . args)
-				(func (cons arg args))))))
+
 
 (define gen_eq
 	(lambda()
@@ -3589,7 +3624,7 @@
 (define addRSINScheme
 	(lambda (src)
 		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend)
-		 ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd)
+		 ,(gen_append)  ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd)
 		  ,(gen_gcd_arthimetics_helper_func) ,(gen_plus) ,(gen_minus) ,(gen_mul) ,(gen_div) ,(gen_smaller) ,(gen_greater) ,(gen_eq_Op)
 
 		 ,src)))
@@ -3917,7 +3952,7 @@
 					"RETURN;"  n
 					errorLabel":" n
 					"OUT(IMM(2) , 'c' );" n
-					"SHOW(\"Wrong number of args!!!\" , R0);" n
+					"SHOW(\"Wrong number of args!!!\" , FPARG(1));" n
 					"HALT;"n
 					closExitLabel ":" n
 				))
@@ -4198,8 +4233,16 @@ return 0;
 ;	(lambda (str)
 ;		(cadar (test-string <Sexpr> str))))
 
-
-
+;;ass1 -run-func .. input = (string->list src)
+;(define charlist->sexprs
+ ; (lambda (chars)
+  ;  (<Sexpr> chars
+	;     (lambda (m r)
+	 ;      (if (null? r)
+	;	   `(,m)
+	;	   (cons m (charlist->sexprs r))))
+	 ;    (lambda ()
+	  ;     'fuck))))
 
 
 (define runAss3 (lambda (exp) 
