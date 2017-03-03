@@ -2283,6 +2283,9 @@
 (define RS_null? (lambda () (RS_predicate "RS_LABEL_null_body" "RS_LABEL_null_finish" 
 	"RS_ERORR_null" "RS_null_TRUE_COND" 'null? "T_NIL")))
 
+(define RS_void? (lambda () (RS_predicate "RS_LABEL_void_body" "RS_LABEL_void_finish" 
+	"RS_ERORR_void" "RS_void_TRUE_COND" 'void? "T_VOID")))
+
 (define gen_rational
 	(lambda ()
 		`(define rational? 
@@ -2677,14 +2680,7 @@
 ;					finish_label ":" n
 ;					(CISC_comment "RS_GCD ends")))))
 
-(define gen_gcd
-  (lambda ()
-    `(define gcd
-       (lambda (a b)
-         (cond [(eq? b 0) a]
-               [else (gcd b (remainder a b))])
-         ))
-    ))
+
 
 
 (define RS_cahrToInteger 
@@ -2900,64 +2896,43 @@
 					finish_label ":" n
 					(CISC_comment "RS_compare_address ends")))))
 
-(define gen_eq
-	(lambda()
-		'(define eq? 
-			(lambda (exp1 exp2)
-				(if (or (and (integer? exp1) (integer? exp2)) 
-						(and (fraction? exp1) (fraction? exp2))
-						(and (char? exp1) (char? exp2))
-						(and (symbol? exp1) (symbol? exp2)))
-					(compare_vals exp1 exp2)
-					(if (or (and (null? exp1) (null? exp2))
-							(and (boolean? exp1) (boolean? exp2))
-							(and (string? exp1) (string? exp2))
-							(and (vector? exp1) (vector? exp2))
-							(and (pair? exp1) (pair? exp2)))
-						(compare_address exp1 exp2)
-						#f )
-				)))))
+
 					
 ;;;;;;;;;;;;;;;;;;;;;;;;;;arithmetic procedures;;;;;;;;;;;;;;;;
 
-;(define RS_plus      
-;	(lambda ()
-;		(let
-;			((finish_label  "RS_plus_closure_ends")
-;			(body_label  "RS_plus_body")
-;			(error_label "RS_ERORR_RS_plus")
-;			(baseCaseLabel "RS_plus_Base_Case_Label")
-;			(loopLabel "RS_plus_Loop_Label")
-;			(otherCaseLabel "RS_plus_Other_Case_Label")
-;			(exit_label "RS_plus_Exit_Label"))
-;				(string-append 
-;					(CISC_comment "RS_plus starts")
-;					(RS_makeClosure body_label finish_label (lookupFvar '+ SCHEMEFvarsTable))
-;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
-;						(string-append
-;							"CMP (FPARG(1) , IMM(0));" n
-;							"JUMP_EQ(" baseCaseLabel ");" n
-;							"MOV (R2 , FPARG(1));" n 					;R2 = number of args
-;							"MOV (R3 , INDD(FPARG(2),1));" n 			;F3 = value of first arg and in the end the answer
-;							loopLabel ":" n
-;							"CMP (R2 , IMM(1));" n
-;							"JUMP_EQ(" otherCaseLabel ");" n
-;							"ADD (R3 , INDD(FPARG(1 + R2),1));" n 		;Add vals from the end of args list
-;							"DECR (R2);" n
-;							"JUMP(" loopLabel ");" n
-;							baseCaseLabel ":" n
-;							"PUSH(IMM(0));" n
-;							"CALL(MAKE_SOB_INTEGER);" n
-;							"DROP(1);" n
-;							"JUMP(" exit_label ");" n
-;							otherCaseLabel ":" n
-;							"PUSH(R3);" n
-;							"CALL(MAKE_SOB_INTEGER);" n
-;							"DROP(1);" n
-;							exit_label ":" n ))
-;					finish_label ":" n
-;					(CISC_comment "RS_plus ends")))))
-
+(define RS_create_frac_from_ints_and_gcd ;;;;;input: 2 integers and their GCD number. output : a fraction of int1/gcd / int2/gcd 
+										;;;if denom/gcd == 1 --> make_Sob_intger , else -> make fraction.
+	(lambda ()							;; INPUT = NUMER, DENOMER , GCD
+		(let
+			((finish_label  "RS_create_frac_from_ints_closure_ends")
+			(body_label  "RS_create_frac_from_ints_body")
+			(error_label "RS_ERORR_RS_create_frac_from_ints"))
+				(string-append 
+					(CISC_comment "RS_create_frac_from_ints starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'create_frac SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_create_frac_from_ints\",R0);"
+						(string-append
+							(args_check_macro "3" error_label)
+								"MOV (R6 , INDD ( FPARG(2) , 1 ));" n ;;get the number from sob_integer
+								"MOV (R7 , INDD ( FPARG(3) , 1 ));" n ;;get the number from sob_integer
+								"MOV (R8 , INDD ( FPARG(4) , 1 ));" n ;;get the number from sob_integer
+								"DIV (R6 , R8);" n 
+								"DIV (R7 , R8);" n 
+								"CMP (R7 ,1);" n 
+								"JUMP_EQ (RS_CREATE_FRAC_INTEGER_COND);"  n 
+								(call_malloc 3)
+								"MOV (INDD(R0,0),T_FRACTION)"  n
+								"MOV (INDD(R0,1),R6)"  n
+								"MOV (INDD(R0,2),R7)"  n
+								"JUMP(RS_MAKE_FRAC_END);" n 
+								"RS_CREATE_FRAC_INTEGER_COND:" n 
+								(call_malloc 2)
+								"MOV (INDD(R0,0),T_INTEGER)"  n
+								"MOV (INDD(R0,1),R6)"  n
+								"RS_MAKE_FRAC_END:" n 
+								))
+					finish_label ":" n
+					(CISC_comment "RS_create_frac_from_ints")))))
 
 (define check_if_2_args_are_fracs 
 	(lambda (error_label) 
@@ -2980,7 +2955,7 @@
 			)))
 
 
-(define RS_plus       ;;binary plus for fractions
+(define RS_plus_bin      
 	(lambda ()
 		(let
 			((finish_label  "RS_plus_closure_ends")
@@ -2988,7 +2963,7 @@
 			(error_label "RS_ERORR_RS_plus"))
 				(string-append 
 					(CISC_comment "RS_plus starts")
-					(RS_makeClosure body_label finish_label (lookupFvar '+ SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'plus_bin SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_plus\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
@@ -3007,7 +2982,7 @@
 					finish_label ":" n
 					(CISC_comment "RS_plus ends")))))
 
-(define RS_minus    
+(define RS_minus_bin    
 	(lambda ()
 		(let
 			((finish_label  "RS_minus_closure_ends")
@@ -3015,7 +2990,7 @@
 			(error_label "RS_ERORR_RS_minus"))
 				(string-append 
 					(CISC_comment "RS_minus starts")
-					(RS_makeClosure body_label finish_label (lookupFvar '- SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'minus_bin SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_minus\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
@@ -3035,7 +3010,7 @@
 					(CISC_comment "RS_minus ends")))))
 
 
-(define RS_mul   
+(define RS_mul_bin   
 	(lambda ()
 		(let
 			((finish_label  "RS_mul_closure_ends")
@@ -3043,7 +3018,7 @@
 			(error_label "RS_ERORR_RS_mul"))
 				(string-append 
 					(CISC_comment "RS_mul starts")
-					(RS_makeClosure body_label finish_label (lookupFvar '* SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'mul_bin SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_mul\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
@@ -3060,7 +3035,7 @@
 					finish_label ":" n
 					(CISC_comment "RS_mul ends")))))
 
-(define RS_div   
+(define RS_div_bin   
 	(lambda ()
 		(let
 			((finish_label  "RS_div_closure_ends")
@@ -3068,7 +3043,7 @@
 			(error_label "RS_ERORR_RS_div"))
 				(string-append 
 					(CISC_comment "RS_div starts")
-					(RS_makeClosure body_label finish_label (lookupFvar '/ SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'div_bin SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_div\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
@@ -3087,7 +3062,7 @@
 
 
 
-(define RS_equality_op    
+(define RS_equality_op_bin    
 	(lambda ()
 		(let
 			((finish_label  "RS_equality_op_closure_ends")
@@ -3097,7 +3072,7 @@
 			(exit_label "RS_equality_op_Exit_Label"))
 				(string-append 
 					(CISC_comment "RS_equality_op starts")
-					(RS_makeClosure body_label finish_label (lookupFvar '= SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'eq_bin SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_equality_op\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
@@ -3118,7 +3093,7 @@
 					(CISC_comment "RS_equality_op ends")))))
 
 
-(define RS_smaller    
+(define RS_smaller_bin   
 	(lambda ()
 		(let
 			((finish_label  "RS_smaller_closure_ends")
@@ -3129,7 +3104,7 @@
 			(exit_label "RS_smaller_Exit_Label"))
 				(string-append 
 					(CISC_comment "RS_smaller starts")
-					(RS_makeClosure body_label finish_label (lookupFvar '< SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'smaller_bin SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_smaller\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
@@ -3153,7 +3128,7 @@
 					(CISC_comment "RS_smaller ends")))))
 
 
-(define RS_greater    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only fractions !!!!!!! ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define RS_greater_bin    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; For now only fractions !!!!!!! ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	(lambda ()
 		(let
 			((finish_label  "RS_greater_closure_ends")
@@ -3164,7 +3139,7 @@
 			(exit_label "RS_greater_Exit_Label"))
 				(string-append 
 					(CISC_comment "RS_greater starts")
-					(RS_makeClosure body_label finish_label (lookupFvar '> SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'greater_bin SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_greater\",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
@@ -3221,22 +3196,12 @@
 					(CISC_comment "RS_numberTofraction ends")))))
 
 
-;(define gen_checkNumbers
-;  (lambda ()
-;    `(define checkNumbers
-;       (lambda (a b)
-;         (cond [(and (integer? a) (fraction? b)) (op (number->fraction a) b)]
-;         	   [(and (fraction? a) (integer? b)) (op  a (number->fraction b))]
-;         	   [(and (fraction? a) (fraction? b)) (op a b)]
-;               [else (op  (number->fraction a) (number->fraction b))])
-;         ))
-;    ))
 
 (define add_RS_to_FvarTable 
 	(lambda () 
 		(string-append 
 		(RS_car) (RS_cdr) (RS_cons) (RS_set_car) (RS_set_cdr) 
-		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?) (RS_fraction?)
+		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?) (RS_void?) (RS_fraction?)
 		(RS_zero?) (RS_not) (RS_compare_address) (RS_compare_vals)
 		(RS_symbolToString) (RS_stringToSymbol)
 		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
@@ -3245,13 +3210,13 @@
 		(RS_cahrToInteger) (RS_numberTofraction) (RS_integerToChar) 
 		(RS_list)
 		(RS_remainder) (RS_denominator) (RS_numerator)
-		(RS_plus) (RS_minus) (RS_smaller) (RS_greater) (RS_mul) (RS_div) (RS_equality_op)
+		(RS_plus_bin) (RS_minus_bin) (RS_smaller_bin) (RS_greater_bin) (RS_mul_bin) (RS_div_bin) (RS_equality_op_bin) (RS_create_frac_from_ints_and_gcd)
 		)))
 
 (define RS_LIST 
 	(list 
 		'car 'cdr 'cons 'set-car! 'set-cdr! 
-		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 'fraction?
+		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 'void? 'fraction?
 		'zero? 'not 'compare_address 'compare_vals
 		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 
@@ -3260,14 +3225,9 @@
 		'char->integer 'number->fraction 'integer->char
 		'list
 		'remainder 'denominator 'numerator
-		'+ '- '< '> '/ '* '=
+		'plus_bin 'minus_bin 'smaller_bin 'greater_bin 'div_bin 'mul_bin 'eq_bin 'create_frac
 	 ))
 
-
-
-
-;;RUNTIME SUPPORT TODO:
-;; < , = , > , +, / , * , - 
 
 
 
@@ -3424,6 +3384,35 @@
 			(lambda (func arg . args)
 				(func (cons arg args))))))
 
+(define gen_eq
+	(lambda()
+		'(define eq? 
+			(lambda (exp1 exp2)
+				(if (or (and (integer? exp1) (integer? exp2)) 
+						(and (fraction? exp1) (fraction? exp2))
+						(and (char? exp1) (char? exp2))
+						(and (symbol? exp1) (symbol? exp2)))
+					(compare_vals exp1 exp2)
+					(if (or (and (null? exp1) (null? exp2))
+							(and (void? exp1) (void? exp2))
+							(and (boolean? exp1) (boolean? exp2))
+							(and (string? exp1) (string? exp2))
+							(and (vector? exp1) (vector? exp2))
+							(and (pair? exp1) (pair? exp2)))
+						(compare_address exp1 exp2)
+						#f )
+				)))))
+
+(define gen_gcd
+  (lambda ()
+    `(define gcd
+       (lambda (a b)
+         (cond ((eq? b 0) a)
+               (else (gcd b (remainder a b)))
+         ))
+    )))
+
+
 ;(define gen_append
 ;	(lambda ()
 ;		(define append_2 
@@ -3432,9 +3421,123 @@
 ;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
 ;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
 ;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
-					  
+	
 
+	;;;;arithmetics:
+
+(define gen_gcd_arthimetics_helper_func ;;input = fraction. output = number after gcd op on numer&denom
+	(lambda ()
+		`(define gcd_arthimetics_helper
+				(lambda (frac)
+					(letrec 
+							((denom  (denominator frac))
+							(numer (numerator frac))
+							(gcd_number (gcd numer denom)))
+						(if (eq_bin (number->fraction denom) (number->fraction 1)) 
+							numer 
+							(create_frac numer denom gcd_number)))))))
+
+
+(define gen_plus 
+	(lambda ()
+		`(define +
+			(lambda arguments 
+					(letrec ((plus_loop
+						 (lambda (args)
+								(cond 
+									((null? args) (number->fraction 0))
+									((null? (cdr args)) (plus_bin (number->fraction (car args)) (number->fraction 0)))
+									(else (plus_bin (number->fraction (car args)) (plus_loop (cdr args)))))))
+					(result (plus_loop arguments)))
+					(gcd_arthimetics_helper result))))))	
+
+
+(define gen_minus 
+	(lambda ()
+		`(define -
+			(lambda arguments 
+					(letrec ((minus_loop
+						 (lambda (sum args)
+								(cond 
+									((null? (cdr args)) (minus_bin (number->fraction sum) (number->fraction (car args))))
+									(else (minus_loop (minus_bin (number->fraction sum) (number->fraction (car args))) (cdr args))))))
+					(result  (if (null? (cdr arguments)) 
+									 (minus_loop  0 arguments)
+									(minus_loop (car arguments) (cdr arguments)))))
+							(gcd_arthimetics_helper result))))))
+
+
+(define gen_mul 
+	(lambda ()
+		`(define *
+			(lambda arguments 
+					(letrec ((mul_loop
+						 (lambda (args)
+								(cond 
+									((null? args) (number->fraction 1))
+									((null? (cdr args)) (mul_bin (number->fraction (car args)) (number->fraction 1)))
+									(else (mul_bin (number->fraction (car args)) (mul_loop (cdr args)))))))
+					(result (mul_loop arguments)))
+					(gcd_arthimetics_helper result))))))	
 				
+(define gen_div
+	(lambda ()
+		`(define /
+			(lambda arguments 
+					(letrec ((div_loop
+						 (lambda (sum args)
+								(cond 
+									((null? (cdr args)) (div_bin (number->fraction sum) (number->fraction (car args))))
+									(else (div_loop (div_bin (number->fraction sum) (number->fraction (car args))) (cdr args))))))
+					(result  (if (null? (cdr arguments)) 
+									 (div_loop  1 arguments)
+									(div_loop (car arguments) (cdr arguments)))))
+							(gcd_arthimetics_helper result))))))
+
+(define gen_smaller
+	(lambda ()
+		`(define <
+			(lambda arguments 
+					(letrec ((smaller_loop
+						 (lambda (ans args)
+								(cond 
+									((null? (cdr args)) ans)
+									(else (smaller_loop (and ans (smaller_bin (number->fraction (car args)) (number->fraction (car (cdr args))))) 
+										(cdr args))))))
+					(result  (if (null? (cdr arguments)) 
+									 #t
+									(smaller_loop #t arguments))))
+							result)))))
+
+(define gen_greater
+	(lambda ()
+		`(define >
+			(lambda arguments 
+					(letrec ((greater_loop
+						 (lambda (ans args)
+								(cond 
+									((null? (cdr args)) ans)
+									(else (greater_loop (and ans (greater_bin (number->fraction (car args)) (number->fraction (car (cdr args))))) 
+										(cdr args))))))
+					(result  (if (null? (cdr arguments)) 
+									 #t
+									(greater_loop #t arguments))))
+							result)))))
+(define gen_eq_Op
+	(lambda ()
+		`(define =
+			(lambda arguments 
+					(letrec ((eq_loop
+						 (lambda (ans args)
+								(cond 
+									((null? (cdr args)) ans)
+									(else (eq_loop (and ans (eq_bin (number->fraction (car args)) (number->fraction (car (cdr args))))) 
+										(cdr args))))))
+					(result  (if (null? (cdr arguments)) 
+									 #t
+									(eq_loop #t arguments))))
+							result)))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;*************************************** VERY IMPORTANT DO NOT DELETE !!!!!!!!!!!!!!! ************************************** ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3486,7 +3589,10 @@
 (define addRSINScheme
 	(lambda (src)
 		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend)
-		 ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd) ,src)))
+		 ,(gen_append) ,(gen_apply) ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd)
+		  ,(gen_gcd_arthimetics_helper_func) ,(gen_plus) ,(gen_minus) ,(gen_mul) ,(gen_div) ,(gen_smaller) ,(gen_greater) ,(gen_eq_Op)
+
+		 ,src)))
 
 
 
@@ -3507,7 +3613,7 @@
 
 
 (define fvar_code_gen 
-	(lambda  (var_name)
+	(lambda  (var_name) 
 			(let* ((counter (number->string (updateCounter)))
 					(errorlabel (string-append "UNDEF_LABEL" counter))
 					(finish_label (string-append "FINISH_FVAR_LABEL" counter)))
@@ -3757,8 +3863,7 @@
 					"DECR(R3);" n  "DECR(R4);" n
 					"JUMP(" loopOverStackLabel ");"n
 					exitLoopOverStackLabel ":" n
-					"MOV (FPARG(1 + R4), FPARG(-2 + R3));" n
-					;"INFO" n 
+					"MOV (FPARG(1 + R4), FPARG(-2 + R3));" n 
 					"MOV (SP , FP);" n 												;repair stack pointer according to Nadav "The Tool" Zilberstein formula
 					"SUB (SP , R4);" n
 					"SUB (SP , IMM(3));" n
