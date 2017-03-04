@@ -1895,6 +1895,7 @@
 (define taggingConstsHelper (lambda (costa ans) 
 	(cond 
 		((null? costa) ans)
+		((void? costa) ans)
 		((boolean? costa) ans)
 		((number? costa) (make-number-tag costa ans))
 		((char? costa)  (make-char-tag costa ans))
@@ -1949,19 +1950,41 @@
 	 			   "CALL (MAKE_SOB_CHAR);" n "DROP (1);"  n 
 	 			   "MOV(INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);")))
 
-(define code_gen_constStringOrVector_Helper (lambda (chars_lst)
+
+;;;changed by Nadav 4.3.2017
+;(define code_gen_constStringOrVector_Helper (lambda (chars_lst) (printE chars_lst)
+;	(if (null? chars_lst) ""
+;		(string-append
+;			"PUSH (INDD(CONSTARRAY," (number->string (car chars_lst)) "));" n
+;			(code_gen_constStringOrVector_Helper (cdr chars_lst))))))
+
+
+(define code_gen_constVector_Helper (lambda (chars_lst) 
 	(if (null? chars_lst) ""
 		(string-append
 			"PUSH (INDD(CONSTARRAY," (number->string (car chars_lst)) "));" n
-			(code_gen_constStringOrVector_Helper (cdr chars_lst))))))
+			(code_gen_constVector_Helper (cdr chars_lst))))))
+
+(define code_gen_constString_Helper (lambda (chars_lst) 
+	(if (null? chars_lst) ""
+		(string-append
+
+			"MOV(R1, (INDD(CONSTARRAY," (number->string (car chars_lst)) ")));" n
+			"PUSH (INDD(R1, 1));" n
+			(code_gen_constString_Helper (cdr chars_lst))))))
+
+
+
 
 (define code_gen_constStringOrVector (lambda (exp type)
 	(string-append 	
-				(code_gen_constStringOrVector_Helper (cdr (get-repr-from-tagged exp)))
+		(if (equal? "MAKE_SOB_STRING" type)
+				(code_gen_constString_Helper (cdr (get-repr-from-tagged exp)))
+				(code_gen_constVector_Helper (cdr (get-repr-from-tagged exp))))
 				   "PUSH (" (number->string (car (get-repr-from-tagged exp))) ");" n
 	 			   "CALL (" type ")"   n "DROP (" (number->string (car (get-repr-from-tagged exp))) ");"  n 
 	 			   "MOV(INDD(CONSTARRAY," (number->string (get-address-from-tagged exp)) ") , R0);")))
-
+;;end changes by nadav 4.3
 (define code_gen_constNumber (lambda (exp)
 	(string-append "PUSH (" (number->string (get-repr-from-tagged exp)) ");" n
 	 			   "CALL (MAKE_SOB_INTEGER);" n "DROP (1);"  n 
@@ -2479,6 +2502,49 @@
 					finish_label ":" n
 					(CISC_comment "RS_vector ends")))))
 
+
+(define RS_make_vector 
+	(lambda () 
+		(let ((finish_label "RS_make_vector_closure_ends")
+			(body_label "RS_make_vector_body")
+			(error_label  "RS_ERORR_RS_make_vector"))
+				(string-append 
+					(CISC_comment "RS_make_vector starts")
+					(RS_makeClosure body_label finish_label (lookupFvar 'make-vector SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_make_vector\",R0);"
+						(string-append
+
+							"MOV (R6, FPARG(1));" n  ;;r6 = NUMBER OF ARGS
+							"MOV (R7, INDD(FPARG(2),1));" n  ;; R7 = MAKE-COUNT
+							"CMP(R6,2);" n 
+							"JUMP_EQ(RS_MAKE_VECTOR_OPERAND);"  n 
+							(call_malloc 2)
+							"MOV(INDD(R0,0),T_INTEGER);" n
+							"MOV(INDD(R0,1),0);" n 
+							"MOV(R8,R0);" n 
+							"JUMP(RS_MAKE_VECTOR_INIT_VEC);" n 
+							"RS_MAKE_VECTOR_OPERAND:" n
+							"MOV(R8,FPARG(3));" n ;;R8 = OPERAND
+							"RS_MAKE_VECTOR_INIT_VEC:"
+							"MOV(R9,2);" n ;;COUNTER FOR INSERT THE OPERAND IN THE VECTOR
+							"MOV(R10,R7);" n 
+							"ADD(R10,2);" n 
+							 "PUSH(R10);" n "CALL (MALLOC);" n  "DROP(1);" n 
+							"MOV(INDD(R0,0),T_VECTOR);" n
+							"MOV(INDD(R0,1),R7);" n 
+							 ;R8 = OPERAND ; R7 = MAKE-COUNT 
+							"RS_MAKE_VECTOR_LOOP:" n 
+							"CMP(R7,0);" n 
+							"JUMP_EQ(RS_MAKE_VECTOR_ENDS);" n 
+							"MOV(INDD(R0,R9),R8);" n 
+							"ADD(R9,1);" n 
+							"SUB(R7,1);" n 
+							"JUMP(RS_MAKE_VECTOR_LOOP);" n 
+							"RS_MAKE_VECTOR_ENDS:"  n 
+							))
+					finish_label ":" n
+					(CISC_comment "RS_make_vector ends")))))
+
 (define RS_string_length
 	(lambda () 
 		(let ((finish_label "RS_string_length_closure_ends")
@@ -2566,6 +2632,55 @@
 					finish_label ":" n
 					(CISC_comment "RS_make_string ends")))))
 
+;(define RS_make_string 
+;	(lambda () 
+;		(let ((finish_label "RS_make_string_closure_ends")
+;			(body_label "RS_make_string_body")
+;			(error_label  "RS_ERORR_RS_make_string")
+;			(continue_label  "RS_make_string_Continue")
+;			(gen_empty_string_label  "RS_make_string_Empty_String")
+;			(loop_string_label  "RS_make_string_Loop_Label")
+;			(loop_empty_string_label  "RS_make_string_Loop_Empty_String_Label")
+;			(loop_exit_empty_string_label  "RS_make_string_Loop_Exit_Empty_String_Label"))
+;				(string-append 
+;					(CISC_comment "RS_make_string starts")
+;					(RS_makeClosure body_label finish_label (lookupFvar 'make-string SCHEMEFvarsTable))
+;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_make_string\",R0);"
+;						(string-append
+;							"CMP (FPARG(1) , IMM(1));" n 						;if there is one arg gen empty string
+;							"JUMP_EQ(" gen_empty_string_label ");" n
+;							(args_check_macro "2" error_label)
+;							"CMP (FPARG(2) , IMM(0));" n  						;check the string requested length (if equal 0 gen empty string) 
+;							"JUMP_EQ(" gen_empty_string_label ");" n 	
+;							"MOV (R3 , FPARG(3));" n 							;R3 = holds the char
+;							"MOV (R2 , INDD(FPARG(2),1));" n 					;R2 = holds the string requested length
+;							"PUSH(2 + R2);" n "CALL(MALLOC);" n "DROP(1);" n
+;							"MOV (IND(R0) , T_STRING);" n
+;							"MOV (INDD(R0,1) , R2);" n
+;							"MOV (R4 , IMM(2));" n 								;R4 = holds the index of the string (init eq 2)
+;							loop_string_label ":" n
+;							"CMP (R2 , 0);" n
+;							"JUMP_EQ(" continue_label ");" n
+;							"MOV (INDD(R0,R4) , R3);" n
+;;							"DECR(R2);" n "INCR(R4);" n 						;decrease R2 increase R4
+;							"JUMP(" loop_string_label ");" n
+;							gen_empty_string_label ":" n
+;							"MOV (R6 , FPARG(3));" n
+;							"ADD (R6 , 2);" n
+;							"PUSH(R6);" n "CALL(MALLOC);" n "DROP(1);" n
+;							"MOV (IND(R0) , T_STRING);" n
+;							"MOV (INDD(R0,1) , FPARG(3));" n
+;							"MOV (R6 , FPARG(3));" n
+;							loop_empty_string_label ":" n
+;							"CMP (R6 , 0);" n
+;							"JUMP_EQ(" loop_exit_empty_string_label ");" n
+;							"MOV (INDD(R0,R6 + 2) , SOB_NIL);" n
+;							"DECR(R6);" n
+;							"JUMP(" loop_empty_string_label ");" n
+;							loop_exit_empty_string_label ":" n
+;							continue_label ":" n)) 
+;					finish_label ":" n
+;					(CISC_comment "RS_make_string ends")))))
 
 (define RS_string_set! 
 	(lambda () 
@@ -3286,7 +3401,7 @@
 		(RS_boolean?) (RS_char?) (RS_integer?) (RS_pair?) (RS_procedure?) (RS_string?) (RS_symbol?) (RS_vector?) (RS_null?) (RS_void?) (RS_fraction?)
 		(RS_zero?) (RS_not) (RS_compare_address) (RS_compare_vals)
 		(RS_symbolToString) (RS_stringToSymbol)
-		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector)
+		(RS_vector_length) (RS_vector_ref) (RS_vector_set!) (RS_vector) (RS_make_vector)
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
 		(RS_apply) (RS_append_bin)
 		(RS_cahrToInteger) (RS_numberTofraction) (RS_integerToChar) 
@@ -3301,7 +3416,7 @@
 		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 'void? 'fraction?
 		'zero? 'not 'compare_address 'compare_vals
 		'string->symbol 'symbol->string
-		'vector-length 'vector-ref 'vector-set! 'vector 
+		'vector-length 'vector-ref 'vector-set! 'vector 'make-vector
 		'string-length 'string-ref 'make-string 'string-set!
 		'apply 'append_bin
 		'char->integer 'number->fraction 'integer->char
@@ -3443,17 +3558,6 @@
 		            (reverseList (cdr lst) (cons (car lst) revList))))) ))
 
 
-
-
-
-;(define gen_append_helper
-;	(lambda ()
-;		`(define append_helper
- ;     		(lambda (lists ans)
-  ;      		(if (null? (cdr lists))
-   ;         		ans
-    ;        		(append_helper (cdr lists) (append_bin (reverseList (car lists) '()) ans))))))) 
-
 (define gen_append_helper
 	(lambda ()
 		`(define append_helper
@@ -3464,8 +3568,6 @@
 					((and  (not (pair? (car lists))) (null? (car lists))) (append_helper (cdr lists) ans))		
             		(else (pair? (car lists)) (append_helper (cdr lists) (append_bin (reverseList ans '()) (car lists)))))))))
 
-
-
 (define gen_append
 	(lambda ()
 		`(define append
@@ -3473,17 +3575,6 @@
 					(cond ((null? args) (list))
 						  ((null? (cdr args)) (car args))
 						  (else (append_helper args '())))))))
-
-
-;(define gen_append
-	;(lambda ()
-		;`(define append
-       ;		(lambda args
-      ;   		(foldl_2 append_bin '() ))) ))
-
-
-	
-
 
 (define gen_eq
 	(lambda()
@@ -3527,7 +3618,9 @@
 							(gcd_number (gcd numer denom)))
 						(if (eq_bin (number->fraction denom) (number->fraction 1)) 
 							numer 
-							(create_frac numer denom gcd_number)))))))
+							(if  (smaller_bin (number->fraction 0)  (number->fraction denom))
+									(mul_bin (create_frac numer denom gcd_number) (number->fraction -1)
+									(create_frac numer denom gcd_number)))))))))
 
 
 (define gen_plus 
@@ -3684,8 +3777,7 @@
 			,(gen_append_helper) ,(gen_append) 
 		 ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd)
 		  ,(gen_gcd_arthimetics_helper_func) ,(gen_plus) ,(gen_minus) ,(gen_mul) ,(gen_div) ,(gen_smaller) ,(gen_greater) ,(gen_eq_Op)
-
-		 ,src)))
+		 ,@src)))
 
 
 
@@ -4262,63 +4354,75 @@
  (define prolouge "#include <stdio.h>
 #include <stdlib.h>
 #define DO_SHOW 1
-#include \"cisc.h\"
-#include \"beneyal.h\"
+#include \"arch/cisc.h\"
+#include \"arch/beneyal.h\"
 int main()
 {
 START_MACHINE;
 JUMP(CONTINUE);
-#include \"char.lib\"
-#include \"io.lib\"
-#include \"math.lib\"
-#include \"string.lib\"
-#include \"system.lib\"
-#include \"scheme.lib\"
+#include \"arch/char.lib\"
+#include \"arch/io.lib\"
+#include \"arch/math.lib\"
+#include \"arch/string.lib\"
+#include \"arch/system.lib\"
+#include \"arch/scheme.lib\"
 CONTINUE:
 ")
 
 
 (define epilogue 
 "
-INFO
+
 STOP_MACHINE;
 return 0;
 }")
 
 
 
-;(define apply_sxpr_str 
-;	(lambda (str)
-;		(cadar (test-string <Sexpr> str))))
-
-;;ass1 -run-func .. input = (string->list src)
-;(define charlist->sexprs
- ; (lambda (chars)
-  ;  (<Sexpr> chars
-	;     (lambda (m r)
-	 ;      (if (null? r)
-	;	   `(,m)
-	;	   (cons m (charlist->sexprs r))))
-	 ;    (lambda ()
-	  ;     'fuck))))
+(define run_ass1
+ (lambda (src)  (<Sexpr> src
+     (lambda (result remaining)
+	       (if (null? remaining)
+		   `(,result)   
+		   (cons result (run_ass1 remaining))))  (lambda () 'ass1FAIL))))
 
 
 (define runAss3 (lambda (exp) 
 	(annotate-tc (pe->lex-pe (box-set (remove-applic-lambda-nil (eliminate-nested-defines (parse  exp))))))))
 
-;(define compile-scheme-file 
-;	(lambda (src CISC)
-;		(apply_sxpr_str (file->string src))    ;; this expression need to sent to parse function
-(define a (lambda (src)
-	(let* ( (addShitToSaveTime (addRSINScheme src))
-			(after_ass3 (runAss3 addShitToSaveTime))
-			(CISC-const-table (buildConstantTable after_ass3))
+
+(define code_gen_for_exp (lambda (parsed_exp) 
+	(let ((void_label (string-append "R0_IS_VOID_number_" (number->string (updateCounter)))))
+
+		(string-append
+			(code_gen parsed_exp 0) n 
+			"CMP(R0,SOB_VOID);" n 
+			"JUMP_EQ(" void_label ");" n 
+			"PUSH(R0); " n 
+			"CALL(WRITE_SOB);" n 
+			"DROP(1);" n 
+			"PUSH(10); " n 
+			"CALL(PUTCHAR);" n 
+			"DROP(1);" n 
+			void_label ":" n 
+	))))
+
+(define compile-scheme-file (lambda (file out)
+	(let* (
+			(src_after_ass1  (run_ass1 (string->list (file->string file))))
+			(shit_and_src   (addRSINScheme src_after_ass1))
+
+			(after_ass3  (runAss3  shit_and_src))
+
+			(CISC-const-table  (buildConstantTable after_ass3))
 			(CISC_symbol_table (buildSymbolTable))
 			(CISC-fvar-table (buildFvarTable after_ass3))	
-			(codeGen (code_gen after_ass3 0))
-		   )
+
+			(all_parsed_exp (map runAss3 (cdr shit_and_src)))
+			(codeGen (fold-right string-append "" (map code_gen_for_exp all_parsed_exp)))
+			)
 	CISC-fvar-table
-	(writeToFile "arch/out.c"
+	(writeToFile out
 		(string-append 
 				prolouge
 				MACROS
@@ -4331,6 +4435,24 @@ return 0;
 
 	)))
 
+;(define compile-scheme-file
+ ; (lambda (sourceFile outputFile)
+  ;  (let* ((input (file->string sourceFile))
+   ;     
+    ;       (sexprList (charlist->sexprs (string->list input)))
+     ;      (sexprWithRS (createRS_MacroExpantion sexprList))
+      ;    
+        ;   (parsedExp (work1 sexprWithRS))
+         ;  (cTable (makeConstantTable parsedExp))
+           ;(ciscConstantTable (constantTableToCisc cTable))
+          ; (ciscFvarTable (allAroundCreatefvTable parsedExp))
+           ;(ciscSymbolList (symbolTable->cisc))
+           ;(;ciscRS (createRS_inCisc))
+           ;(prepCodes (map work1 (cdr sexprWithRS)))
+           ;(generatedCode (fold-right sa "" (map (lambda (singleParsedExp) (scheme->cisc+print singleParsedExp 0 cTable)) prepCodes)))
+
+      
+     
 ;;;;;;;;;;;TESTS: 
 ;(define test
 ;	(lambda ()
