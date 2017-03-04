@@ -3230,6 +3230,7 @@
 					finish_label ":" n
 					(CISC_comment "RS_apply ends")))))
 
+
 (define RS_append_bin   
 	(lambda ()
 		(let
@@ -3239,17 +3240,22 @@
 				(string-append 
 					(CISC_comment "RS_append_bin  starts")
 					(RS_makeClosure body_label finish_label (lookupFvar 'append_bin SCHEMEFvarsTable))
-					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_append_bin \",R0); \n INFO \n"
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_append_bin \",R0);"
 						(string-append
 							(args_check_macro "2" error_label)
 							"MOV(R6,FPARG(2));"  n  ;;R6 = FIRST LIST (THE ONE THAT GOT REVERESED)
 							"MOV(R7,FPARG(3));"  n  ;;R7 = SECOND LIST
-							"CMP (IND(R7) , T_PAIR);" n
-							"JUMP_NE(" error_label ");" n
+
+
 							"CMP(R6,SOB_NIL);" n 
 							"JUMP_EQ(RS_APPEND_FINISH_ADDING);" n 
 							"CMP (IND(R6) , T_PAIR);" n
-							"JUMP_NE(" error_label ");" n	
+							"JUMP_NE(" error_label ");" n
+
+							"CMP (R7 , SOB_NIL);" n
+							"JUMP_EQ(RS_APPEND_FINISH_ADDING2);" n
+
+
 							"RS_APPEND_ADDING_LOOP:" n 	
 							(call_malloc 3)
 							"MOV(INDD(R0,0) , T_PAIR);" n 
@@ -3259,9 +3265,16 @@
 							"CMP(INDD(R6,2),SOB_NIL);" n 
 							"JUMP_EQ(RS_APPEND_FINISH_ADDING);" n
 							"MOV(R6, INDD(R6,2));" n 
-							"JUMP(RS_APPEND_ADDING_LOOP);" n 
+							"JUMP(RS_APPEND_ADDING_LOOP);" n
+
+
+							 "RS_APPEND_FINISH_ADDING2:" n 
+							 "MOV(R0,R6);" n
+							 "JUMP(RS_append_END);" n
+
 							"RS_APPEND_FINISH_ADDING:" n 
 							"MOV(R0,R7);" n 
+							"RS_append_END:" n 
 							))
 					finish_label ":" n
 					(CISC_comment "RS_append_bin  ends")))))					
@@ -3430,6 +3443,38 @@
 		            (reverseList (cdr lst) (cons (car lst) revList))))) ))
 
 
+
+
+
+;(define gen_append_helper
+;	(lambda ()
+;		`(define append_helper
+ ;     		(lambda (lists ans)
+  ;      		(if (null? (cdr lists))
+   ;         		ans
+    ;        		(append_helper (cdr lists) (append_bin (reverseList (car lists) '()) ans))))))) 
+
+(define gen_append_helper
+	(lambda ()
+		`(define append_helper
+      		(lambda (lists ans)
+        		(cond 
+        			((null? lists) ans) 
+        			((null? ans) (append_helper (cdr lists) (car lists)))
+					((and  (not (pair? (car lists))) (null? (car lists))) (append_helper (cdr lists) ans))		
+            		(else (pair? (car lists)) (append_helper (cdr lists) (append_bin (reverseList ans '()) (car lists)))))))))
+
+
+
+(define gen_append
+	(lambda ()
+		`(define append
+			(lambda args 
+					(cond ((null? args) (list))
+						  ((null? (cdr args)) (car args))
+						  (else (append_helper args '())))))))
+
+
 ;(define gen_append
 	;(lambda ()
 		;`(define append
@@ -3437,26 +3482,6 @@
       ;   		(foldl_2 append_bin '() ))) ))
 
 
-
-(define gen_append
-	(lambda ()
-		`(define append
-			(lambda args
-					(cond ((null? args) (list))
-						  ((null? (cdr args)) (car args))
-						  (bin_append (reverseList (car args)) (append (cdr args))))))))
-
-
-
-
-;(define gen_append
-;	(lambda ()
-;		(define append_2 
-;			(lambda args
-;				(cond ((null? args) args) 																						;if (append) = '()
-;					  ((and (list? args) (null? (cdr args))) (car args)) 														;if (append '(1)) = '(1)
-;					  ((and (list? args) (list? (car args)) (not (list? (cdr args)))) (cons (car args) (cadr args))) 			;if (append '(1) 2) = '(1 . 2)
-;					  (else (append_2 (cons (binaryAppend (car args) (cadr args)) (cddr args)))))))								;if (append '(1) '(2)) = '(1 2)
 	
 
 
@@ -3655,8 +3680,9 @@
 
 (define addRSINScheme
 	(lambda (src)
-		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_binaryAppend)
-		 ,(gen_append)  ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd)
+		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) 
+			,(gen_append_helper) ,(gen_append) 
+		 ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd)
 		  ,(gen_gcd_arthimetics_helper_func) ,(gen_plus) ,(gen_minus) ,(gen_mul) ,(gen_div) ,(gen_smaller) ,(gen_greater) ,(gen_eq_Op)
 
 		 ,src)))
