@@ -2317,7 +2317,7 @@
 	"RS_ERORR_null" "RS_null_TRUE_COND" 'null? "T_NIL")))
 
 (define RS_void? (lambda () (RS_predicate "RS_LABEL_void_body" "RS_LABEL_void_finish" 
-	"RS_ERORR_void" "RS_void_TRUE_COND" 'void? "T_VOID")))
+	"RS_ERORR_void" "RS_void_TRUE_COND" 'void1? "T_VOID")))
 
 (define gen_rational
 	(lambda ()
@@ -2598,50 +2598,15 @@
 							"CMP(R8,R7);" n
 							"JUMP_GE(" error_label ");" n
 							"ADD(R8,2);" n 								;;repair index
-							"MOV(R0,INDD(R10,R8));" n)) 
+
+							(call_malloc 2)
+							"MOV(INDD(R0,0),T_CHAR);" n 
+							"MOV(INDD(R0,1),INDD(R10,R8));" n 
+							)) 
 					finish_label ":" n
 					(CISC_comment "RS_string_ref ends")))))
 
 
-
-;(define RS_make_string 
-;	(lambda () 
-;		(let ((finish_label "RS_make_string_closure_ends")
-;			(body_label "RS_make_string_body")
-;			(error_label  "RS_ERORR_RS_make_string")
-;			(continue_label  "RS_make_string_Continue")
-;			(gen_empty_string_label  "RS_make_string_Empty_String")
-;			(loop_string_label  "RS_make_string_Loop_Label"))
-;				(string-append 
-;					(CISC_comment "RS_make_string starts")
-;					(RS_makeClosure body_label finish_label (lookupFvar 'make-string SCHEMEFvarsTable))
-;					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_make_string\",R0);"
-;						(string-append
-;							"CMP (FPARG(1) , IMM(1));" n 						;if there is one arg gen empty string
-;							"JUMP_EQ(" gen_empty_string_label ");" n
-;							(args_check_macro "2" error_label)
-;							"CMP (FPARG(2) , IMM(0));" n  						;check the string requested length (if equal 0 gen empty string) 
-;							"JUMP_EQ(" gen_empty_string_label ");" n 	
-;							"MOV (R3 , FPARG(3));" n 							;R3 = holds the char
-;							"MOV (R2 , INDD(FPARG(2),1));" n 					;R2 = holds the string requested length
-;							"PUSH(2 + R2);" n "CALL(MALLOC);" n "DROP(1);" n
-;							"MOV (IND(R0) , T_STRING);" n
-;							"MOV (INDD(R0,1) , R2);" n
-;							"MOV (R4 , IMM(2));" n 								;R4 = holds the index of the string (init eq 2)
-;							loop_string_label ":" n
-;							"CMP (R2 , 0);" n
-;							"JUMP_EQ(" continue_label ");" n
-;							"MOV (INDD(R0,R4) , R3);" n
-;;							"DECR(R2);" n "INCR(R4);" n 						;decrease R2 increase R4
-;;							"JUMP(" loop_string_label ");" n
-;							gen_empty_string_label ":" n
-;;							"PUSH(3);" n "CALL(MALLOC);" n "DROP(1);" n
-;							"MOV (IND(R0) , T_STRING);" n
-;							"MOV (INDD(R0,1) , IMM(0));" n
-;							"MOV (INDD(R0,2) , SOB_NIL);" n
-;							continue_label ":" n)) 
-;					finish_label ":" n
-;					(CISC_comment "RS_make_string ends")))))
 
 (define RS_make_string 
 	(lambda () 
@@ -2655,15 +2620,15 @@
 			(loop_exit_empty_string_label  "RS_make_string_Loop_Exit_Empty_String_Label"))
 				(string-append 
 					(CISC_comment "RS_make_string starts")
-					(RS_makeClosure body_label finish_label (lookupFvar 'make-string SCHEMEFvarsTable))
+					(RS_makeClosure body_label finish_label (lookupFvar 'make-string_LEGACY SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_make_string\",R0);"
 						(string-append
-							"CMP (FPARG(1) , IMM(1));" n 						;if there is one arg gen empty string
-							"JUMP_EQ(" gen_empty_string_label ");" n
+						;	"CMP (FPARG(1) , IMM(1));" n 						;if there is one arg gen empty string
+							;"JUMP_EQ(" gen_empty_string_label ");" n
 							(args_check_macro "2" error_label)
-							"CMP (FPARG(2) , IMM(0));" n  						;check the string requested length (if equal 0 gen empty string) 
-							"JUMP_EQ(" gen_empty_string_label ");" n 	
-							"MOV (R3 , FPARG(3));" n 							;R3 = holds the char
+						;	"CMP (FPARG(2) , IMM(0));" n  						;check the string requested length (if equal 0 gen empty string) 
+							;"JUMP_EQ(" gen_empty_string_label ");" n 	
+							"MOV (R3 , INDD(FPARG(3),1));" n 							;R3 = holds the char
 							"MOV (R2 , INDD(FPARG(2),1));" n 					;R2 = holds the string requested length
 							"PUSH(2 + R2);" n "CALL(MALLOC);" n "DROP(1);" n
 							"MOV (IND(R0) , T_STRING);" n
@@ -2675,20 +2640,24 @@
 							"MOV (INDD(R0,R4) , R3);" n
 							"DECR(R2);" n "INCR(R4);" n 						;decrease R2 increase R4
 							"JUMP(" loop_string_label ");" n
-							gen_empty_string_label ":" n
-							"MOV (R6 , FPARG(3));" n
-							"ADD (R6 , 2);" n
-							"PUSH(R6);" n "CALL(MALLOC);" n "DROP(1);" n
-							"MOV (IND(R0) , T_STRING);" n
-							"MOV (INDD(R0,1) , FPARG(3));" n
-							"MOV (R6 , FPARG(3));" n
-							loop_empty_string_label ":" n
-							"CMP (R6 , 0);" n
-							"JUMP_EQ(" loop_exit_empty_string_label ");" n
-							"MOV (INDD(R0,R6 + 2) , SOB_NIL);" n
-							"DECR(R6);" n
-							"JUMP(" loop_empty_string_label ");" n
-							loop_exit_empty_string_label ":" n
+
+							;gen_empty_string_label ":" n
+							;"MOV (R6 , INDD(FPARG(2),1));" n
+							;"ADD (R6 , 2);" n
+							;"PUSH(R6);" n "CALL(MALLOC);" n "DROP(1);" n
+							;"MOV (IND(R0) , T_STRING);" n
+							;"MOV (INDD(R0,1) , INDD(FPARG(2),1));" n
+							;"MOV (R6 , INDD(FPARG(2),1));" n
+
+							;loop_empty_string_label ":" n
+							;"CMP (R6 , 0);" n
+							;"JUMP_EQ(" loop_exit_empty_string_label ");" n
+							;"MOV (INDD(R0,R6 + 1) , R9);" n
+							;"DECR(R6);" n
+							;"JUMP(" loop_empty_string_label ");" n
+							;loop_exit_empty_string_label ":" n
+
+
 							continue_label ":" n)) 
 					finish_label ":" n
 					(CISC_comment "RS_make_string ends")))))
@@ -2709,8 +2678,10 @@
 							"CMP (R3 , INDD(R2,1));" n  			;check that index is smaller than the length of the string
 							"JUMP_GE(" error_label ");" n
 							"ADD (R3 , IMM(2));" n 					;fix index
-							"MOV (R4 , FPARG(4));" n 				;R4 = holds pointer to char
+							"MOV (R4 , INDD (FPARG(4) ,1));" n 				;R4 = holds pointer to char
 							"MOV (INDD(R2,R3) , R4);" n 			;change the string
+
+							"MOV(R0,SOB_VOID);" n 
 							))
 					finish_label ":" n
 					(CISC_comment "RS_string_set ends")))))
@@ -2739,8 +2710,33 @@
 							"CMP(R10,SOB_NIL);" n  ;;;??
 							"JUMP_EQ (STR_TO_SYM_ADD_HERE);"
 							;;;ELSE = FIRST LINK IS NOT NULL:
+						
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+							"MOV(R13,INDD(R10,0));" n 
+
 							"CMP (R7 , INDD(R10,0));" n 
-							"JUMP_EQ(STRTOSYM_RETURN_TO_USER);" n 
+							"JUMP_EQ(RS_STRING_TO_SYMBOL_STR_FOUND);" n 
+							;;R7 = ARG_STR , R13 = LINKED-LIST STR
+							"MOV(R14,INDD(R7,1));"  n ;; R14 = STR-LENGTH
+
+							"CMP(INDD(R7,1),INDD(R13,1));" n 
+							"JUMP_NE(PROCEED_LOOP_STR_SYM);"  n 
+
+							"MOV(R15 ,0);" n 
+
+							"RS_STR_TO_STR_CMP_LOOP:" n 
+							"CMP(R15,R14);" n 
+							"JUMP_EQ(RS_STRING_TO_SYMBOL_STR_FOUND);"  n 
+
+							"CMP(INDD(R7,R15+2),INDD(R13,R15+2));"  n 
+							"JUMP_NE(PROCEED_LOOP_STR_SYM);" n 
+
+							"ADD (R15,1);" n 	
+							"JUMP(RS_STR_TO_STR_CMP_LOOP)" n 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+							"PROCEED_LOOP_STR_SYM:" n 
 							;;IF ITS NOT EQUAL:
 							"MOV(R12,R10);"  
 							"MOV(R10,INDD(R10,1));" n		
@@ -2757,7 +2753,13 @@
 							"JUMP(STRTOSYM_RETURN_TO_USER);"
 							"R12_ISNULL:" n 
 							"MOV(SYMBOLTABLE,R0);" n
+
+							"JUMP(STRTOSYM_RETURN_TO_USER);" n 
 							;;;;build a symobl for the user:
+
+							"RS_STRING_TO_SYMBOL_STR_FOUND:"  n 
+							"MOV(R7,INDD(R10,0));" n 
+
 							"STRTOSYM_RETURN_TO_USER:" n 
 							(call_malloc 2)
 							"MOV(IND(R0), T_SYMBOL);" n 
@@ -2783,8 +2785,9 @@
 							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the char 
 							"CMP (INDD(R2,0) , T_CHAR);" n
 							"JUMP_NE(" error_label ");" n
-							"MOV (INDD(R2,0) , T_INTEGER);" n
-							"MOV (R0 , R2);" n
+							(call_malloc 2)
+							"MOV (INDD(R0,0) , T_INTEGER);" n
+							"MOV (INDD(R0,1) , INDD(R2,1));" n
 							))
 					finish_label ":" n
 					(CISC_comment "RS_cahrToInteger ends")))))
@@ -2803,8 +2806,9 @@
 							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the integer 
 							"CMP (INDD(R2,0) , T_INTEGER);" n
 							"JUMP_NE(" error_label ");" n
-							"MOV (INDD(R2,0) , T_CHAR);" n
-							"MOV (R0 , R2);" n
+							(call_malloc 2)
+							"MOV (INDD(R0,0) , T_CHAR);" n
+							"MOV (INDD(R0,1) , INDD(R2,1));" n
 							))
 					finish_label ":" n
 					(CISC_comment "RS_integerToChar ends")))))
@@ -2852,7 +2856,7 @@
 				(string-append 
 					(CISC_comment "RS_remainder starts")
 					(RS_makeClosure body_label finish_label (lookupFvar 'remainder SCHEMEFvarsTable))
-					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_remainder\",R0);"
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_remainder\",R0);\n INFO \n"
 						(string-append
 							(args_check_macro "2" error_label)
 							"MOV (R1 ,FPARG(2));" n
@@ -2950,7 +2954,6 @@
 							(args_check_macro "2" error_label)
 							"CMP(INDD(FPARG(2),0),T_FRACTION);" n 
 							"JUMP_EQ(RS_compare_vals_FRACTION_TYPE);" n 
-
 							"CMP (INDD(FPARG(2),1) , INDD(FPARG(3),1));" n
 							"JUMP_NE(" false_label ");" n
 							"RS_CV_TRUE_LABEL:" n 
@@ -2982,7 +2985,7 @@
 					(RS_makeClosure body_label finish_label (lookupFvar 'compare_address SCHEMEFvarsTable))
 					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_compare_address\",R0);"
 						(string-append
-							(args_check_macro "2" error_label)
+							(args_check_macro "2" error_label) 
 							"CMP (FPARG(2) , FPARG(3));" n
 							"JUMP_NE(" false_label ");" n
 							"MOV (R0 , SOB_TRUE);" n
@@ -3013,9 +3016,6 @@
 								"MOV (R6 , INDD ( FPARG(2) , 1 ));" n ;;get the number from sob_integer
 								"MOV (R7 , INDD ( FPARG(3) , 1 ));" n ;;get the number from sob_integer
 								"MOV (R8 , INDD ( FPARG(4) , 1 ));" n ;;get the number from sob_integer
-
-
-
 								"CMP(R7,0);" n  ;;CHECK IF DENOM IS NEGATIVE. IF IT IS,I WANT TO TRANSFORM IT FROM 1/-12 TO -1/12
 								"JUMP_LT(RS_CREATE_FRACTION_NEGATIVE_DENOM);" n 
 								"JUMP(RS_CREATE_FRAC_PROCEED_CREATING);" n 
@@ -3459,11 +3459,11 @@
 (define RS_LIST 
 	(list 
 		'car 'cdr 'cons 'set-car! 'set-cdr! 
-		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 'void? 'fraction?
+		'boolean? 'char? 'integer? 'pair? 'procedure? 'string? 'symbol? 'vector? 'null? 'void1? 'fraction?
 		'zero? 'not 'compare_address 'compare_vals
 		'string->symbol 'symbol->string
 		'vector-length 'vector-ref 'vector-set! 'vector 'make-vector
-		'string-length 'string-ref 'make-string 'string-set!
+		'string-length 'string-ref 'make-string_LEGACY 'string-set!
 		'apply 'append_bin
 		'char->integer 'number->fraction 'integer->char
 		'list
@@ -3632,7 +3632,7 @@
 						(and (symbol? exp1) (symbol? exp2)))
 					(compare_vals exp1 exp2)
 					(if (or (and (null? exp1) (null? exp2))
-							(and (void? exp1) (void? exp2))
+							(and (void1? exp1) (void1? exp2))
 							(and (boolean? exp1) (boolean? exp2))
 							(and (string? exp1) (string? exp2))
 							(and (vector? exp1) (vector? exp2))
@@ -3815,9 +3815,20 @@
 ; 	(lambda (exp)
 ; 		(cdr (car exp))))
 
+
+(define gen_make_string
+  (lambda()
+    `(define make-string (lambda (count . char)
+         (if (null? char)
+             (make-string_LEGACY count 0)
+             (if (char? (car char)) (make-string_LEGACY count (car char)) #f))))))
+
+
+
+
 (define addRSINScheme
 	(lambda (src)
-		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) 
+		`(begin ,(gen_map) ,(gen_reverseList) ,(gen_foldl_2) ,(gen_make_string)
 			,(gen_append_helper) ,(gen_append) 
 		 ,(gen_number) ,(gen_rational) ,(gen_eq) ,(gen_gcd)
 		  ,(gen_gcd_arthimetics_helper_func) ,(gen_plus) ,(gen_minus) ,(gen_mul) ,(gen_div) ,(gen_smaller) ,(gen_greater) ,(gen_eq_Op)
@@ -3882,7 +3893,7 @@
 
 	))))
 
-(define searchConstInSCHEMEconstTable (lambda (const constTable)
+(define searchConstInSCHEMEconstTable (lambda (const constTable) 
 		(if (equal? const (get-costa-from-tagged (car constTable)))
 				(get-address-from-tagged (car constTable))
 				(searchConstInSCHEMEconstTable const (cdr constTable)))))
@@ -3936,6 +3947,7 @@
 			"MOV (R1 , INDD (R0,2));" n
 			"CALLA (R1);" n
 			"DROP(1);" n "POP(R1);" n "DROP(R1);" n
+
 			errorLabel":" n
 		))))
 
@@ -4145,7 +4157,7 @@
 					"POP(FP);" n
 					"RETURN;"  n
 					errorLabel":" n
-					"OUT(IMM(2) , 'c' );" n
+					"INFO" n
 					"SHOW(\"Wrong number of args!!!\" , FPARG(1));" n
 					"HALT;"n
 					closExitLabel ":" n
@@ -4481,9 +4493,7 @@ return 0;
 				CISC-fvar-table		
 				codeGen
 				epilogue
-			))
-
-	)))
+			)))))
 
 
 (define test (lambda () 

@@ -268,13 +268,13 @@
 
 (define string-append
   (lambda s
-    (list->string (apply append (map string->list s)))))
+    (list->string (apply append1 (map string->list s)))))
 
 (define vector-append
   (lambda s
-    (list->vector (apply append (map vector->list s)))))
+    (list->vector (apply append1 (map vector->list s)))))
 
-(define append
+(define append1
   (letrec ((app2
 	    (lambda (s1 s2)
 	      (if (null? s1) s2

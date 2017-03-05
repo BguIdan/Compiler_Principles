@@ -310,26 +310,6 @@ b
     )
 (loop2 7 (lambda (x) (+ x x)) 3)	
 
-; test 47
-(define loop3 (lambda (num func param)
-                  (begin
-                    (define i 0)
-                    (define subloop (lambda ()
-                                      (if (= i num)
-                                          param
-                                          (begin
-                                            (set! i (+ i 1))
-                                            (func param)
-                                            (subloop)
-                                            )
-                                          )
-                                      )
-                      )
-                    )
-                  (subloop)
-                  )
-    )
-(loop3 7 (lambda (x) (+ 8 x)) 123)
 
 ; test 48
 (define loop4 (lambda (num func param)

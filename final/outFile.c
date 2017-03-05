@@ -20,7 +20,7 @@ CONTINUE:
 #define SOB_FALSE INDD (CONSTARRAY,3)
 
 /*************init Const-Table starts here***********/
-PUSH(IMM(7));
+PUSH(IMM(34));
 CALL (MALLOC);
 DROP(1);
 MOV (CONSTARRAY,R0);
@@ -39,20 +39,240 @@ MOV(INDD(CONSTARRAY,3) , R0);
 PUSH (0);
 CALL (MAKE_SOB_INTEGER);
 DROP (1);
-MOV(INDD(CONSTARRAY,4) , R0);
+MOV(INDD(CONSTARRAY,182) , R0);
 PUSH (1);
 CALL (MAKE_SOB_INTEGER);
 DROP (1);
-MOV(INDD(CONSTARRAY,5) , R0);
-PUSH (2);
-CALL (MAKE_SOB_INTEGER);
+MOV(INDD(CONSTARRAY,183) , R0);
+PUSH (97);
+CALL (MAKE_SOB_CHAR);
 DROP (1);
-MOV(INDD(CONSTARRAY,6) , R0);
+MOV(INDD(CONSTARRAY,184) , R0);
+MOV(R1, (INDD(CONSTARRAY,184)));
+PUSH (INDD(R1, 1));
+PUSH (1);
+CALL (MAKE_SOB_STRING)
+DROP (1);
+MOV(INDD(CONSTARRAY,185) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,185));
+MOV (INDD (CONSTARRAY ,186) , R0);
+
+PUSH (98);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,187) , R0);
+MOV(R1, (INDD(CONSTARRAY,187)));
+PUSH (INDD(R1, 1));
+PUSH (1);
+CALL (MAKE_SOB_STRING)
+DROP (1);
+MOV(INDD(CONSTARRAY,188) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,188));
+MOV (INDD (CONSTARRAY ,189) , R0);
+
+PUSH (99);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,190) , R0);
+MOV(R1, (INDD(CONSTARRAY,190)));
+PUSH (INDD(R1, 1));
+PUSH (1);
+CALL (MAKE_SOB_STRING)
+DROP (1);
+MOV(INDD(CONSTARRAY,191) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,191));
+MOV (INDD (CONSTARRAY ,192) , R0);
+
+PUSH (100);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,193) , R0);
+MOV(R1, (INDD(CONSTARRAY,193)));
+PUSH (INDD(R1, 1));
+PUSH (1);
+CALL (MAKE_SOB_STRING)
+DROP (1);
+MOV(INDD(CONSTARRAY,194) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,194));
+MOV (INDD (CONSTARRAY ,195) , R0);
+
+PUSH (101);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,196) , R0);
+MOV(R1, (INDD(CONSTARRAY,196)));
+PUSH (INDD(R1, 1));
+PUSH (1);
+CALL (MAKE_SOB_STRING)
+DROP (1);
+MOV(INDD(CONSTARRAY,197) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,197));
+MOV (INDD (CONSTARRAY ,198) , R0);
+
+PUSH (102);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,199) , R0);
+MOV(R1, (INDD(CONSTARRAY,199)));
+PUSH (INDD(R1, 1));
+PUSH (1);
+CALL (MAKE_SOB_STRING)
+DROP (1);
+MOV(INDD(CONSTARRAY,200) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,200));
+MOV (INDD (CONSTARRAY ,201) , R0);
+
+PUSH (103);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,202) , R0);
+MOV(R1, (INDD(CONSTARRAY,202)));
+PUSH (INDD(R1, 1));
+PUSH (1);
+CALL (MAKE_SOB_STRING)
+DROP (1);
+MOV(INDD(CONSTARRAY,203) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,203));
+MOV (INDD (CONSTARRAY ,204) , R0);
+
+PUSH (50);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,205) , R0);
+PUSH (51);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,206) , R0);
+PUSH (52);
+CALL (MAKE_SOB_CHAR);
+DROP (1);
+MOV(INDD(CONSTARRAY,207) , R0);
+MOV(R1, (INDD(CONSTARRAY,202)));
+PUSH (INDD(R1, 1));
+MOV(R1, (INDD(CONSTARRAY,205)));
+PUSH (INDD(R1, 1));
+MOV(R1, (INDD(CONSTARRAY,206)));
+PUSH (INDD(R1, 1));
+MOV(R1, (INDD(CONSTARRAY,207)));
+PUSH (INDD(R1, 1));
+PUSH (4);
+CALL (MAKE_SOB_STRING)
+DROP (4);
+MOV(INDD(CONSTARRAY,208) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,208));
+MOV (INDD (CONSTARRAY ,209) , R0);
+
+MOV(R1, (INDD(CONSTARRAY,184)));
+PUSH (INDD(R1, 1));
+MOV(R1, (INDD(CONSTARRAY,187)));
+PUSH (INDD(R1, 1));
+MOV(R1, (INDD(CONSTARRAY,190)));
+PUSH (INDD(R1, 1));
+PUSH (3);
+CALL (MAKE_SOB_STRING)
+DROP (3);
+MOV(INDD(CONSTARRAY,210) , R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV(IND(R0) , T_SYMBOL);
+		MOV(INDD(R0,1) ,INDD(CONSTARRAY,210));
+MOV (INDD (CONSTARRAY ,211) , R0);
+
 
 /*************init Const-Table ends here***********/
 
 /*************symbol table starts: ***********/
 MOV (R7,SOB_NIL);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,210));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,208));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,203));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,200));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,197));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,194));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,191));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,188));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(2));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) ,INDD(CONSTARRAY,185));
+MOV (INDD (R0,1) , R7);
+MOV (R7, R0);
+PUSH(IMM(1));
+CALL (MALLOC);
+DROP(1);
 MOV (SYMBOLTABLE,R7);
 
 /*************symbol table ends: ***********/
@@ -539,7 +759,7 @@ RS_LABEL_null_finish:
 
 /*************RS_null?ends***********/
 
-/*************RS_void1?starts***********/
+/*************RS_void?starts***********/
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -560,14 +780,14 @@ MOV(R0,SOB_FALSE);
 POP(FP);
 RETURN;
 RS_ERORR_void:
-SHOW("error in procedure void1?",FPARG(2));
+SHOW("error in procedure void?",FPARG(2));
 HALT;
 RS_void_TRUE_COND:
 POP(FP);
 RETURN;
 RS_LABEL_void_finish:
 
-/*************RS_void1?ends***********/
+/*************RS_void?ends***********/
 
 /*************RS_fraction?starts***********/
 PUSH(IMM(3));
@@ -1149,7 +1369,7 @@ MOV (R3 , INDD(FPARG(3),1));
 CMP (R3 , INDD(R2,1));
 JUMP_GE(RS_ERORR_RS_string_set);
 ADD (R3 , IMM(2));
-MOV (R4 , INDD (FPARG(4) ,1));
+MOV (R4 , FPARG(4));
 MOV (INDD(R2,R3) , R4);
 MOV(R0,SOB_VOID);
 POP(FP);
@@ -1229,17 +1449,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover0);
+JUMP_EQ (tc_applic_end_param_ranover4780);
 ADD (R10 , IMM(1));
-tc_applic_for_label0:
+tc_applic_for_label4780:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover0);
+JUMP_LE (tc_applic_end_param_ranover4780);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label0);
-tc_applic_end_param_ranover0:
+JUMP (tc_applic_for_label4780);
+tc_applic_end_param_ranover4780:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -1483,8 +1703,6 @@ POP(FP);
 RETURN;
 RS_ERORR_RS_remainder:
 SHOW("error in procedure RS_remainder",R0);
- INFO 
-
 HALT;
 RS_remainder_closure_ends:
 
@@ -1925,21 +2143,21 @@ RS_create_frac_from_ints_closure_ends:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_580);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5360);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_580:
+LOOP_COPY_ENV_5360:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_580);
+JUMP_EQ(EXIT_LOOP_COPY_5360);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_580);
-EXIT_LOOP_COPY_580:
+JUMP(LOOP_COPY_ENV_5360);
+EXIT_LOOP_COPY_5360:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -1947,27 +2165,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_580:
+LOOP_EXTEND_ENV_5360:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_580);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5360);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_580);
-EXIT_LOOP_EXTEND_ENV_580:
+JUMP(LOOP_EXTEND_ENV_5360);
+EXIT_LOOP_EXTEND_ENV_5360:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_562));
-JUMP(L_CLOSURE_EXIT_562);
-L_CLOSURE_BODY_562:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5342));
+JUMP(L_CLOSURE_EXIT_5342);
+L_CLOSURE_BODY_5342:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_562);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5342);
 
 /*************if3 code starts here***********/
 
@@ -1984,15 +2201,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL579);
-JUMP (FINISH_FVAR_LABEL579);
-UNDEF_LABEL579:
+JUMP_EQ (UNDEF_LABEL5359);
+JUMP (FINISH_FVAR_LABEL5359);
+UNDEF_LABEL5359:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL579:
+FINISH_FVAR_LABEL5359:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_578);
+JUMP_NE(L_Error_cannot_apply_non_closure_5358);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2000,32 +2217,32 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_578:
+L_Error_cannot_apply_non_closure_5358:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE564);
+JUMP_EQ (L_IF3_ELSE5344);
 
-/*************tc-applic code starts here575***********/
+/*************tc-applic code starts here5355***********/
 PUSH (IMM(0));
 
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,36));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL577);
-JUMP (FINISH_FVAR_LABEL577);
-UNDEF_LABEL577:
+JUMP_EQ (UNDEF_LABEL5357);
+JUMP (FINISH_FVAR_LABEL5357);
+UNDEF_LABEL5357:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL577:
+FINISH_FVAR_LABEL5357:
 
 
-/*************tc-applic cont575***********/
+/*************tc-applic cont5355***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_575);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5355);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -2035,17 +2252,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover576);
+JUMP_EQ (tc_applic_end_param_ranover5356);
 ADD (R10 , IMM(1));
-tc_applic_for_label576:
+tc_applic_for_label5356:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover576);
+JUMP_LE (tc_applic_end_param_ranover5356);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label576);
-tc_applic_end_param_ranover576:
+JUMP (tc_applic_for_label5356);
+tc_applic_end_param_ranover5356:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -2063,13 +2280,13 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_575:
+L_Error_cannot_tc_apply_non_closure_5355:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT563);
-L_IF3_ELSE564:
+JUMP (L_IF3_EXIT5343);
+L_IF3_ELSE5344:
 
-/*************tc-applic code starts here565***********/
+/*************tc-applic code starts here5345***********/
 
 /*************applic code starts here***********/
 
@@ -2086,15 +2303,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL574);
-JUMP (FINISH_FVAR_LABEL574);
-UNDEF_LABEL574:
+JUMP_EQ (UNDEF_LABEL5354);
+JUMP (FINISH_FVAR_LABEL5354);
+UNDEF_LABEL5354:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL574:
+FINISH_FVAR_LABEL5354:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_573);
+JUMP_NE(L_Error_cannot_apply_non_closure_5353);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2102,7 +2319,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_573:
+L_Error_cannot_apply_non_closure_5353:
 
 /*************applic code ends here***********/
 
@@ -2119,15 +2336,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,48));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL572);
-JUMP (FINISH_FVAR_LABEL572);
-UNDEF_LABEL572:
+JUMP_EQ (UNDEF_LABEL5352);
+JUMP (FINISH_FVAR_LABEL5352);
+UNDEF_LABEL5352:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL572:
+FINISH_FVAR_LABEL5352:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_571);
+JUMP_NE(L_Error_cannot_apply_non_closure_5351);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2135,7 +2352,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_571:
+L_Error_cannot_apply_non_closure_5351:
 
 /*************applic code ends here***********/
 
@@ -2156,15 +2373,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL570);
-JUMP (FINISH_FVAR_LABEL570);
-UNDEF_LABEL570:
+JUMP_EQ (UNDEF_LABEL5350);
+JUMP (FINISH_FVAR_LABEL5350);
+UNDEF_LABEL5350:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL570:
+FINISH_FVAR_LABEL5350:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_569);
+JUMP_NE(L_Error_cannot_apply_non_closure_5349);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2172,7 +2389,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_569:
+L_Error_cannot_apply_non_closure_5349:
 
 /*************applic code ends here***********/
 
@@ -2185,7 +2402,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_568);
+JUMP_NE(L_Error_cannot_apply_non_closure_5348);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2193,7 +2410,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_568:
+L_Error_cannot_apply_non_closure_5348:
 
 /*************applic code ends here***********/
 
@@ -2203,19 +2420,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,2));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL567);
-JUMP (FINISH_FVAR_LABEL567);
-UNDEF_LABEL567:
+JUMP_EQ (UNDEF_LABEL5347);
+JUMP (FINISH_FVAR_LABEL5347);
+UNDEF_LABEL5347:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL567:
+FINISH_FVAR_LABEL5347:
 
 
-/*************tc-applic cont565***********/
+/*************tc-applic cont5345***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_565);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5345);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -2225,17 +2442,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover566);
+JUMP_EQ (tc_applic_end_param_ranover5346);
 ADD (R10 , IMM(1));
-tc_applic_for_label566:
+tc_applic_for_label5346:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover566);
+JUMP_LE (tc_applic_end_param_ranover5346);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label566);
-tc_applic_end_param_ranover566:
+JUMP (tc_applic_for_label5346);
+tc_applic_end_param_ranover5346:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -2253,19 +2470,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_565:
+L_Error_cannot_tc_apply_non_closure_5345:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT563:
+L_IF3_EXIT5343:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_562:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5342:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_562:
+L_CLOSURE_EXIT_5342:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,48),R0);
@@ -2274,14 +2491,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_561);
+JUMP_EQ(R0_IS_VOID_number_5341);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_561:
+R0_IS_VOID_number_5341:
 
 /*************'def' code starts here***********/
 
@@ -2289,21 +2506,21 @@ R0_IS_VOID_number_561:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_596);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5376);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_596:
+LOOP_COPY_ENV_5376:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_596);
+JUMP_EQ(EXIT_LOOP_COPY_5376);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_596);
-EXIT_LOOP_COPY_596:
+JUMP(LOOP_COPY_ENV_5376);
+EXIT_LOOP_COPY_5376:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -2311,27 +2528,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_596:
+LOOP_EXTEND_ENV_5376:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_596);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5376);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_596);
-EXIT_LOOP_EXTEND_ENV_596:
+JUMP(LOOP_EXTEND_ENV_5376);
+EXIT_LOOP_EXTEND_ENV_5376:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_582));
-JUMP(L_CLOSURE_EXIT_582);
-L_CLOSURE_BODY_582:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5362));
+JUMP(L_CLOSURE_EXIT_5362);
+L_CLOSURE_BODY_5362:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_582);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5362);
 
 /*************if3 code starts here***********/
 
@@ -2348,15 +2564,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL595);
-JUMP (FINISH_FVAR_LABEL595);
-UNDEF_LABEL595:
+JUMP_EQ (UNDEF_LABEL5375);
+JUMP (FINISH_FVAR_LABEL5375);
+UNDEF_LABEL5375:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL595:
+FINISH_FVAR_LABEL5375:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_594);
+JUMP_NE(L_Error_cannot_apply_non_closure_5374);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2364,22 +2580,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_594:
+L_Error_cannot_apply_non_closure_5374:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE584);
+JUMP_EQ (L_IF3_ELSE5364);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT583);
-L_IF3_ELSE584:
+JUMP (L_IF3_EXIT5363);
+L_IF3_ELSE5364:
 
-/*************tc-applic code starts here585***********/
+/*************tc-applic code starts here5365***********/
 
 /*************applic code starts here***********/
 
@@ -2403,15 +2619,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL593);
-JUMP (FINISH_FVAR_LABEL593);
-UNDEF_LABEL593:
+JUMP_EQ (UNDEF_LABEL5373);
+JUMP (FINISH_FVAR_LABEL5373);
+UNDEF_LABEL5373:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL593:
+FINISH_FVAR_LABEL5373:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_592);
+JUMP_NE(L_Error_cannot_apply_non_closure_5372);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2419,7 +2635,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_592:
+L_Error_cannot_apply_non_closure_5372:
 
 /*************applic code ends here***********/
 
@@ -2429,15 +2645,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,2));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL591);
-JUMP (FINISH_FVAR_LABEL591);
-UNDEF_LABEL591:
+JUMP_EQ (UNDEF_LABEL5371);
+JUMP (FINISH_FVAR_LABEL5371);
+UNDEF_LABEL5371:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL591:
+FINISH_FVAR_LABEL5371:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_590);
+JUMP_NE(L_Error_cannot_apply_non_closure_5370);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2445,7 +2661,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_590:
+L_Error_cannot_apply_non_closure_5370:
 
 /*************applic code ends here***********/
 
@@ -2464,15 +2680,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL589);
-JUMP (FINISH_FVAR_LABEL589);
-UNDEF_LABEL589:
+JUMP_EQ (UNDEF_LABEL5369);
+JUMP (FINISH_FVAR_LABEL5369);
+UNDEF_LABEL5369:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL589:
+FINISH_FVAR_LABEL5369:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_588);
+JUMP_NE(L_Error_cannot_apply_non_closure_5368);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2480,7 +2696,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_588:
+L_Error_cannot_apply_non_closure_5368:
 
 /*************applic code ends here***********/
 
@@ -2490,19 +2706,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,51));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL587);
-JUMP (FINISH_FVAR_LABEL587);
-UNDEF_LABEL587:
+JUMP_EQ (UNDEF_LABEL5367);
+JUMP (FINISH_FVAR_LABEL5367);
+UNDEF_LABEL5367:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL587:
+FINISH_FVAR_LABEL5367:
 
 
-/*************tc-applic cont585***********/
+/*************tc-applic cont5365***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_585);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5365);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -2512,17 +2728,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover586);
+JUMP_EQ (tc_applic_end_param_ranover5366);
 ADD (R10 , IMM(1));
-tc_applic_for_label586:
+tc_applic_for_label5366:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover586);
+JUMP_LE (tc_applic_end_param_ranover5366);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label586);
-tc_applic_end_param_ranover586:
+JUMP (tc_applic_for_label5366);
+tc_applic_end_param_ranover5366:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -2540,19 +2756,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_585:
+L_Error_cannot_tc_apply_non_closure_5365:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT583:
+L_IF3_EXIT5363:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_582:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5362:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_582:
+L_CLOSURE_EXIT_5362:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,51),R0);
@@ -2561,14 +2777,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_581);
+JUMP_EQ(R0_IS_VOID_number_5361);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_581:
+R0_IS_VOID_number_5361:
 
 /*************'def' code starts here***********/
 
@@ -2576,21 +2792,21 @@ R0_IS_VOID_number_581:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_538);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5318);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_538:
+LOOP_COPY_ENV_5318:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_538);
+JUMP_EQ(EXIT_LOOP_COPY_5318);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_538);
-EXIT_LOOP_COPY_538:
+JUMP(LOOP_COPY_ENV_5318);
+EXIT_LOOP_COPY_5318:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -2598,27 +2814,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_538:
+LOOP_EXTEND_ENV_5318:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_538);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5318);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_538);
-EXIT_LOOP_EXTEND_ENV_538:
+JUMP(LOOP_EXTEND_ENV_5318);
+EXIT_LOOP_EXTEND_ENV_5318:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_525));
-JUMP(L_CLOSURE_EXIT_525);
-L_CLOSURE_BODY_525:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5305));
+JUMP(L_CLOSURE_EXIT_5305);
+L_CLOSURE_BODY_5305:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(3));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_525);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5305);
 
 /*************if3 code starts here***********/
 
@@ -2635,15 +2850,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL537);
-JUMP (FINISH_FVAR_LABEL537);
-UNDEF_LABEL537:
+JUMP_EQ (UNDEF_LABEL5317);
+JUMP (FINISH_FVAR_LABEL5317);
+UNDEF_LABEL5317:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL537:
+FINISH_FVAR_LABEL5317:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_536);
+JUMP_NE(L_Error_cannot_apply_non_closure_5316);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2651,22 +2866,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_536:
+L_Error_cannot_apply_non_closure_5316:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE527);
+JUMP_EQ (L_IF3_ELSE5307);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT526);
-L_IF3_ELSE527:
+JUMP (L_IF3_EXIT5306);
+L_IF3_ELSE5307:
 
-/*************tc-applic code starts here528***********/
+/*************tc-applic code starts here5308***********/
 
 /*************applic code starts here***********/
 
@@ -2681,15 +2896,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL535);
-JUMP (FINISH_FVAR_LABEL535);
-UNDEF_LABEL535:
+JUMP_EQ (UNDEF_LABEL5315);
+JUMP (FINISH_FVAR_LABEL5315);
+UNDEF_LABEL5315:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL535:
+FINISH_FVAR_LABEL5315:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_534);
+JUMP_NE(L_Error_cannot_apply_non_closure_5314);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2697,7 +2912,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_534:
+L_Error_cannot_apply_non_closure_5314:
 
 /*************applic code ends here***********/
 
@@ -2718,15 +2933,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL533);
-JUMP (FINISH_FVAR_LABEL533);
-UNDEF_LABEL533:
+JUMP_EQ (UNDEF_LABEL5313);
+JUMP (FINISH_FVAR_LABEL5313);
+UNDEF_LABEL5313:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL533:
+FINISH_FVAR_LABEL5313:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_532);
+JUMP_NE(L_Error_cannot_apply_non_closure_5312);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2734,7 +2949,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_532:
+L_Error_cannot_apply_non_closure_5312:
 
 /*************applic code ends here***********/
 
@@ -2754,7 +2969,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_531);
+JUMP_NE(L_Error_cannot_apply_non_closure_5311);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -2762,7 +2977,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_531:
+L_Error_cannot_apply_non_closure_5311:
 
 /*************applic code ends here***********/
 
@@ -2779,19 +2994,19 @@ PUSH(3);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,49));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL530);
-JUMP (FINISH_FVAR_LABEL530);
-UNDEF_LABEL530:
+JUMP_EQ (UNDEF_LABEL5310);
+JUMP (FINISH_FVAR_LABEL5310);
+UNDEF_LABEL5310:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL530:
+FINISH_FVAR_LABEL5310:
 
 
-/*************tc-applic cont528***********/
+/*************tc-applic cont5308***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_528);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5308);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -2801,17 +3016,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover529);
+JUMP_EQ (tc_applic_end_param_ranover5309);
 ADD (R10 , IMM(1));
-tc_applic_for_label529:
+tc_applic_for_label5309:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover529);
+JUMP_LE (tc_applic_end_param_ranover5309);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label529);
-tc_applic_end_param_ranover529:
+JUMP (tc_applic_for_label5309);
+tc_applic_end_param_ranover5309:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -2829,19 +3044,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_528:
+L_Error_cannot_tc_apply_non_closure_5308:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT526:
+L_IF3_EXIT5306:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_525:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5305:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_525:
+L_CLOSURE_EXIT_5305:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,49),R0);
@@ -2850,14 +3065,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_524);
+JUMP_EQ(R0_IS_VOID_number_5304);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_524:
+R0_IS_VOID_number_5304:
 
 /*************'def' code starts here***********/
 
@@ -2865,21 +3080,21 @@ R0_IS_VOID_number_524:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_560);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5340);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_560:
+LOOP_COPY_ENV_5340:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_560);
+JUMP_EQ(EXIT_LOOP_COPY_5340);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_560);
-EXIT_LOOP_COPY_560:
+JUMP(LOOP_COPY_ENV_5340);
+EXIT_LOOP_COPY_5340:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -2887,37 +3102,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_560:
+LOOP_EXTEND_ENV_5340:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_560);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5340);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_560);
-EXIT_LOOP_EXTEND_ENV_560:
+JUMP(LOOP_EXTEND_ENV_5340);
+EXIT_LOOP_EXTEND_ENV_5340:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_540));
-JUMP(L_CLOSURE_EXIT_540);
-L_CLOSURE_BODY_540:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5320));
+JUMP(L_CLOSURE_EXIT_5320);
+L_CLOSURE_BODY_5320:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 1);
-JUMP_EQ(NO_OPTIONAL_ARGS_559);
+JUMP_EQ(NO_OPTIONAL_ARGS_5339);
 MOV (R8,FPARG(1)-1- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_559:
+LOOP_ARGS_5339:
 CMP (R4 ,0);
-JUMP_EQ(EXIT_LOOP_ARGS_559);
+JUMP_EQ(EXIT_LOOP_ARGS_5339);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -2927,46 +3141,46 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_559);
-EXIT_LOOP_ARGS_559:
+JUMP(LOOP_ARGS_5339);
+EXIT_LOOP_ARGS_5339:
 MOV (FPARG(2 + 1), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 2);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_559:
+FIXING_STACK_5339:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_559);
+JUMP_EQ(EXIT_FIXING_STACK_5339);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_559);
-EXIT_FIXING_STACK_559:
+JUMP(FIXING_STACK_5339);
+EXIT_FIXING_STACK_5339:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_559);
-NO_OPTIONAL_ARGS_559:
+JUMP(FINAL_5339);
+NO_OPTIONAL_ARGS_5339:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_559:
+NIL_CASE_LOOP_5339:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_559);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_5339);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_559);
-EXIT_NIL_CASE_LOOP_559:
+JUMP(NIL_CASE_LOOP_5339);
+EXIT_NIL_CASE_LOOP_5339:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_559:
+FINAL_5339:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
@@ -2985,15 +3199,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL558);
-JUMP (FINISH_FVAR_LABEL558);
-UNDEF_LABEL558:
+JUMP_EQ (UNDEF_LABEL5338);
+JUMP (FINISH_FVAR_LABEL5338);
+UNDEF_LABEL5338:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL558:
+FINISH_FVAR_LABEL5338:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_557);
+JUMP_NE(L_Error_cannot_apply_non_closure_5337);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3001,15 +3215,15 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_557:
+L_Error_cannot_apply_non_closure_5337:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE542);
+JUMP_EQ (L_IF3_ELSE5322);
 
-/*************tc-applic code starts here554***********/
-MOV (R0 ,INDD(CONSTARRAY,4));
+/*************tc-applic code starts here5334***********/
+MOV (R0 ,INDD(CONSTARRAY,182));
 
 PUSH(R0);
 
@@ -3024,19 +3238,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,29));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL556);
-JUMP (FINISH_FVAR_LABEL556);
-UNDEF_LABEL556:
+JUMP_EQ (UNDEF_LABEL5336);
+JUMP (FINISH_FVAR_LABEL5336);
+UNDEF_LABEL5336:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL556:
+FINISH_FVAR_LABEL5336:
 
 
-/*************tc-applic cont554***********/
+/*************tc-applic cont5334***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_554);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5334);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -3046,17 +3260,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover555);
+JUMP_EQ (tc_applic_end_param_ranover5335);
 ADD (R10 , IMM(1));
-tc_applic_for_label555:
+tc_applic_for_label5335:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover555);
+JUMP_LE (tc_applic_end_param_ranover5335);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label555);
-tc_applic_end_param_ranover555:
+JUMP (tc_applic_for_label5335);
+tc_applic_end_param_ranover5335:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -3074,11 +3288,11 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_554:
+L_Error_cannot_tc_apply_non_closure_5334:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT541);
-L_IF3_ELSE542:
+JUMP (L_IF3_EXIT5321);
+L_IF3_ELSE5322:
 
 /*************if3 code starts here***********/
 
@@ -3097,15 +3311,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL553);
-JUMP (FINISH_FVAR_LABEL553);
-UNDEF_LABEL553:
+JUMP_EQ (UNDEF_LABEL5333);
+JUMP (FINISH_FVAR_LABEL5333);
+UNDEF_LABEL5333:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL553:
+FINISH_FVAR_LABEL5333:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_552);
+JUMP_NE(L_Error_cannot_apply_non_closure_5332);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3113,7 +3327,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_552:
+L_Error_cannot_apply_non_closure_5332:
 
 /*************applic code ends here***********/
 
@@ -3123,15 +3337,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,6));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL551);
-JUMP (FINISH_FVAR_LABEL551);
-UNDEF_LABEL551:
+JUMP_EQ (UNDEF_LABEL5331);
+JUMP (FINISH_FVAR_LABEL5331);
+UNDEF_LABEL5331:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL551:
+FINISH_FVAR_LABEL5331:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_550);
+JUMP_NE(L_Error_cannot_apply_non_closure_5330);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3139,14 +3353,14 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_550:
+L_Error_cannot_apply_non_closure_5330:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE544);
+JUMP_EQ (L_IF3_ELSE5324);
 
-/*************tc-applic code starts here545***********/
+/*************tc-applic code starts here5325***********/
 
 /*************applic code starts here***********/
 
@@ -3161,15 +3375,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL549);
-JUMP (FINISH_FVAR_LABEL549);
-UNDEF_LABEL549:
+JUMP_EQ (UNDEF_LABEL5329);
+JUMP (FINISH_FVAR_LABEL5329);
+UNDEF_LABEL5329:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL549:
+FINISH_FVAR_LABEL5329:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_548);
+JUMP_NE(L_Error_cannot_apply_non_closure_5328);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3177,7 +3391,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_548:
+L_Error_cannot_apply_non_closure_5328:
 
 /*************applic code ends here***********/
 
@@ -3194,19 +3408,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,29));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL547);
-JUMP (FINISH_FVAR_LABEL547);
-UNDEF_LABEL547:
+JUMP_EQ (UNDEF_LABEL5327);
+JUMP (FINISH_FVAR_LABEL5327);
+UNDEF_LABEL5327:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL547:
+FINISH_FVAR_LABEL5327:
 
 
-/*************tc-applic cont545***********/
+/*************tc-applic cont5325***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_545);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5325);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -3216,17 +3430,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover546);
+JUMP_EQ (tc_applic_end_param_ranover5326);
 ADD (R10 , IMM(1));
-tc_applic_for_label546:
+tc_applic_for_label5326:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover546);
+JUMP_LE (tc_applic_end_param_ranover5326);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label546);
-tc_applic_end_param_ranover546:
+JUMP (tc_applic_for_label5326);
+tc_applic_end_param_ranover5326:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -3244,27 +3458,27 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_545:
+L_Error_cannot_tc_apply_non_closure_5325:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT543);
-L_IF3_ELSE544:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5323);
+L_IF3_ELSE5324:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT543:
+L_IF3_EXIT5323:
 
 /*************if3 code ends here***********/
 
-L_IF3_EXIT541:
+L_IF3_EXIT5321:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_540:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5320:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_540:
+L_CLOSURE_EXIT_5320:
 
 /*************lambda-opt code ends here***********/
 MOV(INDD(FVARARRAY,50),R0);
@@ -3273,14 +3487,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_539);
+JUMP_EQ(R0_IS_VOID_number_5319);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_539:
+R0_IS_VOID_number_5319:
 
 /*************'def' code starts here***********/
 
@@ -3288,21 +3502,21 @@ R0_IS_VOID_number_539:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_500);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5280);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_500:
+LOOP_COPY_ENV_5280:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_500);
+JUMP_EQ(EXIT_LOOP_COPY_5280);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_500);
-EXIT_LOOP_COPY_500:
+JUMP(LOOP_COPY_ENV_5280);
+EXIT_LOOP_COPY_5280:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -3310,27 +3524,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_500:
+LOOP_EXTEND_ENV_5280:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_500);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5280);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_500);
-EXIT_LOOP_EXTEND_ENV_500:
+JUMP(LOOP_EXTEND_ENV_5280);
+EXIT_LOOP_EXTEND_ENV_5280:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_450));
-JUMP(L_CLOSURE_EXIT_450);
-L_CLOSURE_BODY_450:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5230));
+JUMP(L_CLOSURE_EXIT_5230);
+L_CLOSURE_BODY_5230:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_450);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5230);
 
 /*************if3 code starts here***********/
 
@@ -3347,15 +3560,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL499);
-JUMP (FINISH_FVAR_LABEL499);
-UNDEF_LABEL499:
+JUMP_EQ (UNDEF_LABEL5279);
+JUMP (FINISH_FVAR_LABEL5279);
+UNDEF_LABEL5279:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL499:
+FINISH_FVAR_LABEL5279:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_498);
+JUMP_NE(L_Error_cannot_apply_non_closure_5278);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3363,20 +3576,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_498:
+L_Error_cannot_apply_non_closure_5278:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE452);
+JUMP_EQ (L_IF3_ELSE5232);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT451);
-L_IF3_ELSE452:
+JUMP (L_IF3_EXIT5231);
+L_IF3_ELSE5232:
 
 /*************if3 code starts here***********/
 
@@ -3393,15 +3606,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL497);
-JUMP (FINISH_FVAR_LABEL497);
-UNDEF_LABEL497:
+JUMP_EQ (UNDEF_LABEL5277);
+JUMP (FINISH_FVAR_LABEL5277);
+UNDEF_LABEL5277:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL497:
+FINISH_FVAR_LABEL5277:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_496);
+JUMP_NE(L_Error_cannot_apply_non_closure_5276);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3409,14 +3622,14 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_496:
+L_Error_cannot_apply_non_closure_5276:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE454);
+JUMP_EQ (L_IF3_ELSE5234);
 
-/*************tc-applic code starts here489***********/
+/*************tc-applic code starts here5269***********/
 
 /*************applic code starts here***********/
 
@@ -3431,15 +3644,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL495);
-JUMP (FINISH_FVAR_LABEL495);
-UNDEF_LABEL495:
+JUMP_EQ (UNDEF_LABEL5275);
+JUMP (FINISH_FVAR_LABEL5275);
+UNDEF_LABEL5275:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL495:
+FINISH_FVAR_LABEL5275:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_494);
+JUMP_NE(L_Error_cannot_apply_non_closure_5274);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3447,7 +3660,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_494:
+L_Error_cannot_apply_non_closure_5274:
 
 /*************applic code ends here***********/
 
@@ -3466,15 +3679,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL493);
-JUMP (FINISH_FVAR_LABEL493);
-UNDEF_LABEL493:
+JUMP_EQ (UNDEF_LABEL5273);
+JUMP (FINISH_FVAR_LABEL5273);
+UNDEF_LABEL5273:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL493:
+FINISH_FVAR_LABEL5273:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_492);
+JUMP_NE(L_Error_cannot_apply_non_closure_5272);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3482,7 +3695,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_492:
+L_Error_cannot_apply_non_closure_5272:
 
 /*************applic code ends here***********/
 
@@ -3492,19 +3705,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,53));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL491);
-JUMP (FINISH_FVAR_LABEL491);
-UNDEF_LABEL491:
+JUMP_EQ (UNDEF_LABEL5271);
+JUMP (FINISH_FVAR_LABEL5271);
+UNDEF_LABEL5271:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL491:
+FINISH_FVAR_LABEL5271:
 
 
-/*************tc-applic cont489***********/
+/*************tc-applic cont5269***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_489);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5269);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -3514,17 +3727,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover490);
+JUMP_EQ (tc_applic_end_param_ranover5270);
 ADD (R10 , IMM(1));
-tc_applic_for_label490:
+tc_applic_for_label5270:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover490);
+JUMP_LE (tc_applic_end_param_ranover5270);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label490);
-tc_applic_end_param_ranover490:
+JUMP (tc_applic_for_label5270);
+tc_applic_end_param_ranover5270:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -3542,11 +3755,11 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_489:
+L_Error_cannot_tc_apply_non_closure_5269:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT453);
-L_IF3_ELSE454:
+JUMP (L_IF3_EXIT5233);
+L_IF3_ELSE5234:
 
 /*************if3 code starts here***********/
 
@@ -3569,15 +3782,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL488);
-JUMP (FINISH_FVAR_LABEL488);
-UNDEF_LABEL488:
+JUMP_EQ (UNDEF_LABEL5268);
+JUMP (FINISH_FVAR_LABEL5268);
+UNDEF_LABEL5268:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL488:
+FINISH_FVAR_LABEL5268:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_487);
+JUMP_NE(L_Error_cannot_apply_non_closure_5267);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3585,7 +3798,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_487:
+L_Error_cannot_apply_non_closure_5267:
 
 /*************applic code ends here***********/
 
@@ -3595,15 +3808,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,8));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL486);
-JUMP (FINISH_FVAR_LABEL486);
-UNDEF_LABEL486:
+JUMP_EQ (UNDEF_LABEL5266);
+JUMP (FINISH_FVAR_LABEL5266);
+UNDEF_LABEL5266:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL486:
+FINISH_FVAR_LABEL5266:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_485);
+JUMP_NE(L_Error_cannot_apply_non_closure_5265);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3611,7 +3824,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_485:
+L_Error_cannot_apply_non_closure_5265:
 
 /*************applic code ends here***********/
 
@@ -3621,15 +3834,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,17));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL484);
-JUMP (FINISH_FVAR_LABEL484);
-UNDEF_LABEL484:
+JUMP_EQ (UNDEF_LABEL5264);
+JUMP (FINISH_FVAR_LABEL5264);
+UNDEF_LABEL5264:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL484:
+FINISH_FVAR_LABEL5264:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_483);
+JUMP_NE(L_Error_cannot_apply_non_closure_5263);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3637,12 +3850,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_483:
+L_Error_cannot_apply_non_closure_5263:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE478);
+JUMP_EQ (L_IF3_ELSE5258);
 
 /*************applic code starts here***********/
 
@@ -3659,15 +3872,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL482);
-JUMP (FINISH_FVAR_LABEL482);
-UNDEF_LABEL482:
+JUMP_EQ (UNDEF_LABEL5262);
+JUMP (FINISH_FVAR_LABEL5262);
+UNDEF_LABEL5262:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL482:
+FINISH_FVAR_LABEL5262:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_481);
+JUMP_NE(L_Error_cannot_apply_non_closure_5261);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3675,7 +3888,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_481:
+L_Error_cannot_apply_non_closure_5261:
 
 /*************applic code ends here***********/
 
@@ -3685,15 +3898,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL480);
-JUMP (FINISH_FVAR_LABEL480);
-UNDEF_LABEL480:
+JUMP_EQ (UNDEF_LABEL5260);
+JUMP (FINISH_FVAR_LABEL5260);
+UNDEF_LABEL5260:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL480:
+FINISH_FVAR_LABEL5260:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_479);
+JUMP_NE(L_Error_cannot_apply_non_closure_5259);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3701,22 +3914,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_479:
+L_Error_cannot_apply_non_closure_5259:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT477);
-L_IF3_ELSE478:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5257);
+L_IF3_ELSE5258:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT477:
+L_IF3_EXIT5257:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE456);
+JUMP_EQ (L_IF3_ELSE5236);
 
-/*************tc-applic code starts here472***********/
+/*************tc-applic code starts here5252***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
@@ -3738,15 +3951,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL476);
-JUMP (FINISH_FVAR_LABEL476);
-UNDEF_LABEL476:
+JUMP_EQ (UNDEF_LABEL5256);
+JUMP (FINISH_FVAR_LABEL5256);
+UNDEF_LABEL5256:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL476:
+FINISH_FVAR_LABEL5256:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_475);
+JUMP_NE(L_Error_cannot_apply_non_closure_5255);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3754,7 +3967,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_475:
+L_Error_cannot_apply_non_closure_5255:
 
 /*************applic code ends here***********/
 
@@ -3764,19 +3977,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,53));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL474);
-JUMP (FINISH_FVAR_LABEL474);
-UNDEF_LABEL474:
+JUMP_EQ (UNDEF_LABEL5254);
+JUMP (FINISH_FVAR_LABEL5254);
+UNDEF_LABEL5254:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL474:
+FINISH_FVAR_LABEL5254:
 
 
-/*************tc-applic cont472***********/
+/*************tc-applic cont5252***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_472);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5252);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -3786,17 +3999,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover473);
+JUMP_EQ (tc_applic_end_param_ranover5253);
 ADD (R10 , IMM(1));
-tc_applic_for_label473:
+tc_applic_for_label5253:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover473);
+JUMP_LE (tc_applic_end_param_ranover5253);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label473);
-tc_applic_end_param_ranover473:
+JUMP (tc_applic_for_label5253);
+tc_applic_end_param_ranover5253:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -3814,11 +4027,11 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_472:
+L_Error_cannot_tc_apply_non_closure_5252:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT455);
-L_IF3_ELSE456:
+JUMP (L_IF3_EXIT5235);
+L_IF3_ELSE5236:
 
 /*************seq code starts***********/
 
@@ -3837,15 +4050,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL471);
-JUMP (FINISH_FVAR_LABEL471);
-UNDEF_LABEL471:
+JUMP_EQ (UNDEF_LABEL5251);
+JUMP (FINISH_FVAR_LABEL5251);
+UNDEF_LABEL5251:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL471:
+FINISH_FVAR_LABEL5251:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_470);
+JUMP_NE(L_Error_cannot_apply_non_closure_5250);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3853,7 +4066,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_470:
+L_Error_cannot_apply_non_closure_5250:
 
 /*************applic code ends here***********/
 
@@ -3863,15 +4076,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,8));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL469);
-JUMP (FINISH_FVAR_LABEL469);
-UNDEF_LABEL469:
+JUMP_EQ (UNDEF_LABEL5249);
+JUMP (FINISH_FVAR_LABEL5249);
+UNDEF_LABEL5249:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL469:
+FINISH_FVAR_LABEL5249:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_468);
+JUMP_NE(L_Error_cannot_apply_non_closure_5248);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3879,11 +4092,11 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_468:
+L_Error_cannot_apply_non_closure_5248:
 
 /*************applic code ends here***********/
 
-/*************tc-applic code starts here457***********/
+/*************tc-applic code starts here5237***********/
 
 /*************applic code starts here***********/
 
@@ -3900,15 +4113,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL467);
-JUMP (FINISH_FVAR_LABEL467);
-UNDEF_LABEL467:
+JUMP_EQ (UNDEF_LABEL5247);
+JUMP (FINISH_FVAR_LABEL5247);
+UNDEF_LABEL5247:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL467:
+FINISH_FVAR_LABEL5247:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_466);
+JUMP_NE(L_Error_cannot_apply_non_closure_5246);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3916,14 +4129,14 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_466:
+L_Error_cannot_apply_non_closure_5246:
 
 /*************applic code ends here***********/
 
 PUSH(R0);
 
 /*************applic code starts here***********/
-MOV (R0 ,INDD(CONSTARRAY,0));
+MOV (R0 ,INDD(CONSTARRAY,178));
 
 PUSH(R0);
 
@@ -3938,15 +4151,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,51));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL465);
-JUMP (FINISH_FVAR_LABEL465);
-UNDEF_LABEL465:
+JUMP_EQ (UNDEF_LABEL5245);
+JUMP (FINISH_FVAR_LABEL5245);
+UNDEF_LABEL5245:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL465:
+FINISH_FVAR_LABEL5245:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_464);
+JUMP_NE(L_Error_cannot_apply_non_closure_5244);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3954,7 +4167,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_464:
+L_Error_cannot_apply_non_closure_5244:
 
 /*************applic code ends here***********/
 
@@ -3964,15 +4177,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,32));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL463);
-JUMP (FINISH_FVAR_LABEL463);
-UNDEF_LABEL463:
+JUMP_EQ (UNDEF_LABEL5243);
+JUMP (FINISH_FVAR_LABEL5243);
+UNDEF_LABEL5243:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL463:
+FINISH_FVAR_LABEL5243:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_462);
+JUMP_NE(L_Error_cannot_apply_non_closure_5242);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -3980,7 +4193,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_462:
+L_Error_cannot_apply_non_closure_5242:
 
 /*************applic code ends here***********/
 
@@ -3999,15 +4212,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL461);
-JUMP (FINISH_FVAR_LABEL461);
-UNDEF_LABEL461:
+JUMP_EQ (UNDEF_LABEL5241);
+JUMP (FINISH_FVAR_LABEL5241);
+UNDEF_LABEL5241:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL461:
+FINISH_FVAR_LABEL5241:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_460);
+JUMP_NE(L_Error_cannot_apply_non_closure_5240);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -4015,7 +4228,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_460:
+L_Error_cannot_apply_non_closure_5240:
 
 /*************applic code ends here***********/
 
@@ -4025,19 +4238,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,53));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL459);
-JUMP (FINISH_FVAR_LABEL459);
-UNDEF_LABEL459:
+JUMP_EQ (UNDEF_LABEL5239);
+JUMP (FINISH_FVAR_LABEL5239);
+UNDEF_LABEL5239:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL459:
+FINISH_FVAR_LABEL5239:
 
 
-/*************tc-applic cont457***********/
+/*************tc-applic cont5237***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_457);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5237);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -4047,17 +4260,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover458);
+JUMP_EQ (tc_applic_end_param_ranover5238);
 ADD (R10 , IMM(1));
-tc_applic_for_label458:
+tc_applic_for_label5238:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover458);
+JUMP_LE (tc_applic_end_param_ranover5238);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label458);
-tc_applic_end_param_ranover458:
+JUMP (tc_applic_for_label5238);
+tc_applic_end_param_ranover5238:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -4075,29 +4288,29 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_457:
+L_Error_cannot_tc_apply_non_closure_5237:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
 /*************seq code ends***********/
 
-L_IF3_EXIT455:
+L_IF3_EXIT5235:
 
 /*************if3 code ends here***********/
 
-L_IF3_EXIT453:
+L_IF3_EXIT5233:
 
 /*************if3 code ends here***********/
 
-L_IF3_EXIT451:
+L_IF3_EXIT5231:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_450:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5230:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_450:
+L_CLOSURE_EXIT_5230:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,53),R0);
@@ -4106,14 +4319,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_449);
+JUMP_EQ(R0_IS_VOID_number_5229);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_449:
+R0_IS_VOID_number_5229:
 
 /*************'def' code starts here***********/
 
@@ -4121,21 +4334,21 @@ R0_IS_VOID_number_449:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_523);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5303);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_523:
+LOOP_COPY_ENV_5303:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_523);
+JUMP_EQ(EXIT_LOOP_COPY_5303);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_523);
-EXIT_LOOP_COPY_523:
+JUMP(LOOP_COPY_ENV_5303);
+EXIT_LOOP_COPY_5303:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -4143,37 +4356,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_523:
+LOOP_EXTEND_ENV_5303:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_523);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5303);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_523);
-EXIT_LOOP_EXTEND_ENV_523:
+JUMP(LOOP_EXTEND_ENV_5303);
+EXIT_LOOP_EXTEND_ENV_5303:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_502));
-JUMP(L_CLOSURE_EXIT_502);
-L_CLOSURE_BODY_502:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5282));
+JUMP(L_CLOSURE_EXIT_5282);
+L_CLOSURE_BODY_5282:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_522);
+JUMP_EQ(NO_OPTIONAL_ARGS_5302);
 MOV (R8,FPARG(1)-0- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_522:
+LOOP_ARGS_5302:
 CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_522);
+JUMP_EQ(EXIT_LOOP_ARGS_5302);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -4183,46 +4395,46 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_522);
-EXIT_LOOP_ARGS_522:
+JUMP(LOOP_ARGS_5302);
+EXIT_LOOP_ARGS_5302:
 MOV (FPARG(2 + 0), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 1);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_522:
+FIXING_STACK_5302:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_522);
+JUMP_EQ(EXIT_FIXING_STACK_5302);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_522);
-EXIT_FIXING_STACK_522:
+JUMP(FIXING_STACK_5302);
+EXIT_FIXING_STACK_5302:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_522);
-NO_OPTIONAL_ARGS_522:
+JUMP(FINAL_5302);
+NO_OPTIONAL_ARGS_5302:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_522:
+NIL_CASE_LOOP_5302:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_522);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_5302);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_522);
-EXIT_NIL_CASE_LOOP_522:
+JUMP(NIL_CASE_LOOP_5302);
+EXIT_NIL_CASE_LOOP_5302:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_522:
+FINAL_5302:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
@@ -4241,15 +4453,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL521);
-JUMP (FINISH_FVAR_LABEL521);
-UNDEF_LABEL521:
+JUMP_EQ (UNDEF_LABEL5301);
+JUMP (FINISH_FVAR_LABEL5301);
+UNDEF_LABEL5301:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL521:
+FINISH_FVAR_LABEL5301:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_520);
+JUMP_NE(L_Error_cannot_apply_non_closure_5300);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -4257,32 +4469,32 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_520:
+L_Error_cannot_apply_non_closure_5300:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE504);
+JUMP_EQ (L_IF3_ELSE5284);
 
-/*************tc-applic code starts here517***********/
+/*************tc-applic code starts here5297***********/
 PUSH (IMM(0));
 
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,36));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL519);
-JUMP (FINISH_FVAR_LABEL519);
-UNDEF_LABEL519:
+JUMP_EQ (UNDEF_LABEL5299);
+JUMP (FINISH_FVAR_LABEL5299);
+UNDEF_LABEL5299:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL519:
+FINISH_FVAR_LABEL5299:
 
 
-/*************tc-applic cont517***********/
+/*************tc-applic cont5297***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_517);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5297);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -4292,17 +4504,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover518);
+JUMP_EQ (tc_applic_end_param_ranover5298);
 ADD (R10 , IMM(1));
-tc_applic_for_label518:
+tc_applic_for_label5298:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover518);
+JUMP_LE (tc_applic_end_param_ranover5298);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label518);
-tc_applic_end_param_ranover518:
+JUMP (tc_applic_for_label5298);
+tc_applic_end_param_ranover5298:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -4320,11 +4532,11 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_517:
+L_Error_cannot_tc_apply_non_closure_5297:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT503);
-L_IF3_ELSE504:
+JUMP (L_IF3_EXIT5283);
+L_IF3_ELSE5284:
 
 /*************if3 code starts here***********/
 
@@ -4343,15 +4555,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL516);
-JUMP (FINISH_FVAR_LABEL516);
-UNDEF_LABEL516:
+JUMP_EQ (UNDEF_LABEL5296);
+JUMP (FINISH_FVAR_LABEL5296);
+UNDEF_LABEL5296:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL516:
+FINISH_FVAR_LABEL5296:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_515);
+JUMP_NE(L_Error_cannot_apply_non_closure_5295);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -4359,7 +4571,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_515:
+L_Error_cannot_apply_non_closure_5295:
 
 /*************applic code ends here***********/
 
@@ -4369,15 +4581,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL514);
-JUMP (FINISH_FVAR_LABEL514);
-UNDEF_LABEL514:
+JUMP_EQ (UNDEF_LABEL5294);
+JUMP (FINISH_FVAR_LABEL5294);
+UNDEF_LABEL5294:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL514:
+FINISH_FVAR_LABEL5294:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_513);
+JUMP_NE(L_Error_cannot_apply_non_closure_5293);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -4385,14 +4597,14 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_513:
+L_Error_cannot_apply_non_closure_5293:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE506);
+JUMP_EQ (L_IF3_ELSE5286);
 
-/*************tc-applic code starts here510***********/
+/*************tc-applic code starts here5290***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 0));
@@ -4405,19 +4617,19 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL512);
-JUMP (FINISH_FVAR_LABEL512);
-UNDEF_LABEL512:
+JUMP_EQ (UNDEF_LABEL5292);
+JUMP (FINISH_FVAR_LABEL5292);
+UNDEF_LABEL5292:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL512:
+FINISH_FVAR_LABEL5292:
 
 
-/*************tc-applic cont510***********/
+/*************tc-applic cont5290***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_510);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5290);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -4427,17 +4639,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover511);
+JUMP_EQ (tc_applic_end_param_ranover5291);
 ADD (R10 , IMM(1));
-tc_applic_for_label511:
+tc_applic_for_label5291:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover511);
+JUMP_LE (tc_applic_end_param_ranover5291);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label511);
-tc_applic_end_param_ranover511:
+JUMP (tc_applic_for_label5291);
+tc_applic_end_param_ranover5291:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -4455,14 +4667,14 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_510:
+L_Error_cannot_tc_apply_non_closure_5290:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT505);
-L_IF3_ELSE506:
+JUMP (L_IF3_EXIT5285);
+L_IF3_ELSE5286:
 
-/*************tc-applic code starts here507***********/
-MOV (R0 ,INDD(CONSTARRAY,0));
+/*************tc-applic code starts here5287***********/
+MOV (R0 ,INDD(CONSTARRAY,178));
 
 PUSH(R0);
 
@@ -4477,19 +4689,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,53));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL509);
-JUMP (FINISH_FVAR_LABEL509);
-UNDEF_LABEL509:
+JUMP_EQ (UNDEF_LABEL5289);
+JUMP (FINISH_FVAR_LABEL5289);
+UNDEF_LABEL5289:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL509:
+FINISH_FVAR_LABEL5289:
 
 
-/*************tc-applic cont507***********/
+/*************tc-applic cont5287***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_507);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5287);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -4499,17 +4711,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover508);
+JUMP_EQ (tc_applic_end_param_ranover5288);
 ADD (R10 , IMM(1));
-tc_applic_for_label508:
+tc_applic_for_label5288:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover508);
+JUMP_LE (tc_applic_end_param_ranover5288);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label508);
-tc_applic_end_param_ranover508:
+JUMP (tc_applic_for_label5288);
+tc_applic_end_param_ranover5288:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -4527,23 +4739,23 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_507:
+L_Error_cannot_tc_apply_non_closure_5287:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT505:
+L_IF3_EXIT5285:
 
 /*************if3 code ends here***********/
 
-L_IF3_EXIT503:
+L_IF3_EXIT5283:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_502:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5282:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_502:
+L_CLOSURE_EXIT_5282:
 
 /*************lambda-var code ends here***********/
 MOV(INDD(FVARARRAY,52),R0);
@@ -4552,14 +4764,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_501);
+JUMP_EQ(R0_IS_VOID_number_5281);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_501:
+R0_IS_VOID_number_5281:
 
 /*************'def' code starts here***********/
 
@@ -4567,21 +4779,21 @@ R0_IS_VOID_number_501:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_439);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5219);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_439:
+LOOP_COPY_ENV_5219:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_439);
+JUMP_EQ(EXIT_LOOP_COPY_5219);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_439);
-EXIT_LOOP_COPY_439:
+JUMP(LOOP_COPY_ENV_5219);
+EXIT_LOOP_COPY_5219:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -4589,29 +4801,28 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_439:
+LOOP_EXTEND_ENV_5219:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_439);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5219);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_439);
-EXIT_LOOP_EXTEND_ENV_439:
+JUMP(LOOP_EXTEND_ENV_5219);
+EXIT_LOOP_EXTEND_ENV_5219:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_435));
-JUMP(L_CLOSURE_EXIT_435);
-L_CLOSURE_BODY_435:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5215));
+JUMP(L_CLOSURE_EXIT_5215);
+L_CLOSURE_BODY_5215:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(1));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_435);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5215);
 
-/*************tc-applic code starts here436***********/
+/*************tc-applic code starts here5216***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 0));
@@ -4624,19 +4835,19 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,55));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL438);
-JUMP (FINISH_FVAR_LABEL438);
-UNDEF_LABEL438:
+JUMP_EQ (UNDEF_LABEL5218);
+JUMP (FINISH_FVAR_LABEL5218);
+UNDEF_LABEL5218:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL438:
+FINISH_FVAR_LABEL5218:
 
 
-/*************tc-applic cont436***********/
+/*************tc-applic cont5216***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_436);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5216);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -4646,17 +4857,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover437);
+JUMP_EQ (tc_applic_end_param_ranover5217);
 ADD (R10 , IMM(1));
-tc_applic_for_label437:
+tc_applic_for_label5217:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover437);
+JUMP_LE (tc_applic_end_param_ranover5217);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label437);
-tc_applic_end_param_ranover437:
+JUMP (tc_applic_for_label5217);
+tc_applic_end_param_ranover5217:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -4674,15 +4885,15 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_436:
+L_Error_cannot_tc_apply_non_closure_5216:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_435:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5215:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_435:
+L_CLOSURE_EXIT_5215:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,54),R0);
@@ -4691,14 +4902,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_434);
+JUMP_EQ(R0_IS_VOID_number_5214);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_434:
+R0_IS_VOID_number_5214:
 
 /*************'def' code starts here***********/
 
@@ -4706,21 +4917,21 @@ R0_IS_VOID_number_434:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_448);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5228);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_448:
+LOOP_COPY_ENV_5228:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_448);
+JUMP_EQ(EXIT_LOOP_COPY_5228);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_448);
-EXIT_LOOP_COPY_448:
+JUMP(LOOP_COPY_ENV_5228);
+EXIT_LOOP_COPY_5228:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -4728,27 +4939,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_448:
+LOOP_EXTEND_ENV_5228:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_448);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5228);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_448);
-EXIT_LOOP_EXTEND_ENV_448:
+JUMP(LOOP_EXTEND_ENV_5228);
+EXIT_LOOP_EXTEND_ENV_5228:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_441));
-JUMP(L_CLOSURE_EXIT_441);
-L_CLOSURE_BODY_441:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5221));
+JUMP(L_CLOSURE_EXIT_5221);
+L_CLOSURE_BODY_5221:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(1));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_441);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5221);
 
 /*************or code starts here***********/
 
@@ -4765,15 +4975,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,7));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL447);
-JUMP (FINISH_FVAR_LABEL447);
-UNDEF_LABEL447:
+JUMP_EQ (UNDEF_LABEL5227);
+JUMP (FINISH_FVAR_LABEL5227);
+UNDEF_LABEL5227:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL447:
+FINISH_FVAR_LABEL5227:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_446);
+JUMP_NE(L_Error_cannot_apply_non_closure_5226);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -4781,14 +4991,14 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_446:
+L_Error_cannot_apply_non_closure_5226:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT442);
+JUMP_NE (L_OR_EXIT5222);
 
-/*************tc-applic code starts here443***********/
+/*************tc-applic code starts here5223***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 0));
@@ -4801,19 +5011,19 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,15));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL445);
-JUMP (FINISH_FVAR_LABEL445);
-UNDEF_LABEL445:
+JUMP_EQ (UNDEF_LABEL5225);
+JUMP (FINISH_FVAR_LABEL5225);
+UNDEF_LABEL5225:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL445:
+FINISH_FVAR_LABEL5225:
 
 
-/*************tc-applic cont443***********/
+/*************tc-applic cont5223***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_443);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5223);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -4823,17 +5033,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover444);
+JUMP_EQ (tc_applic_end_param_ranover5224);
 ADD (R10 , IMM(1));
-tc_applic_for_label444:
+tc_applic_for_label5224:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover444);
+JUMP_LE (tc_applic_end_param_ranover5224);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label444);
-tc_applic_end_param_ranover444:
+JUMP (tc_applic_for_label5224);
+tc_applic_end_param_ranover5224:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -4851,21 +5061,21 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_443:
+L_Error_cannot_tc_apply_non_closure_5223:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT442);
-L_OR_EXIT442:
+JUMP_NE (L_OR_EXIT5222);
+L_OR_EXIT5222:
 
 /*************or code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_441:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5221:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_441:
+L_CLOSURE_EXIT_5221:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,55),R0);
@@ -4874,14 +5084,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_440);
+JUMP_EQ(R0_IS_VOID_number_5220);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_440:
+R0_IS_VOID_number_5220:
 
 /*************'def' code starts here***********/
 
@@ -4889,21 +5099,21 @@ R0_IS_VOID_number_440:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_421);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5201);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_421:
+LOOP_COPY_ENV_5201:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_421);
+JUMP_EQ(EXIT_LOOP_COPY_5201);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_421);
-EXIT_LOOP_COPY_421:
+JUMP(LOOP_COPY_ENV_5201);
+EXIT_LOOP_COPY_5201:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -4911,27 +5121,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_421:
+LOOP_EXTEND_ENV_5201:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_421);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5201);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_421);
-EXIT_LOOP_EXTEND_ENV_421:
+JUMP(LOOP_EXTEND_ENV_5201);
+EXIT_LOOP_EXTEND_ENV_5201:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_348));
-JUMP(L_CLOSURE_EXIT_348);
-L_CLOSURE_BODY_348:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5128));
+JUMP(L_CLOSURE_EXIT_5128);
+L_CLOSURE_BODY_5128:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_348);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5128);
 
 /*************if3 code starts here***********/
 
@@ -4952,15 +5161,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,7));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL420);
-JUMP (FINISH_FVAR_LABEL420);
-UNDEF_LABEL420:
+JUMP_EQ (UNDEF_LABEL5200);
+JUMP (FINISH_FVAR_LABEL5200);
+UNDEF_LABEL5200:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL420:
+FINISH_FVAR_LABEL5200:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_419);
+JUMP_NE(L_Error_cannot_apply_non_closure_5199);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -4968,12 +5177,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_419:
+L_Error_cannot_apply_non_closure_5199:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE416);
+JUMP_EQ (L_IF3_ELSE5196);
 
 /*************applic code starts here***********/
 
@@ -4988,15 +5197,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,7));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL418);
-JUMP (FINISH_FVAR_LABEL418);
-UNDEF_LABEL418:
+JUMP_EQ (UNDEF_LABEL5198);
+JUMP (FINISH_FVAR_LABEL5198);
+UNDEF_LABEL5198:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL418:
+FINISH_FVAR_LABEL5198:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_417);
+JUMP_NE(L_Error_cannot_apply_non_closure_5197);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5004,20 +5213,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_417:
+L_Error_cannot_apply_non_closure_5197:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT415);
-L_IF3_ELSE416:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5195);
+L_IF3_ELSE5196:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT415:
+L_IF3_EXIT5195:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT396);
+JUMP_NE (L_OR_EXIT5176);
 
 /*************if3 code starts here***********/
 
@@ -5034,15 +5243,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,15));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL414);
-JUMP (FINISH_FVAR_LABEL414);
-UNDEF_LABEL414:
+JUMP_EQ (UNDEF_LABEL5194);
+JUMP (FINISH_FVAR_LABEL5194);
+UNDEF_LABEL5194:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL414:
+FINISH_FVAR_LABEL5194:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_413);
+JUMP_NE(L_Error_cannot_apply_non_closure_5193);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5050,12 +5259,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_413:
+L_Error_cannot_apply_non_closure_5193:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE410);
+JUMP_EQ (L_IF3_ELSE5190);
 
 /*************applic code starts here***********/
 
@@ -5070,15 +5279,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,15));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL412);
-JUMP (FINISH_FVAR_LABEL412);
-UNDEF_LABEL412:
+JUMP_EQ (UNDEF_LABEL5192);
+JUMP (FINISH_FVAR_LABEL5192);
+UNDEF_LABEL5192:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL412:
+FINISH_FVAR_LABEL5192:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_411);
+JUMP_NE(L_Error_cannot_apply_non_closure_5191);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5086,20 +5295,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_411:
+L_Error_cannot_apply_non_closure_5191:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT409);
-L_IF3_ELSE410:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5189);
+L_IF3_ELSE5190:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT409:
+L_IF3_EXIT5189:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT396);
+JUMP_NE (L_OR_EXIT5176);
 
 /*************if3 code starts here***********/
 
@@ -5116,15 +5325,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,6));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL408);
-JUMP (FINISH_FVAR_LABEL408);
-UNDEF_LABEL408:
+JUMP_EQ (UNDEF_LABEL5188);
+JUMP (FINISH_FVAR_LABEL5188);
+UNDEF_LABEL5188:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL408:
+FINISH_FVAR_LABEL5188:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_407);
+JUMP_NE(L_Error_cannot_apply_non_closure_5187);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5132,12 +5341,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_407:
+L_Error_cannot_apply_non_closure_5187:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE404);
+JUMP_EQ (L_IF3_ELSE5184);
 
 /*************applic code starts here***********/
 
@@ -5152,15 +5361,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,6));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL406);
-JUMP (FINISH_FVAR_LABEL406);
-UNDEF_LABEL406:
+JUMP_EQ (UNDEF_LABEL5186);
+JUMP (FINISH_FVAR_LABEL5186);
+UNDEF_LABEL5186:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL406:
+FINISH_FVAR_LABEL5186:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_405);
+JUMP_NE(L_Error_cannot_apply_non_closure_5185);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5168,20 +5377,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_405:
+L_Error_cannot_apply_non_closure_5185:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT403);
-L_IF3_ELSE404:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5183);
+L_IF3_ELSE5184:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT403:
+L_IF3_EXIT5183:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT396);
+JUMP_NE (L_OR_EXIT5176);
 
 /*************if3 code starts here***********/
 
@@ -5198,15 +5407,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,11));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL402);
-JUMP (FINISH_FVAR_LABEL402);
-UNDEF_LABEL402:
+JUMP_EQ (UNDEF_LABEL5182);
+JUMP (FINISH_FVAR_LABEL5182);
+UNDEF_LABEL5182:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL402:
+FINISH_FVAR_LABEL5182:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_401);
+JUMP_NE(L_Error_cannot_apply_non_closure_5181);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5214,12 +5423,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_401:
+L_Error_cannot_apply_non_closure_5181:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE398);
+JUMP_EQ (L_IF3_ELSE5178);
 
 /*************applic code starts here***********/
 
@@ -5234,15 +5443,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,11));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL400);
-JUMP (FINISH_FVAR_LABEL400);
-UNDEF_LABEL400:
+JUMP_EQ (UNDEF_LABEL5180);
+JUMP (FINISH_FVAR_LABEL5180);
+UNDEF_LABEL5180:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL400:
+FINISH_FVAR_LABEL5180:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_399);
+JUMP_NE(L_Error_cannot_apply_non_closure_5179);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5250,28 +5459,28 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_399:
+L_Error_cannot_apply_non_closure_5179:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT397);
-L_IF3_ELSE398:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5177);
+L_IF3_ELSE5178:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT397:
+L_IF3_EXIT5177:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT396);
-L_OR_EXIT396:
+JUMP_NE (L_OR_EXIT5176);
+L_OR_EXIT5176:
 
 /*************or code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE350);
+JUMP_EQ (L_IF3_ELSE5130);
 
-/*************tc-applic code starts here393***********/
+/*************tc-applic code starts here5173***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
@@ -5291,19 +5500,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,19));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL395);
-JUMP (FINISH_FVAR_LABEL395);
-UNDEF_LABEL395:
+JUMP_EQ (UNDEF_LABEL5175);
+JUMP (FINISH_FVAR_LABEL5175);
+UNDEF_LABEL5175:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL395:
+FINISH_FVAR_LABEL5175:
 
 
-/*************tc-applic cont393***********/
+/*************tc-applic cont5173***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_393);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5173);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -5313,17 +5522,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover394);
+JUMP_EQ (tc_applic_end_param_ranover5174);
 ADD (R10 , IMM(1));
-tc_applic_for_label394:
+tc_applic_for_label5174:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover394);
+JUMP_LE (tc_applic_end_param_ranover5174);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label394);
-tc_applic_end_param_ranover394:
+JUMP (tc_applic_for_label5174);
+tc_applic_end_param_ranover5174:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -5341,11 +5550,11 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_393:
+L_Error_cannot_tc_apply_non_closure_5173:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT349);
-L_IF3_ELSE350:
+JUMP (L_IF3_EXIT5129);
+L_IF3_ELSE5130:
 
 /*************if3 code starts here***********/
 
@@ -5366,15 +5575,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL392);
-JUMP (FINISH_FVAR_LABEL392);
-UNDEF_LABEL392:
+JUMP_EQ (UNDEF_LABEL5172);
+JUMP (FINISH_FVAR_LABEL5172);
+UNDEF_LABEL5172:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL392:
+FINISH_FVAR_LABEL5172:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_391);
+JUMP_NE(L_Error_cannot_apply_non_closure_5171);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5382,12 +5591,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_391:
+L_Error_cannot_apply_non_closure_5171:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE388);
+JUMP_EQ (L_IF3_ELSE5168);
 
 /*************applic code starts here***********/
 
@@ -5402,15 +5611,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL390);
-JUMP (FINISH_FVAR_LABEL390);
-UNDEF_LABEL390:
+JUMP_EQ (UNDEF_LABEL5170);
+JUMP (FINISH_FVAR_LABEL5170);
+UNDEF_LABEL5170:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL390:
+FINISH_FVAR_LABEL5170:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_389);
+JUMP_NE(L_Error_cannot_apply_non_closure_5169);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5418,20 +5627,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_389:
+L_Error_cannot_apply_non_closure_5169:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT387);
-L_IF3_ELSE388:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5167);
+L_IF3_ELSE5168:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT387:
+L_IF3_EXIT5167:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT356);
+JUMP_NE (L_OR_EXIT5136);
 
 /*************if3 code starts here***********/
 
@@ -5448,15 +5657,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,14));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL386);
-JUMP (FINISH_FVAR_LABEL386);
-UNDEF_LABEL386:
+JUMP_EQ (UNDEF_LABEL5166);
+JUMP (FINISH_FVAR_LABEL5166);
+UNDEF_LABEL5166:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL386:
+FINISH_FVAR_LABEL5166:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_385);
+JUMP_NE(L_Error_cannot_apply_non_closure_5165);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5464,12 +5673,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_385:
+L_Error_cannot_apply_non_closure_5165:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE382);
+JUMP_EQ (L_IF3_ELSE5162);
 
 /*************applic code starts here***********/
 
@@ -5484,15 +5693,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,14));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL384);
-JUMP (FINISH_FVAR_LABEL384);
-UNDEF_LABEL384:
+JUMP_EQ (UNDEF_LABEL5164);
+JUMP (FINISH_FVAR_LABEL5164);
+UNDEF_LABEL5164:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL384:
+FINISH_FVAR_LABEL5164:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_383);
+JUMP_NE(L_Error_cannot_apply_non_closure_5163);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5500,20 +5709,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_383:
+L_Error_cannot_apply_non_closure_5163:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT381);
-L_IF3_ELSE382:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5161);
+L_IF3_ELSE5162:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT381:
+L_IF3_EXIT5161:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT356);
+JUMP_NE (L_OR_EXIT5136);
 
 /*************if3 code starts here***********/
 
@@ -5530,15 +5739,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,5));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL380);
-JUMP (FINISH_FVAR_LABEL380);
-UNDEF_LABEL380:
+JUMP_EQ (UNDEF_LABEL5160);
+JUMP (FINISH_FVAR_LABEL5160);
+UNDEF_LABEL5160:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL380:
+FINISH_FVAR_LABEL5160:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_379);
+JUMP_NE(L_Error_cannot_apply_non_closure_5159);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5546,12 +5755,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_379:
+L_Error_cannot_apply_non_closure_5159:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE376);
+JUMP_EQ (L_IF3_ELSE5156);
 
 /*************applic code starts here***********/
 
@@ -5566,15 +5775,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,5));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL378);
-JUMP (FINISH_FVAR_LABEL378);
-UNDEF_LABEL378:
+JUMP_EQ (UNDEF_LABEL5158);
+JUMP (FINISH_FVAR_LABEL5158);
+UNDEF_LABEL5158:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL378:
+FINISH_FVAR_LABEL5158:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_377);
+JUMP_NE(L_Error_cannot_apply_non_closure_5157);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5582,20 +5791,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_377:
+L_Error_cannot_apply_non_closure_5157:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT375);
-L_IF3_ELSE376:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5155);
+L_IF3_ELSE5156:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT375:
+L_IF3_EXIT5155:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT356);
+JUMP_NE (L_OR_EXIT5136);
 
 /*************if3 code starts here***********/
 
@@ -5612,15 +5821,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,10));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL374);
-JUMP (FINISH_FVAR_LABEL374);
-UNDEF_LABEL374:
+JUMP_EQ (UNDEF_LABEL5154);
+JUMP (FINISH_FVAR_LABEL5154);
+UNDEF_LABEL5154:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL374:
+FINISH_FVAR_LABEL5154:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_373);
+JUMP_NE(L_Error_cannot_apply_non_closure_5153);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5628,12 +5837,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_373:
+L_Error_cannot_apply_non_closure_5153:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE370);
+JUMP_EQ (L_IF3_ELSE5150);
 
 /*************applic code starts here***********/
 
@@ -5648,15 +5857,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,10));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL372);
-JUMP (FINISH_FVAR_LABEL372);
-UNDEF_LABEL372:
+JUMP_EQ (UNDEF_LABEL5152);
+JUMP (FINISH_FVAR_LABEL5152);
+UNDEF_LABEL5152:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL372:
+FINISH_FVAR_LABEL5152:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_371);
+JUMP_NE(L_Error_cannot_apply_non_closure_5151);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5664,20 +5873,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_371:
+L_Error_cannot_apply_non_closure_5151:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT369);
-L_IF3_ELSE370:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5149);
+L_IF3_ELSE5150:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT369:
+L_IF3_EXIT5149:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT356);
+JUMP_NE (L_OR_EXIT5136);
 
 /*************if3 code starts here***********/
 
@@ -5694,15 +5903,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,12));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL368);
-JUMP (FINISH_FVAR_LABEL368);
-UNDEF_LABEL368:
+JUMP_EQ (UNDEF_LABEL5148);
+JUMP (FINISH_FVAR_LABEL5148);
+UNDEF_LABEL5148:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL368:
+FINISH_FVAR_LABEL5148:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_367);
+JUMP_NE(L_Error_cannot_apply_non_closure_5147);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5710,12 +5919,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_367:
+L_Error_cannot_apply_non_closure_5147:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE364);
+JUMP_EQ (L_IF3_ELSE5144);
 
 /*************applic code starts here***********/
 
@@ -5730,15 +5939,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,12));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL366);
-JUMP (FINISH_FVAR_LABEL366);
-UNDEF_LABEL366:
+JUMP_EQ (UNDEF_LABEL5146);
+JUMP (FINISH_FVAR_LABEL5146);
+UNDEF_LABEL5146:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL366:
+FINISH_FVAR_LABEL5146:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_365);
+JUMP_NE(L_Error_cannot_apply_non_closure_5145);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5746,20 +5955,20 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_365:
+L_Error_cannot_apply_non_closure_5145:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT363);
-L_IF3_ELSE364:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5143);
+L_IF3_ELSE5144:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT363:
+L_IF3_EXIT5143:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT356);
+JUMP_NE (L_OR_EXIT5136);
 
 /*************if3 code starts here***********/
 
@@ -5776,15 +5985,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,8));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL362);
-JUMP (FINISH_FVAR_LABEL362);
-UNDEF_LABEL362:
+JUMP_EQ (UNDEF_LABEL5142);
+JUMP (FINISH_FVAR_LABEL5142);
+UNDEF_LABEL5142:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL362:
+FINISH_FVAR_LABEL5142:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_361);
+JUMP_NE(L_Error_cannot_apply_non_closure_5141);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5792,12 +6001,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_361:
+L_Error_cannot_apply_non_closure_5141:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE358);
+JUMP_EQ (L_IF3_ELSE5138);
 
 /*************applic code starts here***********/
 
@@ -5812,15 +6021,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,8));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL360);
-JUMP (FINISH_FVAR_LABEL360);
-UNDEF_LABEL360:
+JUMP_EQ (UNDEF_LABEL5140);
+JUMP (FINISH_FVAR_LABEL5140);
+UNDEF_LABEL5140:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL360:
+FINISH_FVAR_LABEL5140:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_359);
+JUMP_NE(L_Error_cannot_apply_non_closure_5139);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -5828,28 +6037,28 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_359:
+L_Error_cannot_apply_non_closure_5139:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT357);
-L_IF3_ELSE358:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5137);
+L_IF3_ELSE5138:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT357:
+L_IF3_EXIT5137:
 
 /*************if3 code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_NE (L_OR_EXIT356);
-L_OR_EXIT356:
+JUMP_NE (L_OR_EXIT5136);
+L_OR_EXIT5136:
 
 /*************or code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE352);
+JUMP_EQ (L_IF3_ELSE5132);
 
-/*************tc-applic code starts here353***********/
+/*************tc-applic code starts here5133***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
@@ -5869,19 +6078,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,18));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL355);
-JUMP (FINISH_FVAR_LABEL355);
-UNDEF_LABEL355:
+JUMP_EQ (UNDEF_LABEL5135);
+JUMP (FINISH_FVAR_LABEL5135);
+UNDEF_LABEL5135:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL355:
+FINISH_FVAR_LABEL5135:
 
 
-/*************tc-applic cont353***********/
+/*************tc-applic cont5133***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_353);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5133);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -5891,17 +6100,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover354);
+JUMP_EQ (tc_applic_end_param_ranover5134);
 ADD (R10 , IMM(1));
-tc_applic_for_label354:
+tc_applic_for_label5134:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover354);
+JUMP_LE (tc_applic_end_param_ranover5134);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label354);
-tc_applic_end_param_ranover354:
+JUMP (tc_applic_for_label5134);
+tc_applic_end_param_ranover5134:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -5919,27 +6128,27 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_353:
+L_Error_cannot_tc_apply_non_closure_5133:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT351);
-L_IF3_ELSE352:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT5131);
+L_IF3_ELSE5132:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT351:
+L_IF3_EXIT5131:
 
 /*************if3 code ends here***********/
 
-L_IF3_EXIT349:
+L_IF3_EXIT5129:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_348:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5128:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_348:
+L_CLOSURE_EXIT_5128:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,56),R0);
@@ -5948,14 +6157,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_347);
+JUMP_EQ(R0_IS_VOID_number_5127);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_347:
+R0_IS_VOID_number_5127:
 
 /*************'def' code starts here***********/
 
@@ -5963,21 +6172,21 @@ R0_IS_VOID_number_347:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_433);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5213);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_433:
+LOOP_COPY_ENV_5213:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_433);
+JUMP_EQ(EXIT_LOOP_COPY_5213);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_433);
-EXIT_LOOP_COPY_433:
+JUMP(LOOP_COPY_ENV_5213);
+EXIT_LOOP_COPY_5213:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -5985,32 +6194,31 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_433:
+LOOP_EXTEND_ENV_5213:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_433);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5213);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_433);
-EXIT_LOOP_EXTEND_ENV_433:
+JUMP(LOOP_EXTEND_ENV_5213);
+EXIT_LOOP_EXTEND_ENV_5213:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_423));
-JUMP(L_CLOSURE_EXIT_423);
-L_CLOSURE_BODY_423:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5203));
+JUMP(L_CLOSURE_EXIT_5203);
+L_CLOSURE_BODY_5203:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_423);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5203);
 
 /*************if3 code starts here***********/
 
 /*************applic code starts here***********/
-MOV (R0 ,INDD(CONSTARRAY,4));
+MOV (R0 ,INDD(CONSTARRAY,182));
 
 PUSH(R0);
 
@@ -6025,15 +6233,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,56));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL432);
-JUMP (FINISH_FVAR_LABEL432);
-UNDEF_LABEL432:
+JUMP_EQ (UNDEF_LABEL5212);
+JUMP (FINISH_FVAR_LABEL5212);
+UNDEF_LABEL5212:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL432:
+FINISH_FVAR_LABEL5212:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_431);
+JUMP_NE(L_Error_cannot_apply_non_closure_5211);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6041,22 +6249,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_431:
+L_Error_cannot_apply_non_closure_5211:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE425);
+JUMP_EQ (L_IF3_ELSE5205);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 0));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT424);
-L_IF3_ELSE425:
+JUMP (L_IF3_EXIT5204);
+L_IF3_ELSE5205:
 
-/*************tc-applic code starts here426***********/
+/*************tc-applic code starts here5206***********/
 
 /*************applic code starts here***********/
 
@@ -6078,15 +6286,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,37));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL430);
-JUMP (FINISH_FVAR_LABEL430);
-UNDEF_LABEL430:
+JUMP_EQ (UNDEF_LABEL5210);
+JUMP (FINISH_FVAR_LABEL5210);
+UNDEF_LABEL5210:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL430:
+FINISH_FVAR_LABEL5210:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_429);
+JUMP_NE(L_Error_cannot_apply_non_closure_5209);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6094,7 +6302,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_429:
+L_Error_cannot_apply_non_closure_5209:
 
 /*************applic code ends here***********/
 
@@ -6111,19 +6319,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,57));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL428);
-JUMP (FINISH_FVAR_LABEL428);
-UNDEF_LABEL428:
+JUMP_EQ (UNDEF_LABEL5208);
+JUMP (FINISH_FVAR_LABEL5208);
+UNDEF_LABEL5208:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL428:
+FINISH_FVAR_LABEL5208:
 
 
-/*************tc-applic cont426***********/
+/*************tc-applic cont5206***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_426);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5206);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -6133,17 +6341,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover427);
+JUMP_EQ (tc_applic_end_param_ranover5207);
 ADD (R10 , IMM(1));
-tc_applic_for_label427:
+tc_applic_for_label5207:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover427);
+JUMP_LE (tc_applic_end_param_ranover5207);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label427);
-tc_applic_end_param_ranover427:
+JUMP (tc_applic_for_label5207);
+tc_applic_end_param_ranover5207:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -6161,19 +6369,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_426:
+L_Error_cannot_tc_apply_non_closure_5206:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT424:
+L_IF3_EXIT5204:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_423:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5203:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_423:
+L_CLOSURE_EXIT_5203:
 
 /*************lambda-simple code ends here***********/
 MOV(INDD(FVARARRAY,57),R0);
@@ -6182,14 +6390,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_422);
+JUMP_EQ(R0_IS_VOID_number_5202);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_422:
+R0_IS_VOID_number_5202:
 
 /*************'def' code starts here***********/
 
@@ -6197,21 +6405,21 @@ R0_IS_VOID_number_422:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_300);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5080);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_300:
+LOOP_COPY_ENV_5080:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_300);
+JUMP_EQ(EXIT_LOOP_COPY_5080);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_300);
-EXIT_LOOP_COPY_300:
+JUMP(LOOP_COPY_ENV_5080);
+EXIT_LOOP_COPY_5080:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -6219,36 +6427,35 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_300:
+LOOP_EXTEND_ENV_5080:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_300);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5080);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_300);
-EXIT_LOOP_EXTEND_ENV_300:
+JUMP(LOOP_EXTEND_ENV_5080);
+EXIT_LOOP_EXTEND_ENV_5080:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_278));
-JUMP(L_CLOSURE_EXIT_278);
-L_CLOSURE_BODY_278:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5058));
+JUMP(L_CLOSURE_EXIT_5058);
+L_CLOSURE_BODY_5058:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(1));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_278);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5058);
 
-/*************tc-applic code starts here279***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
-
-PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+/*************tc-applic code starts here5059***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+MOV (R0 ,INDD(CONSTARRAY,181));
+
+PUSH(R0);
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
 PUSH(3);
@@ -6257,21 +6464,21 @@ PUSH(3);
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_299);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5079);
 PUSH(2);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_299:
+LOOP_COPY_ENV_5079:
 CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_299);
+JUMP_EQ(EXIT_LOOP_COPY_5079);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_299);
-EXIT_LOOP_COPY_299:
+JUMP(LOOP_COPY_ENV_5079);
+EXIT_LOOP_COPY_5079:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -6279,27 +6486,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_299:
+LOOP_EXTEND_ENV_5079:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_299);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5079);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_299);
-EXIT_LOOP_EXTEND_ENV_299:
+JUMP(LOOP_EXTEND_ENV_5079);
+EXIT_LOOP_EXTEND_ENV_5079:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_281));
-JUMP(L_CLOSURE_EXIT_281);
-L_CLOSURE_BODY_281:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5061));
+JUMP(L_CLOSURE_EXIT_5061);
+L_CLOSURE_BODY_5061:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(3));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_281);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5061);
 
 /*************seq code starts***********/
 
@@ -6318,15 +6524,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,38));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL298);
-JUMP (FINISH_FVAR_LABEL298);
-UNDEF_LABEL298:
+JUMP_EQ (UNDEF_LABEL5078);
+JUMP (FINISH_FVAR_LABEL5078);
+UNDEF_LABEL5078:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL298:
+FINISH_FVAR_LABEL5078:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_297);
+JUMP_NE(L_Error_cannot_apply_non_closure_5077);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6334,7 +6540,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_297:
+L_Error_cannot_apply_non_closure_5077:
 
 /*************applic code ends here***********/
 MOV(FPARG(2),R0);
@@ -6355,15 +6561,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,39));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL296);
-JUMP (FINISH_FVAR_LABEL296);
-UNDEF_LABEL296:
+JUMP_EQ (UNDEF_LABEL5076);
+JUMP (FINISH_FVAR_LABEL5076);
+UNDEF_LABEL5076:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL296:
+FINISH_FVAR_LABEL5076:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_295);
+JUMP_NE(L_Error_cannot_apply_non_closure_5075);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6371,7 +6577,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_295:
+L_Error_cannot_apply_non_closure_5075:
 
 /*************applic code ends here***********/
 MOV(FPARG(3),R0);
@@ -6397,15 +6603,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,57));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL294);
-JUMP (FINISH_FVAR_LABEL294);
-UNDEF_LABEL294:
+JUMP_EQ (UNDEF_LABEL5074);
+JUMP (FINISH_FVAR_LABEL5074);
+UNDEF_LABEL5074:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL294:
+FINISH_FVAR_LABEL5074:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_293);
+JUMP_NE(L_Error_cannot_apply_non_closure_5073);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6413,7 +6619,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_293:
+L_Error_cannot_apply_non_closure_5073:
 
 /*************applic code ends here***********/
 MOV(FPARG(4),R0);
@@ -6424,7 +6630,7 @@ MOV (R0,SOB_VOID);
 /*************applic code starts here***********/
 
 /*************applic code starts here***********/
-MOV (R0 ,INDD(CONSTARRAY,5));
+MOV (R0 ,INDD(CONSTARRAY,183));
 
 PUSH(R0);
 PUSH(1);
@@ -6432,15 +6638,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL292);
-JUMP (FINISH_FVAR_LABEL292);
-UNDEF_LABEL292:
+JUMP_EQ (UNDEF_LABEL5072);
+JUMP (FINISH_FVAR_LABEL5072);
+UNDEF_LABEL5072:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL292:
+FINISH_FVAR_LABEL5072:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_291);
+JUMP_NE(L_Error_cannot_apply_non_closure_5071);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6448,7 +6654,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_291:
+L_Error_cannot_apply_non_closure_5071:
 
 /*************applic code ends here***********/
 
@@ -6467,15 +6673,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL290);
-JUMP (FINISH_FVAR_LABEL290);
-UNDEF_LABEL290:
+JUMP_EQ (UNDEF_LABEL5070);
+JUMP (FINISH_FVAR_LABEL5070);
+UNDEF_LABEL5070:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL290:
+FINISH_FVAR_LABEL5070:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_289);
+JUMP_NE(L_Error_cannot_apply_non_closure_5069);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6483,7 +6689,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_289:
+L_Error_cannot_apply_non_closure_5069:
 
 /*************applic code ends here***********/
 
@@ -6493,15 +6699,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,46));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL288);
-JUMP (FINISH_FVAR_LABEL288);
-UNDEF_LABEL288:
+JUMP_EQ (UNDEF_LABEL5068);
+JUMP (FINISH_FVAR_LABEL5068);
+UNDEF_LABEL5068:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL288:
+FINISH_FVAR_LABEL5068:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_287);
+JUMP_NE(L_Error_cannot_apply_non_closure_5067);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6509,22 +6715,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_287:
+L_Error_cannot_apply_non_closure_5067:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE283);
+JUMP_EQ (L_IF3_ELSE5063);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT282);
-L_IF3_ELSE283:
+JUMP (L_IF3_EXIT5062);
+L_IF3_ELSE5063:
 
-/*************tc-applic code starts here284***********/
+/*************tc-applic code starts here5064***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 2));
@@ -6551,19 +6757,19 @@ PUSH(3);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,47));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL286);
-JUMP (FINISH_FVAR_LABEL286);
-UNDEF_LABEL286:
+JUMP_EQ (UNDEF_LABEL5066);
+JUMP (FINISH_FVAR_LABEL5066);
+UNDEF_LABEL5066:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL286:
+FINISH_FVAR_LABEL5066:
 
 
-/*************tc-applic cont284***********/
+/*************tc-applic cont5064***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_284);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5064);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -6573,17 +6779,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover285);
+JUMP_EQ (tc_applic_end_param_ranover5065);
 ADD (R10 , IMM(1));
-tc_applic_for_label285:
+tc_applic_for_label5065:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover285);
+JUMP_LE (tc_applic_end_param_ranover5065);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label285);
-tc_applic_end_param_ranover285:
+JUMP (tc_applic_for_label5065);
+tc_applic_end_param_ranover5065:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -6601,30 +6807,30 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_284:
+L_Error_cannot_tc_apply_non_closure_5064:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT282:
+L_IF3_EXIT5062:
 
 /*************if3 code ends here***********/
 
 /*************seq code ends***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_281:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5061:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_281:
+L_CLOSURE_EXIT_5061:
 
 /*************lambda-simple code ends here***********/
 
 
-/*************tc-applic cont279***********/
+/*************tc-applic cont5059***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_279);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5059);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -6634,17 +6840,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover280);
+JUMP_EQ (tc_applic_end_param_ranover5060);
 ADD (R10 , IMM(1));
-tc_applic_for_label280:
+tc_applic_for_label5060:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover280);
+JUMP_LE (tc_applic_end_param_ranover5060);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label280);
-tc_applic_end_param_ranover280:
+JUMP (tc_applic_for_label5060);
+tc_applic_end_param_ranover5060:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -6662,31 +6868,31 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_279:
+L_Error_cannot_tc_apply_non_closure_5059:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_278:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5058:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_278:
+L_CLOSURE_EXIT_5058:
 
 /*************lambda-simple code ends here***********/
-MOV(INDD(FVARARRAY,61),R0);
+MOV(INDD(FVARARRAY,62),R0);
 MOV (R0 , SOB_VOID);
 
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_277);
+JUMP_EQ(R0_IS_VOID_number_5057);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_277:
+R0_IS_VOID_number_5057:
 
 /*************'def' code starts here***********/
 
@@ -6694,21 +6900,21 @@ R0_IS_VOID_number_277:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_346);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5126);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_346:
+LOOP_COPY_ENV_5126:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_346);
+JUMP_EQ(EXIT_LOOP_COPY_5126);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_346);
-EXIT_LOOP_COPY_346:
+JUMP(LOOP_COPY_ENV_5126);
+EXIT_LOOP_COPY_5126:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -6716,37 +6922,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_346:
+LOOP_EXTEND_ENV_5126:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_346);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5126);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_346);
-EXIT_LOOP_EXTEND_ENV_346:
+JUMP(LOOP_EXTEND_ENV_5126);
+EXIT_LOOP_EXTEND_ENV_5126:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_302));
-JUMP(L_CLOSURE_EXIT_302);
-L_CLOSURE_BODY_302:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5082));
+JUMP(L_CLOSURE_EXIT_5082);
+L_CLOSURE_BODY_5082:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_345);
+JUMP_EQ(NO_OPTIONAL_ARGS_5125);
 MOV (R8,FPARG(1)-0- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_345:
+LOOP_ARGS_5125:
 CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_345);
+JUMP_EQ(EXIT_LOOP_ARGS_5125);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -6756,54 +6961,54 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_345);
-EXIT_LOOP_ARGS_345:
+JUMP(LOOP_ARGS_5125);
+EXIT_LOOP_ARGS_5125:
 MOV (FPARG(2 + 0), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 1);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_345:
+FIXING_STACK_5125:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_345);
+JUMP_EQ(EXIT_FIXING_STACK_5125);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_345);
-EXIT_FIXING_STACK_345:
+JUMP(FIXING_STACK_5125);
+EXIT_FIXING_STACK_5125:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_345);
-NO_OPTIONAL_ARGS_345:
+JUMP(FINAL_5125);
+NO_OPTIONAL_ARGS_5125:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_345:
+NIL_CASE_LOOP_5125:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_345);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_5125);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_345);
-EXIT_NIL_CASE_LOOP_345:
+JUMP(NIL_CASE_LOOP_5125);
+EXIT_NIL_CASE_LOOP_5125:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_345:
+FINAL_5125:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
-/*************tc-applic code starts here303***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
+/*************tc-applic code starts here5083***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
 PUSH(2);
@@ -6812,21 +7017,21 @@ PUSH(2);
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_344);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5124);
 PUSH(2);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_344:
+LOOP_COPY_ENV_5124:
 CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_344);
+JUMP_EQ(EXIT_LOOP_COPY_5124);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_344);
-EXIT_LOOP_COPY_344:
+JUMP(LOOP_COPY_ENV_5124);
+EXIT_LOOP_COPY_5124:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -6834,27 +7039,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_344:
+LOOP_EXTEND_ENV_5124:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_344);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5124);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_344);
-EXIT_LOOP_EXTEND_ENV_344:
+JUMP(LOOP_EXTEND_ENV_5124);
+EXIT_LOOP_EXTEND_ENV_5124:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_305));
-JUMP(L_CLOSURE_EXIT_305);
-L_CLOSURE_BODY_305:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5085));
+JUMP(L_CLOSURE_EXIT_5085);
+L_CLOSURE_BODY_5085:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_305);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5085);
 
 /*************seq code starts***********/
 
@@ -6871,21 +7075,21 @@ MOV (R7, R0)
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (3,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_343);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5123);
 PUSH(3);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_343:
+LOOP_COPY_ENV_5123:
 CMP(R4,2);
-JUMP_EQ(EXIT_LOOP_COPY_343);
+JUMP_EQ(EXIT_LOOP_COPY_5123);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_343);
-EXIT_LOOP_COPY_343:
+JUMP(LOOP_COPY_ENV_5123);
+EXIT_LOOP_COPY_5123:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -6893,27 +7097,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_343:
+LOOP_EXTEND_ENV_5123:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_343);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5123);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_343);
-EXIT_LOOP_EXTEND_ENV_343:
+JUMP(LOOP_EXTEND_ENV_5123);
+EXIT_LOOP_EXTEND_ENV_5123:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_310));
-JUMP(L_CLOSURE_EXIT_310);
-L_CLOSURE_BODY_310:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5090));
+JUMP(L_CLOSURE_EXIT_5090);
+L_CLOSURE_BODY_5090:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(1));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_310);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5090);
 
 /*************if3 code starts here***********/
 
@@ -6930,15 +7133,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL342);
-JUMP (FINISH_FVAR_LABEL342);
-UNDEF_LABEL342:
+JUMP_EQ (UNDEF_LABEL5122);
+JUMP (FINISH_FVAR_LABEL5122);
+UNDEF_LABEL5122:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL342:
+FINISH_FVAR_LABEL5122:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_341);
+JUMP_NE(L_Error_cannot_apply_non_closure_5121);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -6946,15 +7149,15 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_341:
+L_Error_cannot_apply_non_closure_5121:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE312);
+JUMP_EQ (L_IF3_ELSE5092);
 
-/*************tc-applic code starts here338***********/
-MOV (R0 ,INDD(CONSTARRAY,4));
+/*************tc-applic code starts here5118***********/
+MOV (R0 ,INDD(CONSTARRAY,182));
 
 PUSH(R0);
 PUSH(1);
@@ -6962,19 +7165,19 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL340);
-JUMP (FINISH_FVAR_LABEL340);
-UNDEF_LABEL340:
+JUMP_EQ (UNDEF_LABEL5120);
+JUMP (FINISH_FVAR_LABEL5120);
+UNDEF_LABEL5120:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL340:
+FINISH_FVAR_LABEL5120:
 
 
-/*************tc-applic cont338***********/
+/*************tc-applic cont5118***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_338);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5118);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -6984,17 +7187,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover339);
+JUMP_EQ (tc_applic_end_param_ranover5119);
 ADD (R10 , IMM(1));
-tc_applic_for_label339:
+tc_applic_for_label5119:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover339);
+JUMP_LE (tc_applic_end_param_ranover5119);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label339);
-tc_applic_end_param_ranover339:
+JUMP (tc_applic_for_label5119);
+tc_applic_end_param_ranover5119:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -7012,11 +7215,11 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_338:
+L_Error_cannot_tc_apply_non_closure_5118:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT311);
-L_IF3_ELSE312:
+JUMP (L_IF3_EXIT5091);
+L_IF3_ELSE5092:
 
 /*************if3 code starts here***********/
 
@@ -7035,15 +7238,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL337);
-JUMP (FINISH_FVAR_LABEL337);
-UNDEF_LABEL337:
+JUMP_EQ (UNDEF_LABEL5117);
+JUMP (FINISH_FVAR_LABEL5117);
+UNDEF_LABEL5117:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL337:
+FINISH_FVAR_LABEL5117:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_336);
+JUMP_NE(L_Error_cannot_apply_non_closure_5116);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7051,7 +7254,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_336:
+L_Error_cannot_apply_non_closure_5116:
 
 /*************applic code ends here***********/
 
@@ -7061,15 +7264,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL335);
-JUMP (FINISH_FVAR_LABEL335);
-UNDEF_LABEL335:
+JUMP_EQ (UNDEF_LABEL5115);
+JUMP (FINISH_FVAR_LABEL5115);
+UNDEF_LABEL5115:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL335:
+FINISH_FVAR_LABEL5115:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_334);
+JUMP_NE(L_Error_cannot_apply_non_closure_5114);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7077,17 +7280,17 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_334:
+L_Error_cannot_apply_non_closure_5114:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE314);
+JUMP_EQ (L_IF3_ELSE5094);
 
-/*************tc-applic code starts here325***********/
+/*************tc-applic code starts here5105***********/
 
 /*************applic code starts here***********/
-MOV (R0 ,INDD(CONSTARRAY,4));
+MOV (R0 ,INDD(CONSTARRAY,182));
 
 PUSH(R0);
 PUSH(1);
@@ -7095,15 +7298,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL333);
-JUMP (FINISH_FVAR_LABEL333);
-UNDEF_LABEL333:
+JUMP_EQ (UNDEF_LABEL5113);
+JUMP (FINISH_FVAR_LABEL5113);
+UNDEF_LABEL5113:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL333:
+FINISH_FVAR_LABEL5113:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_332);
+JUMP_NE(L_Error_cannot_apply_non_closure_5112);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7111,7 +7314,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_332:
+L_Error_cannot_apply_non_closure_5112:
 
 /*************applic code ends here***********/
 
@@ -7132,15 +7335,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL331);
-JUMP (FINISH_FVAR_LABEL331);
-UNDEF_LABEL331:
+JUMP_EQ (UNDEF_LABEL5111);
+JUMP (FINISH_FVAR_LABEL5111);
+UNDEF_LABEL5111:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL331:
+FINISH_FVAR_LABEL5111:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_330);
+JUMP_NE(L_Error_cannot_apply_non_closure_5110);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7148,7 +7351,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_330:
+L_Error_cannot_apply_non_closure_5110:
 
 /*************applic code ends here***********/
 
@@ -7158,15 +7361,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL329);
-JUMP (FINISH_FVAR_LABEL329);
-UNDEF_LABEL329:
+JUMP_EQ (UNDEF_LABEL5109);
+JUMP (FINISH_FVAR_LABEL5109);
+UNDEF_LABEL5109:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL329:
+FINISH_FVAR_LABEL5109:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_328);
+JUMP_NE(L_Error_cannot_apply_non_closure_5108);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7174,7 +7377,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_328:
+L_Error_cannot_apply_non_closure_5108:
 
 /*************applic code ends here***********/
 
@@ -7184,19 +7387,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,40));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL327);
-JUMP (FINISH_FVAR_LABEL327);
-UNDEF_LABEL327:
+JUMP_EQ (UNDEF_LABEL5107);
+JUMP (FINISH_FVAR_LABEL5107);
+UNDEF_LABEL5107:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL327:
+FINISH_FVAR_LABEL5107:
 
 
-/*************tc-applic cont325***********/
+/*************tc-applic cont5105***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_325);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5105);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -7206,17 +7409,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover326);
+JUMP_EQ (tc_applic_end_param_ranover5106);
 ADD (R10 , IMM(1));
-tc_applic_for_label326:
+tc_applic_for_label5106:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover326);
+JUMP_LE (tc_applic_end_param_ranover5106);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label326);
-tc_applic_end_param_ranover326:
+JUMP (tc_applic_for_label5106);
+tc_applic_end_param_ranover5106:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -7234,13 +7437,13 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_325:
+L_Error_cannot_tc_apply_non_closure_5105:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT313);
-L_IF3_ELSE314:
+JUMP (L_IF3_EXIT5093);
+L_IF3_ELSE5094:
 
-/*************tc-applic code starts here315***********/
+/*************tc-applic code starts here5095***********/
 
 /*************applic code starts here***********/
 
@@ -7257,15 +7460,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL324);
-JUMP (FINISH_FVAR_LABEL324);
-UNDEF_LABEL324:
+JUMP_EQ (UNDEF_LABEL5104);
+JUMP (FINISH_FVAR_LABEL5104);
+UNDEF_LABEL5104:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL324:
+FINISH_FVAR_LABEL5104:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_323);
+JUMP_NE(L_Error_cannot_apply_non_closure_5103);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7273,7 +7476,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_323:
+L_Error_cannot_apply_non_closure_5103:
 
 /*************applic code ends here***********/
 
@@ -7288,7 +7491,7 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 MOV(R0, (IND R0));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_322);
+JUMP_NE(L_Error_cannot_apply_non_closure_5102);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7296,7 +7499,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_322:
+L_Error_cannot_apply_non_closure_5102:
 
 /*************applic code ends here***********/
 
@@ -7317,15 +7520,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL321);
-JUMP (FINISH_FVAR_LABEL321);
-UNDEF_LABEL321:
+JUMP_EQ (UNDEF_LABEL5101);
+JUMP (FINISH_FVAR_LABEL5101);
+UNDEF_LABEL5101:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL321:
+FINISH_FVAR_LABEL5101:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_320);
+JUMP_NE(L_Error_cannot_apply_non_closure_5100);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7333,7 +7536,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_320:
+L_Error_cannot_apply_non_closure_5100:
 
 /*************applic code ends here***********/
 
@@ -7343,15 +7546,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL319);
-JUMP (FINISH_FVAR_LABEL319);
-UNDEF_LABEL319:
+JUMP_EQ (UNDEF_LABEL5099);
+JUMP (FINISH_FVAR_LABEL5099);
+UNDEF_LABEL5099:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL319:
+FINISH_FVAR_LABEL5099:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_318);
+JUMP_NE(L_Error_cannot_apply_non_closure_5098);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7359,7 +7562,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_318:
+L_Error_cannot_apply_non_closure_5098:
 
 /*************applic code ends here***********/
 
@@ -7369,19 +7572,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,40));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL317);
-JUMP (FINISH_FVAR_LABEL317);
-UNDEF_LABEL317:
+JUMP_EQ (UNDEF_LABEL5097);
+JUMP (FINISH_FVAR_LABEL5097);
+UNDEF_LABEL5097:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL317:
+FINISH_FVAR_LABEL5097:
 
 
-/*************tc-applic cont315***********/
+/*************tc-applic cont5095***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_315);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5095);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -7391,17 +7594,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover316);
+JUMP_EQ (tc_applic_end_param_ranover5096);
 ADD (R10 , IMM(1));
-tc_applic_for_label316:
+tc_applic_for_label5096:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover316);
+JUMP_LE (tc_applic_end_param_ranover5096);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label316);
-tc_applic_end_param_ranover316:
+JUMP (tc_applic_for_label5096);
+tc_applic_end_param_ranover5096:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -7419,23 +7622,23 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_315:
+L_Error_cannot_tc_apply_non_closure_5095:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT313:
+L_IF3_EXIT5093:
 
 /*************if3 code ends here***********/
 
-L_IF3_EXIT311:
+L_IF3_EXIT5091:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_310:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5090:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_310:
+L_CLOSURE_EXIT_5090:
 
 /*************lambda-simple code ends here***********/
 MOV(IND(R7),R0);
@@ -7459,7 +7662,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 MOV(R0, (IND R0));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_309);
+JUMP_NE(L_Error_cannot_apply_non_closure_5089);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -7467,13 +7670,13 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_309:
+L_Error_cannot_apply_non_closure_5089:
 
 /*************applic code ends here***********/
 MOV(FPARG(3),R0);
 MOV (R0,SOB_VOID);
 
-/*************tc-applic code starts here306***********/
+/*************tc-applic code starts here5086***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
@@ -7484,21 +7687,21 @@ PUSH(R0);
 PUSH(1);
 
 /*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,61));
+MOV (R0 ,INDD(FVARARRAY,62));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL308);
-JUMP (FINISH_FVAR_LABEL308);
-UNDEF_LABEL308:
+JUMP_EQ (UNDEF_LABEL5088);
+JUMP (FINISH_FVAR_LABEL5088);
+UNDEF_LABEL5088:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL308:
+FINISH_FVAR_LABEL5088:
 
 
-/*************tc-applic cont306***********/
+/*************tc-applic cont5086***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_306);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5086);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -7508,17 +7711,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover307);
+JUMP_EQ (tc_applic_end_param_ranover5087);
 ADD (R10 , IMM(1));
-tc_applic_for_label307:
+tc_applic_for_label5087:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover307);
+JUMP_LE (tc_applic_end_param_ranover5087);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label307);
-tc_applic_end_param_ranover307:
+JUMP (tc_applic_for_label5087);
+tc_applic_end_param_ranover5087:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -7536,26 +7739,26 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_306:
+L_Error_cannot_tc_apply_non_closure_5086:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
 /*************seq code ends***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_305:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5085:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_305:
+L_CLOSURE_EXIT_5085:
 
 /*************lambda-simple code ends here***********/
 
 
-/*************tc-applic cont303***********/
+/*************tc-applic cont5083***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_303);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5083);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -7565,17 +7768,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover304);
+JUMP_EQ (tc_applic_end_param_ranover5084);
 ADD (R10 , IMM(1));
-tc_applic_for_label304:
+tc_applic_for_label5084:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover304);
+JUMP_LE (tc_applic_end_param_ranover5084);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label304);
-tc_applic_end_param_ranover304:
+JUMP (tc_applic_for_label5084);
+tc_applic_end_param_ranover5084:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -7593,1051 +7796,15 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_303:
+L_Error_cannot_tc_apply_non_closure_5083:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_302:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_5082:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_302:
-
-/*************lambda-var code ends here***********/
-MOV(INDD(FVARARRAY,65),R0);
-MOV (R0 , SOB_VOID);
-
-/*************'def' code ends here***********/
-
-CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_301);
-PUSH(R0); 
-CALL(WRITE_SOB);
-DROP(1);
-PUSH(10); 
-CALL(PUTCHAR);
-DROP(1);
-R0_IS_VOID_number_301:
-
-/*************'def' code starts here***********/
-
-/*************lambda-var code starts here***********/
-MOV (R1,FPARG(0));
-MOV(R2 ,SOB_NIL);
-CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_230);
-PUSH(1);
-CALL(MALLOC);
-DROP(1);
-MOV (R2,R0);
-MOV (R4 , IMM(0));
-MOV (R5 , IMM(1));
-LOOP_COPY_ENV_230:
-CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_230);
-MOV (INDD(R2,R5) , INDD(R1,R4) );
-ADD(R4 , IMM(1));
-ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_230);
-EXIT_LOOP_COPY_230:
-MOV (R3 , FPARG(1));
-PUSH(R3);
-CALL(MALLOC);
-DROP(1);
-MOV (INDD(R2,0) , R0);
-MOV (R4 , IMM(0));
-MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_230:
-CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_230);
-MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
-ADD(R4 , IMM(1));
-ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_230);
-EXIT_LOOP_EXTEND_ENV_230:
-PUSH (IMM(3));
-CALL(MALLOC);
-DROP(1);
-MOV (INDD(R0 ,0) , T_CLOSURE);
-MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_180));
-JUMP(L_CLOSURE_EXIT_180);
-L_CLOSURE_BODY_180:
-PUSH(FP);
-MOV (FP , SP);
-
-/*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
-CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_229);
-MOV (R8,FPARG(1)-0- 1);
-MOV (R6 ,SOB_NIL);
-MOV (R5 , R6);
-MOV (R4 , FPARG(1));
-DECR(R4);
-LOOP_ARGS_229:
-CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_229);
-PUSH(IMM(3));
-CALL (MALLOC);
-DROP(1);
-MOV (INDD(R0,0) , T_PAIR);
-MOV (INDD(R0,2) , R5);
-MOV (R5 , R0);
-MOV (INDD(R5,1) , FPARG(2 + R4));
-MOV (R6, R5);
-DECR(R4);
-JUMP(LOOP_ARGS_229);
-EXIT_LOOP_ARGS_229:
-MOV (FPARG(2 + 0), R6);
-MOV (R4, FPARG(1));
-MOV (FPARG(1), 1);
-MOV (R3 , FPARG(1));
-ADD (R3 , IMM(3));
-FIXING_STACK_229:
-CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_229);
-MOV (FPARG(1 + R4), FPARG(-2 + R3));
-DECR(R3);
-DECR(R4);
-JUMP(FIXING_STACK_229);
-EXIT_FIXING_STACK_229:
-MOV (FPARG(1 + R4), FPARG(-2 + R3));
-MOV (SP , FP);
-SUB (SP , R4);
-SUB (SP , IMM(3));
-SUB (FP,R8);
-JUMP(FINAL_229);
-NO_OPTIONAL_ARGS_229:
-MOV (R5 , SOB_NIL);
-MOV (R4 , FPARG(1));
-ADD(R4 , IMM(4));
-ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_229:
-CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_229);
-MOV (R3 , FPARG(-2 + R4 - 1));
-MOV (FPARG(-2 + R4 - 1) , R5);
-MOV (R5 , R3);
-DECR(R4);
-JUMP(NIL_CASE_LOOP_229);
-EXIT_NIL_CASE_LOOP_229:
-MOV (FPARG(-2 + R4 - 1) , R5);
-DECR(R4);
-SUB(FP,R4);
-MOV (SP , FP);
-FINAL_229:
-
-/*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
-
-/*************tc-applic code starts here181***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
-
-PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
-
-PUSH(R0);
-PUSH(2);
-
-/*************lambda-simple code starts here***********/
-MOV (R1,FPARG(0));
-MOV(R2 ,SOB_NIL);
-CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_228);
-PUSH(2);
-CALL(MALLOC);
-DROP(1);
-MOV (R2,R0);
-MOV (R4 , IMM(0));
-MOV (R5 , IMM(1));
-LOOP_COPY_ENV_228:
-CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_228);
-MOV (INDD(R2,R5) , INDD(R1,R4) );
-ADD(R4 , IMM(1));
-ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_228);
-EXIT_LOOP_COPY_228:
-MOV (R3 , FPARG(1));
-PUSH(R3);
-CALL(MALLOC);
-DROP(1);
-MOV (INDD(R2,0) , R0);
-MOV (R4 , IMM(0));
-MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_228:
-CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_228);
-MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
-ADD(R4 , IMM(1));
-ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_228);
-EXIT_LOOP_EXTEND_ENV_228:
-PUSH (IMM(3));
-CALL(MALLOC);
-DROP(1);
-MOV (INDD(R0 ,0) , T_CLOSURE);
-MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_183));
-JUMP(L_CLOSURE_EXIT_183);
-L_CLOSURE_BODY_183:
-PUSH(FP);
-MOV (FP , SP);
-CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_183);
-
-/*************seq code starts***********/
-
-MOV(FPARG(2),R0);
-MOV (R0,SOB_VOID);
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-MOV (R7, R0)
-
-/*************lambda-simple code starts here***********/
-MOV (R1,FPARG(0));
-MOV(R2 ,SOB_NIL);
-CMP (3,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_227);
-PUSH(3);
-CALL(MALLOC);
-DROP(1);
-MOV (R2,R0);
-MOV (R4 , IMM(0));
-MOV (R5 , IMM(1));
-LOOP_COPY_ENV_227:
-CMP(R4,2);
-JUMP_EQ(EXIT_LOOP_COPY_227);
-MOV (INDD(R2,R5) , INDD(R1,R4) );
-ADD(R4 , IMM(1));
-ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_227);
-EXIT_LOOP_COPY_227:
-MOV (R3 , FPARG(1));
-PUSH(R3);
-CALL(MALLOC);
-DROP(1);
-MOV (INDD(R2,0) , R0);
-MOV (R4 , IMM(0));
-MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_227:
-CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_227);
-MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
-ADD(R4 , IMM(1));
-ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_227);
-EXIT_LOOP_EXTEND_ENV_227:
-PUSH (IMM(3));
-CALL(MALLOC);
-DROP(1);
-MOV (INDD(R0 ,0) , T_CLOSURE);
-MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_199));
-JUMP(L_CLOSURE_EXIT_199);
-L_CLOSURE_BODY_199:
-PUSH(FP);
-MOV (FP , SP);
-CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_199);
-
-/*************if3 code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 1));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,1));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL226);
-JUMP (FINISH_FVAR_LABEL226);
-UNDEF_LABEL226:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL226:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_225);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_225:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,13));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL224);
-JUMP (FINISH_FVAR_LABEL224);
-UNDEF_LABEL224:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL224:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_223);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_223:
-
-/*************applic code ends here***********/
-
-CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE201);
-
-/*************tc-applic code starts here214***********/
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 1));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,0));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL222);
-JUMP (FINISH_FVAR_LABEL222);
-UNDEF_LABEL222:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL222:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_221);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_221:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL220);
-JUMP (FINISH_FVAR_LABEL220);
-UNDEF_LABEL220:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL220:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_219);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_219:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL218);
-JUMP (FINISH_FVAR_LABEL218);
-UNDEF_LABEL218:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL218:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_217);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_217:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(2);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,41));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL216);
-JUMP (FINISH_FVAR_LABEL216);
-UNDEF_LABEL216:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL216:
-
-
-/*************tc-applic cont214***********/
-MOV (R7,FPARG(IMM(-1)));
-MOV (R8, FPARG(IMM(-2)));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_214);
-PUSH (INDD (R0,1));
-MOV (R9 , FPARG(IMM(1)));
-ADD (R9 , IMM(1));
-
-/*************run run_over_frame starts***********/
-PUSH (R7);
-MOV(R10 , STARG(IMM(1)));
-MOV(R12,R10);
-CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover215);
-ADD (R10 , IMM(1));
-tc_applic_for_label215:
-CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover215);
-MOV (R11,STARG(R10));
-MOV (FPARG(R9),R11);
-SUB (R9 , 1);
-SUB (R10 , 1);
-JUMP (tc_applic_for_label215);
-tc_applic_end_param_ranover215:
-MOV (R11, R12);
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (R11, STARG(0));
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (FPARG(R9) , R7);
-SUB (R9 , 1);
-MOV (SP ,FP);
-SUB (SP , R9);
-SUB (SP , 3);
-MOV (FP , R8);
-
-/*************run run_over_frame starts***********/
-
-/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
-JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_214:
-SHOW ("NOT A CLOSURE:" , INDD(R0,0));
-
-JUMP (L_IF3_EXIT200);
-L_IF3_ELSE201:
-
-/*************tc-applic code starts here202***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 1));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,1));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL213);
-JUMP (FINISH_FVAR_LABEL213);
-UNDEF_LABEL213:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL213:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_212);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_212:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 1));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,0));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL211);
-JUMP (FINISH_FVAR_LABEL211);
-UNDEF_LABEL211:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL211:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_210);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_210:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL209);
-JUMP (FINISH_FVAR_LABEL209);
-UNDEF_LABEL209:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL209:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_208);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_208:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL207);
-JUMP (FINISH_FVAR_LABEL207);
-UNDEF_LABEL207:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL207:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_206);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_206:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(2);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,41));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL205);
-JUMP (FINISH_FVAR_LABEL205);
-UNDEF_LABEL205:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL205:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_204);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_204:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(2);
-
-/*************bvar code starts here***********/
-MOV (R0,FPARG(0));
-MOV (R0,INDD(R0,0));
-MOV (R0,INDD(R0,0));
-
-/*************bvar code ends here***********/
-MOV(R0, (IND R0));
-
-/*************tc-applic cont202***********/
-MOV (R7,FPARG(IMM(-1)));
-MOV (R8, FPARG(IMM(-2)));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_202);
-PUSH (INDD (R0,1));
-MOV (R9 , FPARG(IMM(1)));
-ADD (R9 , IMM(1));
-
-/*************run run_over_frame starts***********/
-PUSH (R7);
-MOV(R10 , STARG(IMM(1)));
-MOV(R12,R10);
-CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover203);
-ADD (R10 , IMM(1));
-tc_applic_for_label203:
-CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover203);
-MOV (R11,STARG(R10));
-MOV (FPARG(R9),R11);
-SUB (R9 , 1);
-SUB (R10 , 1);
-JUMP (tc_applic_for_label203);
-tc_applic_end_param_ranover203:
-MOV (R11, R12);
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (R11, STARG(0));
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (FPARG(R9) , R7);
-SUB (R9 , 1);
-MOV (SP ,FP);
-SUB (SP , R9);
-SUB (SP , 3);
-MOV (FP , R8);
-
-/*************run run_over_frame starts***********/
-
-/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
-JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_202:
-SHOW ("NOT A CLOSURE:" , INDD(R0,0));
-
-L_IF3_EXIT200:
-
-/*************if3 code ends here***********/
-POP(FP);
-RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_199:
-INFO
-SHOW("Wrong number of args!!!" , FPARG(1));
-HALT;
-L_CLOSURE_EXIT_199:
-
-/*************lambda-simple code ends here***********/
-MOV(IND(R7),R0);
-MOV (R0 , SOB_VOID);
-
-/*************if3 code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************bvar code starts here***********/
-MOV (R0,FPARG(0));
-MOV (R0,INDD(R0,0));
-MOV (R0,INDD(R0,0));
-
-/*************bvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,1));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL198);
-JUMP (FINISH_FVAR_LABEL198);
-UNDEF_LABEL198:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL198:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_197);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_197:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,13));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL196);
-JUMP (FINISH_FVAR_LABEL196);
-UNDEF_LABEL196:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL196:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_195);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_195:
-
-/*************applic code ends here***********/
-
-CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE188);
-
-/*************applic code starts here***********/
-
-/*************bvar code starts here***********/
-MOV (R0,FPARG(0));
-MOV (R0,INDD(R0,0));
-MOV (R0,INDD(R0,0));
-
-/*************bvar code ends here***********/
-
-PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,4));
-
-PUSH(R0);
-PUSH(2);
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-MOV(R0, (IND R0));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_194);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_194:
-
-/*************applic code ends here***********/
-
-JUMP (L_IF3_EXIT187);
-L_IF3_ELSE188:
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************bvar code starts here***********/
-MOV (R0,FPARG(0));
-MOV (R0,INDD(R0,0));
-MOV (R0,INDD(R0,0));
-
-/*************bvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,1));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL193);
-JUMP (FINISH_FVAR_LABEL193);
-UNDEF_LABEL193:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL193:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_192);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_192:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-
-/*************applic code starts here***********/
-
-/*************bvar code starts here***********/
-MOV (R0,FPARG(0));
-MOV (R0,INDD(R0,0));
-MOV (R0,INDD(R0,0));
-
-/*************bvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,0));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL191);
-JUMP (FINISH_FVAR_LABEL191);
-UNDEF_LABEL191:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL191:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_190);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_190:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(2);
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-MOV(R0, (IND R0));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_189);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_189:
-
-/*************applic code ends here***********/
-
-L_IF3_EXIT187:
-
-/*************if3 code ends here***********/
-MOV(FPARG(3),R0);
-MOV (R0,SOB_VOID);
-
-/*************tc-applic code starts here184***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 1));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,61));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL186);
-JUMP (FINISH_FVAR_LABEL186);
-UNDEF_LABEL186:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL186:
-
-
-/*************tc-applic cont184***********/
-MOV (R7,FPARG(IMM(-1)));
-MOV (R8, FPARG(IMM(-2)));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_184);
-PUSH (INDD (R0,1));
-MOV (R9 , FPARG(IMM(1)));
-ADD (R9 , IMM(1));
-
-/*************run run_over_frame starts***********/
-PUSH (R7);
-MOV(R10 , STARG(IMM(1)));
-MOV(R12,R10);
-CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover185);
-ADD (R10 , IMM(1));
-tc_applic_for_label185:
-CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover185);
-MOV (R11,STARG(R10));
-MOV (FPARG(R9),R11);
-SUB (R9 , 1);
-SUB (R10 , 1);
-JUMP (tc_applic_for_label185);
-tc_applic_end_param_ranover185:
-MOV (R11, R12);
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (R11, STARG(0));
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (FPARG(R9) , R7);
-SUB (R9 , 1);
-MOV (SP ,FP);
-SUB (SP , R9);
-SUB (SP , 3);
-MOV (FP , R8);
-
-/*************run run_over_frame starts***********/
-
-/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
-JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_184:
-SHOW ("NOT A CLOSURE:" , INDD(R0,0));
-
-/*************seq code ends***********/
-POP(FP);
-RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_183:
-INFO
-SHOW("Wrong number of args!!!" , FPARG(1));
-HALT;
-L_CLOSURE_EXIT_183:
-
-/*************lambda-simple code ends here***********/
-
-
-/*************tc-applic cont181***********/
-MOV (R7,FPARG(IMM(-1)));
-MOV (R8, FPARG(IMM(-2)));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_181);
-PUSH (INDD (R0,1));
-MOV (R9 , FPARG(IMM(1)));
-ADD (R9 , IMM(1));
-
-/*************run run_over_frame starts***********/
-PUSH (R7);
-MOV(R10 , STARG(IMM(1)));
-MOV(R12,R10);
-CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover182);
-ADD (R10 , IMM(1));
-tc_applic_for_label182:
-CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover182);
-MOV (R11,STARG(R10));
-MOV (FPARG(R9),R11);
-SUB (R9 , 1);
-SUB (R10 , 1);
-JUMP (tc_applic_for_label182);
-tc_applic_end_param_ranover182:
-MOV (R11, R12);
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (R11, STARG(0));
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (FPARG(R9) , R7);
-SUB (R9 , 1);
-MOV (SP ,FP);
-SUB (SP , R9);
-SUB (SP , 3);
-MOV (FP , R8);
-
-/*************run run_over_frame starts***********/
-
-/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
-JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_181:
-SHOW ("NOT A CLOSURE:" , INDD(R0,0));
-POP(FP);
-RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_180:
-INFO
-SHOW("Wrong number of args!!!" , FPARG(1));
-HALT;
-L_CLOSURE_EXIT_180:
+L_CLOSURE_EXIT_5082:
 
 /*************lambda-var code ends here***********/
 MOV(INDD(FVARARRAY,58),R0);
@@ -8646,14 +7813,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_179);
+JUMP_EQ(R0_IS_VOID_number_5081);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_179:
+R0_IS_VOID_number_5081:
 
 /*************'def' code starts here***********/
 
@@ -8661,21 +7828,21 @@ R0_IS_VOID_number_179:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_276);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5010);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_276:
+LOOP_COPY_ENV_5010:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_276);
+JUMP_EQ(EXIT_LOOP_COPY_5010);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_276);
-EXIT_LOOP_COPY_276:
+JUMP(LOOP_COPY_ENV_5010);
+EXIT_LOOP_COPY_5010:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -8683,37 +7850,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_276:
+LOOP_EXTEND_ENV_5010:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_276);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5010);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_276);
-EXIT_LOOP_EXTEND_ENV_276:
+JUMP(LOOP_EXTEND_ENV_5010);
+EXIT_LOOP_EXTEND_ENV_5010:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_232));
-JUMP(L_CLOSURE_EXIT_232);
-L_CLOSURE_BODY_232:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4960));
+JUMP(L_CLOSURE_EXIT_4960);
+L_CLOSURE_BODY_4960:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_275);
+JUMP_EQ(NO_OPTIONAL_ARGS_5009);
 MOV (R8,FPARG(1)-0- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_275:
+LOOP_ARGS_5009:
 CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_275);
+JUMP_EQ(EXIT_LOOP_ARGS_5009);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -8723,54 +7889,54 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_275);
-EXIT_LOOP_ARGS_275:
+JUMP(LOOP_ARGS_5009);
+EXIT_LOOP_ARGS_5009:
 MOV (FPARG(2 + 0), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 1);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_275:
+FIXING_STACK_5009:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_275);
+JUMP_EQ(EXIT_FIXING_STACK_5009);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_275);
-EXIT_FIXING_STACK_275:
+JUMP(FIXING_STACK_5009);
+EXIT_FIXING_STACK_5009:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_275);
-NO_OPTIONAL_ARGS_275:
+JUMP(FINAL_5009);
+NO_OPTIONAL_ARGS_5009:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_275:
+NIL_CASE_LOOP_5009:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_275);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_5009);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_275);
-EXIT_NIL_CASE_LOOP_275:
+JUMP(NIL_CASE_LOOP_5009);
+EXIT_NIL_CASE_LOOP_5009:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_275:
+FINAL_5009:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
-/*************tc-applic code starts here233***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
+/*************tc-applic code starts here4961***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
 PUSH(2);
@@ -8779,21 +7945,21 @@ PUSH(2);
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_274);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5008);
 PUSH(2);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_274:
+LOOP_COPY_ENV_5008:
 CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_274);
+JUMP_EQ(EXIT_LOOP_COPY_5008);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_274);
-EXIT_LOOP_COPY_274:
+JUMP(LOOP_COPY_ENV_5008);
+EXIT_LOOP_COPY_5008:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -8801,27 +7967,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_274:
+LOOP_EXTEND_ENV_5008:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_274);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5008);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_274);
-EXIT_LOOP_EXTEND_ENV_274:
+JUMP(LOOP_EXTEND_ENV_5008);
+EXIT_LOOP_EXTEND_ENV_5008:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_235));
-JUMP(L_CLOSURE_EXIT_235);
-L_CLOSURE_BODY_235:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4963));
+JUMP(L_CLOSURE_EXIT_4963);
+L_CLOSURE_BODY_4963:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_235);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4963);
 
 /*************seq code starts***********/
 
@@ -8838,21 +8003,21 @@ MOV (R7, R0)
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (3,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_273);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5007);
 PUSH(3);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_273:
+LOOP_COPY_ENV_5007:
 CMP(R4,2);
-JUMP_EQ(EXIT_LOOP_COPY_273);
+JUMP_EQ(EXIT_LOOP_COPY_5007);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_273);
-EXIT_LOOP_COPY_273:
+JUMP(LOOP_COPY_ENV_5007);
+EXIT_LOOP_COPY_5007:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -8860,587 +8025,32 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_273:
+LOOP_EXTEND_ENV_5007:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_273);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5007);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_273);
-EXIT_LOOP_EXTEND_ENV_273:
+JUMP(LOOP_EXTEND_ENV_5007);
+EXIT_LOOP_EXTEND_ENV_5007:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_240));
-JUMP(L_CLOSURE_EXIT_240);
-L_CLOSURE_BODY_240:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4979));
+JUMP(L_CLOSURE_EXIT_4979);
+L_CLOSURE_BODY_4979:
 PUSH(FP);
 MOV (FP , SP);
-CMP(FPARG(1) , IMM(1));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_240);
-
-/*************if3 code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,13));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL272);
-JUMP (FINISH_FVAR_LABEL272);
-UNDEF_LABEL272:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL272:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_271);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_271:
-
-/*************applic code ends here***********/
-
-CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE242);
-
-/*************tc-applic code starts here268***********/
-MOV (R0 ,INDD(CONSTARRAY,5));
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL270);
-JUMP (FINISH_FVAR_LABEL270);
-UNDEF_LABEL270:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL270:
-
-
-/*************tc-applic cont268***********/
-MOV (R7,FPARG(IMM(-1)));
-MOV (R8, FPARG(IMM(-2)));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_268);
-PUSH (INDD (R0,1));
-MOV (R9 , FPARG(IMM(1)));
-ADD (R9 , IMM(1));
-
-/*************run run_over_frame starts***********/
-PUSH (R7);
-MOV(R10 , STARG(IMM(1)));
-MOV(R12,R10);
-CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover269);
-ADD (R10 , IMM(1));
-tc_applic_for_label269:
-CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover269);
-MOV (R11,STARG(R10));
-MOV (FPARG(R9),R11);
-SUB (R9 , 1);
-SUB (R10 , 1);
-JUMP (tc_applic_for_label269);
-tc_applic_end_param_ranover269:
-MOV (R11, R12);
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (R11, STARG(0));
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (FPARG(R9) , R7);
-SUB (R9 , 1);
-MOV (SP ,FP);
-SUB (SP , R9);
-SUB (SP , 3);
-MOV (FP , R8);
-
-/*************run run_over_frame starts***********/
-
-/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
-JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_268:
-SHOW ("NOT A CLOSURE:" , INDD(R0,0));
-
-JUMP (L_IF3_EXIT241);
-L_IF3_ELSE242:
+CMP(FPARG(1) , IMM(2));
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4979);
 
 /*************if3 code starts here***********/
 
 /*************applic code starts here***********/
 
 /*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,1));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL267);
-JUMP (FINISH_FVAR_LABEL267);
-UNDEF_LABEL267:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL267:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_266);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_266:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,13));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL265);
-JUMP (FINISH_FVAR_LABEL265);
-UNDEF_LABEL265:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL265:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_264);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_264:
-
-/*************applic code ends here***********/
-
-CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE244);
-
-/*************tc-applic code starts here255***********/
-
-/*************applic code starts here***********/
-MOV (R0 ,INDD(CONSTARRAY,5));
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL263);
-JUMP (FINISH_FVAR_LABEL263);
-UNDEF_LABEL263:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL263:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_262);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_262:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,0));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL261);
-JUMP (FINISH_FVAR_LABEL261);
-UNDEF_LABEL261:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL261:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_260);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_260:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL259);
-JUMP (FINISH_FVAR_LABEL259);
-UNDEF_LABEL259:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL259:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_258);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_258:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(2);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,45));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL257);
-JUMP (FINISH_FVAR_LABEL257);
-UNDEF_LABEL257:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL257:
-
-
-/*************tc-applic cont255***********/
-MOV (R7,FPARG(IMM(-1)));
-MOV (R8, FPARG(IMM(-2)));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_255);
-PUSH (INDD (R0,1));
-MOV (R9 , FPARG(IMM(1)));
-ADD (R9 , IMM(1));
-
-/*************run run_over_frame starts***********/
-PUSH (R7);
-MOV(R10 , STARG(IMM(1)));
-MOV(R12,R10);
-CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover256);
-ADD (R10 , IMM(1));
-tc_applic_for_label256:
-CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover256);
-MOV (R11,STARG(R10));
-MOV (FPARG(R9),R11);
-SUB (R9 , 1);
-SUB (R10 , 1);
-JUMP (tc_applic_for_label256);
-tc_applic_end_param_ranover256:
-MOV (R11, R12);
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (R11, STARG(0));
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (FPARG(R9) , R7);
-SUB (R9 , 1);
-MOV (SP ,FP);
-SUB (SP , R9);
-SUB (SP , 3);
-MOV (FP , R8);
-
-/*************run run_over_frame starts***********/
-
-/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
-JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_255:
-SHOW ("NOT A CLOSURE:" , INDD(R0,0));
-
-JUMP (L_IF3_EXIT243);
-L_IF3_ELSE244:
-
-/*************tc-applic code starts here245***********/
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,1));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL254);
-JUMP (FINISH_FVAR_LABEL254);
-UNDEF_LABEL254:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL254:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_253);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_253:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************bvar code starts here***********/
-MOV (R0,FPARG(0));
-MOV (R0,INDD(R0,0));
-MOV (R0,INDD(R0,0));
-
-/*************bvar code ends here***********/
-MOV(R0, (IND R0));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_252);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_252:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-
-/*************applic code starts here***********/
-
-/*************applic code starts here***********/
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,0));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL251);
-JUMP (FINISH_FVAR_LABEL251);
-UNDEF_LABEL251:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL251:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_250);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_250:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,34));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL249);
-JUMP (FINISH_FVAR_LABEL249);
-UNDEF_LABEL249:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL249:
-
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_248);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_248:
-
-/*************applic code ends here***********/
-
-PUSH(R0);
-PUSH(2);
-
-/*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,45));
-CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL247);
-JUMP (FINISH_FVAR_LABEL247);
-UNDEF_LABEL247:
-SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
-HALT;
-FINISH_FVAR_LABEL247:
-
-
-/*************tc-applic cont245***********/
-MOV (R7,FPARG(IMM(-1)));
-MOV (R8, FPARG(IMM(-2)));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_245);
-PUSH (INDD (R0,1));
-MOV (R9 , FPARG(IMM(1)));
-ADD (R9 , IMM(1));
-
-/*************run run_over_frame starts***********/
-PUSH (R7);
-MOV(R10 , STARG(IMM(1)));
-MOV(R12,R10);
-CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover246);
-ADD (R10 , IMM(1));
-tc_applic_for_label246:
-CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover246);
-MOV (R11,STARG(R10));
-MOV (FPARG(R9),R11);
-SUB (R9 , 1);
-SUB (R10 , 1);
-JUMP (tc_applic_for_label246);
-tc_applic_end_param_ranover246:
-MOV (R11, R12);
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (R11, STARG(0));
-MOV (FPARG(R9) , R11);
-SUB (R9 , 1);
-MOV (FPARG(R9) , R7);
-SUB (R9 , 1);
-MOV (SP ,FP);
-SUB (SP , R9);
-SUB (SP , 3);
-MOV (FP , R8);
-
-/*************run run_over_frame starts***********/
-
-/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
-JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_245:
-SHOW ("NOT A CLOSURE:" , INDD(R0,0));
-
-L_IF3_EXIT243:
-
-/*************if3 code ends here***********/
-
-L_IF3_EXIT241:
-
-/*************if3 code ends here***********/
-POP(FP);
-RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_240:
-INFO
-SHOW("Wrong number of args!!!" , FPARG(1));
-HALT;
-L_CLOSURE_EXIT_240:
-
-/*************lambda-simple code ends here***********/
-MOV(IND(R7),R0);
-MOV (R0 , SOB_VOID);
-
-/*************applic code starts here***********/
-
-/*************bvar code starts here***********/
-MOV (R0,FPARG(0));
-MOV (R0,INDD(R0,0));
-MOV (R0,INDD(R0,0));
-
-/*************bvar code ends here***********/
-
-PUSH(R0);
-PUSH(1);
-
-/*************pvar code starts here***********/
-MOV (R0,FPARG(2 + 0));
-
-/*************pvar code ends here***********/
-MOV(R0, (IND R0));
-CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_239);
-MOV (R1 , INDD (R0,1));
-PUSH (R1);
-MOV (R1 , INDD (R0,2));
-CALLA (R1);
-DROP(1);
-POP(R1);
-DROP(R1);
-L_Error_cannot_apply_non_closure_239:
-
-/*************applic code ends here***********/
-MOV(FPARG(3),R0);
-MOV (R0,SOB_VOID);
-
-/*************tc-applic code starts here236***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
@@ -9451,21 +8061,174 @@ PUSH(R0);
 PUSH(1);
 
 /*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,61));
+MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL238);
-JUMP (FINISH_FVAR_LABEL238);
-UNDEF_LABEL238:
+JUMP_EQ (UNDEF_LABEL5006);
+JUMP (FINISH_FVAR_LABEL5006);
+UNDEF_LABEL5006:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL238:
+FINISH_FVAR_LABEL5006:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5005);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5005:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,13));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5004);
+JUMP (FINISH_FVAR_LABEL5004);
+UNDEF_LABEL5004:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5004:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5003);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5003:
+
+/*************applic code ends here***********/
+
+CMP (R0, SOB_FALSE);
+JUMP_EQ (L_IF3_ELSE4981);
+
+/*************tc-applic code starts here4994***********/
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 1));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,0));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5002);
+JUMP (FINISH_FVAR_LABEL5002);
+UNDEF_LABEL5002:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5002:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5001);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5001:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5000);
+JUMP (FINISH_FVAR_LABEL5000);
+UNDEF_LABEL5000:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5000:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4999);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4999:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4998);
+JUMP (FINISH_FVAR_LABEL4998);
+UNDEF_LABEL4998:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4998:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4997);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4997:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(2);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,41));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4996);
+JUMP (FINISH_FVAR_LABEL4996);
+UNDEF_LABEL4996:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4996:
 
 
-/*************tc-applic cont236***********/
+/*************tc-applic cont4994***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_236);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4994);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -9475,17 +8238,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover237);
+JUMP_EQ (tc_applic_end_param_ranover4995);
 ADD (R10 , IMM(1));
-tc_applic_for_label237:
+tc_applic_for_label4995:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover237);
+JUMP_LE (tc_applic_end_param_ranover4995);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label237);
-tc_applic_end_param_ranover237:
+JUMP (tc_applic_for_label4995);
+tc_applic_end_param_ranover4995:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -9503,26 +8266,532 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_236:
+L_Error_cannot_tc_apply_non_closure_4994:
+SHOW ("NOT A CLOSURE:" , INDD(R0,0));
+
+JUMP (L_IF3_EXIT4980);
+L_IF3_ELSE4981:
+
+/*************tc-applic code starts here4982***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 1));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,1));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4993);
+JUMP (FINISH_FVAR_LABEL4993);
+UNDEF_LABEL4993:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4993:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4992);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4992:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 1));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,0));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4991);
+JUMP (FINISH_FVAR_LABEL4991);
+UNDEF_LABEL4991:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4991:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4990);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4990:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4989);
+JUMP (FINISH_FVAR_LABEL4989);
+UNDEF_LABEL4989:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4989:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4988);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4988:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4987);
+JUMP (FINISH_FVAR_LABEL4987);
+UNDEF_LABEL4987:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4987:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4986);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4986:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(2);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,41));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4985);
+JUMP (FINISH_FVAR_LABEL4985);
+UNDEF_LABEL4985:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4985:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4984);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4984:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(2);
+
+/*************bvar code starts here***********/
+MOV (R0,FPARG(0));
+MOV (R0,INDD(R0,0));
+MOV (R0,INDD(R0,0));
+
+/*************bvar code ends here***********/
+MOV(R0, (IND R0));
+
+/*************tc-applic cont4982***********/
+MOV (R7,FPARG(IMM(-1)));
+MOV (R8, FPARG(IMM(-2)));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4982);
+PUSH (INDD (R0,1));
+MOV (R9 , FPARG(IMM(1)));
+ADD (R9 , IMM(1));
+
+/*************run run_over_frame starts***********/
+PUSH (R7);
+MOV(R10 , STARG(IMM(1)));
+MOV(R12,R10);
+CMP(R10 , IMM(0));
+JUMP_EQ (tc_applic_end_param_ranover4983);
+ADD (R10 , IMM(1));
+tc_applic_for_label4983:
+CMP (R10 , 1);
+JUMP_LE (tc_applic_end_param_ranover4983);
+MOV (R11,STARG(R10));
+MOV (FPARG(R9),R11);
+SUB (R9 , 1);
+SUB (R10 , 1);
+JUMP (tc_applic_for_label4983);
+tc_applic_end_param_ranover4983:
+MOV (R11, R12);
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (R11, STARG(0));
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (FPARG(R9) , R7);
+SUB (R9 , 1);
+MOV (SP ,FP);
+SUB (SP , R9);
+SUB (SP , 3);
+MOV (FP , R8);
+
+/*************run run_over_frame starts***********/
+
+/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
+JUMPA (INDD(R0,2)); 
+L_Error_cannot_tc_apply_non_closure_4982:
+SHOW ("NOT A CLOSURE:" , INDD(R0,0));
+
+L_IF3_EXIT4980:
+
+/*************if3 code ends here***********/
+POP(FP);
+RETURN;
+L_ERROR_LAMBDA_ARGS_COUNT_4979:
+OUT(IMM(2) , 'c' );
+SHOW("Wrong number of args!!!" , FPARG(1));
+HALT;
+L_CLOSURE_EXIT_4979:
+
+/*************lambda-simple code ends here***********/
+MOV(IND(R7),R0);
+MOV (R0 , SOB_VOID);
+
+/*************if3 code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************bvar code starts here***********/
+MOV (R0,FPARG(0));
+MOV (R0,INDD(R0,0));
+MOV (R0,INDD(R0,0));
+
+/*************bvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,1));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4978);
+JUMP (FINISH_FVAR_LABEL4978);
+UNDEF_LABEL4978:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4978:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4977);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4977:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,13));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4976);
+JUMP (FINISH_FVAR_LABEL4976);
+UNDEF_LABEL4976:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4976:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4975);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4975:
+
+/*************applic code ends here***********/
+
+CMP (R0, SOB_FALSE);
+JUMP_EQ (L_IF3_ELSE4968);
+
+/*************applic code starts here***********/
+
+/*************bvar code starts here***********/
+MOV (R0,FPARG(0));
+MOV (R0,INDD(R0,0));
+MOV (R0,INDD(R0,0));
+
+/*************bvar code ends here***********/
+
+PUSH(R0);
+MOV (R0 ,INDD(CONSTARRAY,182));
+
+PUSH(R0);
+PUSH(2);
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+MOV(R0, (IND R0));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4974);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4974:
+
+/*************applic code ends here***********/
+
+JUMP (L_IF3_EXIT4967);
+L_IF3_ELSE4968:
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************bvar code starts here***********/
+MOV (R0,FPARG(0));
+MOV (R0,INDD(R0,0));
+MOV (R0,INDD(R0,0));
+
+/*************bvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,1));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4973);
+JUMP (FINISH_FVAR_LABEL4973);
+UNDEF_LABEL4973:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4973:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4972);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4972:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+
+/*************applic code starts here***********/
+
+/*************bvar code starts here***********/
+MOV (R0,FPARG(0));
+MOV (R0,INDD(R0,0));
+MOV (R0,INDD(R0,0));
+
+/*************bvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,0));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4971);
+JUMP (FINISH_FVAR_LABEL4971);
+UNDEF_LABEL4971:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4971:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4970);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4970:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(2);
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+MOV(R0, (IND R0));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_4969);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_4969:
+
+/*************applic code ends here***********/
+
+L_IF3_EXIT4967:
+
+/*************if3 code ends here***********/
+MOV(FPARG(3),R0);
+MOV (R0,SOB_VOID);
+
+/*************tc-applic code starts here4964***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 1));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,62));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL4966);
+JUMP (FINISH_FVAR_LABEL4966);
+UNDEF_LABEL4966:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL4966:
+
+
+/*************tc-applic cont4964***********/
+MOV (R7,FPARG(IMM(-1)));
+MOV (R8, FPARG(IMM(-2)));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4964);
+PUSH (INDD (R0,1));
+MOV (R9 , FPARG(IMM(1)));
+ADD (R9 , IMM(1));
+
+/*************run run_over_frame starts***********/
+PUSH (R7);
+MOV(R10 , STARG(IMM(1)));
+MOV(R12,R10);
+CMP(R10 , IMM(0));
+JUMP_EQ (tc_applic_end_param_ranover4965);
+ADD (R10 , IMM(1));
+tc_applic_for_label4965:
+CMP (R10 , 1);
+JUMP_LE (tc_applic_end_param_ranover4965);
+MOV (R11,STARG(R10));
+MOV (FPARG(R9),R11);
+SUB (R9 , 1);
+SUB (R10 , 1);
+JUMP (tc_applic_for_label4965);
+tc_applic_end_param_ranover4965:
+MOV (R11, R12);
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (R11, STARG(0));
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (FPARG(R9) , R7);
+SUB (R9 , 1);
+MOV (SP ,FP);
+SUB (SP , R9);
+SUB (SP , 3);
+MOV (FP , R8);
+
+/*************run run_over_frame starts***********/
+
+/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
+JUMPA (INDD(R0,2)); 
+L_Error_cannot_tc_apply_non_closure_4964:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
 /*************seq code ends***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_235:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4963:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_235:
+L_CLOSURE_EXIT_4963:
 
 /*************lambda-simple code ends here***********/
 
 
-/*************tc-applic cont233***********/
+/*************tc-applic cont4961***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_233);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4961);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -9532,17 +8801,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover234);
+JUMP_EQ (tc_applic_end_param_ranover4962);
 ADD (R10 , IMM(1));
-tc_applic_for_label234:
+tc_applic_for_label4962:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover234);
+JUMP_LE (tc_applic_end_param_ranover4962);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label234);
-tc_applic_end_param_ranover234:
+JUMP (tc_applic_for_label4962);
+tc_applic_end_param_ranover4962:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -9560,15 +8829,15 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_233:
+L_Error_cannot_tc_apply_non_closure_4961:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_232:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4960:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_232:
+L_CLOSURE_EXIT_4960:
 
 /*************lambda-var code ends here***********/
 MOV(INDD(FVARARRAY,59),R0);
@@ -9577,14 +8846,14 @@ MOV (R0 , SOB_VOID);
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_231);
+JUMP_EQ(R0_IS_VOID_number_4959);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_231:
+R0_IS_VOID_number_4959:
 
 /*************'def' code starts here***********/
 
@@ -9592,21 +8861,21 @@ R0_IS_VOID_number_231:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_137);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5056);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_137:
+LOOP_COPY_ENV_5056:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_137);
+JUMP_EQ(EXIT_LOOP_COPY_5056);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_137);
-EXIT_LOOP_COPY_137:
+JUMP(LOOP_COPY_ENV_5056);
+EXIT_LOOP_COPY_5056:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -9614,37 +8883,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_137:
+LOOP_EXTEND_ENV_5056:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_137);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5056);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_137);
-EXIT_LOOP_EXTEND_ENV_137:
+JUMP(LOOP_EXTEND_ENV_5056);
+EXIT_LOOP_EXTEND_ENV_5056:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_87));
-JUMP(L_CLOSURE_EXIT_87);
-L_CLOSURE_BODY_87:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5012));
+JUMP(L_CLOSURE_EXIT_5012);
+L_CLOSURE_BODY_5012:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_136);
+JUMP_EQ(NO_OPTIONAL_ARGS_5055);
 MOV (R8,FPARG(1)-0- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_136:
+LOOP_ARGS_5055:
 CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_136);
+JUMP_EQ(EXIT_LOOP_ARGS_5055);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -9654,54 +8922,54 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_136);
-EXIT_LOOP_ARGS_136:
+JUMP(LOOP_ARGS_5055);
+EXIT_LOOP_ARGS_5055:
 MOV (FPARG(2 + 0), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 1);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_136:
+FIXING_STACK_5055:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_136);
+JUMP_EQ(EXIT_FIXING_STACK_5055);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_136);
-EXIT_FIXING_STACK_136:
+JUMP(FIXING_STACK_5055);
+EXIT_FIXING_STACK_5055:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_136);
-NO_OPTIONAL_ARGS_136:
+JUMP(FINAL_5055);
+NO_OPTIONAL_ARGS_5055:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_136:
+NIL_CASE_LOOP_5055:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_136);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_5055);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_136);
-EXIT_NIL_CASE_LOOP_136:
+JUMP(NIL_CASE_LOOP_5055);
+EXIT_NIL_CASE_LOOP_5055:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_136:
+FINAL_5055:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
-/*************tc-applic code starts here88***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
+/*************tc-applic code starts here5013***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
 PUSH(2);
@@ -9710,21 +8978,21 @@ PUSH(2);
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_135);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5054);
 PUSH(2);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_135:
+LOOP_COPY_ENV_5054:
 CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_135);
+JUMP_EQ(EXIT_LOOP_COPY_5054);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_135);
-EXIT_LOOP_COPY_135:
+JUMP(LOOP_COPY_ENV_5054);
+EXIT_LOOP_COPY_5054:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -9732,27 +9000,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_135:
+LOOP_EXTEND_ENV_5054:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_135);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5054);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_135);
-EXIT_LOOP_EXTEND_ENV_135:
+JUMP(LOOP_EXTEND_ENV_5054);
+EXIT_LOOP_EXTEND_ENV_5054:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_90));
-JUMP(L_CLOSURE_EXIT_90);
-L_CLOSURE_BODY_90:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5015));
+JUMP(L_CLOSURE_EXIT_5015);
+L_CLOSURE_BODY_5015:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_90);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5015);
 
 /*************seq code starts***********/
 
@@ -9769,21 +9036,21 @@ MOV (R7, R0)
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (3,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_134);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_5053);
 PUSH(3);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_134:
+LOOP_COPY_ENV_5053:
 CMP(R4,2);
-JUMP_EQ(EXIT_LOOP_COPY_134);
+JUMP_EQ(EXIT_LOOP_COPY_5053);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_134);
-EXIT_LOOP_COPY_134:
+JUMP(LOOP_COPY_ENV_5053);
+EXIT_LOOP_COPY_5053:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -9791,27 +9058,954 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_134:
+LOOP_EXTEND_ENV_5053:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_134);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_5053);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_134);
-EXIT_LOOP_EXTEND_ENV_134:
+JUMP(LOOP_EXTEND_ENV_5053);
+EXIT_LOOP_EXTEND_ENV_5053:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_106));
-JUMP(L_CLOSURE_EXIT_106);
-L_CLOSURE_BODY_106:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5020));
+JUMP(L_CLOSURE_EXIT_5020);
+L_CLOSURE_BODY_5020:
+PUSH(FP);
+MOV (FP , SP);
+CMP(FPARG(1) , IMM(1));
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_5020);
+
+/*************if3 code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,13));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5052);
+JUMP (FINISH_FVAR_LABEL5052);
+UNDEF_LABEL5052:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5052:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5051);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5051:
+
+/*************applic code ends here***********/
+
+CMP (R0, SOB_FALSE);
+JUMP_EQ (L_IF3_ELSE5022);
+
+/*************tc-applic code starts here5048***********/
+MOV (R0 ,INDD(CONSTARRAY,183));
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5050);
+JUMP (FINISH_FVAR_LABEL5050);
+UNDEF_LABEL5050:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5050:
+
+
+/*************tc-applic cont5048***********/
+MOV (R7,FPARG(IMM(-1)));
+MOV (R8, FPARG(IMM(-2)));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5048);
+PUSH (INDD (R0,1));
+MOV (R9 , FPARG(IMM(1)));
+ADD (R9 , IMM(1));
+
+/*************run run_over_frame starts***********/
+PUSH (R7);
+MOV(R10 , STARG(IMM(1)));
+MOV(R12,R10);
+CMP(R10 , IMM(0));
+JUMP_EQ (tc_applic_end_param_ranover5049);
+ADD (R10 , IMM(1));
+tc_applic_for_label5049:
+CMP (R10 , 1);
+JUMP_LE (tc_applic_end_param_ranover5049);
+MOV (R11,STARG(R10));
+MOV (FPARG(R9),R11);
+SUB (R9 , 1);
+SUB (R10 , 1);
+JUMP (tc_applic_for_label5049);
+tc_applic_end_param_ranover5049:
+MOV (R11, R12);
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (R11, STARG(0));
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (FPARG(R9) , R7);
+SUB (R9 , 1);
+MOV (SP ,FP);
+SUB (SP , R9);
+SUB (SP , 3);
+MOV (FP , R8);
+
+/*************run run_over_frame starts***********/
+
+/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
+JUMPA (INDD(R0,2)); 
+L_Error_cannot_tc_apply_non_closure_5048:
+SHOW ("NOT A CLOSURE:" , INDD(R0,0));
+
+JUMP (L_IF3_EXIT5021);
+L_IF3_ELSE5022:
+
+/*************if3 code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,1));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5047);
+JUMP (FINISH_FVAR_LABEL5047);
+UNDEF_LABEL5047:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5047:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5046);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5046:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,13));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5045);
+JUMP (FINISH_FVAR_LABEL5045);
+UNDEF_LABEL5045:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5045:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5044);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5044:
+
+/*************applic code ends here***********/
+
+CMP (R0, SOB_FALSE);
+JUMP_EQ (L_IF3_ELSE5024);
+
+/*************tc-applic code starts here5035***********/
+
+/*************applic code starts here***********/
+MOV (R0 ,INDD(CONSTARRAY,183));
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5043);
+JUMP (FINISH_FVAR_LABEL5043);
+UNDEF_LABEL5043:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5043:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5042);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5042:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,0));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5041);
+JUMP (FINISH_FVAR_LABEL5041);
+UNDEF_LABEL5041:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5041:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5040);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5040:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5039);
+JUMP (FINISH_FVAR_LABEL5039);
+UNDEF_LABEL5039:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5039:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5038);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5038:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(2);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,45));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5037);
+JUMP (FINISH_FVAR_LABEL5037);
+UNDEF_LABEL5037:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5037:
+
+
+/*************tc-applic cont5035***********/
+MOV (R7,FPARG(IMM(-1)));
+MOV (R8, FPARG(IMM(-2)));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5035);
+PUSH (INDD (R0,1));
+MOV (R9 , FPARG(IMM(1)));
+ADD (R9 , IMM(1));
+
+/*************run run_over_frame starts***********/
+PUSH (R7);
+MOV(R10 , STARG(IMM(1)));
+MOV(R12,R10);
+CMP(R10 , IMM(0));
+JUMP_EQ (tc_applic_end_param_ranover5036);
+ADD (R10 , IMM(1));
+tc_applic_for_label5036:
+CMP (R10 , 1);
+JUMP_LE (tc_applic_end_param_ranover5036);
+MOV (R11,STARG(R10));
+MOV (FPARG(R9),R11);
+SUB (R9 , 1);
+SUB (R10 , 1);
+JUMP (tc_applic_for_label5036);
+tc_applic_end_param_ranover5036:
+MOV (R11, R12);
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (R11, STARG(0));
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (FPARG(R9) , R7);
+SUB (R9 , 1);
+MOV (SP ,FP);
+SUB (SP , R9);
+SUB (SP , 3);
+MOV (FP , R8);
+
+/*************run run_over_frame starts***********/
+
+/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
+JUMPA (INDD(R0,2)); 
+L_Error_cannot_tc_apply_non_closure_5035:
+SHOW ("NOT A CLOSURE:" , INDD(R0,0));
+
+JUMP (L_IF3_EXIT5023);
+L_IF3_ELSE5024:
+
+/*************tc-applic code starts here5025***********/
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,1));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5034);
+JUMP (FINISH_FVAR_LABEL5034);
+UNDEF_LABEL5034:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5034:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5033);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5033:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************bvar code starts here***********/
+MOV (R0,FPARG(0));
+MOV (R0,INDD(R0,0));
+MOV (R0,INDD(R0,0));
+
+/*************bvar code ends here***********/
+MOV(R0, (IND R0));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5032);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5032:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+
+/*************applic code starts here***********/
+
+/*************applic code starts here***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,0));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5031);
+JUMP (FINISH_FVAR_LABEL5031);
+UNDEF_LABEL5031:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5031:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5030);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5030:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,34));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5029);
+JUMP (FINISH_FVAR_LABEL5029);
+UNDEF_LABEL5029:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5029:
+
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5028);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5028:
+
+/*************applic code ends here***********/
+
+PUSH(R0);
+PUSH(2);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,45));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5027);
+JUMP (FINISH_FVAR_LABEL5027);
+UNDEF_LABEL5027:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5027:
+
+
+/*************tc-applic cont5025***********/
+MOV (R7,FPARG(IMM(-1)));
+MOV (R8, FPARG(IMM(-2)));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5025);
+PUSH (INDD (R0,1));
+MOV (R9 , FPARG(IMM(1)));
+ADD (R9 , IMM(1));
+
+/*************run run_over_frame starts***********/
+PUSH (R7);
+MOV(R10 , STARG(IMM(1)));
+MOV(R12,R10);
+CMP(R10 , IMM(0));
+JUMP_EQ (tc_applic_end_param_ranover5026);
+ADD (R10 , IMM(1));
+tc_applic_for_label5026:
+CMP (R10 , 1);
+JUMP_LE (tc_applic_end_param_ranover5026);
+MOV (R11,STARG(R10));
+MOV (FPARG(R9),R11);
+SUB (R9 , 1);
+SUB (R10 , 1);
+JUMP (tc_applic_for_label5026);
+tc_applic_end_param_ranover5026:
+MOV (R11, R12);
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (R11, STARG(0));
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (FPARG(R9) , R7);
+SUB (R9 , 1);
+MOV (SP ,FP);
+SUB (SP , R9);
+SUB (SP , 3);
+MOV (FP , R8);
+
+/*************run run_over_frame starts***********/
+
+/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
+JUMPA (INDD(R0,2)); 
+L_Error_cannot_tc_apply_non_closure_5025:
+SHOW ("NOT A CLOSURE:" , INDD(R0,0));
+
+L_IF3_EXIT5023:
+
+/*************if3 code ends here***********/
+
+L_IF3_EXIT5021:
+
+/*************if3 code ends here***********/
+POP(FP);
+RETURN;
+L_ERROR_LAMBDA_ARGS_COUNT_5020:
+OUT(IMM(2) , 'c' );
+SHOW("Wrong number of args!!!" , FPARG(1));
+HALT;
+L_CLOSURE_EXIT_5020:
+
+/*************lambda-simple code ends here***********/
+MOV(IND(R7),R0);
+MOV (R0 , SOB_VOID);
+
+/*************applic code starts here***********/
+
+/*************bvar code starts here***********/
+MOV (R0,FPARG(0));
+MOV (R0,INDD(R0,0));
+MOV (R0,INDD(R0,0));
+
+/*************bvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+MOV(R0, (IND R0));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE(L_Error_cannot_apply_non_closure_5019);
+MOV (R1 , INDD (R0,1));
+PUSH (R1);
+MOV (R1 , INDD (R0,2));
+CALLA (R1);
+DROP(1);
+POP(R1);
+DROP(R1);
+L_Error_cannot_apply_non_closure_5019:
+
+/*************applic code ends here***********/
+MOV(FPARG(3),R0);
+MOV (R0,SOB_VOID);
+
+/*************tc-applic code starts here5016***********/
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 1));
+
+/*************pvar code ends here***********/
+
+PUSH(R0);
+PUSH(1);
+
+/*************fvar code:***********/
+MOV (R0 ,INDD(FVARARRAY,62));
+CMP (R0 , 0XDEF);
+JUMP_EQ (UNDEF_LABEL5018);
+JUMP (FINISH_FVAR_LABEL5018);
+UNDEF_LABEL5018:
+SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
+HALT;
+FINISH_FVAR_LABEL5018:
+
+
+/*************tc-applic cont5016***********/
+MOV (R7,FPARG(IMM(-1)));
+MOV (R8, FPARG(IMM(-2)));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5016);
+PUSH (INDD (R0,1));
+MOV (R9 , FPARG(IMM(1)));
+ADD (R9 , IMM(1));
+
+/*************run run_over_frame starts***********/
+PUSH (R7);
+MOV(R10 , STARG(IMM(1)));
+MOV(R12,R10);
+CMP(R10 , IMM(0));
+JUMP_EQ (tc_applic_end_param_ranover5017);
+ADD (R10 , IMM(1));
+tc_applic_for_label5017:
+CMP (R10 , 1);
+JUMP_LE (tc_applic_end_param_ranover5017);
+MOV (R11,STARG(R10));
+MOV (FPARG(R9),R11);
+SUB (R9 , 1);
+SUB (R10 , 1);
+JUMP (tc_applic_for_label5017);
+tc_applic_end_param_ranover5017:
+MOV (R11, R12);
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (R11, STARG(0));
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (FPARG(R9) , R7);
+SUB (R9 , 1);
+MOV (SP ,FP);
+SUB (SP , R9);
+SUB (SP , 3);
+MOV (FP , R8);
+
+/*************run run_over_frame starts***********/
+
+/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
+JUMPA (INDD(R0,2)); 
+L_Error_cannot_tc_apply_non_closure_5016:
+SHOW ("NOT A CLOSURE:" , INDD(R0,0));
+
+/*************seq code ends***********/
+POP(FP);
+RETURN;
+L_ERROR_LAMBDA_ARGS_COUNT_5015:
+OUT(IMM(2) , 'c' );
+SHOW("Wrong number of args!!!" , FPARG(1));
+HALT;
+L_CLOSURE_EXIT_5015:
+
+/*************lambda-simple code ends here***********/
+
+
+/*************tc-applic cont5013***********/
+MOV (R7,FPARG(IMM(-1)));
+MOV (R8, FPARG(IMM(-2)));
+CMP (INDD (R0,0) ,IMM(T_CLOSURE));
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_5013);
+PUSH (INDD (R0,1));
+MOV (R9 , FPARG(IMM(1)));
+ADD (R9 , IMM(1));
+
+/*************run run_over_frame starts***********/
+PUSH (R7);
+MOV(R10 , STARG(IMM(1)));
+MOV(R12,R10);
+CMP(R10 , IMM(0));
+JUMP_EQ (tc_applic_end_param_ranover5014);
+ADD (R10 , IMM(1));
+tc_applic_for_label5014:
+CMP (R10 , 1);
+JUMP_LE (tc_applic_end_param_ranover5014);
+MOV (R11,STARG(R10));
+MOV (FPARG(R9),R11);
+SUB (R9 , 1);
+SUB (R10 , 1);
+JUMP (tc_applic_for_label5014);
+tc_applic_end_param_ranover5014:
+MOV (R11, R12);
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (R11, STARG(0));
+MOV (FPARG(R9) , R11);
+SUB (R9 , 1);
+MOV (FPARG(R9) , R7);
+SUB (R9 , 1);
+MOV (SP ,FP);
+SUB (SP , R9);
+SUB (SP , 3);
+MOV (FP , R8);
+
+/*************run run_over_frame starts***********/
+
+/*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
+JUMPA (INDD(R0,2)); 
+L_Error_cannot_tc_apply_non_closure_5013:
+SHOW ("NOT A CLOSURE:" , INDD(R0,0));
+POP(FP);
+RETURN;
+L_ERROR_LAMBDA_ARGS_COUNT_5012:
+OUT(IMM(2) , 'c' );
+SHOW("Wrong number of args!!!" , FPARG(1));
+HALT;
+L_CLOSURE_EXIT_5012:
+
+/*************lambda-var code ends here***********/
+MOV(INDD(FVARARRAY,60),R0);
+MOV (R0 , SOB_VOID);
+
+/*************'def' code ends here***********/
+
+CMP(R0,SOB_VOID);
+JUMP_EQ(R0_IS_VOID_number_5011);
+PUSH(R0); 
+CALL(WRITE_SOB);
+DROP(1);
+PUSH(10); 
+CALL(PUTCHAR);
+DROP(1);
+R0_IS_VOID_number_5011:
+
+/*************'def' code starts here***********/
+
+/*************lambda-var code starts here***********/
+MOV (R1,FPARG(0));
+MOV(R2 ,SOB_NIL);
+CMP (1,IMM(1));
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4917);
+PUSH(1);
+CALL(MALLOC);
+DROP(1);
+MOV (R2,R0);
+MOV (R4 , IMM(0));
+MOV (R5 , IMM(1));
+LOOP_COPY_ENV_4917:
+CMP(R4,0);
+JUMP_EQ(EXIT_LOOP_COPY_4917);
+MOV (INDD(R2,R5) , INDD(R1,R4) );
+ADD(R4 , IMM(1));
+ADD(R5 , IMM(1));
+JUMP(LOOP_COPY_ENV_4917);
+EXIT_LOOP_COPY_4917:
+MOV (R3 , FPARG(1));
+PUSH(R3);
+CALL(MALLOC);
+DROP(1);
+MOV (INDD(R2,0) , R0);
+MOV (R4 , IMM(0));
+MOV (R5 , IMM(2));
+LOOP_EXTEND_ENV_4917:
+CMP(R4 , R3);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4917);
+MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
+ADD(R4 , IMM(1));
+ADD(R5 , IMM(1));
+JUMP(LOOP_EXTEND_ENV_4917);
+EXIT_LOOP_EXTEND_ENV_4917:
+PUSH (IMM(3));
+CALL(MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) , T_CLOSURE);
+MOV (INDD(R0 ,1) , R2);
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4867));
+JUMP(L_CLOSURE_EXIT_4867);
+L_CLOSURE_BODY_4867:
+PUSH(FP);
+MOV (FP , SP);
+
+/*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
+CMP (FPARG(1) , 0);
+JUMP_EQ(NO_OPTIONAL_ARGS_4916);
+MOV (R8,FPARG(1)-0- 1);
+MOV (R6 ,SOB_NIL);
+MOV (R5 , R6);
+MOV (R4 , FPARG(1));
+DECR(R4);
+LOOP_ARGS_4916:
+CMP (R4 ,-1);
+JUMP_EQ(EXIT_LOOP_ARGS_4916);
+PUSH(IMM(3));
+CALL (MALLOC);
+DROP(1);
+MOV (INDD(R0,0) , T_PAIR);
+MOV (INDD(R0,2) , R5);
+MOV (R5 , R0);
+MOV (INDD(R5,1) , FPARG(2 + R4));
+MOV (R6, R5);
+DECR(R4);
+JUMP(LOOP_ARGS_4916);
+EXIT_LOOP_ARGS_4916:
+MOV (FPARG(2 + 0), R6);
+MOV (R4, FPARG(1));
+MOV (FPARG(1), 1);
+MOV (R3 , FPARG(1));
+ADD (R3 , IMM(3));
+FIXING_STACK_4916:
+CMP (R3,IMM(0));
+JUMP_EQ(EXIT_FIXING_STACK_4916);
+MOV (FPARG(1 + R4), FPARG(-2 + R3));
+DECR(R3);
+DECR(R4);
+JUMP(FIXING_STACK_4916);
+EXIT_FIXING_STACK_4916:
+MOV (FPARG(1 + R4), FPARG(-2 + R3));
+MOV (SP , FP);
+SUB (SP , R4);
+SUB (SP , IMM(3));
+SUB (FP,R8);
+JUMP(FINAL_4916);
+NO_OPTIONAL_ARGS_4916:
+MOV (R5 , SOB_NIL);
+MOV (R4 , FPARG(1));
+ADD(R4 , IMM(4));
+ADD (FPARG(1) , IMM(1));
+NIL_CASE_LOOP_4916:
+CMP (R4 , IMM(0));
+JUMP_EQ(EXIT_NIL_CASE_LOOP_4916);
+MOV (R3 , FPARG(-2 + R4 - 1));
+MOV (FPARG(-2 + R4 - 1) , R5);
+MOV (R5 , R3);
+DECR(R4);
+JUMP(NIL_CASE_LOOP_4916);
+EXIT_NIL_CASE_LOOP_4916:
+MOV (FPARG(-2 + R4 - 1) , R5);
+DECR(R4);
+SUB(FP,R4);
+MOV (SP , FP);
+FINAL_4916:
+
+/*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
+
+/*************tc-applic code starts here4868***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
+
+PUSH(R0);
+MOV (R0 ,INDD(CONSTARRAY,181));
+
+PUSH(R0);
+PUSH(2);
+
+/*************lambda-simple code starts here***********/
+MOV (R1,FPARG(0));
+MOV(R2 ,SOB_NIL);
+CMP (2,IMM(1));
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4915);
+PUSH(2);
+CALL(MALLOC);
+DROP(1);
+MOV (R2,R0);
+MOV (R4 , IMM(0));
+MOV (R5 , IMM(1));
+LOOP_COPY_ENV_4915:
+CMP(R4,1);
+JUMP_EQ(EXIT_LOOP_COPY_4915);
+MOV (INDD(R2,R5) , INDD(R1,R4) );
+ADD(R4 , IMM(1));
+ADD(R5 , IMM(1));
+JUMP(LOOP_COPY_ENV_4915);
+EXIT_LOOP_COPY_4915:
+MOV (R3 , FPARG(1));
+PUSH(R3);
+CALL(MALLOC);
+DROP(1);
+MOV (INDD(R2,0) , R0);
+MOV (R4 , IMM(0));
+MOV (R5 , IMM(2));
+LOOP_EXTEND_ENV_4915:
+CMP(R4 , R3);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4915);
+MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
+ADD(R4 , IMM(1));
+ADD(R5 , IMM(1));
+JUMP(LOOP_EXTEND_ENV_4915);
+EXIT_LOOP_EXTEND_ENV_4915:
+PUSH (IMM(3));
+CALL(MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) , T_CLOSURE);
+MOV (INDD(R0 ,1) , R2);
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4870));
+JUMP(L_CLOSURE_EXIT_4870);
+L_CLOSURE_BODY_4870:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_106);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4870);
+
+/*************seq code starts***********/
+
+MOV(FPARG(2),R0);
+MOV (R0,SOB_VOID);
+
+/*************pvar code starts here***********/
+MOV (R0,FPARG(2 + 0));
+
+/*************pvar code ends here***********/
+MOV (R7, R0)
+
+/*************lambda-simple code starts here***********/
+MOV (R1,FPARG(0));
+MOV(R2 ,SOB_NIL);
+CMP (3,IMM(1));
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4914);
+PUSH(3);
+CALL(MALLOC);
+DROP(1);
+MOV (R2,R0);
+MOV (R4 , IMM(0));
+MOV (R5 , IMM(1));
+LOOP_COPY_ENV_4914:
+CMP(R4,2);
+JUMP_EQ(EXIT_LOOP_COPY_4914);
+MOV (INDD(R2,R5) , INDD(R1,R4) );
+ADD(R4 , IMM(1));
+ADD(R5 , IMM(1));
+JUMP(LOOP_COPY_ENV_4914);
+EXIT_LOOP_COPY_4914:
+MOV (R3 , FPARG(1));
+PUSH(R3);
+CALL(MALLOC);
+DROP(1);
+MOV (INDD(R2,0) , R0);
+MOV (R4 , IMM(0));
+MOV (R5 , IMM(2));
+LOOP_EXTEND_ENV_4914:
+CMP(R4 , R3);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4914);
+MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
+ADD(R4 , IMM(1));
+ADD(R5 , IMM(1));
+JUMP(LOOP_EXTEND_ENV_4914);
+EXIT_LOOP_EXTEND_ENV_4914:
+PUSH (IMM(3));
+CALL(MALLOC);
+DROP(1);
+MOV (INDD(R0 ,0) , T_CLOSURE);
+MOV (INDD(R0 ,1) , R2);
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4886));
+JUMP(L_CLOSURE_EXIT_4886);
+L_CLOSURE_BODY_4886:
+PUSH(FP);
+MOV (FP , SP);
+CMP(FPARG(1) , IMM(2));
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4886);
 
 /*************if3 code starts here***********/
 
@@ -9830,15 +10024,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL133);
-JUMP (FINISH_FVAR_LABEL133);
-UNDEF_LABEL133:
+JUMP_EQ (UNDEF_LABEL4913);
+JUMP (FINISH_FVAR_LABEL4913);
+UNDEF_LABEL4913:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL133:
+FINISH_FVAR_LABEL4913:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_132);
+JUMP_NE(L_Error_cannot_apply_non_closure_4912);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -9846,7 +10040,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_132:
+L_Error_cannot_apply_non_closure_4912:
 
 /*************applic code ends here***********/
 
@@ -9856,15 +10050,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL131);
-JUMP (FINISH_FVAR_LABEL131);
-UNDEF_LABEL131:
+JUMP_EQ (UNDEF_LABEL4911);
+JUMP (FINISH_FVAR_LABEL4911);
+UNDEF_LABEL4911:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL131:
+FINISH_FVAR_LABEL4911:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_130);
+JUMP_NE(L_Error_cannot_apply_non_closure_4910);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -9872,14 +10066,14 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_130:
+L_Error_cannot_apply_non_closure_4910:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE108);
+JUMP_EQ (L_IF3_ELSE4888);
 
-/*************tc-applic code starts here121***********/
+/*************tc-applic code starts here4901***********/
 
 /*************applic code starts here***********/
 
@@ -9896,15 +10090,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL129);
-JUMP (FINISH_FVAR_LABEL129);
-UNDEF_LABEL129:
+JUMP_EQ (UNDEF_LABEL4909);
+JUMP (FINISH_FVAR_LABEL4909);
+UNDEF_LABEL4909:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL129:
+FINISH_FVAR_LABEL4909:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_128);
+JUMP_NE(L_Error_cannot_apply_non_closure_4908);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -9912,7 +10106,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_128:
+L_Error_cannot_apply_non_closure_4908:
 
 /*************applic code ends here***********/
 
@@ -9922,15 +10116,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL127);
-JUMP (FINISH_FVAR_LABEL127);
-UNDEF_LABEL127:
+JUMP_EQ (UNDEF_LABEL4907);
+JUMP (FINISH_FVAR_LABEL4907);
+UNDEF_LABEL4907:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL127:
+FINISH_FVAR_LABEL4907:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_126);
+JUMP_NE(L_Error_cannot_apply_non_closure_4906);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -9938,7 +10132,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_126:
+L_Error_cannot_apply_non_closure_4906:
 
 /*************applic code ends here***********/
 
@@ -9957,15 +10151,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL125);
-JUMP (FINISH_FVAR_LABEL125);
-UNDEF_LABEL125:
+JUMP_EQ (UNDEF_LABEL4905);
+JUMP (FINISH_FVAR_LABEL4905);
+UNDEF_LABEL4905:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL125:
+FINISH_FVAR_LABEL4905:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_124);
+JUMP_NE(L_Error_cannot_apply_non_closure_4904);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -9973,7 +10167,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_124:
+L_Error_cannot_apply_non_closure_4904:
 
 /*************applic code ends here***********/
 
@@ -9983,19 +10177,19 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,44));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL123);
-JUMP (FINISH_FVAR_LABEL123);
-UNDEF_LABEL123:
+JUMP_EQ (UNDEF_LABEL4903);
+JUMP (FINISH_FVAR_LABEL4903);
+UNDEF_LABEL4903:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL123:
+FINISH_FVAR_LABEL4903:
 
 
-/*************tc-applic cont121***********/
+/*************tc-applic cont4901***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_121);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4901);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -10005,17 +10199,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover122);
+JUMP_EQ (tc_applic_end_param_ranover4902);
 ADD (R10 , IMM(1));
-tc_applic_for_label122:
+tc_applic_for_label4902:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover122);
+JUMP_LE (tc_applic_end_param_ranover4902);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label122);
-tc_applic_end_param_ranover122:
+JUMP (tc_applic_for_label4902);
+tc_applic_end_param_ranover4902:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -10033,13 +10227,13 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_121:
+L_Error_cannot_tc_apply_non_closure_4901:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-JUMP (L_IF3_EXIT107);
-L_IF3_ELSE108:
+JUMP (L_IF3_EXIT4887);
+L_IF3_ELSE4888:
 
-/*************tc-applic code starts here109***********/
+/*************tc-applic code starts here4889***********/
 
 /*************applic code starts here***********/
 
@@ -10054,15 +10248,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL120);
-JUMP (FINISH_FVAR_LABEL120);
-UNDEF_LABEL120:
+JUMP_EQ (UNDEF_LABEL4900);
+JUMP (FINISH_FVAR_LABEL4900);
+UNDEF_LABEL4900:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL120:
+FINISH_FVAR_LABEL4900:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_119);
+JUMP_NE(L_Error_cannot_apply_non_closure_4899);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10070,7 +10264,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_119:
+L_Error_cannot_apply_non_closure_4899:
 
 /*************applic code ends here***********/
 
@@ -10093,15 +10287,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL118);
-JUMP (FINISH_FVAR_LABEL118);
-UNDEF_LABEL118:
+JUMP_EQ (UNDEF_LABEL4898);
+JUMP (FINISH_FVAR_LABEL4898);
+UNDEF_LABEL4898:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL118:
+FINISH_FVAR_LABEL4898:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_117);
+JUMP_NE(L_Error_cannot_apply_non_closure_4897);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10109,7 +10303,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_117:
+L_Error_cannot_apply_non_closure_4897:
 
 /*************applic code ends here***********/
 
@@ -10119,15 +10313,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL116);
-JUMP (FINISH_FVAR_LABEL116);
-UNDEF_LABEL116:
+JUMP_EQ (UNDEF_LABEL4896);
+JUMP (FINISH_FVAR_LABEL4896);
+UNDEF_LABEL4896:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL116:
+FINISH_FVAR_LABEL4896:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_115);
+JUMP_NE(L_Error_cannot_apply_non_closure_4895);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10135,7 +10329,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_115:
+L_Error_cannot_apply_non_closure_4895:
 
 /*************applic code ends here***********/
 
@@ -10154,15 +10348,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL114);
-JUMP (FINISH_FVAR_LABEL114);
-UNDEF_LABEL114:
+JUMP_EQ (UNDEF_LABEL4894);
+JUMP (FINISH_FVAR_LABEL4894);
+UNDEF_LABEL4894:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL114:
+FINISH_FVAR_LABEL4894:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_113);
+JUMP_NE(L_Error_cannot_apply_non_closure_4893);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10170,7 +10364,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_113:
+L_Error_cannot_apply_non_closure_4893:
 
 /*************applic code ends here***********/
 
@@ -10180,15 +10374,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,44));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL112);
-JUMP (FINISH_FVAR_LABEL112);
-UNDEF_LABEL112:
+JUMP_EQ (UNDEF_LABEL4892);
+JUMP (FINISH_FVAR_LABEL4892);
+UNDEF_LABEL4892:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL112:
+FINISH_FVAR_LABEL4892:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_111);
+JUMP_NE(L_Error_cannot_apply_non_closure_4891);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10196,7 +10390,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_111:
+L_Error_cannot_apply_non_closure_4891:
 
 /*************applic code ends here***********/
 
@@ -10211,11 +10405,11 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 MOV(R0, (IND R0));
 
-/*************tc-applic cont109***********/
+/*************tc-applic cont4889***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_109);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4889);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -10225,17 +10419,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover110);
+JUMP_EQ (tc_applic_end_param_ranover4890);
 ADD (R10 , IMM(1));
-tc_applic_for_label110:
+tc_applic_for_label4890:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover110);
+JUMP_LE (tc_applic_end_param_ranover4890);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label110);
-tc_applic_end_param_ranover110:
+JUMP (tc_applic_for_label4890);
+tc_applic_end_param_ranover4890:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -10253,19 +10447,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_109:
+L_Error_cannot_tc_apply_non_closure_4889:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT107:
+L_IF3_EXIT4887:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_106:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4886:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_106:
+L_CLOSURE_EXIT_4886:
 
 /*************lambda-simple code ends here***********/
 MOV(IND(R7),R0);
@@ -10290,15 +10484,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL105);
-JUMP (FINISH_FVAR_LABEL105);
-UNDEF_LABEL105:
+JUMP_EQ (UNDEF_LABEL4885);
+JUMP (FINISH_FVAR_LABEL4885);
+UNDEF_LABEL4885:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL105:
+FINISH_FVAR_LABEL4885:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_104);
+JUMP_NE(L_Error_cannot_apply_non_closure_4884);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10306,7 +10500,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_104:
+L_Error_cannot_apply_non_closure_4884:
 
 /*************applic code ends here***********/
 
@@ -10316,15 +10510,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL103);
-JUMP (FINISH_FVAR_LABEL103);
-UNDEF_LABEL103:
+JUMP_EQ (UNDEF_LABEL4883);
+JUMP (FINISH_FVAR_LABEL4883);
+UNDEF_LABEL4883:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL103:
+FINISH_FVAR_LABEL4883:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_102);
+JUMP_NE(L_Error_cannot_apply_non_closure_4882);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10332,12 +10526,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_102:
+L_Error_cannot_apply_non_closure_4882:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE95);
+JUMP_EQ (L_IF3_ELSE4875);
 
 /*************applic code starts here***********/
 
@@ -10349,7 +10543,7 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,5));
+MOV (R0 ,INDD(CONSTARRAY,183));
 
 PUSH(R0);
 PUSH(2);
@@ -10360,7 +10554,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 MOV(R0, (IND R0));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_101);
+JUMP_NE(L_Error_cannot_apply_non_closure_4881);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10368,12 +10562,12 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_101:
+L_Error_cannot_apply_non_closure_4881:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT94);
-L_IF3_ELSE95:
+JUMP (L_IF3_EXIT4874);
+L_IF3_ELSE4875:
 
 /*************applic code starts here***********/
 
@@ -10392,15 +10586,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL100);
-JUMP (FINISH_FVAR_LABEL100);
-UNDEF_LABEL100:
+JUMP_EQ (UNDEF_LABEL4880);
+JUMP (FINISH_FVAR_LABEL4880);
+UNDEF_LABEL4880:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL100:
+FINISH_FVAR_LABEL4880:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_99);
+JUMP_NE(L_Error_cannot_apply_non_closure_4879);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10408,7 +10602,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_99:
+L_Error_cannot_apply_non_closure_4879:
 
 /*************applic code ends here***********/
 
@@ -10429,15 +10623,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL98);
-JUMP (FINISH_FVAR_LABEL98);
-UNDEF_LABEL98:
+JUMP_EQ (UNDEF_LABEL4878);
+JUMP (FINISH_FVAR_LABEL4878);
+UNDEF_LABEL4878:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL98:
+FINISH_FVAR_LABEL4878:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_97);
+JUMP_NE(L_Error_cannot_apply_non_closure_4877);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10445,7 +10639,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_97:
+L_Error_cannot_apply_non_closure_4877:
 
 /*************applic code ends here***********/
 
@@ -10458,7 +10652,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 MOV(R0, (IND R0));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_96);
+JUMP_NE(L_Error_cannot_apply_non_closure_4876);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10466,17 +10660,17 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_96:
+L_Error_cannot_apply_non_closure_4876:
 
 /*************applic code ends here***********/
 
-L_IF3_EXIT94:
+L_IF3_EXIT4874:
 
 /*************if3 code ends here***********/
 MOV(FPARG(3),R0);
 MOV (R0,SOB_VOID);
 
-/*************tc-applic code starts here91***********/
+/*************tc-applic code starts here4871***********/
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 1));
@@ -10487,21 +10681,21 @@ PUSH(R0);
 PUSH(1);
 
 /*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,61));
+MOV (R0 ,INDD(FVARARRAY,62));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL93);
-JUMP (FINISH_FVAR_LABEL93);
-UNDEF_LABEL93:
+JUMP_EQ (UNDEF_LABEL4873);
+JUMP (FINISH_FVAR_LABEL4873);
+UNDEF_LABEL4873:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL93:
+FINISH_FVAR_LABEL4873:
 
 
-/*************tc-applic cont91***********/
+/*************tc-applic cont4871***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_91);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4871);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -10511,17 +10705,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover92);
+JUMP_EQ (tc_applic_end_param_ranover4872);
 ADD (R10 , IMM(1));
-tc_applic_for_label92:
+tc_applic_for_label4872:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover92);
+JUMP_LE (tc_applic_end_param_ranover4872);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label92);
-tc_applic_end_param_ranover92:
+JUMP (tc_applic_for_label4872);
+tc_applic_end_param_ranover4872:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -10539,26 +10733,26 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_91:
+L_Error_cannot_tc_apply_non_closure_4871:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
 /*************seq code ends***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_90:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4870:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_90:
+L_CLOSURE_EXIT_4870:
 
 /*************lambda-simple code ends here***********/
 
 
-/*************tc-applic cont88***********/
+/*************tc-applic cont4868***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_88);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4868);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -10568,17 +10762,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover89);
+JUMP_EQ (tc_applic_end_param_ranover4869);
 ADD (R10 , IMM(1));
-tc_applic_for_label89:
+tc_applic_for_label4869:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover89);
+JUMP_LE (tc_applic_end_param_ranover4869);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label89);
-tc_applic_end_param_ranover89:
+JUMP (tc_applic_for_label4869);
+tc_applic_end_param_ranover4869:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -10596,31 +10790,31 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_88:
+L_Error_cannot_tc_apply_non_closure_4868:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_87:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4867:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_87:
+L_CLOSURE_EXIT_4867:
 
 /*************lambda-var code ends here***********/
-MOV(INDD(FVARARRAY,60),R0);
+MOV(INDD(FVARARRAY,61),R0);
 MOV (R0 , SOB_VOID);
 
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_86);
+JUMP_EQ(R0_IS_VOID_number_4866);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_86:
+R0_IS_VOID_number_4866:
 
 /*************'def' code starts here***********/
 
@@ -10628,21 +10822,21 @@ R0_IS_VOID_number_86:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_178);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4958);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_178:
+LOOP_COPY_ENV_4958:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_178);
+JUMP_EQ(EXIT_LOOP_COPY_4958);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_178);
-EXIT_LOOP_COPY_178:
+JUMP(LOOP_COPY_ENV_4958);
+EXIT_LOOP_COPY_4958:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -10650,37 +10844,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_178:
+LOOP_EXTEND_ENV_4958:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_178);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4958);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_178);
-EXIT_LOOP_EXTEND_ENV_178:
+JUMP(LOOP_EXTEND_ENV_4958);
+EXIT_LOOP_EXTEND_ENV_4958:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_139));
-JUMP(L_CLOSURE_EXIT_139);
-L_CLOSURE_BODY_139:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4919));
+JUMP(L_CLOSURE_EXIT_4919);
+L_CLOSURE_BODY_4919:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_177);
+JUMP_EQ(NO_OPTIONAL_ARGS_4957);
 MOV (R8,FPARG(1)-0- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_177:
+LOOP_ARGS_4957:
 CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_177);
+JUMP_EQ(EXIT_LOOP_ARGS_4957);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -10690,54 +10883,54 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_177);
-EXIT_LOOP_ARGS_177:
+JUMP(LOOP_ARGS_4957);
+EXIT_LOOP_ARGS_4957:
 MOV (FPARG(2 + 0), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 1);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_177:
+FIXING_STACK_4957:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_177);
+JUMP_EQ(EXIT_FIXING_STACK_4957);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_177);
-EXIT_FIXING_STACK_177:
+JUMP(FIXING_STACK_4957);
+EXIT_FIXING_STACK_4957:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_177);
-NO_OPTIONAL_ARGS_177:
+JUMP(FINAL_4957);
+NO_OPTIONAL_ARGS_4957:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_177:
+NIL_CASE_LOOP_4957:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_177);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_4957);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_177);
-EXIT_NIL_CASE_LOOP_177:
+JUMP(NIL_CASE_LOOP_4957);
+EXIT_NIL_CASE_LOOP_4957:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_177:
+FINAL_4957:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
-/*************tc-applic code starts here140***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
+/*************tc-applic code starts here4920***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
 PUSH(2);
@@ -10746,21 +10939,21 @@ PUSH(2);
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_176);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4956);
 PUSH(2);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_176:
+LOOP_COPY_ENV_4956:
 CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_176);
+JUMP_EQ(EXIT_LOOP_COPY_4956);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_176);
-EXIT_LOOP_COPY_176:
+JUMP(LOOP_COPY_ENV_4956);
+EXIT_LOOP_COPY_4956:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -10768,27 +10961,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_176:
+LOOP_EXTEND_ENV_4956:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_176);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4956);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_176);
-EXIT_LOOP_EXTEND_ENV_176:
+JUMP(LOOP_EXTEND_ENV_4956);
+EXIT_LOOP_EXTEND_ENV_4956:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_142));
-JUMP(L_CLOSURE_EXIT_142);
-L_CLOSURE_BODY_142:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4922));
+JUMP(L_CLOSURE_EXIT_4922);
+L_CLOSURE_BODY_4922:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_142);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4922);
 
 /*************seq code starts***********/
 
@@ -10805,21 +10997,21 @@ MOV (R7, R0)
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (3,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_175);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4955);
 PUSH(3);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_175:
+LOOP_COPY_ENV_4955:
 CMP(R4,2);
-JUMP_EQ(EXIT_LOOP_COPY_175);
+JUMP_EQ(EXIT_LOOP_COPY_4955);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_175);
-EXIT_LOOP_COPY_175:
+JUMP(LOOP_COPY_ENV_4955);
+EXIT_LOOP_COPY_4955:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -10827,27 +11019,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_175:
+LOOP_EXTEND_ENV_4955:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_175);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4955);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_175);
-EXIT_LOOP_EXTEND_ENV_175:
+JUMP(LOOP_EXTEND_ENV_4955);
+EXIT_LOOP_EXTEND_ENV_4955:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_150));
-JUMP(L_CLOSURE_EXIT_150);
-L_CLOSURE_BODY_150:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4930));
+JUMP(L_CLOSURE_EXIT_4930);
+L_CLOSURE_BODY_4930:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_150);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4930);
 
 /*************if3 code starts here***********/
 
@@ -10866,15 +11057,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL174);
-JUMP (FINISH_FVAR_LABEL174);
-UNDEF_LABEL174:
+JUMP_EQ (UNDEF_LABEL4954);
+JUMP (FINISH_FVAR_LABEL4954);
+UNDEF_LABEL4954:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL174:
+FINISH_FVAR_LABEL4954:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_173);
+JUMP_NE(L_Error_cannot_apply_non_closure_4953);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10882,7 +11073,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_173:
+L_Error_cannot_apply_non_closure_4953:
 
 /*************applic code ends here***********/
 
@@ -10892,15 +11083,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL172);
-JUMP (FINISH_FVAR_LABEL172);
-UNDEF_LABEL172:
+JUMP_EQ (UNDEF_LABEL4952);
+JUMP (FINISH_FVAR_LABEL4952);
+UNDEF_LABEL4952:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL172:
+FINISH_FVAR_LABEL4952:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_171);
+JUMP_NE(L_Error_cannot_apply_non_closure_4951);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10908,22 +11099,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_171:
+L_Error_cannot_apply_non_closure_4951:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE152);
+JUMP_EQ (L_IF3_ELSE4932);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 0));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT151);
-L_IF3_ELSE152:
+JUMP (L_IF3_EXIT4931);
+L_IF3_ELSE4932:
 
-/*************tc-applic code starts here153***********/
+/*************tc-applic code starts here4933***********/
 
 /*************applic code starts here***********/
 
@@ -10938,15 +11129,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL170);
-JUMP (FINISH_FVAR_LABEL170);
-UNDEF_LABEL170:
+JUMP_EQ (UNDEF_LABEL4950);
+JUMP (FINISH_FVAR_LABEL4950);
+UNDEF_LABEL4950:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL170:
+FINISH_FVAR_LABEL4950:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_169);
+JUMP_NE(L_Error_cannot_apply_non_closure_4949);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -10954,7 +11145,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_169:
+L_Error_cannot_apply_non_closure_4949:
 
 /*************applic code ends here***********/
 
@@ -10968,7 +11159,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE156);
+JUMP_EQ (L_IF3_ELSE4936);
 
 /*************applic code starts here***********/
 
@@ -10989,15 +11180,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL168);
-JUMP (FINISH_FVAR_LABEL168);
-UNDEF_LABEL168:
+JUMP_EQ (UNDEF_LABEL4948);
+JUMP (FINISH_FVAR_LABEL4948);
+UNDEF_LABEL4948:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL168:
+FINISH_FVAR_LABEL4948:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_167);
+JUMP_NE(L_Error_cannot_apply_non_closure_4947);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11005,7 +11196,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_167:
+L_Error_cannot_apply_non_closure_4947:
 
 /*************applic code ends here***********/
 
@@ -11015,15 +11206,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL166);
-JUMP (FINISH_FVAR_LABEL166);
-UNDEF_LABEL166:
+JUMP_EQ (UNDEF_LABEL4946);
+JUMP (FINISH_FVAR_LABEL4946);
+UNDEF_LABEL4946:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL166:
+FINISH_FVAR_LABEL4946:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_165);
+JUMP_NE(L_Error_cannot_apply_non_closure_4945);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11031,7 +11222,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_165:
+L_Error_cannot_apply_non_closure_4945:
 
 /*************applic code ends here***********/
 
@@ -11041,15 +11232,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL164);
-JUMP (FINISH_FVAR_LABEL164);
-UNDEF_LABEL164:
+JUMP_EQ (UNDEF_LABEL4944);
+JUMP (FINISH_FVAR_LABEL4944);
+UNDEF_LABEL4944:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL164:
+FINISH_FVAR_LABEL4944:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_163);
+JUMP_NE(L_Error_cannot_apply_non_closure_4943);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11057,7 +11248,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_163:
+L_Error_cannot_apply_non_closure_4943:
 
 /*************applic code ends here***********/
 
@@ -11078,15 +11269,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL162);
-JUMP (FINISH_FVAR_LABEL162);
-UNDEF_LABEL162:
+JUMP_EQ (UNDEF_LABEL4942);
+JUMP (FINISH_FVAR_LABEL4942);
+UNDEF_LABEL4942:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL162:
+FINISH_FVAR_LABEL4942:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_161);
+JUMP_NE(L_Error_cannot_apply_non_closure_4941);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11094,7 +11285,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_161:
+L_Error_cannot_apply_non_closure_4941:
 
 /*************applic code ends here***********/
 
@@ -11104,15 +11295,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL160);
-JUMP (FINISH_FVAR_LABEL160);
-UNDEF_LABEL160:
+JUMP_EQ (UNDEF_LABEL4940);
+JUMP (FINISH_FVAR_LABEL4940);
+UNDEF_LABEL4940:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL160:
+FINISH_FVAR_LABEL4940:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_159);
+JUMP_NE(L_Error_cannot_apply_non_closure_4939);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11120,7 +11311,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_159:
+L_Error_cannot_apply_non_closure_4939:
 
 /*************applic code ends here***********/
 
@@ -11130,15 +11321,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,42));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL158);
-JUMP (FINISH_FVAR_LABEL158);
-UNDEF_LABEL158:
+JUMP_EQ (UNDEF_LABEL4938);
+JUMP (FINISH_FVAR_LABEL4938);
+UNDEF_LABEL4938:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL158:
+FINISH_FVAR_LABEL4938:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_157);
+JUMP_NE(L_Error_cannot_apply_non_closure_4937);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11146,15 +11337,15 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_157:
+L_Error_cannot_apply_non_closure_4937:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT155);
-L_IF3_ELSE156:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT4935);
+L_IF3_ELSE4936:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT155:
+L_IF3_EXIT4935:
 
 /*************if3 code ends here***********/
 
@@ -11169,11 +11360,11 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 MOV(R0, (IND R0));
 
-/*************tc-applic cont153***********/
+/*************tc-applic cont4933***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_153);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4933);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -11183,17 +11374,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover154);
+JUMP_EQ (tc_applic_end_param_ranover4934);
 ADD (R10 , IMM(1));
-tc_applic_for_label154:
+tc_applic_for_label4934:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover154);
+JUMP_LE (tc_applic_end_param_ranover4934);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label154);
-tc_applic_end_param_ranover154:
+JUMP (tc_applic_for_label4934);
+tc_applic_end_param_ranover4934:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -11211,19 +11402,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_153:
+L_Error_cannot_tc_apply_non_closure_4933:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT151:
+L_IF3_EXIT4931:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_150:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4930:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_150:
+L_CLOSURE_EXIT_4930:
 
 /*************lambda-simple code ends here***********/
 MOV(IND(R7),R0);
@@ -11248,15 +11439,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL149);
-JUMP (FINISH_FVAR_LABEL149);
-UNDEF_LABEL149:
+JUMP_EQ (UNDEF_LABEL4929);
+JUMP (FINISH_FVAR_LABEL4929);
+UNDEF_LABEL4929:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL149:
+FINISH_FVAR_LABEL4929:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_148);
+JUMP_NE(L_Error_cannot_apply_non_closure_4928);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11264,7 +11455,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_148:
+L_Error_cannot_apply_non_closure_4928:
 
 /*************applic code ends here***********/
 
@@ -11274,15 +11465,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL147);
-JUMP (FINISH_FVAR_LABEL147);
-UNDEF_LABEL147:
+JUMP_EQ (UNDEF_LABEL4927);
+JUMP (FINISH_FVAR_LABEL4927);
+UNDEF_LABEL4927:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL147:
+FINISH_FVAR_LABEL4927:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_146);
+JUMP_NE(L_Error_cannot_apply_non_closure_4926);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11290,16 +11481,16 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_146:
+L_Error_cannot_apply_non_closure_4926:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE144);
-MOV (R0 ,INDD(CONSTARRAY,2));
+JUMP_EQ (L_IF3_ELSE4924);
+MOV (R0 ,INDD(CONSTARRAY,180));
 
-JUMP (L_IF3_EXIT143);
-L_IF3_ELSE144:
+JUMP (L_IF3_EXIT4923);
+L_IF3_ELSE4924:
 
 /*************applic code starts here***********/
 
@@ -11311,7 +11502,7 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,2));
+MOV (R0 ,INDD(CONSTARRAY,180));
 
 PUSH(R0);
 PUSH(2);
@@ -11322,7 +11513,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 MOV(R0, (IND R0));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_145);
+JUMP_NE(L_Error_cannot_apply_non_closure_4925);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11330,11 +11521,11 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_145:
+L_Error_cannot_apply_non_closure_4925:
 
 /*************applic code ends here***********/
 
-L_IF3_EXIT143:
+L_IF3_EXIT4923:
 
 /*************if3 code ends here***********/
 MOV(FPARG(3),R0);
@@ -11348,20 +11539,20 @@ MOV (R0,FPARG(2 + 1));
 /*************seq code ends***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_142:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4922:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_142:
+L_CLOSURE_EXIT_4922:
 
 /*************lambda-simple code ends here***********/
 
 
-/*************tc-applic cont140***********/
+/*************tc-applic cont4920***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_140);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4920);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -11371,17 +11562,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover141);
+JUMP_EQ (tc_applic_end_param_ranover4921);
 ADD (R10 , IMM(1));
-tc_applic_for_label141:
+tc_applic_for_label4921:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover141);
+JUMP_LE (tc_applic_end_param_ranover4921);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label141);
-tc_applic_end_param_ranover141:
+JUMP (tc_applic_for_label4921);
+tc_applic_end_param_ranover4921:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -11399,31 +11590,31 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_140:
+L_Error_cannot_tc_apply_non_closure_4920:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_139:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4919:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_139:
+L_CLOSURE_EXIT_4919:
 
 /*************lambda-var code ends here***********/
-MOV(INDD(FVARARRAY,62),R0);
+MOV(INDD(FVARARRAY,63),R0);
 MOV (R0 , SOB_VOID);
 
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_138);
+JUMP_EQ(R0_IS_VOID_number_4918);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_138:
+R0_IS_VOID_number_4918:
 
 /*************'def' code starts here***********/
 
@@ -11431,21 +11622,21 @@ R0_IS_VOID_number_138:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_44);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4824);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_44:
+LOOP_COPY_ENV_4824:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_44);
+JUMP_EQ(EXIT_LOOP_COPY_4824);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_44);
-EXIT_LOOP_COPY_44:
+JUMP(LOOP_COPY_ENV_4824);
+EXIT_LOOP_COPY_4824:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -11453,37 +11644,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_44:
+LOOP_EXTEND_ENV_4824:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_44);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4824);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_44);
-EXIT_LOOP_EXTEND_ENV_44:
+JUMP(LOOP_EXTEND_ENV_4824);
+EXIT_LOOP_EXTEND_ENV_4824:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_5));
-JUMP(L_CLOSURE_EXIT_5);
-L_CLOSURE_BODY_5:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4785));
+JUMP(L_CLOSURE_EXIT_4785);
+L_CLOSURE_BODY_4785:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_43);
+JUMP_EQ(NO_OPTIONAL_ARGS_4823);
 MOV (R8,FPARG(1)-0- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_43:
+LOOP_ARGS_4823:
 CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_43);
+JUMP_EQ(EXIT_LOOP_ARGS_4823);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -11493,54 +11683,54 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_43);
-EXIT_LOOP_ARGS_43:
+JUMP(LOOP_ARGS_4823);
+EXIT_LOOP_ARGS_4823:
 MOV (FPARG(2 + 0), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 1);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_43:
+FIXING_STACK_4823:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_43);
+JUMP_EQ(EXIT_FIXING_STACK_4823);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_43);
-EXIT_FIXING_STACK_43:
+JUMP(FIXING_STACK_4823);
+EXIT_FIXING_STACK_4823:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_43);
-NO_OPTIONAL_ARGS_43:
+JUMP(FINAL_4823);
+NO_OPTIONAL_ARGS_4823:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_43:
+NIL_CASE_LOOP_4823:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_43);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_4823);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_43);
-EXIT_NIL_CASE_LOOP_43:
+JUMP(NIL_CASE_LOOP_4823);
+EXIT_NIL_CASE_LOOP_4823:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_43:
+FINAL_4823:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
-/*************tc-applic code starts here6***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
+/*************tc-applic code starts here4786***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
 PUSH(2);
@@ -11549,21 +11739,21 @@ PUSH(2);
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_42);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4822);
 PUSH(2);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_42:
+LOOP_COPY_ENV_4822:
 CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_42);
+JUMP_EQ(EXIT_LOOP_COPY_4822);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_42);
-EXIT_LOOP_COPY_42:
+JUMP(LOOP_COPY_ENV_4822);
+EXIT_LOOP_COPY_4822:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -11571,27 +11761,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_42:
+LOOP_EXTEND_ENV_4822:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_42);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4822);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_42);
-EXIT_LOOP_EXTEND_ENV_42:
+JUMP(LOOP_EXTEND_ENV_4822);
+EXIT_LOOP_EXTEND_ENV_4822:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_8));
-JUMP(L_CLOSURE_EXIT_8);
-L_CLOSURE_BODY_8:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4788));
+JUMP(L_CLOSURE_EXIT_4788);
+L_CLOSURE_BODY_4788:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_8);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4788);
 
 /*************seq code starts***********/
 
@@ -11608,21 +11797,21 @@ MOV (R7, R0)
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (3,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_41);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4821);
 PUSH(3);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_41:
+LOOP_COPY_ENV_4821:
 CMP(R4,2);
-JUMP_EQ(EXIT_LOOP_COPY_41);
+JUMP_EQ(EXIT_LOOP_COPY_4821);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_41);
-EXIT_LOOP_COPY_41:
+JUMP(LOOP_COPY_ENV_4821);
+EXIT_LOOP_COPY_4821:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -11630,27 +11819,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_41:
+LOOP_EXTEND_ENV_4821:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_41);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4821);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_41);
-EXIT_LOOP_EXTEND_ENV_41:
+JUMP(LOOP_EXTEND_ENV_4821);
+EXIT_LOOP_EXTEND_ENV_4821:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_16));
-JUMP(L_CLOSURE_EXIT_16);
-L_CLOSURE_BODY_16:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4796));
+JUMP(L_CLOSURE_EXIT_4796);
+L_CLOSURE_BODY_4796:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_16);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4796);
 
 /*************if3 code starts here***********/
 
@@ -11669,15 +11857,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL40);
-JUMP (FINISH_FVAR_LABEL40);
-UNDEF_LABEL40:
+JUMP_EQ (UNDEF_LABEL4820);
+JUMP (FINISH_FVAR_LABEL4820);
+UNDEF_LABEL4820:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL40:
+FINISH_FVAR_LABEL4820:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_39);
+JUMP_NE(L_Error_cannot_apply_non_closure_4819);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11685,7 +11873,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_39:
+L_Error_cannot_apply_non_closure_4819:
 
 /*************applic code ends here***********/
 
@@ -11695,15 +11883,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL38);
-JUMP (FINISH_FVAR_LABEL38);
-UNDEF_LABEL38:
+JUMP_EQ (UNDEF_LABEL4818);
+JUMP (FINISH_FVAR_LABEL4818);
+UNDEF_LABEL4818:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL38:
+FINISH_FVAR_LABEL4818:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_37);
+JUMP_NE(L_Error_cannot_apply_non_closure_4817);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11711,22 +11899,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_37:
+L_Error_cannot_apply_non_closure_4817:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE18);
+JUMP_EQ (L_IF3_ELSE4798);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 0));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT17);
-L_IF3_ELSE18:
+JUMP (L_IF3_EXIT4797);
+L_IF3_ELSE4798:
 
-/*************tc-applic code starts here19***********/
+/*************tc-applic code starts here4799***********/
 
 /*************applic code starts here***********/
 
@@ -11741,15 +11929,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL36);
-JUMP (FINISH_FVAR_LABEL36);
-UNDEF_LABEL36:
+JUMP_EQ (UNDEF_LABEL4816);
+JUMP (FINISH_FVAR_LABEL4816);
+UNDEF_LABEL4816:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL36:
+FINISH_FVAR_LABEL4816:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_35);
+JUMP_NE(L_Error_cannot_apply_non_closure_4815);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11757,7 +11945,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_35:
+L_Error_cannot_apply_non_closure_4815:
 
 /*************applic code ends here***********/
 
@@ -11771,7 +11959,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE22);
+JUMP_EQ (L_IF3_ELSE4802);
 
 /*************applic code starts here***********/
 
@@ -11792,15 +11980,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL34);
-JUMP (FINISH_FVAR_LABEL34);
-UNDEF_LABEL34:
+JUMP_EQ (UNDEF_LABEL4814);
+JUMP (FINISH_FVAR_LABEL4814);
+UNDEF_LABEL4814:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL34:
+FINISH_FVAR_LABEL4814:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_33);
+JUMP_NE(L_Error_cannot_apply_non_closure_4813);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11808,7 +11996,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_33:
+L_Error_cannot_apply_non_closure_4813:
 
 /*************applic code ends here***********/
 
@@ -11818,15 +12006,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL32);
-JUMP (FINISH_FVAR_LABEL32);
-UNDEF_LABEL32:
+JUMP_EQ (UNDEF_LABEL4812);
+JUMP (FINISH_FVAR_LABEL4812);
+UNDEF_LABEL4812:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL32:
+FINISH_FVAR_LABEL4812:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_31);
+JUMP_NE(L_Error_cannot_apply_non_closure_4811);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11834,7 +12022,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_31:
+L_Error_cannot_apply_non_closure_4811:
 
 /*************applic code ends here***********/
 
@@ -11844,15 +12032,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL30);
-JUMP (FINISH_FVAR_LABEL30);
-UNDEF_LABEL30:
+JUMP_EQ (UNDEF_LABEL4810);
+JUMP (FINISH_FVAR_LABEL4810);
+UNDEF_LABEL4810:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL30:
+FINISH_FVAR_LABEL4810:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_29);
+JUMP_NE(L_Error_cannot_apply_non_closure_4809);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11860,7 +12048,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_29:
+L_Error_cannot_apply_non_closure_4809:
 
 /*************applic code ends here***********/
 
@@ -11881,15 +12069,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL28);
-JUMP (FINISH_FVAR_LABEL28);
-UNDEF_LABEL28:
+JUMP_EQ (UNDEF_LABEL4808);
+JUMP (FINISH_FVAR_LABEL4808);
+UNDEF_LABEL4808:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL28:
+FINISH_FVAR_LABEL4808:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_27);
+JUMP_NE(L_Error_cannot_apply_non_closure_4807);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11897,7 +12085,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_27:
+L_Error_cannot_apply_non_closure_4807:
 
 /*************applic code ends here***********/
 
@@ -11907,15 +12095,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL26);
-JUMP (FINISH_FVAR_LABEL26);
-UNDEF_LABEL26:
+JUMP_EQ (UNDEF_LABEL4806);
+JUMP (FINISH_FVAR_LABEL4806);
+UNDEF_LABEL4806:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL26:
+FINISH_FVAR_LABEL4806:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_25);
+JUMP_NE(L_Error_cannot_apply_non_closure_4805);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11923,7 +12111,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_25:
+L_Error_cannot_apply_non_closure_4805:
 
 /*************applic code ends here***********/
 
@@ -11933,15 +12121,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,43));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL24);
-JUMP (FINISH_FVAR_LABEL24);
-UNDEF_LABEL24:
+JUMP_EQ (UNDEF_LABEL4804);
+JUMP (FINISH_FVAR_LABEL4804);
+UNDEF_LABEL4804:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL24:
+FINISH_FVAR_LABEL4804:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_23);
+JUMP_NE(L_Error_cannot_apply_non_closure_4803);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -11949,15 +12137,15 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_23:
+L_Error_cannot_apply_non_closure_4803:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT21);
-L_IF3_ELSE22:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT4801);
+L_IF3_ELSE4802:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT21:
+L_IF3_EXIT4801:
 
 /*************if3 code ends here***********/
 
@@ -11972,11 +12160,11 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 MOV(R0, (IND R0));
 
-/*************tc-applic cont19***********/
+/*************tc-applic cont4799***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_19);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4799);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -11986,17 +12174,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover20);
+JUMP_EQ (tc_applic_end_param_ranover4800);
 ADD (R10 , IMM(1));
-tc_applic_for_label20:
+tc_applic_for_label4800:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover20);
+JUMP_LE (tc_applic_end_param_ranover4800);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label20);
-tc_applic_end_param_ranover20:
+JUMP (tc_applic_for_label4800);
+tc_applic_end_param_ranover4800:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -12014,19 +12202,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_19:
+L_Error_cannot_tc_apply_non_closure_4799:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT17:
+L_IF3_EXIT4797:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_16:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4796:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_16:
+L_CLOSURE_EXIT_4796:
 
 /*************lambda-simple code ends here***********/
 MOV(IND(R7),R0);
@@ -12051,15 +12239,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL15);
-JUMP (FINISH_FVAR_LABEL15);
-UNDEF_LABEL15:
+JUMP_EQ (UNDEF_LABEL4795);
+JUMP (FINISH_FVAR_LABEL4795);
+UNDEF_LABEL4795:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL15:
+FINISH_FVAR_LABEL4795:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_14);
+JUMP_NE(L_Error_cannot_apply_non_closure_4794);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12067,7 +12255,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_14:
+L_Error_cannot_apply_non_closure_4794:
 
 /*************applic code ends here***********/
 
@@ -12077,15 +12265,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL13);
-JUMP (FINISH_FVAR_LABEL13);
-UNDEF_LABEL13:
+JUMP_EQ (UNDEF_LABEL4793);
+JUMP (FINISH_FVAR_LABEL4793);
+UNDEF_LABEL4793:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL13:
+FINISH_FVAR_LABEL4793:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_12);
+JUMP_NE(L_Error_cannot_apply_non_closure_4792);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12093,16 +12281,16 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_12:
+L_Error_cannot_apply_non_closure_4792:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE10);
-MOV (R0 ,INDD(CONSTARRAY,2));
+JUMP_EQ (L_IF3_ELSE4790);
+MOV (R0 ,INDD(CONSTARRAY,180));
 
-JUMP (L_IF3_EXIT9);
-L_IF3_ELSE10:
+JUMP (L_IF3_EXIT4789);
+L_IF3_ELSE4790:
 
 /*************applic code starts here***********/
 
@@ -12114,7 +12302,7 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,2));
+MOV (R0 ,INDD(CONSTARRAY,180));
 
 PUSH(R0);
 PUSH(2);
@@ -12125,7 +12313,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 MOV(R0, (IND R0));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_11);
+JUMP_NE(L_Error_cannot_apply_non_closure_4791);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12133,11 +12321,11 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_11:
+L_Error_cannot_apply_non_closure_4791:
 
 /*************applic code ends here***********/
 
-L_IF3_EXIT9:
+L_IF3_EXIT4789:
 
 /*************if3 code ends here***********/
 MOV(FPARG(3),R0);
@@ -12151,20 +12339,20 @@ MOV (R0,FPARG(2 + 1));
 /*************seq code ends***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_8:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4788:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_8:
+L_CLOSURE_EXIT_4788:
 
 /*************lambda-simple code ends here***********/
 
 
-/*************tc-applic cont6***********/
+/*************tc-applic cont4786***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_6);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4786);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -12174,17 +12362,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover7);
+JUMP_EQ (tc_applic_end_param_ranover4787);
 ADD (R10 , IMM(1));
-tc_applic_for_label7:
+tc_applic_for_label4787:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover7);
+JUMP_LE (tc_applic_end_param_ranover4787);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label7);
-tc_applic_end_param_ranover7:
+JUMP (tc_applic_for_label4787);
+tc_applic_end_param_ranover4787:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -12202,31 +12390,31 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_6:
+L_Error_cannot_tc_apply_non_closure_4786:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_5:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4785:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_5:
+L_CLOSURE_EXIT_4785:
 
 /*************lambda-var code ends here***********/
-MOV(INDD(FVARARRAY,63),R0);
+MOV(INDD(FVARARRAY,64),R0);
 MOV (R0 , SOB_VOID);
 
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_4);
+JUMP_EQ(R0_IS_VOID_number_4784);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_4:
+R0_IS_VOID_number_4784:
 
 /*************'def' code starts here***********/
 
@@ -12234,21 +12422,21 @@ R0_IS_VOID_number_4:
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (1,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_85);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4865);
 PUSH(1);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_85:
+LOOP_COPY_ENV_4865:
 CMP(R4,0);
-JUMP_EQ(EXIT_LOOP_COPY_85);
+JUMP_EQ(EXIT_LOOP_COPY_4865);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_85);
-EXIT_LOOP_COPY_85:
+JUMP(LOOP_COPY_ENV_4865);
+EXIT_LOOP_COPY_4865:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -12256,37 +12444,36 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_85:
+LOOP_EXTEND_ENV_4865:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_85);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4865);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_85);
-EXIT_LOOP_EXTEND_ENV_85:
+JUMP(LOOP_EXTEND_ENV_4865);
+EXIT_LOOP_EXTEND_ENV_4865:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_46));
-JUMP(L_CLOSURE_EXIT_46);
-L_CLOSURE_BODY_46:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4826));
+JUMP(L_CLOSURE_EXIT_4826);
+L_CLOSURE_BODY_4826:
 PUSH(FP);
 MOV (FP , SP);
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 CMP (FPARG(1) , 0);
-JUMP_EQ(NO_OPTIONAL_ARGS_84);
+JUMP_EQ(NO_OPTIONAL_ARGS_4864);
 MOV (R8,FPARG(1)-0- 1);
 MOV (R6 ,SOB_NIL);
 MOV (R5 , R6);
 MOV (R4 , FPARG(1));
 DECR(R4);
-LOOP_ARGS_84:
+LOOP_ARGS_4864:
 CMP (R4 ,-1);
-JUMP_EQ(EXIT_LOOP_ARGS_84);
+JUMP_EQ(EXIT_LOOP_ARGS_4864);
 PUSH(IMM(3));
 CALL (MALLOC);
 DROP(1);
@@ -12296,54 +12483,54 @@ MOV (R5 , R0);
 MOV (INDD(R5,1) , FPARG(2 + R4));
 MOV (R6, R5);
 DECR(R4);
-JUMP(LOOP_ARGS_84);
-EXIT_LOOP_ARGS_84:
+JUMP(LOOP_ARGS_4864);
+EXIT_LOOP_ARGS_4864:
 MOV (FPARG(2 + 0), R6);
 MOV (R4, FPARG(1));
 MOV (FPARG(1), 1);
 MOV (R3 , FPARG(1));
 ADD (R3 , IMM(3));
-FIXING_STACK_84:
+FIXING_STACK_4864:
 CMP (R3,IMM(0));
-JUMP_EQ(EXIT_FIXING_STACK_84);
+JUMP_EQ(EXIT_FIXING_STACK_4864);
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 DECR(R3);
 DECR(R4);
-JUMP(FIXING_STACK_84);
-EXIT_FIXING_STACK_84:
+JUMP(FIXING_STACK_4864);
+EXIT_FIXING_STACK_4864:
 MOV (FPARG(1 + R4), FPARG(-2 + R3));
 MOV (SP , FP);
 SUB (SP , R4);
 SUB (SP , IMM(3));
 SUB (FP,R8);
-JUMP(FINAL_84);
-NO_OPTIONAL_ARGS_84:
+JUMP(FINAL_4864);
+NO_OPTIONAL_ARGS_4864:
 MOV (R5 , SOB_NIL);
 MOV (R4 , FPARG(1));
 ADD(R4 , IMM(4));
 ADD (FPARG(1) , IMM(1));
-NIL_CASE_LOOP_84:
+NIL_CASE_LOOP_4864:
 CMP (R4 , IMM(0));
-JUMP_EQ(EXIT_NIL_CASE_LOOP_84);
+JUMP_EQ(EXIT_NIL_CASE_LOOP_4864);
 MOV (R3 , FPARG(-2 + R4 - 1));
 MOV (FPARG(-2 + R4 - 1) , R5);
 MOV (R5 , R3);
 DECR(R4);
-JUMP(NIL_CASE_LOOP_84);
-EXIT_NIL_CASE_LOOP_84:
+JUMP(NIL_CASE_LOOP_4864);
+EXIT_NIL_CASE_LOOP_4864:
 MOV (FPARG(-2 + R4 - 1) , R5);
 DECR(R4);
 SUB(FP,R4);
 MOV (SP , FP);
-FINAL_84:
+FINAL_4864:
 
 /*************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~***********/
 
-/*************tc-applic code starts here47***********/
-MOV (R0 ,INDD(CONSTARRAY,3));
+/*************tc-applic code starts here4827***********/
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,3));
+MOV (R0 ,INDD(CONSTARRAY,181));
 
 PUSH(R0);
 PUSH(2);
@@ -12352,21 +12539,21 @@ PUSH(2);
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (2,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_83);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4863);
 PUSH(2);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_83:
+LOOP_COPY_ENV_4863:
 CMP(R4,1);
-JUMP_EQ(EXIT_LOOP_COPY_83);
+JUMP_EQ(EXIT_LOOP_COPY_4863);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_83);
-EXIT_LOOP_COPY_83:
+JUMP(LOOP_COPY_ENV_4863);
+EXIT_LOOP_COPY_4863:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -12374,27 +12561,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_83:
+LOOP_EXTEND_ENV_4863:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_83);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4863);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_83);
-EXIT_LOOP_EXTEND_ENV_83:
+JUMP(LOOP_EXTEND_ENV_4863);
+EXIT_LOOP_EXTEND_ENV_4863:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_49));
-JUMP(L_CLOSURE_EXIT_49);
-L_CLOSURE_BODY_49:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4829));
+JUMP(L_CLOSURE_EXIT_4829);
+L_CLOSURE_BODY_4829:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_49);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4829);
 
 /*************seq code starts***********/
 
@@ -12411,21 +12597,21 @@ MOV (R7, R0)
 MOV (R1,FPARG(0));
 MOV(R2 ,SOB_NIL);
 CMP (3,IMM(1));
-JUMP_EQ (EXIT_LOOP_EXTEND_ENV_82);
+JUMP_EQ (EXIT_LOOP_EXTEND_ENV_4862);
 PUSH(3);
 CALL(MALLOC);
 DROP(1);
 MOV (R2,R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(1));
-LOOP_COPY_ENV_82:
+LOOP_COPY_ENV_4862:
 CMP(R4,2);
-JUMP_EQ(EXIT_LOOP_COPY_82);
+JUMP_EQ(EXIT_LOOP_COPY_4862);
 MOV (INDD(R2,R5) , INDD(R1,R4) );
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_COPY_ENV_82);
-EXIT_LOOP_COPY_82:
+JUMP(LOOP_COPY_ENV_4862);
+EXIT_LOOP_COPY_4862:
 MOV (R3 , FPARG(1));
 PUSH(R3);
 CALL(MALLOC);
@@ -12433,27 +12619,26 @@ DROP(1);
 MOV (INDD(R2,0) , R0);
 MOV (R4 , IMM(0));
 MOV (R5 , IMM(2));
-LOOP_EXTEND_ENV_82:
+LOOP_EXTEND_ENV_4862:
 CMP(R4 , R3);
-JUMP_EQ(EXIT_LOOP_EXTEND_ENV_82);
+JUMP_EQ(EXIT_LOOP_EXTEND_ENV_4862);
 MOV (INDD(INDD(R2,0), R4) , FPARG(R5));
 ADD(R4 , IMM(1));
 ADD(R5 , IMM(1));
-JUMP(LOOP_EXTEND_ENV_82);
-EXIT_LOOP_EXTEND_ENV_82:
+JUMP(LOOP_EXTEND_ENV_4862);
+EXIT_LOOP_EXTEND_ENV_4862:
 PUSH (IMM(3));
 CALL(MALLOC);
 DROP(1);
 MOV (INDD(R0 ,0) , T_CLOSURE);
 MOV (INDD(R0 ,1) , R2);
-INFO
-MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_57));
-JUMP(L_CLOSURE_EXIT_57);
-L_CLOSURE_BODY_57:
+MOV (INDD(R0 ,2) ,LABEL(L_CLOSURE_BODY_4837));
+JUMP(L_CLOSURE_EXIT_4837);
+L_CLOSURE_BODY_4837:
 PUSH(FP);
 MOV (FP , SP);
 CMP(FPARG(1) , IMM(2));
-JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_57);
+JUMP_NE(L_ERROR_LAMBDA_ARGS_COUNT_4837);
 
 /*************if3 code starts here***********/
 
@@ -12472,15 +12657,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL81);
-JUMP (FINISH_FVAR_LABEL81);
-UNDEF_LABEL81:
+JUMP_EQ (UNDEF_LABEL4861);
+JUMP (FINISH_FVAR_LABEL4861);
+UNDEF_LABEL4861:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL81:
+FINISH_FVAR_LABEL4861:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_80);
+JUMP_NE(L_Error_cannot_apply_non_closure_4860);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12488,7 +12673,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_80:
+L_Error_cannot_apply_non_closure_4860:
 
 /*************applic code ends here***********/
 
@@ -12498,15 +12683,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL79);
-JUMP (FINISH_FVAR_LABEL79);
-UNDEF_LABEL79:
+JUMP_EQ (UNDEF_LABEL4859);
+JUMP (FINISH_FVAR_LABEL4859);
+UNDEF_LABEL4859:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL79:
+FINISH_FVAR_LABEL4859:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_78);
+JUMP_NE(L_Error_cannot_apply_non_closure_4858);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12514,22 +12699,22 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_78:
+L_Error_cannot_apply_non_closure_4858:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE59);
+JUMP_EQ (L_IF3_ELSE4839);
 
 /*************pvar code starts here***********/
 MOV (R0,FPARG(2 + 0));
 
 /*************pvar code ends here***********/
 
-JUMP (L_IF3_EXIT58);
-L_IF3_ELSE59:
+JUMP (L_IF3_EXIT4838);
+L_IF3_ELSE4839:
 
-/*************tc-applic code starts here60***********/
+/*************tc-applic code starts here4840***********/
 
 /*************applic code starts here***********/
 
@@ -12544,15 +12729,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL77);
-JUMP (FINISH_FVAR_LABEL77);
-UNDEF_LABEL77:
+JUMP_EQ (UNDEF_LABEL4857);
+JUMP (FINISH_FVAR_LABEL4857);
+UNDEF_LABEL4857:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL77:
+FINISH_FVAR_LABEL4857:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_76);
+JUMP_NE(L_Error_cannot_apply_non_closure_4856);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12560,7 +12745,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_76:
+L_Error_cannot_apply_non_closure_4856:
 
 /*************applic code ends here***********/
 
@@ -12574,7 +12759,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE63);
+JUMP_EQ (L_IF3_ELSE4843);
 
 /*************applic code starts here***********/
 
@@ -12595,15 +12780,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL75);
-JUMP (FINISH_FVAR_LABEL75);
-UNDEF_LABEL75:
+JUMP_EQ (UNDEF_LABEL4855);
+JUMP (FINISH_FVAR_LABEL4855);
+UNDEF_LABEL4855:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL75:
+FINISH_FVAR_LABEL4855:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_74);
+JUMP_NE(L_Error_cannot_apply_non_closure_4854);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12611,7 +12796,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_74:
+L_Error_cannot_apply_non_closure_4854:
 
 /*************applic code ends here***********/
 
@@ -12621,15 +12806,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL73);
-JUMP (FINISH_FVAR_LABEL73);
-UNDEF_LABEL73:
+JUMP_EQ (UNDEF_LABEL4853);
+JUMP (FINISH_FVAR_LABEL4853);
+UNDEF_LABEL4853:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL73:
+FINISH_FVAR_LABEL4853:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_72);
+JUMP_NE(L_Error_cannot_apply_non_closure_4852);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12637,7 +12822,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_72:
+L_Error_cannot_apply_non_closure_4852:
 
 /*************applic code ends here***********/
 
@@ -12647,15 +12832,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL71);
-JUMP (FINISH_FVAR_LABEL71);
-UNDEF_LABEL71:
+JUMP_EQ (UNDEF_LABEL4851);
+JUMP (FINISH_FVAR_LABEL4851);
+UNDEF_LABEL4851:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL71:
+FINISH_FVAR_LABEL4851:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_70);
+JUMP_NE(L_Error_cannot_apply_non_closure_4850);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12663,7 +12848,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_70:
+L_Error_cannot_apply_non_closure_4850:
 
 /*************applic code ends here***********/
 
@@ -12684,15 +12869,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,0));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL69);
-JUMP (FINISH_FVAR_LABEL69);
-UNDEF_LABEL69:
+JUMP_EQ (UNDEF_LABEL4849);
+JUMP (FINISH_FVAR_LABEL4849);
+UNDEF_LABEL4849:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL69:
+FINISH_FVAR_LABEL4849:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_68);
+JUMP_NE(L_Error_cannot_apply_non_closure_4848);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12700,7 +12885,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_68:
+L_Error_cannot_apply_non_closure_4848:
 
 /*************applic code ends here***********/
 
@@ -12710,15 +12895,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,34));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL67);
-JUMP (FINISH_FVAR_LABEL67);
-UNDEF_LABEL67:
+JUMP_EQ (UNDEF_LABEL4847);
+JUMP (FINISH_FVAR_LABEL4847);
+UNDEF_LABEL4847:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL67:
+FINISH_FVAR_LABEL4847:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_66);
+JUMP_NE(L_Error_cannot_apply_non_closure_4846);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12726,7 +12911,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_66:
+L_Error_cannot_apply_non_closure_4846:
 
 /*************applic code ends here***********/
 
@@ -12736,15 +12921,15 @@ PUSH(2);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,46));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL65);
-JUMP (FINISH_FVAR_LABEL65);
-UNDEF_LABEL65:
+JUMP_EQ (UNDEF_LABEL4845);
+JUMP (FINISH_FVAR_LABEL4845);
+UNDEF_LABEL4845:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL65:
+FINISH_FVAR_LABEL4845:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_64);
+JUMP_NE(L_Error_cannot_apply_non_closure_4844);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12752,15 +12937,15 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_64:
+L_Error_cannot_apply_non_closure_4844:
 
 /*************applic code ends here***********/
 
-JUMP (L_IF3_EXIT62);
-L_IF3_ELSE63:
-MOV (R0 ,INDD(CONSTARRAY,3));
+JUMP (L_IF3_EXIT4842);
+L_IF3_ELSE4843:
+MOV (R0 ,INDD(CONSTARRAY,181));
 
-L_IF3_EXIT62:
+L_IF3_EXIT4842:
 
 /*************if3 code ends here***********/
 
@@ -12775,11 +12960,11 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 MOV(R0, (IND R0));
 
-/*************tc-applic cont60***********/
+/*************tc-applic cont4840***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_60);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4840);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -12789,17 +12974,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover61);
+JUMP_EQ (tc_applic_end_param_ranover4841);
 ADD (R10 , IMM(1));
-tc_applic_for_label61:
+tc_applic_for_label4841:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover61);
+JUMP_LE (tc_applic_end_param_ranover4841);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label61);
-tc_applic_end_param_ranover61:
+JUMP (tc_applic_for_label4841);
+tc_applic_end_param_ranover4841:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -12817,19 +13002,19 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_60:
+L_Error_cannot_tc_apply_non_closure_4840:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 
-L_IF3_EXIT58:
+L_IF3_EXIT4838:
 
 /*************if3 code ends here***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_57:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4837:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_57:
+L_CLOSURE_EXIT_4837:
 
 /*************lambda-simple code ends here***********/
 MOV(IND(R7),R0);
@@ -12854,15 +13039,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,1));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL56);
-JUMP (FINISH_FVAR_LABEL56);
-UNDEF_LABEL56:
+JUMP_EQ (UNDEF_LABEL4836);
+JUMP (FINISH_FVAR_LABEL4836);
+UNDEF_LABEL4836:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL56:
+FINISH_FVAR_LABEL4836:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_55);
+JUMP_NE(L_Error_cannot_apply_non_closure_4835);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12870,7 +13055,7 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_55:
+L_Error_cannot_apply_non_closure_4835:
 
 /*************applic code ends here***********/
 
@@ -12880,15 +13065,15 @@ PUSH(1);
 /*************fvar code:***********/
 MOV (R0 ,INDD(FVARARRAY,13));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL54);
-JUMP (FINISH_FVAR_LABEL54);
-UNDEF_LABEL54:
+JUMP_EQ (UNDEF_LABEL4834);
+JUMP (FINISH_FVAR_LABEL4834);
+UNDEF_LABEL4834:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL54:
+FINISH_FVAR_LABEL4834:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_53);
+JUMP_NE(L_Error_cannot_apply_non_closure_4833);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12896,16 +13081,16 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_53:
+L_Error_cannot_apply_non_closure_4833:
 
 /*************applic code ends here***********/
 
 CMP (R0, SOB_FALSE);
-JUMP_EQ (L_IF3_ELSE51);
-MOV (R0 ,INDD(CONSTARRAY,2));
+JUMP_EQ (L_IF3_ELSE4831);
+MOV (R0 ,INDD(CONSTARRAY,180));
 
-JUMP (L_IF3_EXIT50);
-L_IF3_ELSE51:
+JUMP (L_IF3_EXIT4830);
+L_IF3_ELSE4831:
 
 /*************applic code starts here***********/
 
@@ -12917,7 +13102,7 @@ MOV (R0,INDD(R0,0));
 /*************bvar code ends here***********/
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,2));
+MOV (R0 ,INDD(CONSTARRAY,180));
 
 PUSH(R0);
 PUSH(2);
@@ -12928,7 +13113,7 @@ MOV (R0,FPARG(2 + 0));
 /*************pvar code ends here***********/
 MOV(R0, (IND R0));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_52);
+JUMP_NE(L_Error_cannot_apply_non_closure_4832);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -12936,11 +13121,11 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_52:
+L_Error_cannot_apply_non_closure_4832:
 
 /*************applic code ends here***********/
 
-L_IF3_EXIT50:
+L_IF3_EXIT4830:
 
 /*************if3 code ends here***********/
 MOV(FPARG(3),R0);
@@ -12954,20 +13139,20 @@ MOV (R0,FPARG(2 + 1));
 /*************seq code ends***********/
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_49:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4829:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_49:
+L_CLOSURE_EXIT_4829:
 
 /*************lambda-simple code ends here***********/
 
 
-/*************tc-applic cont47***********/
+/*************tc-applic cont4827***********/
 MOV (R7,FPARG(IMM(-1)));
 MOV (R8, FPARG(IMM(-2)));
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE (L_Error_cannot_tc_apply_non_closure_47);
+JUMP_NE (L_Error_cannot_tc_apply_non_closure_4827);
 PUSH (INDD (R0,1));
 MOV (R9 , FPARG(IMM(1)));
 ADD (R9 , IMM(1));
@@ -12977,17 +13162,17 @@ PUSH (R7);
 MOV(R10 , STARG(IMM(1)));
 MOV(R12,R10);
 CMP(R10 , IMM(0));
-JUMP_EQ (tc_applic_end_param_ranover48);
+JUMP_EQ (tc_applic_end_param_ranover4828);
 ADD (R10 , IMM(1));
-tc_applic_for_label48:
+tc_applic_for_label4828:
 CMP (R10 , 1);
-JUMP_LE (tc_applic_end_param_ranover48);
+JUMP_LE (tc_applic_end_param_ranover4828);
 MOV (R11,STARG(R10));
 MOV (FPARG(R9),R11);
 SUB (R9 , 1);
 SUB (R10 , 1);
-JUMP (tc_applic_for_label48);
-tc_applic_end_param_ranover48:
+JUMP (tc_applic_for_label4828);
+tc_applic_end_param_ranover4828:
 MOV (R11, R12);
 MOV (FPARG(R9) , R11);
 SUB (R9 , 1);
@@ -13005,53 +13190,61 @@ MOV (FP , R8);
 
 /*************tc-applic code ends here, after that line suppose to be an unconditional jump to R0-body***********/
 JUMPA (INDD(R0,2)); 
-L_Error_cannot_tc_apply_non_closure_47:
+L_Error_cannot_tc_apply_non_closure_4827:
 SHOW ("NOT A CLOSURE:" , INDD(R0,0));
 POP(FP);
 RETURN;
-L_ERROR_LAMBDA_ARGS_COUNT_46:
-INFO
+L_ERROR_LAMBDA_ARGS_COUNT_4826:
+OUT(IMM(2) , 'c' );
 SHOW("Wrong number of args!!!" , FPARG(1));
 HALT;
-L_CLOSURE_EXIT_46:
+L_CLOSURE_EXIT_4826:
 
 /*************lambda-var code ends here***********/
-MOV(INDD(FVARARRAY,64),R0);
+MOV(INDD(FVARARRAY,65),R0);
 MOV (R0 , SOB_VOID);
 
 /*************'def' code ends here***********/
 
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_45);
+JUMP_EQ(R0_IS_VOID_number_4825);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_45:
+R0_IS_VOID_number_4825:
+
+/*************seq code starts***********/
+MOV (R0 ,INDD(CONSTARRAY,186));
+MOV (R0 ,INDD(CONSTARRAY,189));
+MOV (R0 ,INDD(CONSTARRAY,192));
+MOV (R0 ,INDD(CONSTARRAY,195));
+MOV (R0 ,INDD(CONSTARRAY,198));
+MOV (R0 ,INDD(CONSTARRAY,201));
+MOV (R0 ,INDD(CONSTARRAY,204));
+MOV (R0 ,INDD(CONSTARRAY,209));
+MOV (R0 ,INDD(CONSTARRAY,211));
 
 /*************applic code starts here***********/
-MOV (R0 ,INDD(CONSTARRAY,6));
+MOV (R0 ,INDD(CONSTARRAY,208));
 
 PUSH(R0);
-MOV (R0 ,INDD(CONSTARRAY,5));
-
-PUSH(R0);
-PUSH(2);
+PUSH(1);
 
 /*************fvar code:***********/
-MOV (R0 ,INDD(FVARARRAY,65));
+MOV (R0 ,INDD(FVARARRAY,20));
 CMP (R0 , 0XDEF);
-JUMP_EQ (UNDEF_LABEL3);
-JUMP (FINISH_FVAR_LABEL3);
-UNDEF_LABEL3:
+JUMP_EQ (UNDEF_LABEL4783);
+JUMP (FINISH_FVAR_LABEL4783);
+UNDEF_LABEL4783:
 SHOW("THE VAR YOU ARE LOOKING FOR IS UNDEFINE",R0);
 HALT;
-FINISH_FVAR_LABEL3:
+FINISH_FVAR_LABEL4783:
 
 CMP (INDD (R0,0) ,IMM(T_CLOSURE));
-JUMP_NE(L_Error_cannot_apply_non_closure_2);
+JUMP_NE(L_Error_cannot_apply_non_closure_4782);
 MOV (R1 , INDD (R0,1));
 PUSH (R1);
 MOV (R1 , INDD (R0,2));
@@ -13059,19 +13252,21 @@ CALLA (R1);
 DROP(1);
 POP(R1);
 DROP(R1);
-L_Error_cannot_apply_non_closure_2:
+L_Error_cannot_apply_non_closure_4782:
 
 /*************applic code ends here***********/
 
+/*************seq code ends***********/
+
 CMP(R0,SOB_VOID);
-JUMP_EQ(R0_IS_VOID_number_1);
+JUMP_EQ(R0_IS_VOID_number_4781);
 PUSH(R0); 
 CALL(WRITE_SOB);
 DROP(1);
 PUSH(10); 
 CALL(PUTCHAR);
 DROP(1);
-R0_IS_VOID_number_1:
+R0_IS_VOID_number_4781:
 
 
 STOP_MACHINE;
