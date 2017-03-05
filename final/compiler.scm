@@ -3295,7 +3295,7 @@
 				(string-append 
 					(CISC_comment "RS_numberTofraction starts")
 					(RS_makeClosure body_label finish_label (lookupFvar 'number->fraction SCHEMEFvarsTable))
-					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_numberTofraction\",R0);"
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error in procedure RS_numberTofraction\",R0);\n INFO \n"
 						(string-append
 							(args_check_macro "1" error_label)
 							"MOV (R2 , FPARG(2));" n 				;R2 = allegedly holds the integer 
@@ -3440,6 +3440,24 @@
 					finish_label ":" n
 					(CISC_comment "RS_append_bin  ends")))))					
 
+
+(define printer_mrt   
+	(lambda ()
+		(let
+			((finish_label  "p_")
+			(body_label  "p22")
+			(error_label "p2232"))
+				(string-append 
+					(RS_makeClosure body_label finish_label (lookupFvar 'p SCHEMEFvarsTable))
+					(RS_Closure_Code body_label finish_label error_label "SHOW(\"error p \",R0);"
+						(string-append
+							"SHOW(\"\", FPARG(2));" n
+							))
+					finish_label ":" n
+					(CISC_comment "RS_append_bin  ends")))))
+
+
+
 (define add_RS_to_FvarTable 
 	(lambda () 
 		(string-append 
@@ -3451,7 +3469,7 @@
 		(RS_string_length) (RS_string_ref) (RS_make_string) (RS_string_set!)
 		(RS_apply) (RS_append_bin)
 		(RS_cahrToInteger) (RS_numberTofraction) (RS_integerToChar) 
-		(RS_list)
+		(RS_list) (printer_mrt)
 		(RS_remainder) (RS_denominator) (RS_numerator)
 		(RS_plus_bin) (RS_minus_bin) (RS_smaller_bin) (RS_greater_bin) (RS_mul_bin) (RS_div_bin) (RS_equality_op_bin) (RS_create_frac_from_ints_and_gcd)
 		)))
@@ -3466,7 +3484,7 @@
 		'string-length 'string-ref 'make-string_LEGACY 'string-set!
 		'apply 'append_bin
 		'char->integer 'number->fraction 'integer->char
-		'list
+		'list 'p 
 		'remainder 'denominator 'numerator
 		'plus_bin 'minus_bin 'smaller_bin 'greater_bin 'div_bin 'mul_bin 'eq_bin 'create_frac
 	 ))
@@ -4228,10 +4246,12 @@
 ;;;box code gen start
 (define box_code_gen (lambda (var code_gen major)  
 		(call_malloc 1)
-		"MOV (R7,R0);" n 
+		"MOV (R15,R0);" n 
+		"PUSH (R15);" n 
 		(code_gen var major) ;;;now the CISC-value of 'var' is in R0
-		"MOV (IND(R7),R0);" n
-		"MOV(R0,R7);" n ;;the result should be in R0
+		"POP (R15);" n
+		"MOV (IND(R15),R0);" n
+		"MOV(R0,R15);" n ;;the result should be in R0
 	))
 
 
@@ -4239,9 +4259,12 @@
 	(lambda (var1 var2 code_gen major) 
 	 	(string-append 
 			(code_gen var1 major)
-			"MOV (R7, R0)" n ;now R7 holds the pointer of var1-box
+			"MOV (R14, R0)" n ;now R7 holds the pointer of var1-box
+		
+			"PUSH (R14);" n 
 			(code_gen var2 major) ; now R0 holds the value of var2
-			"MOV(IND(R7),R0);" n 
+			"POP (R14);" n 
+			"MOV(IND(R14),R0);" n 
 			"MOV (R0 , SOB_VOID);" n )))
 
 
@@ -4249,7 +4272,7 @@
 (define box_get_code_gen (lambda (var code_gen major)
 	(string-append
 		(code_gen var major) ;now R0 holds the value of var
-		"MOV(R0, (IND R0));" 
+		"MOV(R0, IND (R0));" n 
 	)))
 ;;box code gen ends
 ;;;code-gen of SET
@@ -4266,6 +4289,7 @@
 		  (minor (cadddr bvar)))
 			(string-append
 					(code_gen value major_of_code_gen) ;;r0 = value
+
 					"MOV (R7,FPARG(0));" n ;; now R7 hold the env 
 					"MOV (R7,INDD(R7," (number->string major) "));" n
 					"MOV (INDD(R7," (number->string minor) "),R0);" n))))
@@ -4452,6 +4476,7 @@ return 0;
 
 		(string-append
 			(code_gen parsed_exp 0) n 
+			"INFO" n 
 			"CMP(R0,SOB_VOID);" n 
 			"JUMP_EQ(" void_label ");" n 
 			"PUSH(R0); " n 
